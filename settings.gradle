@@ -1,0 +1,3 @@
+include ':goldenFramework'
+include ':app'
+rootProject.name = "entity"
