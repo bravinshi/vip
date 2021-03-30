@@ -75,25 +75,20 @@ public class AccountHelper {
     }
 
     public static void login(LoginResponseBean loginResponseBean) {
-        SPUtils.getInstance(SP_NAME).put(SP_TOKEN, loginResponseBean.getToken());
-        SPUtils.getInstance(SP_NAME).put(SP_USERID, loginResponseBean.getMbuser().getUserid());
-        SPUtils.getInstance(SP_NAME).put(SP_LIVENAME, "jintianhezong_" + loginResponseBean.getMbuser().getUserid());
-        SPUtils.getInstance(SP_NAME).put(SP_MOBILE, loginResponseBean.getMbuser().getUsermobile());
-        SPUtils.getInstance(SP_NAME).put(SP_GENDER, loginResponseBean.getMbuser().getUsersex());
-        SPUtils.getInstance(SP_NAME).put(SP_AVATAR, loginResponseBean.getMbuser().getUserpic());
-        SPUtils.getInstance(SP_NAME).put(SP_NICKNAME, loginResponseBean.getMbuser().getUsernick());
+        SPUtils.getInstance(SP_NAME).put(SP_TOKEN, loginResponseBean.getTokenHead() + loginResponseBean.getToken());
+        SPUtils.getInstance(SP_NAME).put(SP_USERID, loginResponseBean.getMap().getMbuser().getUserid());
+        SPUtils.getInstance(SP_NAME).put(SP_LIVENAME, "jintianhezong_" + loginResponseBean.getMap().getMbuser().getUserid());
+        SPUtils.getInstance(SP_NAME).put(SP_MOBILE, loginResponseBean.getMap().getMbuser().getUsermobile());
+        SPUtils.getInstance(SP_NAME).put(SP_GENDER, loginResponseBean.getMap().getMbuser().getUsersex());
+        SPUtils.getInstance(SP_NAME).put(SP_AVATAR, loginResponseBean.getMap().getMbuser().getUserpic());
+        SPUtils.getInstance(SP_NAME).put(SP_NICKNAME, loginResponseBean.getMap().getMbuser().getUsernick());
 
-        AccountHelper.setSpInvitiedcode(loginResponseBean.getMbuser().getInvitationcode());
-        AccountHelper.setSpSUPERIORCOMPANY(loginResponseBean.getSuperiorcompany());
-        AccountHelper.setSpSuperiorEnterpriseName(loginResponseBean.getSuperiorenterprisename());
-        AccountHelper.setSpEnterprisename(loginResponseBean.getMbuser().getEnterprisename());
-        AccountHelper.setSpDevelopmenttype(loginResponseBean.getMbuser().getDevelopmenttype());
-        AccountHelper.setSpCompanyHeadimg(loginResponseBean.getCompanyHeadimg());
-    }
-
-    public static void setUserPic(String userPic) {
-        SPUtils.getInstance(SP_NAME).put(SP_AVATAR, userPic);
-        loginInfo.getMbuser().setUserpic(userPic);
+        AccountHelper.setSpInvitiedcode(loginResponseBean.getMap().getMbuser().getInvitationcode());
+        AccountHelper.setSpSUPERIORCOMPANY(loginResponseBean.getMap().getSuperiorcompany());
+        AccountHelper.setSpSuperiorEnterpriseName(loginResponseBean.getMap().getSuperiorenterprisename());
+        AccountHelper.setSpEnterprisename(loginResponseBean.getMap().getMbuser().getEnterprisename());
+        AccountHelper.setSpDevelopmenttype(loginResponseBean.getMap().getMbuser().getDevelopmenttype());
+        AccountHelper.setSpCompanyHeadimg(loginResponseBean.getMap().getCompanyHeadimg());
     }
 
     public static void saveOther(String open_id, String iconurl, String uid) {

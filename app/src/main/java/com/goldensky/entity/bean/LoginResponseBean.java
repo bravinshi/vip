@@ -9,34 +9,35 @@ package com.goldensky.entity.bean;
  */
 public class LoginResponseBean {
 
-    private String superiorcompany;//上一级公司名称
-    private String superiorenterprisename;
-    private UserBean mbuser;
+    private long expiresIn;
+    private UserMap map;
+    private String refreshToken;
     private String token;
-    private String companyHeadimg;//公司头像名称
+    private String tokenHead;
+    private String userid;
 
-    public String getSuperiorcompany() {
-        return superiorcompany;
+    public long getExpiresIn() {
+        return expiresIn;
     }
 
-    public void setSuperiorcompany(String superiorcompany) {
-        this.superiorcompany = superiorcompany;
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
     }
 
-    public String getSuperiorenterprisename() {
-        return superiorenterprisename;
+    public UserMap getMap() {
+        return map;
     }
 
-    public void setSuperiorenterprisename(String superiorenterprisename) {
-        this.superiorenterprisename = superiorenterprisename;
+    public void setMap(UserMap map) {
+        this.map = map;
     }
 
-    public UserBean getMbuser() {
-        return mbuser;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setMbuser(UserBean mbuser) {
-        this.mbuser = mbuser;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getToken() {
@@ -47,98 +48,112 @@ public class LoginResponseBean {
         this.token = token;
     }
 
-    public String getCompanyHeadimg() {
-        return companyHeadimg;
+    public String getTokenHead() {
+        return tokenHead;
     }
 
-    public void setCompanyHeadimg(String companyHeadimg) {
-        this.companyHeadimg = companyHeadimg;
+    public void setTokenHead(String tokenHead) {
+        this.tokenHead = tokenHead;
     }
 
-    public static class UserBean {
-        /**
-         * userid : 299
-         * usernick : jintian_XEOGA5
-         * usermobile : 13315487933
-         * userpassword : null
-         * userpic : null
-         * usersex : null
-         * userregisttime : 1602140339000
-         * usergrade : 0
-         * usertotalintegral : 0
-         * usersurplusintegral : 0
-         * userip : null
-         * usercurrentlogintime : 1602140356000
-         * usersuperiorid : null
-         * easemobuuid : null
-         * infotips : 1
-         * userban : 0
-         * userdel : 0
-         * easemobid : null
-         * isnew : 0
-         * invitationcode : XSILYARV
-         * uservip : 0
-         * userentitytype : 0
-         * developmenttype : 0
-         * usertype : 0
-         * invitecode : null
-         * islegalperson : 0
-         * enterprisename : 北京日益通速递有限责任公司
-         * egalpersonname : 郑彩英
-         * registrationnumber : 110105001842873
-         * businesslicense : https://jintianhezong-1302324525.cos.ap-nanjing.myqcloud.com/IMG_20201008_145924.jpg
-         */
+    public String getUserid() {
+        return userid;
+    }
 
-        private String commodityperformance;// 代理商品业绩
-        private String authorizationcertificate;// 授权证明
-        private String userid;
-        private String usernick;
-        private String usermobile;
-        private String userpassword;
-        private String userpic;
-        private String usersex;
-        private long userregisttime;
-        private int usergrade;
-        private Double usertotalintegral;
-        private Double usersurplusintegral;
-        private String userip;
-        private long usercurrentlogintime;
-        private String usersuperiorid;
-        private String easemobuuid;
-        private int infotips;
-        private int userban;
-        private int userdel;
-        private String easemobid;
-        private int isnew;
-        private String invitationcode;
-        private int uservip;
-        private int userentitytype;
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public static class UserMap {
+        private String superiorenterprisename;
+        private String companyHeadimg;
+        private String superiorcompany;
+        private String token;
+        private LoginUserBean mbuser;
+
+        public String getSuperiorenterprisename() {
+            return superiorenterprisename;
+        }
+
+        public void setSuperiorenterprisename(String superiorenterprisename) {
+            this.superiorenterprisename = superiorenterprisename;
+        }
+
+        public String getCompanyHeadimg() {
+            return companyHeadimg;
+        }
+
+        public void setCompanyHeadimg(String companyHeadimg) {
+            this.companyHeadimg = companyHeadimg;
+        }
+
+        public String getSuperiorcompany() {
+            return superiorcompany;
+        }
+
+        public void setSuperiorcompany(String superiorcompany) {
+            this.superiorcompany = superiorcompany;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public LoginUserBean getMbuser() {
+            return mbuser;
+        }
+
+        public void setMbuser(LoginUserBean mbuser) {
+            this.mbuser = mbuser;
+        }
+    }
+
+    public static class LoginUserBean {
+        private String authorizationcertificate;
+        private String businesslicense;
+        private Double commodityperformance;
         private int developmenttype;
-        private int usertype;
-        private String invitecode;
-        private int islegalperson;
-        private String enterprisename;
+        private String easemobid;
+        private String easemobuuid;
         private String egalpersonname;
-        private String registrationnumber;
-        private String businesslicense;// 营业执照
-        private Integer isofficial;
-        private String identitycardpositive;
+        private String enterprisename;
         private String identitycardback;
-        private String securepassword;
+        private String identitycardpositive;
+        private int infotips;
+        private String invitationcode;
+        private String invitecode;
+        private String isfictitious;
+        private int islegalperson;
+        private int isnew;
         private Double limitaccount;
-        private Double nonagencyachievement;
+        private int nonagencyachievement;
         private Double presettlementaccount;
+        private String registrationnumber;
+        private String securepassword;
         private Double settlementaccount;
         private Double unlimitedaccount;
-        private String isfictitious;// 用户是孵化用户
-
-        public String getCommodityperformance() {
-            return commodityperformance;
-        }
-
-        public void setCommodityperformance(String commodityperformance) {
-            this.commodityperformance = commodityperformance;
-        }
+        private int userban;
+        private String usercurrentlogintime;
+        private int userdel;
+        private int userentitytype;
+        private int usergrade;
+        private int userid;
+        private String userip;
+        private String usermobile;
+        private String usernick;
+        private String userpassword;
+        private String userpic;
+        private String userregisttime;
+        private String usersex;
+        private String usersuperiorid;
+        private Double usersurplusintegral;
+        private Double usertotalintegral;
+        private int usertype;
+        private int uservip;
 
         public String getAuthorizationcertificate() {
             return authorizationcertificate;
@@ -148,12 +163,124 @@ public class LoginResponseBean {
             this.authorizationcertificate = authorizationcertificate;
         }
 
-        public String getSecurepassword() {
-            return securepassword;
+        public String getBusinesslicense() {
+            return businesslicense;
         }
 
-        public void setSecurepassword(String securepassword) {
-            this.securepassword = securepassword;
+        public void setBusinesslicense(String businesslicense) {
+            this.businesslicense = businesslicense;
+        }
+
+        public Double getCommodityperformance() {
+            return commodityperformance;
+        }
+
+        public void setCommodityperformance(Double commodityperformance) {
+            this.commodityperformance = commodityperformance;
+        }
+
+        public int getDevelopmenttype() {
+            return developmenttype;
+        }
+
+        public void setDevelopmenttype(int developmenttype) {
+            this.developmenttype = developmenttype;
+        }
+
+        public String getEasemobid() {
+            return easemobid;
+        }
+
+        public void setEasemobid(String easemobid) {
+            this.easemobid = easemobid;
+        }
+
+        public String getEasemobuuid() {
+            return easemobuuid;
+        }
+
+        public void setEasemobuuid(String easemobuuid) {
+            this.easemobuuid = easemobuuid;
+        }
+
+        public String getEgalpersonname() {
+            return egalpersonname;
+        }
+
+        public void setEgalpersonname(String egalpersonname) {
+            this.egalpersonname = egalpersonname;
+        }
+
+        public String getEnterprisename() {
+            return enterprisename;
+        }
+
+        public void setEnterprisename(String enterprisename) {
+            this.enterprisename = enterprisename;
+        }
+
+        public String getIdentitycardback() {
+            return identitycardback;
+        }
+
+        public void setIdentitycardback(String identitycardback) {
+            this.identitycardback = identitycardback;
+        }
+
+        public String getIdentitycardpositive() {
+            return identitycardpositive;
+        }
+
+        public void setIdentitycardpositive(String identitycardpositive) {
+            this.identitycardpositive = identitycardpositive;
+        }
+
+        public int getInfotips() {
+            return infotips;
+        }
+
+        public void setInfotips(int infotips) {
+            this.infotips = infotips;
+        }
+
+        public String getInvitationcode() {
+            return invitationcode;
+        }
+
+        public void setInvitationcode(String invitationcode) {
+            this.invitationcode = invitationcode;
+        }
+
+        public String getInvitecode() {
+            return invitecode;
+        }
+
+        public void setInvitecode(String invitecode) {
+            this.invitecode = invitecode;
+        }
+
+        public String getIsfictitious() {
+            return isfictitious;
+        }
+
+        public void setIsfictitious(String isfictitious) {
+            this.isfictitious = isfictitious;
+        }
+
+        public int getIslegalperson() {
+            return islegalperson;
+        }
+
+        public void setIslegalperson(int islegalperson) {
+            this.islegalperson = islegalperson;
+        }
+
+        public int getIsnew() {
+            return isnew;
+        }
+
+        public void setIsnew(int isnew) {
+            this.isnew = isnew;
         }
 
         public Double getLimitaccount() {
@@ -164,11 +291,11 @@ public class LoginResponseBean {
             this.limitaccount = limitaccount;
         }
 
-        public Double getNonagencyachievement() {
+        public int getNonagencyachievement() {
             return nonagencyachievement;
         }
 
-        public void setNonagencyachievement(Double nonagencyachievement) {
+        public void setNonagencyachievement(int nonagencyachievement) {
             this.nonagencyachievement = nonagencyachievement;
         }
 
@@ -178,6 +305,22 @@ public class LoginResponseBean {
 
         public void setPresettlementaccount(Double presettlementaccount) {
             this.presettlementaccount = presettlementaccount;
+        }
+
+        public String getRegistrationnumber() {
+            return registrationnumber;
+        }
+
+        public void setRegistrationnumber(String registrationnumber) {
+            this.registrationnumber = registrationnumber;
+        }
+
+        public String getSecurepassword() {
+            return securepassword;
+        }
+
+        public void setSecurepassword(String securepassword) {
+            this.securepassword = securepassword;
         }
 
         public Double getSettlementaccount() {
@@ -196,52 +339,60 @@ public class LoginResponseBean {
             this.unlimitedaccount = unlimitedaccount;
         }
 
-        public String getIsfictitious() {
-            return isfictitious;
+        public int getUserban() {
+            return userban;
         }
 
-        public void setIsfictitious(String isfictitious) {
-            this.isfictitious = isfictitious;
+        public void setUserban(int userban) {
+            this.userban = userban;
         }
 
-        public String getIdentitycardpositive() {
-            return identitycardpositive;
+        public String getUsercurrentlogintime() {
+            return usercurrentlogintime;
         }
 
-        public void setIdentitycardpositive(String identitycardpositive) {
-            this.identitycardpositive = identitycardpositive;
+        public void setUsercurrentlogintime(String usercurrentlogintime) {
+            this.usercurrentlogintime = usercurrentlogintime;
         }
 
-        public String getIdentitycardback() {
-            return identitycardback;
+        public int getUserdel() {
+            return userdel;
         }
 
-        public void setIdentitycardback(String identitycardback) {
-            this.identitycardback = identitycardback;
+        public void setUserdel(int userdel) {
+            this.userdel = userdel;
         }
 
-        public Integer getIsofficial() {
-            return isofficial;
+        public int getUserentitytype() {
+            return userentitytype;
         }
 
-        public void setIsofficial(Integer isofficial) {
-            this.isofficial = isofficial;
+        public void setUserentitytype(int userentitytype) {
+            this.userentitytype = userentitytype;
         }
 
-        public String getUserid() {
+        public int getUsergrade() {
+            return usergrade;
+        }
+
+        public void setUsergrade(int usergrade) {
+            this.usergrade = usergrade;
+        }
+
+        public int getUserid() {
             return userid;
         }
 
-        public void setUserid(String userid) {
+        public void setUserid(int userid) {
             this.userid = userid;
         }
 
-        public String getUsernick() {
-            return usernick;
+        public String getUserip() {
+            return userip;
         }
 
-        public void setUsernick(String usernick) {
-            this.usernick = usernick;
+        public void setUserip(String userip) {
+            this.userip = userip;
         }
 
         public String getUsermobile() {
@@ -250,6 +401,14 @@ public class LoginResponseBean {
 
         public void setUsermobile(String usermobile) {
             this.usermobile = usermobile;
+        }
+
+        public String getUsernick() {
+            return usernick;
+        }
+
+        public void setUsernick(String usernick) {
+            this.usernick = usernick;
         }
 
         public String getUserpassword() {
@@ -268,60 +427,20 @@ public class LoginResponseBean {
             this.userpic = userpic;
         }
 
+        public String getUserregisttime() {
+            return userregisttime;
+        }
+
+        public void setUserregisttime(String userregisttime) {
+            this.userregisttime = userregisttime;
+        }
+
         public String getUsersex() {
             return usersex;
         }
 
         public void setUsersex(String usersex) {
             this.usersex = usersex;
-        }
-
-        public long getUserregisttime() {
-            return userregisttime;
-        }
-
-        public void setUserregisttime(long userregisttime) {
-            this.userregisttime = userregisttime;
-        }
-
-        public int getUsergrade() {
-            return usergrade;
-        }
-
-        public void setUsergrade(int usergrade) {
-            this.usergrade = usergrade;
-        }
-
-        public Double getUsertotalintegral() {
-            return usertotalintegral;
-        }
-
-        public void setUsertotalintegral(Double usertotalintegral) {
-            this.usertotalintegral = usertotalintegral;
-        }
-
-        public Double getUsersurplusintegral() {
-            return usersurplusintegral;
-        }
-
-        public void setUsersurplusintegral(Double usersurplusintegral) {
-            this.usersurplusintegral = usersurplusintegral;
-        }
-
-        public String getUserip() {
-            return userip;
-        }
-
-        public void setUserip(String userip) {
-            this.userip = userip;
-        }
-
-        public long getUsercurrentlogintime() {
-            return usercurrentlogintime;
-        }
-
-        public void setUsercurrentlogintime(long usercurrentlogintime) {
-            this.usercurrentlogintime = usercurrentlogintime;
         }
 
         public String getUsersuperiorid() {
@@ -332,84 +451,20 @@ public class LoginResponseBean {
             this.usersuperiorid = usersuperiorid;
         }
 
-        public String getEasemobuuid() {
-            return easemobuuid;
+        public Double getUsersurplusintegral() {
+            return usersurplusintegral;
         }
 
-        public void setEasemobuuid(String easemobuuid) {
-            this.easemobuuid = easemobuuid;
+        public void setUsersurplusintegral(Double usersurplusintegral) {
+            this.usersurplusintegral = usersurplusintegral;
         }
 
-        public int getInfotips() {
-            return infotips;
+        public Double getUsertotalintegral() {
+            return usertotalintegral;
         }
 
-        public void setInfotips(int infotips) {
-            this.infotips = infotips;
-        }
-
-        public int getUserban() {
-            return userban;
-        }
-
-        public void setUserban(int userban) {
-            this.userban = userban;
-        }
-
-        public int getUserdel() {
-            return userdel;
-        }
-
-        public void setUserdel(int userdel) {
-            this.userdel = userdel;
-        }
-
-        public String getEasemobid() {
-            return easemobid;
-        }
-
-        public void setEasemobid(String easemobid) {
-            this.easemobid = easemobid;
-        }
-
-        public int getIsnew() {
-            return isnew;
-        }
-
-        public void setIsnew(int isnew) {
-            this.isnew = isnew;
-        }
-
-        public String getInvitationcode() {
-            return invitationcode;
-        }
-
-        public void setInvitationcode(String invitationcode) {
-            this.invitationcode = invitationcode;
-        }
-
-        public int getUservip() {
-            return uservip;
-        }
-
-        public void setUservip(int uservip) {
-            this.uservip = uservip;
-        }
-
-        public int getUserentitytype() {
-            return userentitytype;
-        }
-
-        public void setUserentitytype(int userentitytype) {
-            this.userentitytype = userentitytype;
-        }
-
-        public int getDevelopmenttype() {
-            return developmenttype;
-        }
-
-        public void setDevelopmenttype(int developmenttype) {
-            this.developmenttype = developmenttype;
+        public void setUsertotalintegral(Double usertotalintegral) {
+            this.usertotalintegral = usertotalintegral;
         }
 
         public int getUsertype() {
@@ -420,52 +475,12 @@ public class LoginResponseBean {
             this.usertype = usertype;
         }
 
-        public String getInvitecode() {
-            return invitecode;
+        public int getUservip() {
+            return uservip;
         }
 
-        public void setInvitecode(String invitecode) {
-            this.invitecode = invitecode;
-        }
-
-        public int getIslegalperson() {
-            return islegalperson;
-        }
-
-        public void setIslegalperson(int islegalperson) {
-            this.islegalperson = islegalperson;
-        }
-
-        public String getEnterprisename() {
-            return enterprisename;
-        }
-
-        public void setEnterprisename(String enterprisename) {
-            this.enterprisename = enterprisename;
-        }
-
-        public String getEgalpersonname() {
-            return egalpersonname;
-        }
-
-        public void setEgalpersonname(String egalpersonname) {
-            this.egalpersonname = egalpersonname;
-        }
-
-        public String getRegistrationnumber() {
-            return registrationnumber;
-        }
-
-        public void setRegistrationnumber(String registrationnumber) {
-            this.registrationnumber = registrationnumber;
-        }
-
-        public String getBusinesslicense() {
-            return businesslicense;
-        }
-
-        public void setBusinesslicense(String businesslicense) {
-            this.businesslicense = businesslicense;
+        public void setUservip(int uservip) {
+            this.uservip = uservip;
         }
     }
 }

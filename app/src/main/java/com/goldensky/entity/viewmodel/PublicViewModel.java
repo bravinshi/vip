@@ -31,7 +31,6 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<Object> changePasswordLive = new MutableLiveData<>();
 
     public MutableLiveData<String> uploadPicLiveData = new MutableLiveData<>();
-    public MutableLiveData<LoginResponseBean.UserBean> userInfoLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);

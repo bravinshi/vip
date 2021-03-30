@@ -15,6 +15,7 @@ import com.goldensky.entity.helper.AccountHelper;
 import com.goldensky.entity.model.LoginInputModel;
 import com.goldensky.entity.viewmodel.LoginViewModel;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
@@ -50,7 +51,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     }
 
     @Override
-
     public void observe() {
         loginViewModel.verificationCodeLive.observe(this, aBoolean -> {
             // 成功获取验证码
@@ -58,19 +58,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             mBinding.btnGetVerificationCode.startCountDown();
         });
 
-        loginViewModel.loginResponseLive.observe(this, loginResponseBean -> {
-            // 登录成功
-            loginSuccess(loginResponseBean);
-        });
+        // 登录成功
+        loginViewModel.loginResponseLive.observe(this, this::loginSuccess);
     }
 
     /**
      * 登录成功
      */
     private void loginSuccess(LoginResponseBean loginResponseBean) {
+        toast("登录成功");
         AccountHelper.login(loginResponseBean);
         // 进入主页
-        Starter.startMainActivity(this, null);
+//        Starter.startMainActivity(this, null);
     }
 
     /**
