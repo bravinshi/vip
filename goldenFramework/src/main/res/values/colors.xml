@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF7E04</color>
+    <color name="colorPrimaryDark">#FFFF7E04</color>
+    <color name="colorAccent">#FFFF7E04</color>
+    <color name="colorOrange">#e37f10</color>
+    <color name="divider">#dfdfdf</color>
+
+
+    <color name="colorText">#333333</color>
+
+    <color name="colorGray">#999999</color>
+
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorPressed">#e7e7e7</color>
+    <color name="color_de">#66dedede</color>
+    <color name="colorTransparent">#00000000</color>
+
+    <color name="colorUnSelected">#999999</color>
+
+    <color name="colorThemeBlue">#4A90E2</color>
+    <color name="colorMsgRed">#ff3333</color>
+
+
+    <!--金色-->
+    <color name="colorGolden">#FDCE45</color>
+    <!--银色-->
+    <color name="colorSlivery">#B5C8CC</color>
+    <!--铜色-->
+    <color name="colorCoppery">#B06F3B</color>
+
+    <color name="no_net_bg">#fef4b9</color> <!-- 无网络布局背景 -->
+    <color name="no_net_text">#8e6940</color> <!-- 无网络字体颜色 -->
+
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
+
+    <!-- QRCode scanner color begin -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#B0000000</color>
+    <color name="viewfinder_frame">#90FFFFFF</color>
+    <color name="result_point_color">#C0FFFF00</color>
+    <color name="laser_color">#0F0</color>
+    <color name="corner_color">#00FF00</color>
+    <color name="FF333333">#ff333333</color>
+    <color name="F2F2F2">#F2F2F2</color>
+    <color name="EA483F">#EA483F</color>
+    <!-- QRCode scanner color end -->
+
+    <color name="topbar_background_color">@android:color/white</color>
+
+
+</resources>

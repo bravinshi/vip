@@ -45,6 +45,7 @@ public class PublicViewModel extends NetWorkViewModel {
 
             @Override
             public boolean onFail(NetResponse<String> data) {
+                super.onFail(data);
                 if (callback != null) {
                     callback.onFail(data);
                 }
@@ -80,6 +81,7 @@ public class PublicViewModel extends NetWorkViewModel {
 
                     @Override
                     public boolean onFail(NetResponse<Object> data) {
+                        super.onFail(data);
                         if (callback != null) {
                             callback.onFail(data);
                         }
@@ -89,4 +91,14 @@ public class PublicViewModel extends NetWorkViewModel {
                 });
     }
 
+    public void updatePassword(String mobile, String verificationCode, String password) {
+        RetrofitAgent.create(PublicService.class)
+                .updatePwd(mobile, verificationCode, password)
+                .subscribe(new ToastNetObserver<Object>() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        changePasswordLive.postValue(true);
+                    }
+                });
+    }
 }

@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="TopActionBar">
+        <attr name="centerText" format="string"/>
+        <attr name="rightText" format="string"/>
+        <attr name="centerTextColor" format="color|reference"/>
+    </declare-styleable>
+</resources>

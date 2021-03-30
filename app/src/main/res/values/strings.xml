@@ -1,4 +1,5 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="app_name">entity</string>
     <string name="login_type_hint_company">企业登录</string>
     <string name="get_code">获取验证码</string>
@@ -29,4 +30,6 @@
     <string name="text_cancel">取消</string>
     <string name="text_next">下一步</string>
     <string name="text_confirm">确定</string>
+    <string name="hint_login_success">登录成功</string>
+    <string name="hint_change_psd_success">修改密码成功,请重新登录</string>
 </resources>

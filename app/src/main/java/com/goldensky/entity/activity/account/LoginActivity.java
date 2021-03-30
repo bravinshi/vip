@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
      * 登录成功
      */
     private void loginSuccess(LoginResponseBean loginResponseBean) {
-        toast("登录成功");
+        toast(getString(R.string.hint_login_success));
         AccountHelper.login(loginResponseBean);
         // 进入主页
 //        Starter.startMainActivity(this, null);
@@ -136,7 +136,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
      * 忘记密码
      */
     private void forgetPassword() {
-//        Starter.startForgetPasswordActivity(this, null);
+        Starter.startForgetPasswordActivity(this, null);
     }
 
     /**

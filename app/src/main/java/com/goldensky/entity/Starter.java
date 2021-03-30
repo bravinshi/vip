@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.goldensky.entity.activity.account.ForgetPasswordActivity;
 import com.goldensky.entity.activity.account.LoginActivity;
 
 /**
@@ -32,6 +33,17 @@ public class Starter {
      */
     public static void startMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MainActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动忘记密码界面
+     */
+    public static void startForgetPasswordActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ForgetPasswordActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
