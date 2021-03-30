@@ -1,0 +1,38 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+
+    <!-- 倒计时按钮的自定义属性 -->
+    <declare-styleable name="CountDownButton">
+        <attr name="millisInFuture" format="integer"/>
+        <attr name="countDownInterval" format="integer"/>
+        <attr name="countHint" format="string|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="AspectRatioFrameLayout">
+        <attr name="resize_mode" />
+    </declare-styleable>
+
+    <attr name="resize_mode" format="enum">
+        <enum name="fit" value="0" />
+        <enum name="fixed_width" value="1" />
+        <enum name="fixed_height" value="2" />
+        <enum name="fill" value="3" />
+        <enum name="zoom" value="4" />
+    </attr>
+
+    <declare-styleable name="Hand_RatioImageView">
+        <attr name="hand_ratio_width" format="integer|dimension" />
+        <attr name="hand_ratio_height" format="integer|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="image_radius" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MeasureFixedLayout">
+        <attr name="measureFixed_half_height" format="boolean"/>
+    </declare-styleable>
+</resources>

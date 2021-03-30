@@ -1,5 +1,11 @@
 package com.goldensky.entity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.goldensky.entity.activity.account.LoginActivity;
+
 /**
  * @author bravin
  * @version 1.0
@@ -8,4 +14,27 @@ package com.goldensky.entity;
  * 类说明：
  */
 public class Starter {
+
+    /**
+     * 启动登录页
+     */
+    public static void startLoginActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动MainActivity
+     */
+    public static void startMainActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MainActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
 }

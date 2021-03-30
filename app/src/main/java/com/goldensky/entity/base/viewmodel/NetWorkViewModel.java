@@ -106,6 +106,13 @@ public class NetWorkViewModel extends BaseViewModel {
 
         public abstract void onSuccess(T data);
 
+        /**
+         * 网络访问错误回调
+         *
+         * @param data 错误的参数
+         *
+         * @return
+         */
         public abstract boolean onFail(NetResponse<T> data);
     }
 
