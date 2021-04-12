@@ -16,6 +16,15 @@ public class LoginResponseBean {
     private String tokenHead;
     private String userid;
 
+    public void copy(LoginResponseBean responseBean) {
+        this.expiresIn = responseBean.getExpiresIn();
+        this.map = responseBean.getMap();
+        this.refreshToken = responseBean.getRefreshToken();
+        this.token = responseBean.getToken();
+        this.tokenHead = responseBean.getTokenHead();
+        this.userid = responseBean.getUserid();
+    }
+
     public long getExpiresIn() {
         return expiresIn;
     }
