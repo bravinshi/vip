@@ -7,7 +7,7 @@
 
         <variable
             name="loginInfo"
-            type="com.goldensky.entity.model.LoginInputModel" />
+            type="com.goldensky.vip.model.LoginInputModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_phone_or_license" />
 
-        <com.goldensky.entity.base.ui.view.CountDownButton
+        <com.goldensky.vip.base.ui.view.CountDownButton
             android:id="@+id/btn_get_verification_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
