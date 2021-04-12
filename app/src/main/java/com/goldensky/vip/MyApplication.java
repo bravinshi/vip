@@ -5,6 +5,7 @@ import android.app.Application;
 import com.goldensky.framework.net.ApiConfiguration;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.framework.util.Utils;
+import com.goldensky.vip.helper.AccountHelper;
 import com.google.gson.Gson;
 
 /**
@@ -30,5 +31,20 @@ public class MyApplication extends Application {
         RetrofitAgent.config(apiConfiguration);
 
         Utils.init(this);
+        AccountHelper.deserialization();
+    }
+
+    /**
+     * 方法不可靠
+     *
+     * This method is for use in emulated process environments.  It will
+     * never be called on a production Android device, where processes are
+     * removed by simply killing them; no user code (including this callback)
+     * is executed when doing so.
+     */
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        AccountHelper.serialization();
     }
 }
