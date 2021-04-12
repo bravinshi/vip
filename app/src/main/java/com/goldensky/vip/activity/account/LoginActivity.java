@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -11,10 +12,8 @@ import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.databinding.ActivityLoginBinding;
 import com.goldensky.vip.enumerate.LoginTypeEnum;
 import com.goldensky.vip.enumerate.VerificationCodePurposeEnum;
-import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.LoginInputModel;
 import com.goldensky.vip.viewmodel.LoginViewModel;
-import com.goldensky.framework.util.StringUtils;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
 
