@@ -1,6 +1,6 @@
 <resources
     xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
-    <string name="app_name">entity</string>
+    <string name="app_name">vip</string>
     <string name="login_type_hint_company">企业登录</string>
     <string name="get_code">获取验证码</string>
     <string name="hint_input_phone_license">请输入手机号/营业执照编号</string>

@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
      */
     private void loginSuccess(LoginResponseBean loginResponseBean) {
         toast(getString(R.string.hint_login_success));
-        AccountHelper.login(loginResponseBean);
+//        AccountHelper.login(loginResponseBean);
         // 进入主页
 //        Starter.startMainActivity(this, null);
     }
