@@ -16,13 +16,12 @@ import com.goldensky.vip.model.LoginInputModel;
 import com.goldensky.vip.viewmodel.LoginViewModel;
 import com.goldensky.framework.util.StringUtils;
 
-public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
 
     private static final int LOGIN_TYPE_PASSWORD = 1;// 登录类型 密码
     private static final int LOGIN_TYPE_VERIFICATION_CODE = 2;// 登录类型 验证码
     private static int CURRENT_LOGIN_TYPE = LOGIN_TYPE_PASSWORD;// 当前登录类型
     private final LoginInputModel loginInputModel = new LoginInputModel();// 保存用户输入的数据
-    private LoginViewModel loginViewModel;
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -51,14 +50,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
     @Override
     public void observe() {
-        loginViewModel.verificationCodeLive.observe(this, aBoolean -> {
+        mViewModel.verificationCodeLive.observe(this, aBoolean -> {
             // 成功获取验证码
             toast(R.string.hint_verification_code_has_sent);
             mBinding.btnGetVerificationCode.startCountDown();
         });
 
         // 登录成功
-        loginViewModel.loginResponseLive.observe(this, this::loginSuccess);
+        mViewModel.loginResponseLive.observe(this, this::loginSuccess);
     }
 
     /**
@@ -81,7 +80,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             return;
         }
         // 获取验证码
-        loginViewModel.getVerificationCode(VerificationCodePurposeEnum.LOGIN.value,
+        mViewModel.getVerificationCode(VerificationCodePurposeEnum.LOGIN.value,
                 loginInputModel.getPhoneOrLicense().trim());
     }
 
@@ -100,7 +99,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         }
 
         // 登录
-        loginViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
+        mViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
                 loginInputModel.getPasswordOrVerificationCode(), LoginTypeEnum.PASSWORD.value);
     }
 
@@ -120,7 +119,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         }
 
         // 登录
-        loginViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
+        mViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
                 loginInputModel.getPasswordOrVerificationCode(),
                 LoginTypeEnum.VERIFICATION_CODE.value);
     }
@@ -143,11 +142,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
      */
     private void register() {
 //        Starter.startRegisterActivity(this, null);
-    }
-
-    @Override
-    public void initViewModel() {
-        loginViewModel = getViewModelProvider().get(LoginViewModel.class);
     }
 
     /**

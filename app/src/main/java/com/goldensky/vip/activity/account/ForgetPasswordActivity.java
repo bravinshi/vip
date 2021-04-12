@@ -12,11 +12,10 @@ import com.goldensky.vip.model.ForgetPasswordInputModel;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.goldensky.framework.util.StringUtils;
 
-public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordBinding> {
+public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordBinding, PublicViewModel> {
 
     private final ForgetPasswordInputModel inputModel = new ForgetPasswordInputModel();// 数据和界面双向绑定
 
-    private PublicViewModel publicViewModel;
     private boolean isInputPasswordNow = false;
 
     @Override
@@ -74,7 +73,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         // 修改密码
-        publicViewModel.updatePassword(inputModel.getPhone().trim(), inputModel
+        mViewModel.updatePassword(inputModel.getPhone().trim(), inputModel
                 .getVerificationCode().trim(), inputModel.getNewPassword()
                 .trim());
     }
@@ -109,7 +108,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         // 获取验证码
-        publicViewModel.getVerificationCode(VerificationCodePurposeEnum.CHANGE_PASSWORD.value,
+        mViewModel.getVerificationCode(VerificationCodePurposeEnum.CHANGE_PASSWORD.value,
                 inputModel.getPhone().trim());
     }
 
@@ -120,21 +119,16 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
 
     @Override
     public void observe() {
-        publicViewModel.verificationCodeLive.observe(this, aBoolean -> {
+        mViewModel.verificationCodeLive.observe(this, aBoolean -> {
             // 成功获取验证码
             toast(R.string.hint_verification_code_has_sent);
             mBinding.btnGetVerificationCode.startCountDown();
         });
 
-        publicViewModel.changePasswordLive.observe(this, o -> {
+        mViewModel.changePasswordLive.observe(this, o -> {
             toast(getString(R.string.hint__new_password_length_is_wrong));
             Starter.startLoginActivity(ForgetPasswordActivity.this, null);
         });
-    }
-
-    @Override
-    public void initViewModel() {
-        publicViewModel = getViewModelProvider().get(PublicViewModel.class);
     }
 
     @Override

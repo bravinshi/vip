@@ -10,6 +10,10 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.goldensky.framework.util.ToastUtils;
+import com.goldensky.framework.viewmodel.BaseViewModel;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 
 /**
@@ -19,10 +23,11 @@ import com.goldensky.framework.util.ToastUtils;
  * 包名： com.goldensky.together.base.activity
  * 类说明：
  */
-public abstract class BaseActivity<T extends ViewDataBinding>
+public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseViewModel>
         extends AppCompatActivity implements IBaseActivity {
 
     public T mBinding;
+    public VM mViewModel;
     private ViewModelProvider viewModelProvider;
 
     @Override
@@ -45,8 +50,6 @@ public abstract class BaseActivity<T extends ViewDataBinding>
     public void beforeSetContentView() {
     }
 
-    public abstract void initViewModel();
-
     public void toast(String message) {
         ToastUtils.showShort(message);
     }
@@ -55,7 +58,15 @@ public abstract class BaseActivity<T extends ViewDataBinding>
         ToastUtils.showShort(resId);
     }
 
-    public ViewModelProvider getViewModelProvider() {
-        return viewModelProvider;
+    private void initViewModel() {
+        Type type = getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+            Type argument = actualTypeArguments[1];
+            mViewModel = viewModelProvider.get((Class<VM>) argument);
+        } else {
+            // BaseActivity必须被继承并实现子类
+            throw new IllegalStateException("BaseActivity must be extended by subclass");
+        }
     }
 }
