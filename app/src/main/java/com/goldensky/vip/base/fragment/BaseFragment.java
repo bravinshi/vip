@@ -41,9 +41,9 @@ public abstract class BaseFragment<T extends ViewDataBinding, VM extends BaseVie
         initView(savedInstanceState);
     }
 
-    abstract int getLayoutRes();
+    protected abstract int getLayoutRes();
 
-    abstract void initView(@Nullable Bundle savedInstanceState);
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     protected VM initViewModel() {
         Type type = getClass().getGenericSuperclass();

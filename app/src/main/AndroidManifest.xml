@@ -34,13 +34,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name="com.goldensky.vip.activity.account.LoginActivity">
+
+        </activity>
+        <activity android:name="com.goldensky.vip.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.goldensky.vip.MainActivity"/>
         <activity android:name="com.goldensky.vip.activity.account.ForgetPasswordActivity"/>
     </application>
 
