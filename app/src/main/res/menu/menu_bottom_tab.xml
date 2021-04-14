@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/item_home" android:title="首页" android:icon="@mipmap/caidan_icon_home_red" app:showAsAction="ifRoom" android:enabled="true"/>
-    <item android:id="@+id/item_shopping_cart" android:title="购物车" android:icon="@mipmap/caidan_icon_shop_line" app:showAsAction="ifRoom" android:enabled="true"/>
-    <item android:id="@+id/item_mine" android:title="我的" android:icon="@mipmap/caidan_icon_my_line" app:showAsAction="ifRoom" android:enabled="true"/>
+    <item android:id="@+id/item_home" android:title="首页" android:icon="@mipmap/menu_icon_home_red" app:showAsAction="ifRoom" android:enabled="true"/>
+    <item android:id="@+id/item_shopping_cart" android:title="购物车" android:icon="@mipmap/menu_icon_shop_line" app:showAsAction="ifRoom" android:enabled="true"/>
+    <item android:id="@+id/item_mine" android:title="我的" android:icon="@mipmap/menu_icon_my_line" app:showAsAction="ifRoom" android:enabled="true"/>
 </menu>
