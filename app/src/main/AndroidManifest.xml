@@ -33,6 +33,13 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="375" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="812" />
+
         <activity android:name="com.goldensky.vip.activity.account.LoginActivity">
 
         </activity>
@@ -43,7 +50,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.goldensky.vip.activity.account.ForgetPasswordActivity"/>
+        <activity android:name="com.goldensky.vip.activity.account.ForgetPasswordActivity" />
     </application>
 
 </manifest>
