@@ -33,4 +33,10 @@
     <string name="hint_change_psd_success">修改密码成功,请重新登录</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_main_products">主营商品</string>
+    <string name="text_goods_comments">商品评价</string>
+    <string name="text_all">全部</string>
+    <string name="text_last">最新</string>
+    <string name="text_pic_video">图/视频</string>
+    <string name="text_good_comment">好评</string>
 </resources>

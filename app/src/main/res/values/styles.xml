@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="itemTextAppearanceActive">
         <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="comment_filter">
+        <item name="android:textColor">@color/select_comment_filter_text</item>
+        <item name="android:paddingEnd">13dp</item>
+        <item name="android:paddingStart">13dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/select_comment_filter_bg</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
 </resources>

@@ -6,6 +6,7 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
+import com.gyf.immersionbar.ImmersionBar;
 
 /**
  * @author bravin
@@ -18,7 +19,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         GoodsDetailViewModel> {
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-
+        ImmersionBar.with(this).statusBarDarkFont(true)
+                .statusBarView(mBinding.vStatusBar).init();
     }
 
     @Override

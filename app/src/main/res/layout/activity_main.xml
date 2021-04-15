@@ -13,6 +13,12 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <View
+            android:id="@+id/v_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorTransparent" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_main"
             android:layout_width="match_parent"
