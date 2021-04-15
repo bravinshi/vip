@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/select_item_shopping_cart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:theme="@style/CheckBoxTheme"
+            android:button="@drawable/selector_checkbox_shopping_cart"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            />
+        <ImageView
+            android:id="@+id/goodsimage_item_shopping_cart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+        <TextView
+            android:id="@+id/goodsname_item_shopping_cart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/goodsimage_item_shopping_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:text="仁和菊花决明子茶枸杞金银花…"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/goodsname_item_shopping_cart"
+            app:layout_constraintLeft_toRightOf="@+id/goodsimage_item_shopping_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/F2F2F2"
+            android:textColor="@color/color_9"
+            android:paddingLeft="4dp"
+            android:text="皇家贡菊/150g"
+            android:textSize="12sp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,4 +3,10 @@
     <style name="itemTextAppearanceActive">
         <item name="android:textSize">11sp</item>
     </style>
+    <style name="CheckBoxTheme">
+        <item name="colorAccent">@color/color_EA483F</item><!--选中颜色-->
+        <item name="colorControlNormal">@color/color_CCCCCC</item><!--未选中颜色-->
+    </style>
+
+
 </resources>
