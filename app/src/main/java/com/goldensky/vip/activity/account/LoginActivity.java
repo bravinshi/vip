@@ -13,7 +13,7 @@ import com.goldensky.vip.databinding.ActivityLoginBinding;
 import com.goldensky.vip.enumerate.LoginTypeEnum;
 import com.goldensky.vip.enumerate.VerificationCodePurposeEnum;
 import com.goldensky.vip.model.LoginInputModel;
-import com.goldensky.vip.viewmodel.LoginViewModel;
+import com.goldensky.vip.viewmodel.account.LoginViewModel;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
 

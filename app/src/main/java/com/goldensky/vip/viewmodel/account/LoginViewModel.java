@@ -1,4 +1,4 @@
-package com.goldensky.vip.viewmodel;
+package com.goldensky.vip.viewmodel.account;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -6,6 +6,7 @@ import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.vip.viewmodel.PublicViewModel;
 
 
 /**
