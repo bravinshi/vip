@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_333333">#333333</color>
+    <color name="color_333336">#333336</color>
+    <color name="color_99999c">#99999c</color>
     <color name="color_999999">#999999</color>
     <color name="color_023894">#023894</color>
     <color name="color_666666">#666666</color>
@@ -28,7 +30,6 @@
     <color name="color_330E82E3">#330E82E3</color>
     <color name="color_e6">#e6e6e6</color>
     <color name="color_f5">#f5f5f5</color>
-    <color name="color_FFEA483F">#FFEA483F</color>
     <color name="color_D1D1D1">#D1D1D1</color>
     <color name="color_EA483F">#EA483F</color>
     <color name="color_ED375E">#ED375E</color>

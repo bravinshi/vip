@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:padding="15dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
@@ -27,8 +27,8 @@
         android:focusableInTouchMode="true"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="#FF333333"
-        android:textSize="17sp" />
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_right"
