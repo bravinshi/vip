@@ -40,6 +40,7 @@ public class TopActionBar extends LinearLayout {
 
         String centerText = typedArray.getString(R.styleable.TopActionBar_centerText);
         String rightText = typedArray.getString(R.styleable.TopActionBar_rightText);
+        String showLeftIcon = typedArray.getString(R.styleable.TopActionBar_rightText);
         int centerColor = typedArray.getColor(R.styleable.TopActionBar_centerTextColor,
                 getResources().getColor(R.color.colorText));
         tvCenter.setText(centerText);
