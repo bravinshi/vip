@@ -1,11 +1,10 @@
 package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
-import android.widget.EditText;
 
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
-import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
+import com.goldensky.vip.databinding.ActivityGoodsCommentBinding;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -16,11 +15,12 @@ import com.gyf.immersionbar.ImmersionBar;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding,
+public class GoodsCommentActivity extends BaseActivity<ActivityGoodsCommentBinding,
         GoodsDetailViewModel> {
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-
+        ImmersionBar.with(this).statusBarDarkFont(true)
+                .statusBarView(mBinding.vStatusBar).init();
     }
 
     @Override
@@ -30,6 +30,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_goods_detail;
+        return R.layout.activity_goods_comment;
     }
 }
