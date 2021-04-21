@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bean"
+            type="com.goldensky.vip.bean.HomeBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_home_jtyx"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="30dp"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{bean.itemTitle}"
+            android:textColor="#FFE7D6"
+            android:textStyle="bold"
+            android:textSize="20sp">
+        </TextView>
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:background="#FFE7D6"
+            app:layout_constraintRight_toLeftOf="@+id/title_tv"
+            app:layout_constraintTop_toTopOf="@+id/title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/title_tv"
+            android:layout_marginRight="@dimen/dp_10">
+        </TextView>
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:background="#FFE7D6"
+            app:layout_constraintLeft_toRightOf="@+id/title_tv"
+            app:layout_constraintTop_toTopOf="@+id/title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/title_tv"
+            android:layout_marginLeft="@dimen/dp_10">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shape_corner_white_bg"
+            android:paddingTop="18dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingBottom="12dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/recycle_view_top"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_corner_white_bg"
+            android:paddingTop="18dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingBottom="12dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/recycle_view_middle"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_corner_white_bg"
+            android:paddingTop="18dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingBottom="12dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycle_view_bottom"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:text="更多 >>"
+            android:textColor="#ffffffff"
+            android:textSize="11sp"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
