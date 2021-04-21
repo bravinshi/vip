@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bean"
+            type="com.goldensky.vip.bean.HomeBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/shape_cornerback_white"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10">
+        <ImageView
+            android:id="@+id/msg_iv"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/home_msg_icon"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textColor="#333333"
+            android:text="@{bean.message}"
+            >
+
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
