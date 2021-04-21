@@ -29,6 +29,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_tab_main"
             android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="54dp"
             app:itemIconTint="@color/select_bottom_tab"
             app:itemTextColor="@color/select_bottom_tab"

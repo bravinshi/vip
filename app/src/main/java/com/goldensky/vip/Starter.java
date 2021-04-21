@@ -6,6 +6,18 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
+import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
+import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
+import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
+import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
+import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
+import com.goldensky.vip.activity.mine.settings.SettingsActivity;
+import com.goldensky.vip.activity.mine.tools.CouponActivity;
+import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
+import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
+import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
+import com.goldensky.vip.activity.order.OrderListActivity;
 
 /**
  * @author bravin
@@ -44,6 +56,127 @@ public class Starter {
      */
     public static void startForgetPasswordActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ForgetPasswordActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动设置界面
+     */
+    public static void startSettingsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SettingsActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动个人信息页面
+     */
+    public static void startPersonDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PersonalDetailsActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动修改密码页面
+     */
+    public static void startChangePWDActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ChangePWDActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动修改昵称页面
+     */
+    public static void startChangeNickActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ChangeNickActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动商品关注页面
+     */
+    public static void startGoodsFocusActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, GoodsFocusActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动圈子关注页面
+     */
+    public static void startCircleFocusActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, CircleFocusActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动最近浏览页面
+     */
+    public static void startRecentBrowseActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, RecentBrowseActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动订单列表页面
+     */
+    public static void startOrderListActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OrderListActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动优惠券页面
+     */
+    public static void startCouponActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, CouponActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动我的地址页面
+     */
+    public static void startMyAddressActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MyAddressActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动好友分享页面
+     */
+    public static void startShareToFriendActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ShareToFriendActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 启动邀请企业页面
+     */
+    public static void startInviteCompanyActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, InviteCompanyActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

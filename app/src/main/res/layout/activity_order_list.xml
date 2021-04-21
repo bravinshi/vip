@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/F2F2F2"
+        tools:context=".activity.order.OrderListActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_order_list"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:showIvBack="true"
+            app:centerText="订单管理"
+            />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_order_list"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_order_list"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="40dp"
+            app:tabTextColor="@color/color_3"
+            app:tabSelectedTextColor="@color/EA483F"
+            app:tabIndicatorHeight="0dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

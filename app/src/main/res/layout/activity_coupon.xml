@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_f5"
+        android:layout_height="match_parent"
+        tools:context=".activity.mine.tools.CouponActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_coupon"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:showIvBack="true"
+            app:centerText="优惠券"
+            />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_coupon"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/color_f5"
+            app:tabTextColor="@color/color_3"
+            app:tabSelectedTextColor="@color/color_4F7DF5"
+            app:tabIndicatorHeight="0dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

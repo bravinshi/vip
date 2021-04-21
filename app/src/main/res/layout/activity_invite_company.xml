@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_EEEEEF"
+        android:layout_height="match_parent"
+        tools:context=".activity.mine.tools.InviteCompanyActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:background="@color/white"
+            android:id="@+id/top_bar_invite_company"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:showIvBack="true"
+            app:centerText="邀请企业"
+            />
+        <ImageView
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_invite_company"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/my_pic_yaoqingqiye"
+            />
+        <ImageView
+            android:id="@+id/btn_invite_company"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:onClick="@{listener}"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:src="@mipmap/my_btn_fenxiang"
+            />
+        <View
+            android:id="@+id/bottom_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

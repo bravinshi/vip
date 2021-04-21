@@ -1,8 +1,14 @@
 <resources>
     <declare-styleable name="TopActionBar">
         <attr name="centerText" format="string"/>
-        <attr name="showRightIcon" format="boolean"/>
         <attr name="rightText" format="string"/>
+        <attr name="leftText" format="string"/>
+        <attr name="showIvBack" format="boolean"/>
+        <attr name="centerTextSize" format="integer"/>
+        <attr name="rightTextSize" format="integer"/>
+        <attr name="leftTextSize" format="integer"/>
+        <attr name="rightTextColor" format="color|reference"/>
         <attr name="centerTextColor" format="color|reference"/>
+        <attr name="leftTextColor" format="color|reference"/>
     </declare-styleable>
 </resources>

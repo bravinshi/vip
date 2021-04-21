@@ -23,8 +23,8 @@ public class MineToolAdapter extends BaseQuickAdapter<MineToolBean, BaseViewHold
     @Override
     protected void convert(BaseViewHolder helper, MineToolBean item) {
         ItemToolMineBinding bind = DataBindingUtil.<ItemToolMineBindingImpl>bind(helper.itemView);
-        Glide.with(mContext).load(item.getSign()).into(bind.ivSignItemMine);
         bind.setBean(item);
-
+        bind.notifyChange();
+        Glide.with(mContext).load(item.getSign()).into(bind.ivSignItemMine);
     }
 }

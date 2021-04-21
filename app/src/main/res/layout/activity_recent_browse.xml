@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.mine.focus.RecentBrowseActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_recent_browse"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:showIvBack="true"
+            app:centerText="最近浏览"
+            app:rightText="清空  编辑"
+            app:rightTextSize="14"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_browse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

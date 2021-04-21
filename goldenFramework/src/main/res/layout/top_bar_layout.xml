@@ -16,7 +16,17 @@
         android:layout_marginRight="15dp"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_back_hui" />
-
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:textColor="#000000"
+        android:visibility="gone"
+        android:textSize="14sp"
+        />
     <TextView
         android:id="@+id/tv_center"
         android:layout_width="match_parent"
@@ -42,9 +52,10 @@
         android:paddingTop="5dp"
         android:paddingRight="15dp"
         android:paddingBottom="5dp"
-        android:textColor="#FF333333"
+        android:visibility="gone"
+        android:textColor="#000000"
         android:textSize="14sp"
-        android:visibility="gone" />
+        />
 
     <View
         android:layout_width="match_parent"
