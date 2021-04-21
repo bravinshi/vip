@@ -156,7 +156,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_order_mine"
-            android:background="@drawable/shape_cornerback_white"
+            android:background="@drawable/shape_corner_white_bg"
             app:layout_constraintTop_toBottomOf="@+id/top_bar_mine"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="match_parent"
@@ -179,7 +179,7 @@
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintTop_toBottomOf="@id/top_bar_mine"
-            android:background="@drawable/shape_cornerback_white"
+            android:background="@drawable/shape_corner_white_bg"
             android:layout_marginTop="380dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"

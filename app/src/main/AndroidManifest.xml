@@ -57,20 +57,30 @@
         <meta-data
             android:name="android.notch_support"
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
+            android:value="true" />
+        <!--适配小米（xiaomi）刘海屏-->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
 
         <activity android:name=".activity.account.LoginActivity" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name="com.goldensky.vip.activity.account.ForgetPasswordActivity" />
+        <activity android:name=".activity.goods.PackageCustomizationActivity" />
+        <activity android:name=".activity.goods.SearchActivity" />
+
+        <activity android:name="com.goldensky.vip.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.GoodsDetailActivity" />
+        <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
+        <activity android:name=".activity.goods.HotTodayActivity" />
+        <activity android:name=".activity.goods.RecommendActivity" />
+
     </application>
 
 </manifest>

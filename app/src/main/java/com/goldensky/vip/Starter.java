@@ -18,6 +18,9 @@ import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
+import com.goldensky.vip.activity.goods.RecommendActivity;
+import com.goldensky.vip.activity.goods.GoodsDetailActivity;
+
 
 /**
  * @author bravin
@@ -61,6 +64,7 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+
 
     /**
      * 启动设置界面
@@ -173,6 +177,18 @@ public class Starter {
         context.startActivity(intent);
     }
     /**
+     * 启动商品详情页
+     */
+    public static void startGoodsDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, GoodsDetailActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
      * 启动邀请企业页面
      */
     public static void startInviteCompanyActivity(Context context, Bundle bundle) {
@@ -182,4 +198,17 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+
+    /**
+     * 启动推荐
+     */
+    public static void startRecommendActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, RecommendActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
 }
