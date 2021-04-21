@@ -35,16 +35,20 @@ public class TopActionBar extends LinearLayout {
     public TopActionBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TopActionBar);
-
         String centerText = typedArray.getString(R.styleable.TopActionBar_centerText);
         String rightText = typedArray.getString(R.styleable.TopActionBar_rightText);
+        Boolean showLeftIcon = typedArray.getBoolean(R.styleable.TopActionBar_rightText,true);
         int centerColor = typedArray.getColor(R.styleable.TopActionBar_centerTextColor,
                 getResources().getColor(R.color.colorText));
         tvCenter.setText(centerText);
         tvCenter.setTextColor(centerColor);
         tvRight.setText(rightText);
+        if(showLeftIcon){
+            tvRight.setVisibility(VISIBLE);
+        }else {
+            tvRight.setVisibility(GONE);
+        }
 
         typedArray.recycle();
     }
