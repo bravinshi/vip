@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
-import com.goldensky.vip.activity.account.RecommendActivity;
+import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 
 /**

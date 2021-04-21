@@ -1,4 +1,4 @@
-package com.goldensky.vip.activity.account;
+package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +28,13 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Ba
         ImmersionBar.with(this).statusBarDarkFont(true)
                 .statusBarView(mBinding.vStatusBar).init();
 
+        mBinding.ivBack.setOnClickListener(v -> RecommendActivity.this.finish());
+
         ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
         tabEntities.add(new TabEntity("商品推荐"));
         tabEntities.add(new TabEntity("服务推荐"));
 
         mBinding.ctl.setTabData(tabEntities);
-        mBinding.ctl.setCurrentTab(0);
         mBinding.ctl.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
