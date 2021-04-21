@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldensky.framework.util.ImageUtils;
 import com.goldensky.vip.R;

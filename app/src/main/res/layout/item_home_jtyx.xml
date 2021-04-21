@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/title_tv"
             android:layout_marginTop="15dp"
-            android:background="@drawable/shape_cornerback_white"
+            android:background="@drawable/shape_corner_white_bg"
             android:paddingTop="18dp"
             android:paddingLeft="@dimen/dp_10"
             android:paddingBottom="12dp">
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/recycle_view_top"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_cornerback_white"
+            android:background="@drawable/shape_corner_white_bg"
             android:paddingTop="18dp"
             android:paddingLeft="@dimen/dp_10"
             android:paddingBottom="12dp">
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/recycle_view_middle"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_cornerback_white"
+            android:background="@drawable/shape_corner_white_bg"
             android:paddingTop="18dp"
             android:paddingLeft="@dimen/dp_10"
             android:paddingBottom="12dp">
