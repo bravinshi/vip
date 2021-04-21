@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 
 /**
  * @author bravin
@@ -49,4 +50,15 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+    /**
+     * 启动商品详情页
+     */
+    public static void startGoodsDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, GoodsDetailActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
 }
