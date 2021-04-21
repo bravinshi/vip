@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.account.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 
 /**
@@ -61,4 +62,14 @@ public class Starter {
         context.startActivity(intent);
     }
 
+    /**
+     * 启动推荐
+     */
+    public static void startRecommendActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, RecommendActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
 }
