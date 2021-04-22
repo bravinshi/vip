@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivitySpecialPriceAreaBinding;
 
@@ -15,10 +16,11 @@ import com.goldensky.vip.databinding.ActivitySpecialPriceAreaBinding;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class SpecialPriceAreaActivity extends BaseActivity<ActivitySpecialPriceAreaBinding, BaseViewModel> {
+public class SpecialPriceAreaActivity extends BaseActivity<ActivitySpecialPriceAreaBinding, BaseViewModel> implements View.OnClickListener {
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         mBinding.ivBack.setOnClickListener(v -> SpecialPriceAreaActivity.this.finish());
+        mBinding.setListener(this);
     }
 
     @Override
@@ -29,5 +31,10 @@ public class SpecialPriceAreaActivity extends BaseActivity<ActivitySpecialPriceA
     @Override
     public int getLayoutId() {
         return R.layout.activity_special_price_area;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

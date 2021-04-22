@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsFocusAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityGoodsFocusBinding;
@@ -17,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsFocusActivity extends BaseActivity<ActivityGoodsFocusBinding, PublicViewModel> {
+public class GoodsFocusActivity extends BaseActivity<ActivityGoodsFocusBinding, PublicViewModel> implements View.OnClickListener {
     private GoodsFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
 
@@ -38,6 +39,7 @@ public class GoodsFocusActivity extends BaseActivity<ActivityGoodsFocusBinding, 
         adapter=new GoodsFocusAdapter(list);
         mBinding.rvGoodsFocus.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvGoodsFocus.setAdapter(adapter);
+        mBinding.setListener(this);
     }
 
     @Override
@@ -48,5 +50,10 @@ public class GoodsFocusActivity extends BaseActivity<ActivityGoodsFocusBinding, 
     @Override
     public int getLayoutId() {
         return R.layout.activity_goods_focus;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

@@ -20,8 +20,8 @@
             android:background="@color/white"
             app:showIvBack="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:centerText="我的"/>
+            android:layout_height="0.1dp"
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintTop_toBottomOf="@id/top_bar_mine"
             android:layout_width="match_parent"

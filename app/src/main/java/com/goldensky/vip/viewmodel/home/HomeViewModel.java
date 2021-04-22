@@ -92,9 +92,9 @@ public class HomeViewModel extends PublicViewModel {
         jrbkNames.add("宿迁骆马湖咸鸭蛋");
 
         List<String> jrbkPrices = new ArrayList();
-        jrbkPrices.add("48.90");
+        jrbkPrices.add("34.90");
         jrbkPrices.add("299.00");
-        jrbkPrices.add("12.80");
+        jrbkPrices.add("49.90");
 
         List<Integer>jrbkPdIds = new ArrayList();
         jrbkPdIds.add(2);
