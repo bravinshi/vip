@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,13 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.goldensky.vip.R;
+import com.goldensky.vip.adapter.CircleFocusAdapter;
+import com.goldensky.vip.adapter.GoodsFocusAdapter;
 import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.databinding.FragmentShoppingCartBinding;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBinding, PublicViewModel> {
     private boolean isEdit=false;
+    private GoodsFocusAdapter adapter;
+    private List<Integer> list=new ArrayList<>();
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_shopping_cart;
@@ -48,6 +56,13 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
                 isEdit=!isEdit;
             }
         });
+        list.add(R.mipmap.gwuc_img_cha);
+        list.add(R.mipmap.gwc_img_mangguo);
+        list.add(R.mipmap.gwc_img_chengzi);
+        list.add(R.mipmap.gwc_img_hongchang);
+        adapter=new GoodsFocusAdapter(list);
+        mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.rvShoppingCart.setAdapter(adapter);
 
     }
 }

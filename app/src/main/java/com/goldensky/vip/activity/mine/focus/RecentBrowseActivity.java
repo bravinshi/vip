@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBinding, PublicViewModel> {
-    private RecentBrowseAdapter adapter;
-    private List<RecentBrowseBean> list=new ArrayList<>();
+    private CircleFocusAdapter adapter;
+    private List<Integer> list=new ArrayList<>();
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -37,10 +37,12 @@ public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBindi
             public void onClick(View v) {
             }
         });
-        for (int i = 0; i < 15; i++) {
-            list.add(new RecentBrowseBean(R.mipmap.my_pic_zuijinliulan,i));
-        }
-        adapter=new RecentBrowseAdapter(list);
+        list.add(R.mipmap.my_pic_zuijinliulan1);
+        list.add(R.mipmap.my_pic_zuijinliulan2);
+        list.add(R.mipmap.my_pic_zuijinliulan3);
+        list.add(R.mipmap.my_pic_zuijinliulan4);
+        list.add(R.mipmap.my_pic_zuijinliulan5);
+        adapter=new CircleFocusAdapter(list);
         mBinding.rvRecentBrowse.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvRecentBrowse.setAdapter(adapter);
 
