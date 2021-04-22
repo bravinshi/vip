@@ -77,6 +77,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
+        <activity android:name=".activity.goods.GoodsDetail1Activity">
+
+
+        </activity>
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />

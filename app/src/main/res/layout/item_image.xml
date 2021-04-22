@@ -9,9 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.goldensky.vip.base.ui.view.AdaptiveImageView
             android:id="@+id/iv"
-            android:scaleType="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

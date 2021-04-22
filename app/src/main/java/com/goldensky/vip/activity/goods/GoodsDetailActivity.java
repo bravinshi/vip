@@ -10,6 +10,8 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
+import com.goldensky.vip.databinding.ActivityGoodsDetail1Binding;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
@@ -39,6 +41,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(GoodsDetailActivity.this);
+        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
             generateFakeData(1);
