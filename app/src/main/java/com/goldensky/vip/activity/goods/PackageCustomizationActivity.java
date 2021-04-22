@@ -39,6 +39,13 @@ public class PackageCustomizationActivity extends BaseActivity<ActivityPackageCu
 
     @Override
     public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
+        switch (v.getId()){
+            case R.id.btn_service:
+                Starter.startCustomerServiceActivity(this,null);
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

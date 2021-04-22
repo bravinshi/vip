@@ -11,6 +11,8 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             app:showIvBack="false"
+            app:centerTextSize="18"
+            app:rightTextSize="14"
             android:layout_height="wrap_content"
             app:centerText="购物车"
             app:rightText="编辑"
@@ -18,6 +20,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
             <CheckBox
                 android:id="@+id/checkbox_select_all"

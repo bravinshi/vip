@@ -35,6 +35,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
+                android:onClick="@{listener}"
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_back_hui" />
 

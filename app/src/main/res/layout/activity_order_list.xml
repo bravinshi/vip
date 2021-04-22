@@ -33,6 +33,35 @@
             app:tabSelectedTextColor="@color/EA483F"
             app:tabIndicatorHeight="0dp"
             />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp"
+            >
+            <ImageView
+                android:id="@+id/iv_order_list"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@mipmap/wddd_img_quesheng"
+                />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/iv_order_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/color_888888"
+                android:text="暂无订单"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_order_list"
             android:layout_width="match_parent"
