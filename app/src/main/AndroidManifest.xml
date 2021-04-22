@@ -78,6 +78,7 @@
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />
+        <activity android:name=".activity.article.ArticleDetailActivity" />
     </application>
 
 </manifest>
