@@ -1,6 +1,7 @@
 package com.goldensky.vip;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
@@ -18,14 +19,14 @@ import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewModel> {
+public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewModel> implements View.OnClickListener {
     private FragmentAdapter fragmentAdapter;
     private List<Fragment> fragments;
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        ImmersionBar.with(this).statusBarDarkFont(true)
-                .statusBarView(mBinding.vStatusBar).init();
+//        ImmersionBar.with(this).statusBarDarkFont(true)
+//                .statusBarView(mBinding.vStatusBar).init();
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new MessageFragment());
@@ -57,6 +58,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
             return true;
         });
         mBinding.viewPagerMain.setOffscreenPageLimit(5);
+        mBinding.setListener(this);
     }
 
     @Override
@@ -67,5 +69,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.adapter.GoodsFocusAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -19,7 +20,7 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CircleFocusActivity extends BaseActivity<ActivityCircleFocusBinding, PublicViewModel> {
+public class CircleFocusActivity extends BaseActivity<ActivityCircleFocusBinding, PublicViewModel> implements View.OnClickListener {
     private CircleFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
 
@@ -38,7 +39,7 @@ public class CircleFocusActivity extends BaseActivity<ActivityCircleFocusBinding
         list.add(R.mipmap.my_pic_quanziguanzhu4);
         list.add(R.mipmap.my_pic_quanziguanzhu5);
         list.add(R.mipmap.my_pic_quanziguanzhu6);
-
+        mBinding.setListener(this);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvGoodsFocus.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvGoodsFocus.setAdapter(adapter);
@@ -55,5 +56,10 @@ public class CircleFocusActivity extends BaseActivity<ActivityCircleFocusBinding
     @Override
     public int getLayoutId() {
         return R.layout.activity_circle_focus;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

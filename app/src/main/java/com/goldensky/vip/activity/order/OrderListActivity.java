@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsFocusAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityOrderListBinding;
@@ -17,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, PublicViewModel> {
+public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, PublicViewModel> implements View.OnClickListener {
     private List<Integer> list=new ArrayList<>();
     private List<Integer> allList=new ArrayList<>();
     private List<Integer> obligationList=new ArrayList<>();
@@ -51,6 +52,7 @@ public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, Pu
         finishedList.add(R.mipmap.my_pic_dingdanguanli2);
         evaluatedList.add(R.mipmap.my_pic_dingdanguanli1);
         adapter=new GoodsFocusAdapter(list);
+        mBinding.setListener(this);
         mBinding.rvOrderList.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvOrderList.setAdapter(adapter);
         if(type>=0&&type<=4){
@@ -123,5 +125,10 @@ public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, Pu
     @Override
     public int getLayoutId() {
         return R.layout.activity_order_list;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

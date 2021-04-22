@@ -7,11 +7,13 @@
         android:layout_height="match_parent"
         tools:context=".fragment.main.ShoppingCartFragment">
         <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_shopping_cart"
             android:background="@color/white"
             android:layout_width="match_parent"
             app:showIvBack="false"
             android:layout_height="wrap_content"
             app:centerText="购物车"
+            app:rightText="编辑"
             />
 
         <RelativeLayout
@@ -28,17 +30,17 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="16sp"
                 />
-            <TextView
-                android:id="@+id/tv_edit_finish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/color_3"
-                android:layout_marginRight="10dp"
-                android:text="编辑"
-                android:textSize="16sp"
-                />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_edit_finish"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:textColor="@color/color_3"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:text="编辑"-->
+<!--                android:textSize="16sp"-->
+<!--                />-->
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"

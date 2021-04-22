@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +84,18 @@
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
-
+        <ImageView
+            android:id="@+id/btn_service"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@mipmap/my_pic_xuanfu"
+            android:layout_marginRight="20dp"
+            android:scaleType="center"
+            android:onClick="@{listener}"
+            android:layout_marginBottom="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

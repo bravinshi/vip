@@ -7,6 +7,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityRecommendBinding;
 import com.goldensky.vip.entity.TabEntity;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * 包名： com.goldensky.vip.activity.account
  * 类说明：
  */
-public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, BaseViewModel> {
+public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, BaseViewModel> implements View.OnClickListener {
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
 
@@ -57,7 +58,7 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Ba
         mBinding.llService.setVisibility(View.GONE);
 
         mBinding.ctl.setCurrentTab(0);
-
+        mBinding.setListener(this);
 
     }
 
@@ -69,5 +70,10 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Ba
     @Override
     public int getLayoutId() {
         return R.layout.activity_recommend;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

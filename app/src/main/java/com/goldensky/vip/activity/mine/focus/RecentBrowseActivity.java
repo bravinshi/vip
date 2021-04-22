@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.adapter.RecentBrowseAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -20,7 +21,7 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBinding, PublicViewModel> {
+public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBinding, PublicViewModel> implements View.OnClickListener {
     private CircleFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
 
@@ -45,7 +46,7 @@ public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBindi
         adapter=new CircleFocusAdapter(list);
         mBinding.rvRecentBrowse.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvRecentBrowse.setAdapter(adapter);
-
+        mBinding.setListener(this);
     }
 
     @Override
@@ -56,5 +57,10 @@ public class RecentBrowseActivity extends BaseActivity<ActivityRecentBrowseBindi
     @Override
     public int getLayoutId() {
         return R.layout.activity_recent_browse;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

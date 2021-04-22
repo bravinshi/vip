@@ -9,6 +9,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.SearchAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.SearchItemBean;
@@ -25,7 +26,7 @@ import java.util.List;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseViewModel> {
+public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseViewModel> implements View.OnClickListener {
 
     private SearchAdapter searchAdapter;
     private List<SearchItemBean> goodsList = new ArrayList<>();
@@ -39,7 +40,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseView
         searchAdapter = new SearchAdapter(null);
         mBinding.rv.setAdapter(searchAdapter);
         mBinding.rv.setLayoutManager(new GridLayoutManager(SearchActivity.this, 4));
-
+        mBinding.setListener(this);
         mBinding.ctl.setTabData(tabEntities);
         mBinding.ctl.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -94,5 +95,10 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseView
     @Override
     public int getLayoutId() {
         return R.layout.activity_search;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Starter.startCustomerServiceActivity(this,null);
     }
 }

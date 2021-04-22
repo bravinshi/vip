@@ -60,7 +60,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             }
         });
         mViewModel.initHomeBeans();
-
         mBinding.searchLayout.setOnClickListener(this);
         mBinding.gxtjIv.setOnClickListener(this);
     }
