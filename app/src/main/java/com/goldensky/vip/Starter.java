@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
@@ -267,6 +268,17 @@ public class Starter {
      */
     public static void startYhzqActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, SpecialPriceAreaActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 文章详情
+     */
+    public static void startArticleDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ArticleDetailActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
