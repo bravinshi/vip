@@ -1,24 +1,17 @@
 package com.goldensky.vip.activity.goods;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldensky.vip.R;
-import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
-import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
 import com.goldensky.vip.databinding.ActivityGoodsDetail1Binding;
-import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,7 +21,7 @@ import java.util.List;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding,
+public class GoodsDetail1Activity extends BaseActivity<ActivityGoodsDetail1Binding,
         GoodsDetailViewModel> {
 
     public static final String KEY_FAKE_DATA = "KEY_FAKE_DATA";
@@ -41,17 +34,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(GoodsDetailActivity.this);
-        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(GoodsDetail1Activity.this);
+//        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
         mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            generateFakeData(1);
-            return;
-        }
-
-        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
-        generateFakeData(fakeKey);
+        generateFakeData(1);
     }
 
     public void generateFakeData(Integer fakeKey) {
@@ -121,11 +107,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     public void showFakeData(FakeData data) {
         ImageLoaderHelper.loadImage(mBinding.ivMain, data.mainImage);
-        mBinding.tvPrice.setText(data.price);
-        mBinding.tvTitle.setText(data.title);
-        mBinding.tvSpecification.setText(data.specification);
-        mBinding.tvCommentNum.setText("(" + data.commentNum + ")");
-        mBinding.tvPrice.setText(data.price);
 
         GoodsDetailAdapter goodsDetailAdapter = new GoodsDetailAdapter();
         mBinding.rvDetail.setAdapter(goodsDetailAdapter);
@@ -186,6 +167,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_goods_detail;
+        return R.layout.activity_goods_detail_1;
     }
 }
