@@ -17,7 +17,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10">
+        android:layout_marginTop="@dimen/dp_10"
+        android:clickable="true">
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
         </TextView>
 
         <ImageView
+            android:id="@+id/more_iv"
             android:layout_width="45dp"
             android:layout_height="16dp"
             app:layout_constraintRight_toRightOf="parent"
