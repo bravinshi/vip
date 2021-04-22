@@ -1,6 +1,8 @@
 package com.goldensky.vip.adapter;
 
 import android.database.DatabaseUtils;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -10,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.databinding.ItemHomeJtyxBinding;
 import com.goldensky.vip.databinding.ItemHomeLbBinding;
@@ -32,10 +36,11 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
     public static final int ITEM_TYPE_YHZQ = 5; //优惠专区
     public static final int ITEM_TYPE_JTYX = 6; //金天优选
 
-    private HomeProductAdapter mHomeProductAdapter;
+    private HomeProductAdapter mRmdProductAdapter;
     private HomeProductAdapter mTopProductAdapter;
     private HomeProductAdapter mMiddleProductAdapter;
     private HomeProductAdapter mBottomProductAdapter;
+    private HomeProductAdapter mJrbkProductAdapter;
 
     public HomeAdapter(List<HomeBean> data) {
         super(data);
@@ -56,24 +61,68 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
         } else if (item.gethItemType() == ITEM_TYPE_MSG) {
             ItemHomeMsgBinding binding = DataBindingUtil.bind(helper.itemView);
             binding.setBean(item);
-        } else if (item.gethItemType() == ITEM_TYPE_RMD || item.gethItemType() == ITEM_TYPE_JRBK) {
+        } else if (item.gethItemType() == ITEM_TYPE_RMD) {
+            helper.addOnClickListener(R.id.more_iv);
             ItemHomeProductBinding binding = DataBindingUtil.bind(helper.itemView);
             binding.recycleView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            mHomeProductAdapter = new HomeProductAdapter(item.getProductList());
-            binding.recycleView.setAdapter(mHomeProductAdapter);
+            mRmdProductAdapter = new HomeProductAdapter(item.getProductList());
+            mRmdProductAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    HomeBean.ProductBean productBean = mRmdProductAdapter.getItem(position);
+                    startProdutDetailActivity(productBean.getProductId());
+                }
+            });
+            binding.recycleView.setAdapter(mRmdProductAdapter);
+            binding.setBean(item);
+        } else if (item.gethItemType() == ITEM_TYPE_JRBK) {
+            helper.addOnClickListener(R.id.more_iv);
+            ItemHomeProductBinding binding = DataBindingUtil.bind(helper.itemView);
+            binding.recycleView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+            mJrbkProductAdapter = new HomeProductAdapter(item.getProductList());
+            mJrbkProductAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    HomeBean.ProductBean productBean = mJrbkProductAdapter.getItem(position);
+                    startProdutDetailActivity(productBean.getProductId());
+                }
+            });
+            binding.recycleView.setAdapter(mJrbkProductAdapter);
             binding.setBean(item);
         } else if (item.gethItemType() == ITEM_TYPE_JTYX) {
             ItemHomeJtyxBinding binding = DataBindingUtil.bind(helper.itemView);
             binding.recycleViewTop.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mTopProductAdapter = new HomeProductAdapter(item.getJtyxProductList().get(0));
+            mTopProductAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    HomeBean.ProductBean productBean = mTopProductAdapter.getItem(position);
+                    startProdutDetailActivity(productBean.getProductId());
+                }
+            });
             binding.recycleViewTop.setAdapter(mTopProductAdapter);
 
             binding.recycleViewMiddle.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mMiddleProductAdapter = new HomeProductAdapter(item.getJtyxProductList().get(1));
+            mMiddleProductAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Log.d("onItemClick", "onItemClick: ");
+                    HomeBean.ProductBean productBean = mMiddleProductAdapter.getItem(position);
+                    startProdutDetailActivity(productBean.getProductId());
+                }
+            });
             binding.recycleViewMiddle.setAdapter(mMiddleProductAdapter);
 
             binding.recycleViewBottom.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             mBottomProductAdapter = new HomeProductAdapter(item.getJtyxProductList().get(2));
+            mBottomProductAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    HomeBean.ProductBean productBean = mBottomProductAdapter.getItem(position);
+                    startProdutDetailActivity(productBean.getProductId());
+                }
+            });
             binding.recycleViewBottom.setAdapter(mBottomProductAdapter);
 
             binding.setBean(item);
@@ -84,4 +133,11 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
         }
     }
 
+    private void startProdutDetailActivity(Integer productId) {
+        if (productId > 0) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("KEY_FAKE_DATA", productId);
+            Starter.startGoodsDetailActivity(mContext, bundle);
+        }
+    }
 }

@@ -7,6 +7,10 @@ import android.os.Bundle;
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.goods.HotTodayActivity;
+import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
+import com.goldensky.vip.activity.goods.SearchActivity;
+import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
@@ -217,7 +221,52 @@ public class Starter {
      */
     public static void startCustomerServiceActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CustomerServiceActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /*
+     * 启动搜索
+     */
+    public static void startSearchActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SearchActivity.class);
 
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 今日爆款
+     */
+    public static void startHotTodayActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, HotTodayActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 个性推荐
+     */
+    public static void startCustomActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PackageCustomizationActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 优惠专区
+     */
+    public static void startYhzqActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SpecialPriceAreaActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

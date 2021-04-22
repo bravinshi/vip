@@ -8,6 +8,9 @@
         <variable
             name="userInfo"
             type="UserBean" />
+<!--        <variable-->
+<!--            name="listener"-->
+<!--            type="android.view.View.OnClickListener" />-->
     </data>
 
     <LinearLayout
@@ -17,7 +20,8 @@
         android:background="@color/color_f5">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp">
+            android:layout_height="170dp"
+            android:clickable="true">
             <View
                 android:layout_width="match_parent"
                 android:layout_height="157dp"
@@ -62,6 +66,7 @@
             </TextView>
 
             <LinearLayout
+                android:id="@+id/search_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
@@ -69,7 +74,8 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:clickable="true">
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -93,7 +99,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:src="@mipmap/home_gxtj_banner"
                 android:scaleType="fitXY"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                android:clickable="true"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view"

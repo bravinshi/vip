@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10">
+        android:layout_marginTop="@dimen/dp_10"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/yhzq_iv"
