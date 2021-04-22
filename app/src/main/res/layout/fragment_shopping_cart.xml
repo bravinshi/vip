@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".fragment.shoppingcart.ShoppingCartFragment">
+        tools:context=".fragment.main.ShoppingCartFragment">
         <com.goldensky.framework.ui.view.TopActionBar
             android:background="@color/white"
             android:layout_width="match_parent"
@@ -40,20 +40,26 @@
                 android:textSize="16sp"
                 />
         </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_shopping_cart"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/shape_list_shopping_cart"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_shopping_cart"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_list_shopping_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
         <View
             android:background="@color/color_shadow"
             android:layout_width="match_parent"

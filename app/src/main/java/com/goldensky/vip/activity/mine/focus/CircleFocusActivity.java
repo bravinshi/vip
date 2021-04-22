@@ -32,9 +32,13 @@ public class CircleFocusActivity extends BaseActivity<ActivityCircleFocusBinding
             }
         });
         mBinding.tabCircleFocus.addTab(mBinding.tabCircleFocus.newTab().setText(getString(R.string.text_all)));
-        for (int i = 0; i < 10; i++) {
-            list.add(R.mipmap.my_pic_quanziguanzhu2);
-        }
+
+        list.add(R.mipmap.my_pic_quanziguanzhu2);
+        list.add(R.mipmap.my_pic_quanziguanzhu3);
+        list.add(R.mipmap.my_pic_quanziguanzhu4);
+        list.add(R.mipmap.my_pic_quanziguanzhu5);
+        list.add(R.mipmap.my_pic_quanziguanzhu6);
+
         adapter=new CircleFocusAdapter(list);
         mBinding.rvGoodsFocus.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvGoodsFocus.setAdapter(adapter);
