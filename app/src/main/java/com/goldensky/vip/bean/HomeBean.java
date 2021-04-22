@@ -86,14 +86,16 @@ public class HomeBean implements MultiItemEntity {
          private String productPrice;
          private Integer productType; //1-推荐  2-爆款 3-金天优选
         private String originPrice;
+        private Integer productId;
 
          private Integer imgId;
 
-         public ProductBean(Integer productType, Integer imgId, String productName, String productPrice) {
+         public ProductBean(Integer productType, Integer imgId, String productName, String productPrice, Integer productId) {
              this.productType = productType;
              this.imgId = imgId;
              this.productName = productName;
              this.productPrice = productPrice;
+             this.productId = productId;
          }
 
         public Integer getProductType() {
@@ -142,6 +144,14 @@ public class HomeBean implements MultiItemEntity {
 
         public void setOriginPrice(String originPrice) {
             this.originPrice = originPrice;
+        }
+
+        public Integer getProductId() {
+            return productId;
+        }
+
+        public void setProductId(Integer productId) {
+            this.productId = productId;
         }
 
         @Override

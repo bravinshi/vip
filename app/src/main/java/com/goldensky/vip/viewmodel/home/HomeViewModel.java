@@ -63,9 +63,15 @@ public class HomeViewModel extends PublicViewModel {
         rmdPrices.add("19.90");
         rmdPrices.add("159.80");
 
+        List<Integer>rmdPdIds = new ArrayList();
+        rmdPdIds.add(1);
+        rmdPdIds.add(0);
+        rmdPdIds.add(0);
+        rmdPdIds.add(0);
+
         List<HomeBean.ProductBean> rmdProducts = new ArrayList<>();
         for (int i = 0 ; i < rmdImgIds.size(); i ++) {
-            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_RMD_PD, rmdImgIds.get(i), rmdNames.get(i), rmdPrices.get(i));
+            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_RMD_PD, rmdImgIds.get(i), rmdNames.get(i), rmdPrices.get(i), rmdPdIds.get(i));
             rmdProducts.add(productBean);
         }
         rmdBean.setProductList(rmdProducts);
@@ -90,9 +96,14 @@ public class HomeViewModel extends PublicViewModel {
         jrbkPrices.add("299.00");
         jrbkPrices.add("12.80");
 
+        List<Integer>jrbkPdIds = new ArrayList();
+        jrbkPdIds.add(2);
+        jrbkPdIds.add(5);
+        jrbkPdIds.add(3);
+
         List<HomeBean.ProductBean> jrbkProducts = new ArrayList<>();
         for (int i = 0 ; i < jrbkImgIds.size(); i ++) {
-            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JRBK_PD, jrbkImgIds.get(i), jrbkNames.get(i), jrbkPrices.get(i));
+            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JRBK_PD, jrbkImgIds.get(i), jrbkNames.get(i), jrbkPrices.get(i),jrbkPdIds.get(i));
             jrbkProducts.add(productBean);
         }
         jrbkBean.setProductList(jrbkProducts);
@@ -131,9 +142,14 @@ public class HomeViewModel extends PublicViewModel {
         jtyxOPrices1.add("18.80");
         jtyxOPrices1.add("88.00");
 
+        List<Integer>jtyxPdIds1 = new ArrayList();
+        jtyxPdIds1.add(4);
+        jtyxPdIds1.add(0);
+        jtyxPdIds1.add(0);
+
         List<HomeBean.ProductBean> jtyxProducts1 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds1.size(); i ++) {
-            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds1.get(i), jtyxNames1.get(i), jtyxPrices1.get(i));
+            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds1.get(i), jtyxNames1.get(i), jtyxPrices1.get(i),jtyxPdIds1.get(i));
             productBean.setOriginPrice(jtyxOPrices1.get(i));
             jtyxProducts1.add(productBean);
         }
@@ -159,9 +175,14 @@ public class HomeViewModel extends PublicViewModel {
         jtyxOPrices2.add("22.60");
         jtyxOPrices2.add("988.00");
 
+        List<Integer>jtyxPdIds2 = new ArrayList();
+        jtyxPdIds2.add(0);
+        jtyxPdIds2.add(0);
+        jtyxPdIds2.add(0);
+
         List<HomeBean.ProductBean> jtyxProducts2 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds2.size(); i ++) {
-            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds2.get(i), jtyxNames2.get(i), jtyxPrices2.get(i));
+            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds2.get(i), jtyxNames2.get(i), jtyxPrices2.get(i),jtyxPdIds2.get(i));
             productBean.setOriginPrice(jtyxOPrices2.get(i));
             jtyxProducts2.add(productBean);
         }
@@ -187,9 +208,14 @@ public class HomeViewModel extends PublicViewModel {
         jtyxOPrices3.add("20.60");
         jtyxOPrices3.add("360.60");
 
+        List<Integer>jtyxPdIds3 = new ArrayList();
+        jtyxPdIds3.add(0);
+        jtyxPdIds3.add(0);
+        jtyxPdIds3.add(0);
+
         List<HomeBean.ProductBean> jtyxProducts3 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds3.size(); i ++) {
-            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds3.get(i), jtyxNames3.get(i), jtyxPrices3.get(i));
+            HomeBean.ProductBean productBean = new HomeBean.ProductBean(HomeProductAdapter.TYPE_JTYX_PD, jtyxImgIds3.get(i), jtyxNames3.get(i), jtyxPrices3.get(i),jtyxPdIds3.get(i));
             productBean.setOriginPrice(jtyxOPrices3.get(i));
             jtyxProducts3.add(productBean);
         }
