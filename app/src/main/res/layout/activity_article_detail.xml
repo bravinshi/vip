@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/v_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.goldensky.framework.ui.view.TopActionBar
+                    android:id="@+id/tab_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    app:centerText="文章详情" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/article_detail" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="这个香蕉酸吗？怎么吃才健康？"
+                    android:textColor="#ff333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="不酸，很甜。香蕉味甘性寒，具有较高的药用价值。主要功用是清肠胃，治便秘，并有清热润肺、止烦渴、填精髓、解酒毒等功效。由于香蕉性寒，故脾胃虚寒、胃痛、腹泻者应少食，胃酸过多者最好不吃。
+香蕉中含有丰富的营养成分，香蕉有清肠胃，治便秘，并有清热润肺、止烦渴、填精髓、解酒毒等功效。而同时香蕉不可以和哈密瓜，酸奶，马铃薯，牛肉等等一起食用，这边一定要切记。还有香蕉不可空腹吃，以上讲解的大家都了解了吧。"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <View
+                    android:background="@color/color_f5"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/my_pic_pinglun" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+
+
+
+</layout>
