@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".fragment.shoppingcart.ShoppingCartFragment">
+        tools:context=".fragment.main.ShoppingCartFragment">
         <com.goldensky.framework.ui.view.TopActionBar
             android:background="@color/white"
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.goldensky.vip.fragment.mine;
+package com.goldensky.vip.fragment.main;
 
 import android.os.Bundle;
 

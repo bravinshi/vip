@@ -1,4 +1,4 @@
-package com.goldensky.vip.fragment.home;
+package com.goldensky.vip.fragment.main;
 
 import android.os.Bundle;
 

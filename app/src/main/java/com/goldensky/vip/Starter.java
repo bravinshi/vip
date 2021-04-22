@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
@@ -204,6 +205,18 @@ public class Starter {
      */
     public static void startRecommendActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, RecommendActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动客服页面
+     */
+    public static void startCustomerServiceActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, CustomerServiceActivity.class);
 
         if (bundle != null) {
             intent.putExtras(bundle);

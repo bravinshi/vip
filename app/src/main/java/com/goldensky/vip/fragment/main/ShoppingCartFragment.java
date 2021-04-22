@@ -1,4 +1,4 @@
-package com.goldensky.vip.fragment.shoppingcart;
+package com.goldensky.vip.fragment.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
