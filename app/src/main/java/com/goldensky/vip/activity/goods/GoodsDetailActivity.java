@@ -41,20 +41,35 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(GoodsDetailActivity.this);
-        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
-        mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            generateFakeData(1);
-            return;
-        }
 
-        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
-        generateFakeData(fakeKey);
+
+
+        LinearLayoutManager mLinearLayoutManager = new FullyLinearLayoutManager(GoodsDetailActivity.this);
+//        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        mBinding.rvDetail.post(new Runnable() {
+            @Override
+            public void run() {
+                Bundle bundle = getIntent().getExtras();
+                if (bundle == null) {
+                    generateFakeData(1);
+                    return;
+                }
+
+                Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
+                generateFakeData(fakeKey);
+            }
+        });
+        super.onWindowFocusChanged(hasFocus);
+
     }
 
     public void generateFakeData(Integer fakeKey) {
+
         if (fakeKey == null) {
             return;
         }

@@ -43,11 +43,12 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
                           int widthSpec, int heightSpec) {
 
         final int widthMode = View.MeasureSpec.getMode(widthSpec);
-        final int heightMode = View.MeasureSpec.getMode(heightSpec);
+        final int heightMode = View.MeasureSpec.UNSPECIFIED;
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
-        final int heightSize = View.MeasureSpec.getSize(heightSpec);
+        final int heightSize = 99999;
+        heightSpec = View.MeasureSpec.makeMeasureSpec(heightSize, heightMode);
 
-        Log.i(TAG, "onMeasure called. \nwidthMode " + widthMode
+        Log.i("RetrofitLog", "onMeasure called. \nwidthMode " + widthMode
                 + " \nheightMode " + heightSpec
                 + " \nwidthSize " + widthSize
                 + " \nheightSize " + heightSize
@@ -57,8 +58,8 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {
             measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+                    widthSpec,
+                    heightSpec,
                     mMeasuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
@@ -87,13 +88,14 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
             case View.MeasureSpec.UNSPECIFIED:
         }
 
+        Log.d("RetrofitLog", "width " + width + " height " + height);
         setMeasuredDimension(width, height);
     }
 
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
                                    int heightSpec, int[] measuredDimension) {
         try {
-            View view = recycler.getViewForPosition(0);//fix 动态添加时报IndexOutOfBoundsException
+            View view = recycler.getViewForPosition(position);//fix 动态添加时报IndexOutOfBoundsException
 
             if (view != null) {
                 RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
@@ -104,7 +106,7 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
                 int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec,
                         getPaddingTop() + getPaddingBottom(), p.height);
 
-                view.measure(childWidthSpec, childHeightSpec);
+                view.measure(widthSpec, heightSpec);
                 measuredDimension[0] = view.getMeasuredWidth() + p.leftMargin + p.rightMargin;
                 measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin;
                 recycler.recycleView(view);

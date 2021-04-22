@@ -12,6 +12,7 @@
         <com.goldensky.vip.base.ui.view.AdaptiveImageView
             android:id="@+id/iv"
             android:layout_width="match_parent"
+            android:minWidth="300dp"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
