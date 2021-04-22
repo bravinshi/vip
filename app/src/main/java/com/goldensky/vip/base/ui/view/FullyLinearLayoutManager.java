@@ -43,10 +43,9 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
                           int widthSpec, int heightSpec) {
 
         final int widthMode = View.MeasureSpec.getMode(widthSpec);
-        final int heightMode = View.MeasureSpec.UNSPECIFIED;
+        final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
-        final int heightSize = 99999;
-        heightSpec = View.MeasureSpec.makeMeasureSpec(heightSize, heightMode);
+        final int heightSize = View.MeasureSpec.getSize(heightSpec);
 
         Log.i("RetrofitLog", "onMeasure called. \nwidthMode " + widthMode
                 + " \nheightMode " + heightSpec
@@ -58,8 +57,8 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {
             measureScrapChild(recycler, i,
-                    widthSpec,
-                    heightSpec,
+                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     mMeasuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
@@ -106,7 +105,7 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
                 int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec,
                         getPaddingTop() + getPaddingBottom(), p.height);
 
-                view.measure(widthSpec, heightSpec);
+                view.measure(childWidthSpec, childHeightSpec);
                 measuredDimension[0] = view.getMeasuredWidth() + p.leftMargin + p.rightMargin;
                 measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin;
                 recycler.recycleView(view);
