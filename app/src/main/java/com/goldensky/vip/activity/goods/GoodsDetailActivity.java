@@ -39,12 +39,13 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
             generateFakeData(1);
             return;
         }
 
-        Integer fakeKey = savedInstanceState.getInt(KEY_FAKE_DATA, 0);
+        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
         generateFakeData(fakeKey);
     }
 
