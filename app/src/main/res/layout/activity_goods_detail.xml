@@ -33,6 +33,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/top_bar_goods_detail">
 
                 <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -43,27 +45,27 @@
 
                         <ImageView
                             android:id="@+id/iv_main"
-                            android:src="@mipmap/pingguozhutu"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:src="@mipmap/pingguozhutu"
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.viewpager2.widget.ViewPager2
-                            android:visibility="gone"
                             android:id="@+id/vp_image"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:visibility="gone"
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <me.relex.circleindicator.CircleIndicator
-                            android:visibility="gone"
                             android:id="@+id/indicator"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/vp_image" />
 
                         <TextView
@@ -71,8 +73,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_marginStart="14dp"
-                            android:layout_marginBottom="15dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginBottom="15dp"
                             android:text="￥49.80"
                             android:textColor="@color/color_EA483F"
                             android:textSize="18sp"
@@ -292,14 +294,18 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_detail"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:orientation="vertical"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        android:layout_height="match_parent">
+
+                        <com.goldensky.vip.base.ui.view.CustomRecyclerView
+                            android:id="@+id/rv_detail"
+                            android:overScrollMode="never"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 

@@ -40,19 +40,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
             int itemId = item.getItemId();
             switch (itemId) {
                 case R.id.item_home:
-                    mBinding.viewPagerMain.setCurrentItem(0);
+                    mBinding.viewPagerMain.setCurrentItem(0, false);
                     break;
                 case R.id.item_message:
-                    mBinding.viewPagerMain.setCurrentItem(1);
+                    mBinding.viewPagerMain.setCurrentItem(1, false);
                     break;
                 case R.id.item_circle:
-                    mBinding.viewPagerMain.setCurrentItem(2);
+                    mBinding.viewPagerMain.setCurrentItem(2, false);
                     break;
                 case R.id.item_shopping_cart:
-                    mBinding.viewPagerMain.setCurrentItem(3);
+                    mBinding.viewPagerMain.setCurrentItem(3, false);
                     break;
                 case R.id.item_mine:
-                    mBinding.viewPagerMain.setCurrentItem(4);
+                    mBinding.viewPagerMain.setCurrentItem(4, false);
                     break;
             }
             return true;

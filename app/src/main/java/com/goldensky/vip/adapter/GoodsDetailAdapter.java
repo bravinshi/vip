@@ -35,11 +35,6 @@ public class GoodsDetailAdapter extends RecyclerView.Adapter<GoodsDetailAdapter.
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        ImageView imageView = new ImageView(parent.getContext());
-//        ViewGroup.LayoutParams layoutParams = new ViewGroup
-//                .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT);
-//        imageView.setLayoutParams(layoutParams);
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
         Log.d("RetrofitLog", "onCreateViewHolder");
