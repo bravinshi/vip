@@ -44,6 +44,7 @@
                 android:layout_height="34dp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
+                android:paddingLeft="20dp"
                 android:layout_toRightOf="@+id/iv_back"
                 android:background="@drawable/shape_recommend_search_bg">
 
@@ -88,11 +89,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/tcdz_img_hint"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        >
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/tcdz_img_hint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/my_pic_kefu1"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="10dp"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
                         android:scaleType="fitXY"

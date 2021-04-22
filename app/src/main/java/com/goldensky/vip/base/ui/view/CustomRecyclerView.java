@@ -27,4 +27,9 @@ public class CustomRecyclerView extends RecyclerView {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        heightSpec = MeasureSpec.makeMeasureSpec(9999, MeasureSpec.EXACTLY);
+        super.onMeasure(widthSpec, heightSpec);
+    }
 }

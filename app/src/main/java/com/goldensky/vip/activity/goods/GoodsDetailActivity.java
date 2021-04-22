@@ -86,7 +86,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_EGG)) {
             fakeData.mainImage(R.mipmap.yadanzhutu)
-                    .price("￥1.9")
+                    .price("￥49.9")
                     .title("正宗骆马湖咸鸭蛋纯天然多有鸭蛋20枚/40枚/60枚")
                     .specification("3.75kg/份 1件")
                     .commentNum(121)
@@ -108,7 +108,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_WINE)) {
             fakeData.mainImage(R.mipmap.jiuzhutu)
-                    .price("￥388")
+                    .price("￥299.0")
                     .title("金天国际金天喝睿酒52度浓香型整箱500ml6瓶礼盒精装送礼纯粮食白酒")
                     .specification("3.75kg/份 1件")
                     .commentNum(56232)
