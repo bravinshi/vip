@@ -48,25 +48,15 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         LinearLayoutManager mLinearLayoutManager = new FullyLinearLayoutManager(GoodsDetailActivity.this);
 //        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
         mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
-    }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        mBinding.rvDetail.post(new Runnable() {
-            @Override
-            public void run() {
-                Bundle bundle = getIntent().getExtras();
-                if (bundle == null) {
-                    generateFakeData(1);
-                    return;
-                }
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            generateFakeData(1);
+            return;
+        }
 
-                Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
-                generateFakeData(fakeKey);
-            }
-        });
-        super.onWindowFocusChanged(hasFocus);
-
+        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
+        generateFakeData(fakeKey);
     }
 
     public void generateFakeData(Integer fakeKey) {
