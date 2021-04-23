@@ -115,6 +115,11 @@ public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, Pu
     public void refreshList(List<Integer> orderList){
         list.clear();
         list.addAll(orderList);
+        if(orderList.size()==0){
+            mBinding.clOrderList.setVisibility(View.VISIBLE);
+        }else {
+            mBinding.clOrderList.setVisibility(View.GONE);
+        }
         adapter.notifyDataSetChanged();
     }
     @Override
