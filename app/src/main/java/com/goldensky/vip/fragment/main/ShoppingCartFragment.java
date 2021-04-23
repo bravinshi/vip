@@ -67,7 +67,12 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
         list.add(R.mipmap.gwc_img_chengzi);
         list.add(R.mipmap.gwc_img_hongchang);
         adapter=new GoodsFocusAdapter(list);
-        mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         mBinding.rvShoppingCart.setAdapter(adapter);
 
     }
