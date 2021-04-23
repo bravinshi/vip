@@ -94,7 +94,7 @@ public class HomeViewModel extends PublicViewModel {
         List<String> jrbkPrices = new ArrayList();
         jrbkPrices.add("34.90");
         jrbkPrices.add("299.00");
-        jrbkPrices.add("49.90");
+        jrbkPrices.add("29.90");
 
         List<Integer>jrbkPdIds = new ArrayList();
         jrbkPdIds.add(2);
