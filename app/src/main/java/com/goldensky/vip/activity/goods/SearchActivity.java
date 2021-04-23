@@ -42,6 +42,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseView
         mBinding.rv.setLayoutManager(new GridLayoutManager(SearchActivity.this, 4));
         mBinding.setListener(this);
         mBinding.ctl.setTabData(tabEntities);
+
         mBinding.ctl.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -99,6 +100,13 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseView
 
     @Override
     public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
+        switch (v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.btn_service:
+                Starter.startCustomerServiceActivity(this,null);
+                break;
+        }
     }
 }
