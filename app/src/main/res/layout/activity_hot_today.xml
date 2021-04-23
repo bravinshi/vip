@@ -67,7 +67,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/iv_1"
                             android:layout_marginTop="10dp"
-                            android:src="@mipmap/jrbk_img_yadan"
+                            android:src="@mipmap/my_pic_yandan3"
                             android:layout_width="0dp"
                             android:layout_height="259dp"/>
 

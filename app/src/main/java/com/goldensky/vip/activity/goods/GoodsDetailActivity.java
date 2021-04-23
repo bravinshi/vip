@@ -69,7 +69,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         if (fakeKey.equals(KEY_FAKE_DATA_APPLE)) {
             fakeData.mainImage(R.mipmap.pingguozhutu)
-                    .price("￥49.8")
+                    .price("￥49.80")
                     .title("山东红富士高端礼盒顺丰包邮整箱3.7KG水果苹果脆甜")
                     .specification("3.75kg/份 1件")
                     .commentNum(2121)
@@ -80,7 +80,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_MANGO)) {
             fakeData.mainImage(R.mipmap.mangguozhutu)
-                    .price("￥34.9")
+                    .price("￥34.90")
                     .title("三亚芒果新鲜采摘顺丰包邮整箱5KG热带水果香甜多汁")
                     .specification("3.75kg/份 1件")
                     .commentNum(9852)
@@ -91,7 +91,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_EGG)) {
             fakeData.mainImage(R.mipmap.yadanzhutu)
-                    .price("￥49.9")
+                    .price("￥29.90")
                     .title("正宗骆马湖咸鸭蛋纯天然多有鸭蛋20枚/40枚/60枚")
                     .specification("3.75kg/份 1件")
                     .commentNum(121)
@@ -102,7 +102,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_SAUSAGE)) {
             fakeData.mainImage(R.mipmap.hongchangzhutu)
-                    .price("￥19.9")
+                    .price("￥19.90")
                     .title("正宗哈尔滨红肠熏火腿肠香肠腊肠方便速食老字号东北特产")
                     .specification("3.75kg/份 1件")
                     .commentNum(6554)
@@ -113,7 +113,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     }});
         } else if (fakeKey.equals(KEY_FAKE_DATA_WINE)) {
             fakeData.mainImage(R.mipmap.jiuzhutu)
-                    .price("￥299.0")
+                    .price("￥299.00")
                     .title("金天国际金天喝睿酒52度浓香型整箱500ml6瓶礼盒精装送礼纯粮食白酒")
                     .specification("3.75kg/份 1件")
                     .commentNum(56232)
