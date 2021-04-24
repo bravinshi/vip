@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.goldensky.framework.viewmodel.BaseViewModel;
@@ -87,6 +88,12 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, BaseView
         serviceList.add(new SearchItemBean(R.mipmap.img_jzfw, "家政服务"));
 
         searchAdapter.setNewData(goodsList);
+        searchAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Starter.startCustomerServiceActivity(SearchActivity.this,null);
+            }
+        });
     }
 
     @Override
