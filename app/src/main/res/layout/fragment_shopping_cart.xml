@@ -29,7 +29,7 @@
                 android:text="全选"
                 android:gravity="center"
                 android:button="@drawable/selector_checkbox_shopping_cart"
-                android:theme="@style/CheckBoxTheme"
+                android:theme="@style/AppRedTheme"
                 android:layout_marginLeft="20dp"
                 android:textSize="16sp"
                 />

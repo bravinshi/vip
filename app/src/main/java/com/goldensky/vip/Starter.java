@@ -21,8 +21,9 @@ import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
 import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
-import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
+import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
+import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
@@ -279,6 +280,16 @@ public class Starter {
      */
     public static void startArticleDetailActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 新建地址
+     */
+    public static void startNewAddressActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, NewAddressActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

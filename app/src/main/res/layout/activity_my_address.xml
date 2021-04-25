@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.mine.tools.MyAddressActivity">
+        tools:context=".activity.mine.tools.adress.MyAddressActivity">
         <com.goldensky.framework.ui.view.TopActionBar
             android:id="@+id/top_bar_my_dress"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +37,7 @@
             android:gravity="center"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:onClick="@{listener}"
             android:layout_marginBottom="50dp"
             android:textColor="@color/white"
             android:background="@drawable/shape_btn_red"

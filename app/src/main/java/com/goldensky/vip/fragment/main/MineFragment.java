@@ -44,13 +44,13 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
             orderList.add(new MineToolBean(R.mipmap.my_icon_daifukuan,"待付款"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_daishouhuo,"待收货"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_daipingjia,"待评价"));
-            orderList.add(new MineToolBean(R.mipmap.my_icon_shouhou,"退款/售后"));
+//            orderList.add(new MineToolBean(R.mipmap.my_icon_shouhou,"退款/售后"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_dingdan,"我的订单"));
-            toolList.add(new MineToolBean(R.mipmap.my_icon_youhuijuan,"优惠券"));
+//            toolList.add(new MineToolBean(R.mipmap.my_icon_youhuijuan,"优惠券"));
             toolList.add(new MineToolBean(R.mipmap.my_icon_dizhi,"我的地址"));
             toolList.add(new MineToolBean(R.mipmap.my_icon_fenxiang,"好友分享"));
-            toolList.add(new MineToolBean(R.mipmap.my_icon_registered2,"邀请企业"));
-            mBinding.rvOrderMine.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL){
+//            toolList.add(new MineToolBean(R.mipmap.my_icon_registered2,"邀请企业"));
+            mBinding.rvOrderMine.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL){
                 @Override
                 public boolean canScrollVertically() {
                     return false;
@@ -82,9 +82,9 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                             startOrderList(4);
                             break;
                         case 3:
-//                            startOrderList(4);
-                            break;
-                        case 4:
+////                            startOrderList(4);
+//                            break;
+//                        case 4:
                             startOrderList(0);
                             break;
                     }
@@ -95,18 +95,25 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     switch (position){
+//                        case 0:
+//                            Starter.startCouponActivity(getContext(),null);
+//                            break;
+//                        case 1:
+//                            Starter.startMyAddressActivity(getContext(),null);
+//                            break;
+//                        case 2:
+//                            Starter.startShareToFriendActivity(getContext(),null);
+//                            break;
+//                        case 3:
+//                            Starter.startInviteCompanyActivity(getContext(),null);
+//                            break;
                         case 0:
-                            Starter.startCouponActivity(getContext(),null);
-                            break;
-                        case 1:
                             Starter.startMyAddressActivity(getContext(),null);
                             break;
-                        case 2:
+                        case 1:
                             Starter.startShareToFriendActivity(getContext(),null);
                             break;
-                        case 3:
-                            Starter.startInviteCompanyActivity(getContext(),null);
-                            break;
+
                     }
                 }
             });
