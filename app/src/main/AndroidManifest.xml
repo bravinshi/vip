@@ -34,6 +34,8 @@
         tools:targetApi="m">
         <activity android:name=".activity.mine.tools.MyToolsActivity"></activity>
         <activity android:name=".activity.mine.tools.MyToolsTestActivity" />
+        <activity android:name=".activity.brandcompany.BrandCompanyActivity"></activity>
+        <activity android:name=".activity.order.OrderActivity" />
         <activity android:name=".activity.customer.CustomerServiceActivity" />
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
