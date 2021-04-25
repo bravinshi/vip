@@ -27,12 +27,14 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo "
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.customer.CustomerServiceActivity"></activity>
+        <activity android:name=".activity.mine.tools.MyToolsActivity"></activity>
+        <activity android:name=".activity.mine.tools.MyToolsTestActivity" />
+        <activity android:name=".activity.customer.CustomerServiceActivity" />
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
         <activity android:name=".activity.mine.tools.MyAddressActivity" />
@@ -75,10 +77,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
-        <activity android:name=".activity.goods.GoodsDetail1Activity">
-
-
-        </activity>
+        <activity android:name=".activity.goods.GoodsDetail1Activity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />
