@@ -39,8 +39,6 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
         list.add(R.mipmap.my_pic_xitongxiaoxi);
         list.add(R.mipmap.my_pic_hezongzhibo);
         list.add(R.mipmap.my_pic_tuiguangxiaoxi);
-        list.add(R.mipmap.my_pic_kepuxiaoxi);
-        list.add(R.mipmap.my_pic_xiaoxitongzhi);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvMessage.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.rvMessage.setAdapter(adapter);

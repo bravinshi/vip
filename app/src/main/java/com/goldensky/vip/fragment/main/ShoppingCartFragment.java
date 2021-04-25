@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBinding, PublicViewModel> {
     private boolean isEdit=false;
-    private GoodsFocusAdapter adapter;
+    private CircleFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
     @Override
     protected int getLayoutRes() {
@@ -34,7 +34,7 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥0.00</font>"));
+        mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥50.6</font>"));
         mBinding.topBarShoppingCart.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +62,9 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
 //                isEdit=!isEdit;
 //            }
 //        });
-        list.add(R.mipmap.gwuc_img_cha);
-        list.add(R.mipmap.gwc_img_mangguo);
-        list.add(R.mipmap.gwc_img_chengzi);
-        list.add(R.mipmap.gwc_img_hongchang);
-        adapter=new GoodsFocusAdapter(list);
+        list.add(R.mipmap.shop_item1);
+        list.add(R.mipmap.shop_item2);
+        adapter=new CircleFocusAdapter(list);
         mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()){
             @Override
             public boolean canScrollVertically() {
