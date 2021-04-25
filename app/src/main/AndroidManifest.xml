@@ -32,7 +32,9 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.customer.CustomerServiceActivity"></activity>
+        <activity android:name=".activity.brandcompany.BrandCompanyActivity"></activity>
+        <activity android:name=".activity.order.OrderActivity" />
+        <activity android:name=".activity.customer.CustomerServiceActivity" />
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
         <activity android:name=".activity.mine.tools.MyAddressActivity" />
@@ -75,10 +77,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
-        <activity android:name=".activity.goods.GoodsDetail1Activity">
-
-
-        </activity>
+        <activity android:name=".activity.goods.GoodsDetail1Activity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />
