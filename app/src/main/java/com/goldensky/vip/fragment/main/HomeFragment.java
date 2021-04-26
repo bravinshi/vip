@@ -44,6 +44,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     protected void initView(@Nullable Bundle savedInstanceState) {
         mBinding.orderLayout.setOnClickListener(this);
         mBinding.sjV.setOnClickListener(this);
+        mBinding.styqIv.setOnClickListener(this);
+        mBinding.scglIv.setOnClickListener(this);
+        mBinding.zyspIv.setOnClickListener(this);
+        mBinding.ddglIv.setOnClickListener(this);
+        mBinding.allIv.setOnClickListener(this);
     }
 
 
@@ -58,6 +63,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             case R.id.sj_v:
                 Intent compInten = new Intent(getContext(), BrandCompanyActivity.class);
                 startActivity(compInten);
+                break;
+            case R.id.styq_iv: //实体邀请
+                break;
+            case R.id.scgl_iv: //商城管理
+                break;
+            case R.id.zysp_iv://主营商品
+                break;
+            case R.id.ddgl_iv: //订单管理
+                break;
+            case R.id.all_iv: //全部
                 break;
         }
     }

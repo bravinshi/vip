@@ -32,6 +32,7 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".activity.accountManager.JyAccountActivity"></activity>
         <activity android:name=".activity.mine.tools.MyToolsActivity"></activity>
         <activity android:name=".activity.mine.tools.MyToolsTestActivity" />
         <activity android:name=".activity.brandcompany.BrandCompanyActivity"></activity>
