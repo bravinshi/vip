@@ -9,12 +9,14 @@ import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
+import com.goldensky.vip.activity.goods.MainGoodsActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
+import com.goldensky.vip.activity.mine.mall.MallManageActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
@@ -22,7 +24,9 @@ import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
+import com.goldensky.vip.activity.mine.tools.MyToolsActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
+import com.goldensky.vip.activity.mine.vip.VipManageActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
@@ -279,6 +283,46 @@ public class Starter {
      */
     public static void startArticleDetailActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 我的工具
+     */
+    public static void startMyToolsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MyToolsActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 主营商品
+     */
+    public static void startMainGoodsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MainGoodsActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 商城管理
+     */
+    public static void startMallMangeActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MallManageActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * VIP管理
+     */
+    public static void startVipManageActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, VipManageActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
