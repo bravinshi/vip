@@ -36,6 +36,9 @@
         <activity android:name=".activity.accountManager.JyToJkActivity" />
         <activity android:name=".activity.accountManager.JsAccountActivity" />
         <activity android:name=".activity.accountManager.JyToAccountActivity" />
+        <activity android:name=".activity.mine.vip.VipManageActivity"></activity>
+        <activity android:name=".activity.mine.mall.MallManageActivity" />
+        <activity android:name=".activity.goods.MainGoodsActivity" />
         <activity android:name=".activity.accountManager.JyAccountActivity" />
         <activity android:name=".activity.mine.tools.MyToolsActivity" />
         <activity android:name=".activity.mine.tools.MyToolsTestActivity" />
