@@ -29,6 +29,7 @@ import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.MyToolsActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.vip.VipManageActivity;
+import com.goldensky.vip.activity.order.JhManageActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
@@ -347,6 +348,12 @@ public class Starter {
     //交易账户
     public static void startJsAccountActivity(Context context) {
         Intent intent = new Intent(context, JsAccountActivity.class);
+        context.startActivity(intent);
+    }
+
+    //进货管理
+    public static void startJhActivity(Context context) {
+        Intent intent = new Intent(context, JhManageActivity.class);
         context.startActivity(intent);
     }
 }

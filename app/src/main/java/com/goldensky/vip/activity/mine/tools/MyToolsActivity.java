@@ -85,6 +85,7 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (position) {
                     case 0:
+                        Starter.startJhActivity(MyToolsActivity.this);
                         break;
                     case 1:
                         Starter.startOrderListActivity(MyToolsActivity.this,null);
