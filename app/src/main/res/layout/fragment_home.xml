@@ -62,6 +62,26 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_2"
                     android:layout_marginTop="15dp"
                     android:src="@mipmap/my_pic_shouye3"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_3"
+                    app:layout_constraintRight_toRightOf="@+id/iv_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_3">
+                    <View
+                        android:id="@+id/jyzh_v"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                    </View>
+                    <View
+                        android:id="@+id/jszh_v"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                    </View>
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/iv_4"

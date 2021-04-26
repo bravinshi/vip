@@ -20,6 +20,8 @@ import com.goldensky.framework.ui.view.NumberButton;
 import com.goldensky.vip.R;
 
 import com.goldensky.vip.Starter;
+import com.goldensky.vip.activity.accountManager.JsAccountActivity;
+import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.brandcompany.BrandCompanyActivity;
 import com.goldensky.vip.activity.order.OrderActivity;
 import com.goldensky.vip.adapter.HomeAdapter;
@@ -49,6 +51,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mBinding.zyspIv.setOnClickListener(this);
         mBinding.ddglIv.setOnClickListener(this);
         mBinding.allIv.setOnClickListener(this);
+        mBinding.jyzhV.setOnClickListener(this);
+        mBinding.jszhV.setOnClickListener(this);
     }
 
 
@@ -63,6 +67,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             case R.id.sj_v:
                 Intent compInten = new Intent(getContext(), BrandCompanyActivity.class);
                 startActivity(compInten);
+                break;
+            case R.id.jyzh_v:
+                Intent jyIntent = new Intent(getContext(), JyAccountActivity.class);
+                startActivity(jyIntent);
+                break;
+            case R.id.jszh_v:
+                Intent jsIntent = new Intent(getContext(), JsAccountActivity.class);
+                startActivity(jsIntent);
                 break;
             case R.id.styq_iv: //实体邀请
                 break;
