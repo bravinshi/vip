@@ -65,9 +65,9 @@ public class HomeViewModel extends PublicViewModel {
 
         List<Integer>rmdPdIds = new ArrayList();
         rmdPdIds.add(1);
-        rmdPdIds.add(0);
-        rmdPdIds.add(0);
-        rmdPdIds.add(0);
+        rmdPdIds.add(6);
+        rmdPdIds.add(7);
+        rmdPdIds.add(8);
 
         List<HomeBean.ProductBean> rmdProducts = new ArrayList<>();
         for (int i = 0 ; i < rmdImgIds.size(); i ++) {
@@ -144,8 +144,8 @@ public class HomeViewModel extends PublicViewModel {
 
         List<Integer>jtyxPdIds1 = new ArrayList();
         jtyxPdIds1.add(4);
-        jtyxPdIds1.add(0);
-        jtyxPdIds1.add(0);
+        jtyxPdIds1.add(9);
+        jtyxPdIds1.add(10);
 
         List<HomeBean.ProductBean> jtyxProducts1 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds1.size(); i ++) {
@@ -176,9 +176,9 @@ public class HomeViewModel extends PublicViewModel {
         jtyxOPrices2.add("988.00");
 
         List<Integer>jtyxPdIds2 = new ArrayList();
-        jtyxPdIds2.add(0);
-        jtyxPdIds2.add(0);
-        jtyxPdIds2.add(0);
+        jtyxPdIds2.add(11);
+        jtyxPdIds2.add(12);
+        jtyxPdIds2.add(13);
 
         List<HomeBean.ProductBean> jtyxProducts2 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds2.size(); i ++) {
@@ -209,9 +209,9 @@ public class HomeViewModel extends PublicViewModel {
         jtyxOPrices3.add("360.60");
 
         List<Integer>jtyxPdIds3 = new ArrayList();
-        jtyxPdIds3.add(0);
-        jtyxPdIds3.add(0);
-        jtyxPdIds3.add(0);
+        jtyxPdIds3.add(14);
+        jtyxPdIds3.add(15);
+        jtyxPdIds3.add(16);
 
         List<HomeBean.ProductBean> jtyxProducts3 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds3.size(); i ++) {

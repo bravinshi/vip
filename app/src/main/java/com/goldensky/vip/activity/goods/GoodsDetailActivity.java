@@ -39,6 +39,19 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     public static final Integer KEY_FAKE_DATA_EGG = 3;// 鸭蛋
     public static final Integer KEY_FAKE_DATA_SAUSAGE = 4;// 红肠
     public static final Integer KEY_FAKE_DATA_WINE = 5;// 酒
+    public static final Integer KEY_FAKE_DATA_ORANGE = 6;// 橘子
+    public static final Integer KEY_FAKE_DATA_MANGUODAO = 7;// 芒果刀
+    public static final Integer KEY_FAKE_DATA_ZHAZHIBEI = 8;// 榨汁机
+    public static final Integer KEY_FAKE_DATA_YOUYUTIAO = 9;// 鱿鱼条
+    public static final Integer KEY_FAKE_DATA_XIAOBINGGAN = 10;// 小饼干
+    public static final Integer KEY_FAKE_DATA_SHUJUXIAN = 11;// 数据线
+    public static final Integer KEY_FAKE_DATA_XIAOSHUIBEI = 12;// 小水杯
+    public static final Integer KEY_FAKE_DATA_CANJU = 13;// 餐具
+    public static final Integer KEY_FAKE_DATA_FENGMI = 14;// 蜂蜜
+    public static final Integer KEY_FAKE_DATA_DANGAO = 15;// 蛋糕
+    public static final Integer KEY_FAKE_DATA_YUNDOU = 16;// 熨斗
+
+
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -119,6 +132,128 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     .commentNum(56232)
                     .detailIds(new ArrayList<Integer>(){{
                         add(R.mipmap.jiu1);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_ORANGE)) {
+            fakeData.mainImage(R.mipmap.chengzi1)
+                    .price("30.80")
+                    .title("正宗赣南脐橙赣州显现采摘当季水果2.5KG手剥冰糖橙")
+                    .specification("2.5kg/份 1件")
+                    .commentNum(8829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.chengzi2);
+                        add(R.mipmap.chengzi3);
+                        add(R.mipmap.chengzi4);
+                        add(R.mipmap.chengzi5);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_MANGUODAO)) {
+            fakeData.mainImage(R.mipmap.mangguodao1)
+                    .price("19.90")
+                    .title("切芒果神器多功能削芒果剥皮分离器专用刀切芒果丁挖勺取肉")
+                    .specification("芒果取肉器")
+                    .commentNum(6398)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.mangguodao2);
+                        add(R.mipmap.mangguodao3);
+                        add(R.mipmap.mangguodao4);
+                        add(R.mipmap.mangguodao5);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_ZHAZHIBEI)) {
+            fakeData.mainImage(R.mipmap.zhazhiji1)
+                    .price("159.80")
+                    .title("榨汁机家用迷你多功能小型便携式迷你果汁水果榨汁杯")
+                    .specification("粉色")
+                    .commentNum(8829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.zhazhiji2);
+                        add(R.mipmap.zhazhiji2);
+                        add(R.mipmap.zhazhiji3);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_YOUYUTIAO)) {
+            fakeData.mainImage(R.mipmap.youyutiao1)
+                    .price("14.80")
+                    .title("碳烤鱿鱼条原味香辣味即食零食年货新鲜现烤现发")
+                    .specification("60g原丝")
+                    .commentNum(3829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.youyutiao2);
+                        add(R.mipmap.youyutiao3);
+                        add(R.mipmap.youyutiao4);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_XIAOBINGGAN)) {
+            fakeData.mainImage(R.mipmap.binggan1)
+                    .price("46.00")
+                    .title("日式小圆饼干1kg多口味海盐小圆饼干零食休闲食品整箱")
+                    .specification("1.5kg/一箱")
+                    .commentNum(9846)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.binggan2);
+                        add(R.mipmap.binggan3);
+                        add(R.mipmap.binggan4);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_SHUJUXIAN)) {
+            fakeData.mainImage(R.mipmap.shujuxian1)
+                    .price("9.90")
+                    .title("品胜USB-C数据线1m/1.5m/2m黑白双色标准数据线")
+                    .specification("1.5m白色 1件")
+                    .commentNum(131321)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.shujuxian2);
+                        add(R.mipmap.shujuxian3);
+                        add(R.mipmap.shujuxian4);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_XIAOSHUIBEI)) {
+            fakeData.mainImage(R.mipmap.my_pic_bolibeizhutu)
+                    .price("15.90")
+                    .title("高硼硅耐热玻 带把喝水杯子 牛奶杯 泡茶杯 六支装260ML")
+                    .specification("不带杯盖 1件")
+                    .commentNum(211119)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.my_pic_bolibei1);
+                        add(R.mipmap.my_pic_bolibe2);
+                        add(R.mipmap.my_pic_bolibei3);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_CANJU)) {
+            fakeData.mainImage(R.mipmap.my_pic_taociwanzhutu)
+                    .price("586.00")
+                    .title("景德镇陶瓷碗餐具套装陶瓷碗碟套装太阳岛20头碗盘碟微波炉适用")
+                    .specification("3.7kg/份 1件")
+                    .commentNum(2138)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.my_pic_taociwan1);
+                        add(R.mipmap.my_pic_taociwa2);
+                        add(R.mipmap.my_pic_taociwan3);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_FENGMI)) {
+            fakeData.mainImage(R.mipmap.my_pic_fengmizhutu)
+                    .price("29.90")
+                    .title("蜂蜜正品农家纯天然琵琶蜂蜜京蜂蜂蜜无添加120ml")
+                    .specification("枇杷蜂蜜 1件")
+                    .commentNum(213)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.my_pic_fengmi1);
+                        add(R.mipmap.my_pic_fengmi2);
+                        add(R.mipmap.my_pic_fengmi3);
+                        add(R.mipmap.my_pic_fengmi4);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_DANGAO)) {
+            fakeData.mainImage(R.mipmap.my_pic_dangaozhutu)
+                    .price("14.90")
+                    .title("鸡蛋松饼松可蛋糕焗式蛋糕糕点休闲小吃零食面包鸡蛋糕")
+                    .specification("500g 1件")
+                    .commentNum(219)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.my_pic_dangao1);
+                        add(R.mipmap.my_pic_dangao2);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_YUNDOU)) {
+            fakeData.mainImage(R.mipmap.my_pic_yundouzhutu)
+                    .price("244.90")
+                    .title("熨斗界的颜值担当手持挂烫机智能蒸汽加热家用迷你型烫衣机小型电熨斗便携式")
+                    .specification("标准版 1件")
+                    .commentNum(8229)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.my_pic_yundou1);
+                        add(R.mipmap.my_pic_yundou2);
                     }});
         }
 
