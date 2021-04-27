@@ -17,6 +17,8 @@ import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.company.CompanyManageActivity;
+import com.goldensky.vip.activity.mine.company.MarketActivity;
+import com.goldensky.vip.activity.mine.company.PerformanceActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
@@ -383,6 +385,16 @@ public class Starter {
     //公司管理
     public static void startCompanyManageActivity(Context context) {
         Intent intent = new Intent(context, CompanyManageActivity.class);
+        context.startActivity(intent);
+    }
+    //市场管理
+    public static void startMarketActivity(Context context) {
+        Intent intent = new Intent(context, MarketActivity.class);
+        context.startActivity(intent);
+    }
+    //业绩收益
+    public static void startPerformanceActivity(Context context) {
+        Intent intent = new Intent(context, PerformanceActivity.class);
         context.startActivity(intent);
     }
 }

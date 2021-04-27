@@ -2,10 +2,13 @@ package com.goldensky.vip.activity.mine.company;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
+import com.goldensky.vip.activity.brandcompany.BrandCompanyActivity;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityCompanyManageBinding;
 import com.goldensky.vip.viewmodel.PublicViewModel;
@@ -19,6 +22,31 @@ public class CompanyManageActivity extends BaseActivity<ActivityCompanyManageBin
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        mBinding.btnOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent compInten = new Intent(CompanyManageActivity.this, BrandCompanyActivity.class);
+                startActivity(compInten);
+            }
+        });
+        mBinding.btnTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Starter.startMarketActivity(CompanyManageActivity.this);
+            }
+        });
+        mBinding.btnThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Starter.startPerformanceActivity(CompanyManageActivity.this);
+            }
+        });
+        mBinding.btnFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

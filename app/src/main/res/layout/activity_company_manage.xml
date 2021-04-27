@@ -15,7 +15,7 @@
             android:id="@+id/top_bar_company"
             app:layout_constraintTop_toTopOf="parent"
             app:centerText="公司管理"
-            app:centerTextColor="@color/white"
+            app:centerTextColor="@color/color_333333"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -62,14 +62,41 @@
             />
         <LinearLayout
             app:layout_constraintBottom_toBottomOf="@+id/iv_three"
-            app:layout_constraintStart_toStartOf="@+id/iv_three"
-            app:layout_constraintEnd_toEndOf="@+id/iv_three"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginBottom="25dp"
             >
-
+            <View
+                android:id="@+id/btn_two"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                />
+            <View
+                android:id="@+id/btn_three"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                />
+            <View
+                android:id="@+id/btn_four"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                />
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                />
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
