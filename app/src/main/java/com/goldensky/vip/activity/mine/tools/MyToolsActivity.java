@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.framework.ui.view.NoScrollStaggeredGridLayoutManager;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.MyToolAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityMyToolsBinding;
@@ -66,6 +68,67 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
                 finish();
             }
         });
+
+        serviceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    Starter.startVipManageActivity(MyToolsActivity.this, null);
+                } else if (position == 1) {
+                    Starter.startMallMangeActivity(MyToolsActivity.this, null);
+                }
+            }
+        });
+
+        goodsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position) {
+                    case 0:
+                        Starter.startJhActivity(MyToolsActivity.this);
+                        break;
+                    case 1:
+                        Starter.startOrderListActivity(MyToolsActivity.this,null);
+                        break;
+                    case 2:
+                        Starter.startMainGoodsActivity(MyToolsActivity.this,null);
+                        break;
+                    case 3:
+                        Starter.startSxOrderActivity(MyToolsActivity.this);
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+        });
+
+        mallAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+            }
+        });
+
+        accountAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+
+                } else if (position == 1) {
+                    Starter.startJyAccountActivity(MyToolsActivity.this);
+                } else if (position == 2) {
+                    Starter.startJsAccountActivity(MyToolsActivity.this);
+                }
+            }
+        });
+
+        elseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+            }
+        });
+
     }
 
     @Override

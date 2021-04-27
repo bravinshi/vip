@@ -9,7 +9,7 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityOrderBinding;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
-public class OrderActivity extends BaseActivity<ActivityOrderBinding, PublicViewModel> implements View.OnClickListener {
+public class XsOrderActivity extends BaseActivity<ActivityOrderBinding, PublicViewModel> implements View.OnClickListener {
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {

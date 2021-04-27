@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.accountManager.JsAccountActivity;
+import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
@@ -28,9 +30,11 @@ import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.MyToolsActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.vip.VipManageActivity;
+import com.goldensky.vip.activity.order.JhManageActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
+import com.goldensky.vip.activity.order.XsOrderActivity;
 
 
 /**
@@ -340,4 +344,27 @@ public class Starter {
         context.startActivity(intent);
     }
 
+    //销售订单
+    public static void startSxOrderActivity(Context context) {
+        Intent intent = new Intent(context, XsOrderActivity.class);
+        context.startActivity(intent);
+    }
+
+    //交易账户
+    public static void startJyAccountActivity(Context context) {
+        Intent intent = new Intent(context, JyAccountActivity.class);
+        context.startActivity(intent);
+    }
+
+    //交易账户
+    public static void startJsAccountActivity(Context context) {
+        Intent intent = new Intent(context, JsAccountActivity.class);
+        context.startActivity(intent);
+    }
+
+    //进货管理
+    public static void startJhActivity(Context context) {
+        Intent intent = new Intent(context, JhManageActivity.class);
+        context.startActivity(intent);
+    }
 }

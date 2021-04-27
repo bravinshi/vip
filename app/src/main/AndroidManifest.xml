@@ -33,6 +33,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".activity.mine.mall.PromoteActivity"></activity>
+        <activity android:name=".activity.order.JhManageActivity"></activity>
         <activity android:name=".activity.accountManager.JyToFkActivity" />
         <activity android:name=".activity.accountManager.JyToJkActivity" />
         <activity android:name=".activity.accountManager.JsAccountActivity" />
@@ -44,7 +45,7 @@
         <activity android:name=".activity.mine.tools.MyToolsActivity" />
         <activity android:name=".activity.mine.tools.MyToolsTestActivity" />
         <activity android:name=".activity.brandcompany.BrandCompanyActivity" />
-        <activity android:name=".activity.order.OrderActivity" />
+        <activity android:name=".activity.order.XsOrderActivity" />
         <activity android:name=".activity.customer.CustomerServiceActivity" />
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
