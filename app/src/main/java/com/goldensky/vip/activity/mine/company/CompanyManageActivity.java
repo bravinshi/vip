@@ -46,7 +46,7 @@ public class CompanyManageActivity extends BaseActivity<ActivityCompanyManageBin
         mBinding.btnFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Starter.startShenPiActivity(CompanyManageActivity.this);
             }
         });
     }

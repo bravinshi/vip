@@ -21,6 +21,7 @@ import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.company.CompanyManageActivity;
 import com.goldensky.vip.activity.mine.company.MarketActivity;
 import com.goldensky.vip.activity.mine.company.PerformanceActivity;
+import com.goldensky.vip.activity.mine.company.ShenPiActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
@@ -424,6 +425,11 @@ public class Starter {
     //业绩收益
     public static void startPerformanceActivity(Context context) {
         Intent intent = new Intent(context, PerformanceActivity.class);
+        context.startActivity(intent);
+    }
+    //审批管理
+    public static void startShenPiActivity(Context context) {
+        Intent intent = new Intent(context, ShenPiActivity.class);
         context.startActivity(intent);
     }
 }
