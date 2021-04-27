@@ -48,9 +48,16 @@ public class MallManageActivity extends BaseActivity<ActivityMallManageBinding, 
         pushList.add(R.mipmap.fenxiao2);
         pushList.add(R.mipmap.fenxiao3);
         adapter=new CircleFocusAdapter(list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Starter.startPromoteActivity(MallManageActivity.this,null);
+            }
+        });
         mBinding.rvMallManage.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvMallManage.setAdapter(adapter);
         refreshAdapter(distributionList);
+
         mBinding.tabMallManage.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -73,12 +80,6 @@ public class MallManageActivity extends BaseActivity<ActivityMallManageBinding, 
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
             }
         });

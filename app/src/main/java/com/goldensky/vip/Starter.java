@@ -17,6 +17,7 @@ import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
 import com.goldensky.vip.activity.mine.mall.MallManageActivity;
+import com.goldensky.vip.activity.mine.mall.PromoteActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
@@ -323,6 +324,16 @@ public class Starter {
      */
     public static void startVipManageActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, VipManageActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 推广详情
+     */
+    public static void startPromoteActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PromoteActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
