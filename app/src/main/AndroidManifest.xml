@@ -32,7 +32,11 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.order.JhManageActivity"></activity>
+        <activity android:name=".activity.mine.vip.VipHomeActivity"></activity>
+        <activity android:name=".activity.accountManager.CompanyInfoActivity" />
+        <activity android:name=".activity.accountManager.AccountManageActivity" />
+        <activity android:name=".activity.order.FxOrderActivity" />
+        <activity android:name=".activity.order.JhManageActivity" />
         <activity android:name=".activity.accountManager.JyToFkActivity" />
         <activity android:name=".activity.accountManager.JyToJkActivity" />
         <activity android:name=".activity.accountManager.JsAccountActivity" />

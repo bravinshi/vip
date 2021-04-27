@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.accountManager.AccountManageActivity;
+import com.goldensky.vip.activity.accountManager.CompanyInfoActivity;
 import com.goldensky.vip.activity.accountManager.JsAccountActivity;
 import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
@@ -28,7 +30,9 @@ import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.MyToolsActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
+import com.goldensky.vip.activity.mine.vip.VipHomeActivity;
 import com.goldensky.vip.activity.mine.vip.VipManageActivity;
+import com.goldensky.vip.activity.order.FxOrderActivity;
 import com.goldensky.vip.activity.order.JhManageActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
@@ -354,6 +358,30 @@ public class Starter {
     //进货管理
     public static void startJhActivity(Context context) {
         Intent intent = new Intent(context, JhManageActivity.class);
+        context.startActivity(intent);
+    }
+
+    //分销订单
+    public static void startFxOrderActivity(Context context) {
+        Intent intent = new Intent(context, FxOrderActivity.class);
+        context.startActivity(intent);
+    }
+
+    //分销订单
+    public static void startAccountManageActivity(Context context) {
+        Intent intent = new Intent(context, AccountManageActivity.class);
+        context.startActivity(intent);
+    }
+
+    //公司资料
+    public static void startCompanyInfoActivity(Context context) {
+        Intent intent = new Intent(context, CompanyInfoActivity.class);
+        context.startActivity(intent);
+    }
+
+    //商城首页
+    public static void startVipHomeActivity(Context context) {
+        Intent intent = new Intent(context, VipHomeActivity.class);
         context.startActivity(intent);
     }
 }
