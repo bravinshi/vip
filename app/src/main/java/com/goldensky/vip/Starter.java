@@ -12,6 +12,7 @@ import com.goldensky.vip.activity.accountManager.BusinessAnalysisActivity;
 import com.goldensky.vip.activity.accountManager.JsAccountActivity;
 import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
+import com.goldensky.vip.activity.brandcompany.SjczActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.MainGoodsActivity;
@@ -36,6 +37,7 @@ import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.MyToolsActivity;
+import com.goldensky.vip.activity.mine.tools.MyToolsTestActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.vip.VipHomeActivity;
 import com.goldensky.vip.activity.mine.vip.VipManageActivity;
@@ -313,6 +315,14 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+
+    /**
+     * 我的工具（体验）
+     */
+    public static void startMyToolsTestActivity(Context context) {
+        Intent intent = new Intent(context, MyToolsTestActivity.class);
+        context.startActivity(intent);
+    }
     /**
      * 主营商品
      */
@@ -430,6 +440,12 @@ public class Starter {
     //审批管理
     public static void startShenPiActivity(Context context) {
         Intent intent = new Intent(context, ShenPiActivity.class);
+        context.startActivity(intent);
+    }
+
+    //升级合作实体
+    public static void startSjstActivity(Context context) {
+        Intent intent = new Intent(context, SjczActivity.class);
         context.startActivity(intent);
     }
 }

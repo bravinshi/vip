@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.framework.ui.view.NoScrollStaggeredGridLayoutManager;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.MyToolAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityMyToolsTestBinding;
@@ -54,6 +56,59 @@ public class MyToolsTestActivity extends BaseActivity<ActivityMyToolsTestBinding
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+
+        serviceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    Starter.startVipManageActivity(MyToolsTestActivity.this, null);
+                } else if (position == 1) {
+                    Starter.startMallMangeActivity(MyToolsTestActivity.this, null);
+                }
+            }
+        });
+
+        goodsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position) {
+                    case 0:
+                        Starter.startJhActivity(MyToolsTestActivity.this);
+                        break;
+                    case 1:
+                        Starter.startOrderListActivity(MyToolsTestActivity.this,null);
+                        break;
+                    case 2:
+                        Starter.startFxOrderActivity(MyToolsTestActivity.this);
+                        break;
+                }
+            }
+        });
+
+        mallAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    Starter.startVipHomeActivity(MyToolsTestActivity.this);
+                } else if (position == 1) {
+                    Starter.startAccountManageActivity(MyToolsTestActivity.this);
+                } else if (position == 2) {
+                    Starter.startCompanyInfoActivity(MyToolsTestActivity.this);
+                }
+            }
+        });
+
+        accountAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0) {
+                    Starter.startJyAccountActivity(MyToolsTestActivity.this);
+                } else if (position == 1) {
+                    Starter.startJsAccountActivity(MyToolsTestActivity.this);
+                }
             }
         });
     }

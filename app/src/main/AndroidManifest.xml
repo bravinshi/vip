@@ -32,7 +32,8 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.mine.company.ShenPiActivity"></activity>
+        <activity android:name=".activity.brandcompany.SjczActivity"></activity>
+        <activity android:name=".activity.mine.company.ShenPiActivity" />
         <activity android:name=".activity.mine.company.PerformanceActivity" />
         <activity android:name=".activity.mine.vip.VipHomeActivity" />
         <activity android:name=".activity.accountManager.CompanyInfoActivity" />

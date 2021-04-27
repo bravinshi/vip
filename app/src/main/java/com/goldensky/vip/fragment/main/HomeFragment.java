@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import android.util.Log;
 import android.view.View;
 
 import com.goldensky.vip.R;
@@ -20,6 +21,8 @@ import com.goldensky.vip.viewmodel.home.HomeViewModel;
 
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> implements View.OnClickListener {
+
+    public static boolean isTYST = true; //是否体验实体
 
     @Override
     protected int getLayoutRes() {
@@ -40,16 +43,32 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isTYST) {
+            mBinding.iv1.setImageResource(R.mipmap.home_tiyan_top);
+            mBinding.iv4.setImageResource(R.mipmap.my_pic_wodegongju_ty);
+        } else {
+            mBinding.iv1.setImageResource(R.mipmap.my_pic_shouye1);
+            mBinding.iv4.setImageResource(R.mipmap.my_pic_wodegongju);
+        }
+    }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.order_layout:
+                if (isTYST) return;
                 Starter.startSxOrderActivity(getContext());
                 break;
             case R.id.sj_v:
-                Intent compInten = new Intent(getContext(), BrandCompanyActivity.class);
-                startActivity(compInten);
+                if (isTYST) {
+                    Starter.startSjstActivity(getContext());
+                } else {
+                    Intent compInten = new Intent(getContext(), BrandCompanyActivity.class);
+                    startActivity(compInten);
+                }
                 break;
             case R.id.jyzh_v:
                 Starter.startJyAccountActivity(getContext());
@@ -64,13 +83,21 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 Starter.startMallMangeActivity(getContext(),null);
                 break;
             case R.id.zysp_iv://主营商品
-                Starter.startMainGoodsActivity(getContext(),null);
+                if (isTYST) {
+                    Starter.startJhActivity(getContext());
+                } else {
+                    Starter.startMainGoodsActivity(getContext(),null);
+                }
                 break;
             case R.id.ddgl_iv: //订单管理
                 Starter.startOrderListActivity(getContext(),null);
                 break;
             case R.id.all_iv: //全部
-                Starter.startMyToolsActivity(getContext(),null);
+                if (isTYST) {
+                    Starter.startMyToolsTestActivity(getContext());
+                } else {
+                    Starter.startMyToolsActivity(getContext(),null);
+                }
                 break;
         }
     }
