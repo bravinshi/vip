@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.mine.company.CompanyManageActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_company"
+            app:layout_constraintTop_toTopOf="parent"
+            app:centerText="公司管理"
+            app:centerTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/iv_one"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:src="@mipmap/gsgl1"
+            android:adjustViewBounds="true"
+            />
+        <View
+            android:id="@+id/btn_one"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_one"
+            app:layout_constraintRight_toRightOf="@+id/iv_one"
+            android:layout_marginRight="30dp"
+            android:layout_width="90dp"
+            android:layout_marginBottom="25dp"
+            android:layout_height="20dp"
+            />
+        <ImageView
+            android:id="@+id/iv_two"
+            app:layout_constraintTop_toBottomOf="@+id/iv_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/gsgl2"
+            android:adjustViewBounds="true"
+            />
+        <ImageView
+            android:id="@+id/iv_three"
+            app:layout_constraintTop_toBottomOf="@+id/iv_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/gsgl3"
+            android:adjustViewBounds="true"
+            />
+        <LinearLayout
+            app:layout_constraintBottom_toBottomOf="@+id/iv_three"
+            app:layout_constraintStart_toStartOf="@+id/iv_three"
+            app:layout_constraintEnd_toEndOf="@+id/iv_three"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="25dp"
+            >
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

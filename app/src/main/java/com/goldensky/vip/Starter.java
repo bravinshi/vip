@@ -8,6 +8,7 @@ import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.accountManager.AccountManageActivity;
 import com.goldensky.vip.activity.accountManager.CompanyInfoActivity;
+import com.goldensky.vip.activity.accountManager.BusinessAnalysisActivity;
 import com.goldensky.vip.activity.accountManager.JsAccountActivity;
 import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
@@ -17,10 +18,13 @@ import com.goldensky.vip.activity.goods.MainGoodsActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
+import com.goldensky.vip.activity.mine.company.CompanyManageActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
 import com.goldensky.vip.activity.mine.mall.MallManageActivity;
+import com.goldensky.vip.activity.mine.mall.MyLiveActivity;
+import com.goldensky.vip.activity.mine.mall.PromoteActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
@@ -336,6 +340,16 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+    /**
+     * 推广详情
+     */
+    public static void startPromoteActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PromoteActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
 
     //销售订单
     public static void startSxOrderActivity(Context context) {
@@ -367,7 +381,7 @@ public class Starter {
         context.startActivity(intent);
     }
 
-    //分销订单
+    //账号管理
     public static void startAccountManageActivity(Context context) {
         Intent intent = new Intent(context, AccountManageActivity.class);
         context.startActivity(intent);
@@ -382,6 +396,22 @@ public class Starter {
     //商城首页
     public static void startVipHomeActivity(Context context) {
         Intent intent = new Intent(context, VipHomeActivity.class);
+        context.startActivity(intent);
+    }
+
+    //我的直播
+    public static void startMyLiveActivity(Context context) {
+        Intent intent = new Intent(context, MyLiveActivity.class);
+        context.startActivity(intent);
+    }
+    //经营分析
+    public static void startBusinessAnalysisActivity(Context context) {
+        Intent intent = new Intent(context, BusinessAnalysisActivity.class);
+        context.startActivity(intent);
+    }
+    //公司管理
+    public static void startCompanyManageActivity(Context context) {
+        Intent intent = new Intent(context, CompanyManageActivity.class);
         context.startActivity(intent);
     }
 }

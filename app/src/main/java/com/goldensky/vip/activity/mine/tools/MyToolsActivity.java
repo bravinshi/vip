@@ -112,6 +112,8 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
                     Starter.startAccountManageActivity(MyToolsActivity.this);
                 } else if (position == 2) {
                     Starter.startCompanyInfoActivity(MyToolsActivity.this);
+                } else if (position == 3) {
+                    Starter.startMyLiveActivity(MyToolsActivity.this);
                 }
             }
         });
@@ -120,7 +122,7 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (position == 0) {
-
+                    Starter.startBusinessAnalysisActivity(MyToolsActivity.this);
                 } else if (position == 1) {
                     Starter.startJyAccountActivity(MyToolsActivity.this);
                 } else if (position == 2) {
@@ -132,7 +134,11 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
         elseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                switch (position){
+                    case 0:
+                        Starter.startCompanyManageActivity(MyToolsActivity.this);
+                        break;
+                }
             }
         });
 
