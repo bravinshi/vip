@@ -97,6 +97,7 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
                         Starter.startSxOrderActivity(MyToolsActivity.this);
                         break;
                     case 4:
+                        Starter.startFxOrderActivity(MyToolsActivity.this);
                         break;
                 }
             }
@@ -105,10 +106,14 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
         mallAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (position){
-                    case 3:
-                        Starter.startMyLiveActivity(MyToolsActivity.this);
-                        break;
+                if (position == 0) {
+                    Starter.startVipHomeActivity(MyToolsActivity.this);
+                } else if (position == 1) {
+                    Starter.startAccountManageActivity(MyToolsActivity.this);
+                } else if (position == 2) {
+                    Starter.startCompanyInfoActivity(MyToolsActivity.this);
+                } else if (position == 3) {
+                    Starter.startMyLiveActivity(MyToolsActivity.this);
                 }
             }
         });

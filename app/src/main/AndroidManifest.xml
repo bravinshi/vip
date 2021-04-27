@@ -32,8 +32,13 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
         <activity android:name=".activity.mine.company.PerformanceActivity"></activity>
-        <activity android:name=".activity.mine.company.MarketActivity" />
+        <activity android:name=".activity.mine.vip.VipHomeActivity"></activity>
+        <activity android:name=".activity.accountManager.CompanyInfoActivity" />
+        <activity android:name=".activity.accountManager.AccountManageActivity" />
+        <activity android:name=".activity.order.FxOrderActivity" />
+        <activity android:name=".activity.mine.company.MarketActivity"></activity>
         <activity android:name=".activity.mine.company.CompanyManageActivity" />
         <activity android:name=".activity.accountManager.BusinessAnalysisActivity" />
         <activity android:name=".activity.mine.mall.MyLiveActivity" />
