@@ -25,7 +25,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
      * 检查登录状态
      */
     private void checkLoginState() {
-        AccountHelper.
+
     }
 
     @Override
