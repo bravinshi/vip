@@ -1,7 +1,9 @@
 package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.goldensky.vip.R;
@@ -47,7 +49,9 @@ public class PackageCustomizationActivity extends BaseActivity<ActivityPackageCu
                 finish();
                 break;
             case R.id.btn_all_package:
-                toast("敬请期待~");
+                Toast ts = Toast.makeText(this,"敬请期待~",Toast.LENGTH_SHORT);
+                ts.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                ts.show();
                 break;
         }
     }

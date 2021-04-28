@@ -27,7 +27,7 @@ public class SystemMessageActivity extends BaseActivity<ActivitySystemMessageBin
                 finish();
             }
         });
-        list.add(R.mipmap.xxxx1);
+        list.add(R.mipmap.xxtz1);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvSystem.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvSystem.setAdapter(adapter);

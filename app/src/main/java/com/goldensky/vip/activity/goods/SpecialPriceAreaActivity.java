@@ -77,7 +77,7 @@ public class SpecialPriceAreaActivity extends BaseActivity<ActivitySpecialPriceA
                 break;
             case R.id.tmzq_v:
                 Toast ts = Toast.makeText(this,"敬请期待~",Toast.LENGTH_SHORT);
-//                ts.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                ts.setGravity(Gravity.CENTER_VERTICAL,0,0);
                 ts.show();
                 break;
             case R.id.btn_service:
