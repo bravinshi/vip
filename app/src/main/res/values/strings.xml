@@ -23,6 +23,7 @@
     <string name="hint_verification_code_has_sent">验证码已发送</string>
     <string name="hint_verification_code_is_wrong">验证码错误</string>
     <string name="hint_login_now">登录中</string>
+    <string name="hint_input_nick">4-20个字符，可由中英文、数字、“_”、”-“组成</string>
     <string name="text_company_regitser">企业注册</string>
     <string name="text_company_info">企业信息</string>
     <string name="text_representative_info">代表信息</string>
@@ -47,4 +48,34 @@
     <string name="text_finished">已完成</string>
     <string name="text_wait_for_evaluated">待评价</string>
     <string name="text_hint_protocol_policy">登录即同意并接受用户协议和隐私政策</string>
+    <string name="text_cancel_delete">在考虑下</string>
+    <string name="text_confirm_delete">删除</string>
+    <string name="text_change_psd">修改密码</string>
+    <string name="text_confirm_submit">确认提交</string>
+    <string name="text_change_nick">修改昵称</string>
+    <string name="text_save">保存</string>
+    <string name="text_phone">手机号码</string>
+    <string name="text_location">所在地区</string>
+    <string name="text_address">详细地址</string>
+    <string name="text_my_tools">我的工具</string>
+    <string name="text_go_close_account">去结算</string>
+    <string name="text_share_to_friend">好友分享</string>
+    <string name="text_settings">设置</string>
+    <string name="text_now_version">当前版本</string>
+    <string name="text_order_manage">订单管理</string>
+    <string name="text_logout">退出登录</string>
+    <string name="text_no_order">暂无订单</string>
+    <string name="text_defult_address">设为默认地址</string>
+    <string name="text_invite_company">邀请企业</string>
+    <string name="text_shipping_address">收货地址</string>
+    <string name="text_btn_new_address">╋   新建收货地址</string>
+    <string name="text_new_address">新建收货地址</string>
+    <string name="text_consignee">收货人</string>
+    <string name="hint_input_consignee_name">请填写收货人姓名</string>
+    <string name="hint_input_consignee_phone">请填写收货人手机号</string>
+    <string name="hint_input_consignee_location">省市县区、乡镇等</string>
+    <string name="hint_input_consignee_address">街道楼牌号等</string>
+    <string name="hint_switch_defult_address">每次下单会默认推荐使用该地址</string>
+    <string name="hint_confirm_delete">确认删除?</string>
+
 </resources>

@@ -29,8 +29,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
 //                .statusBarView(mBinding.vStatusBar).init();
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new MessageFragment());
-        fragments.add(new CircleFragment());
+//        fragments.add(new MessageFragment());
+//        fragments.add(new CircleFragment());
         fragments.add(new ShoppingCartFragment());
         fragments.add(new MineFragment());
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
@@ -42,17 +42,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
                 case R.id.item_home:
                     mBinding.viewPagerMain.setCurrentItem(0, false);
                     break;
-                case R.id.item_message:
+//                case R.id.item_message:
+//                    mBinding.viewPagerMain.setCurrentItem(1, false);
+//                    break;
+//                case R.id.item_circle:
+//                    mBinding.viewPagerMain.setCurrentItem(2, false);
+//                    break;
+                case R.id.item_shopping_cart:
                     mBinding.viewPagerMain.setCurrentItem(1, false);
                     break;
-                case R.id.item_circle:
-                    mBinding.viewPagerMain.setCurrentItem(2, false);
-                    break;
-                case R.id.item_shopping_cart:
-                    mBinding.viewPagerMain.setCurrentItem(3, false);
-                    break;
                 case R.id.item_mine:
-                    mBinding.viewPagerMain.setCurrentItem(4, false);
+                    mBinding.viewPagerMain.setCurrentItem(2, false);
                     break;
             }
             return true;

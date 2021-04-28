@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:showIvBack="true"
-            app:centerText="设置"
+            app:centerText="@string/text_settings"
             app:layout_constraintTop_toTopOf="parent"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="修改密码"
+                android:text="@string/text_change_psd"
                 android:textSize="15sp"
                 android:textColor="@color/color_3"
                 />
@@ -266,7 +266,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="当前版本"
+                android:text="@string/text_now_version"
                 android:textSize="15sp"
                 android:textColor="@color/color_3"
                 />
@@ -297,7 +297,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/shape_btn_red"
-            android:text="退出登录"
+            android:text="@string/text_logout"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_width="match_parent"

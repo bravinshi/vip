@@ -22,136 +22,139 @@
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintTop_toBottomOf="@id/top_bar_mine"
             android:layout_width="match_parent"
+            android:layout_height="280dp"
             android:background="@drawable/shape_back_mine"
-            android:layout_height="280dp">
+            app:layout_constraintTop_toBottomOf="@id/top_bar_mine"
+            tools:layout_editor_absoluteX="0dp">
+
             <ImageView
                 android:id="@+id/iv_head_mine"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/home_icon_touxiang"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                />
-            <TextView
-                app:layout_constraintTop_toTopOf="@+id/iv_head_mine"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="40dp"
+                android:src="@mipmap/home_icon_touxiang"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="85dp"
-                android:text="13963687986"
-                android:textSize="18sp"
-                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="5dp"
+                android:text="13963687986"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iv_head_mine" />
+
             <ImageView
                 android:id="@+id/iv_settings_mine"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="55dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginRight="20dp"
                 android:onClick="@{listener}"
                 android:src="@mipmap/my_icon_shezhi"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
 
                 />
-            <LinearLayout
-                android:id="@+id/goods_focus_mine"
-                android:onClick="@{listener}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="135dp"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="商品关注"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/circle_focus_mine"
-                android:onClick="@{listener}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="135dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/goods_focus_mine"-->
+            <!--                android:onClick="@{listener}"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--                android:layout_marginTop="135dp"-->
+            <!--                android:layout_marginLeft="50dp"-->
+            <!--                android:orientation="vertical"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="11"-->
+            <!--                    android:textSize="14sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="商品关注"-->
+            <!--                    android:textSize="12sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--            </LinearLayout>-->
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/circle_focus_mine"-->
+            <!--                android:onClick="@{listener}"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                android:layout_marginTop="135dp"-->
+            <!--                android:orientation="vertical"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
 
-                    android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="圈子关注"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/recent_browse_mine"
-                android:onClick="@{listener}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="135dp"
-                android:layout_marginRight="50dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="49"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="最近浏览"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="3"-->
+            <!--                    android:textSize="14sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="圈子关注"-->
+            <!--                    android:textSize="12sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--            </LinearLayout>-->
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/recent_browse_mine"-->
+            <!--                android:onClick="@{listener}"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintRight_toRightOf="parent"-->
+            <!--                android:layout_marginTop="135dp"-->
+            <!--                android:layout_marginRight="50dp"-->
+            <!--                android:orientation="vertical"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="49"-->
+            <!--                    android:textSize="14sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="最近浏览"-->
+            <!--                    android:textSize="12sp"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    />-->
+            <!--            </LinearLayout>-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -162,25 +165,15 @@
             android:layout_width="match_parent"
             android:padding="20dp"
             android:layout_height="95dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="135dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             >
         </androidx.recyclerview.widget.RecyclerView>
-        <ImageView
-            app:layout_constraintTop_toBottomOf="@+id/rv_order_mine"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_width="345dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/my_pic_zhiliyuandian"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
         <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintTop_toBottomOf="@id/top_bar_mine"
+            app:layout_constraintTop_toBottomOf="@id/rv_order_mine"
             android:background="@drawable/shape_corner_white_bg"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_width="match_parent"
@@ -190,7 +183,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的工具"
+                android:text="@string/text_my_tools"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"

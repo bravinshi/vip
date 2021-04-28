@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:showIvBack="true"
-            app:centerText="好友分享"
+            app:centerText="@string/text_share_to_friend"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintTop_toBottomOf="@+id/top_bar_share_to_friend"

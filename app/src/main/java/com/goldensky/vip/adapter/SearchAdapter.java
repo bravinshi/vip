@@ -10,8 +10,7 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.bean.MineToolBean;
 import com.goldensky.vip.bean.SearchItemBean;
 import com.goldensky.vip.databinding.ItemSearchBinding;
-import com.goldensky.vip.databinding.ItemToolMineBinding;
-import com.goldensky.vip.databinding.ItemToolMineBindingImpl;
+
 import com.goldensky.vip.helper.ImageLoaderHelper;
 
 import java.util.List;

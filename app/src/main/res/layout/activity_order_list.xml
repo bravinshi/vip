@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:showIvBack="true"
-            app:centerText="订单管理"
+            app:centerText="@string/text_order_manage"
             />
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_order_list"
@@ -59,7 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="16sp"
                 android:textColor="@color/color_888888"
-                android:text="暂无订单"
+                android:text="@string/text_no_order"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
