@@ -19,8 +19,8 @@ public class AccountHelper {
     public static LoginResponseBean copy() {
         LoginResponseBean responseBean = new LoginResponseBean();
 
-        responseBean.setVipUser(loginResponse.getVipUser());
-        responseBean.setTokenHead(new String(loginResponse.getTokenHead()));
+        responseBean.setVipUser(loginResponse.getVipUser().copy());
+        responseBean.setTokenHead(loginResponse.getTokenHead());
         responseBean.setToken(loginResponse.getToken());
         responseBean.setRefreshToken(loginResponse.getRefreshToken());
         responseBean.setExpiresIn(loginResponse.getExpiresIn());
