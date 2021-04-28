@@ -51,6 +51,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@color/white"
                         android:layout_height="match_parent">
 
                         <ImageView
@@ -111,6 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="12dp"
+                            android:background="@color/white"
                             android:layout_marginEnd="15dp"
                             android:text="山东红富士高端礼盒顺丰包邮整箱3.7KG水果苹果脆甜"
                             android:textColor="@color/color_333333"
