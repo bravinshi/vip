@@ -63,7 +63,8 @@ public class MallManageActivity extends BaseActivity<ActivityMallManageBinding, 
         mBinding.rvMallManage.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvMallManage.setAdapter(adapter);
         refreshAdapter(distributionList);
-
+        mBinding.clItemName.setVisibility(View.GONE);
+        refreshAdapter(guanlianList);
         mBinding.tabMallManage.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

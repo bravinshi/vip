@@ -15,7 +15,7 @@ public class PerformanceActivity extends BaseActivity<ActivityPerformanceBinding
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        mBinding.topBarPerformance.setBackListener(new View.OnClickListener() {
+        mBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
