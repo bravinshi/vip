@@ -152,6 +152,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/iv_2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
+                            android:onClick="@{listener}"
                             android:src="@mipmap/my_pic_pingguo1"
                             android:layout_width="0dp"
                             android:layout_height="259dp"/>
@@ -163,6 +164,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:src="@mipmap/my_pic_chengzi1"
                             android:layout_width="0dp"
+                            android:onClick="@{listener}"
                             android:layout_height="259dp"/>
 
                         <ImageView
@@ -173,6 +175,7 @@
                             android:layout_marginTop="10dp"
                             android:src="@mipmap/my_pic_fenliqi1"
                             android:layout_width="0dp"
+                            android:onClick="@{listener}"
                             android:layout_height="259dp"/>
 
                         <ImageView
@@ -183,6 +186,7 @@
                             android:id="@+id/iv_4"
                             android:src="@mipmap/my_pic_zhazhibei1"
                             android:layout_width="0dp"
+                            android:onClick="@{listener}"
                             android:layout_height="259dp"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.goldensky.vip.activity.article;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,7 +22,25 @@ public class ArticleDetailActivity extends BaseActivity<ActivityArticleDetailBin
     public void onFinishInit(Bundle savedInstanceState) {
         ImmersionBar.with(this).statusBarDarkFont(true)
                 .statusBarView(mBinding.vStatusBar).init();
-        mBinding.tabBar.setBackListener(v -> ArticleDetailActivity.this.finish());
+        Intent intent = getIntent();
+        if(intent!=null){
+            int type = intent.getIntExtra("goods", 0);
+            if(type==2){
+                mBinding.ivOneDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingfeiniu1);
+                mBinding.ivTwoDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingfeiniu2);
+                mBinding.ivThreeDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingfeiniu3);
+            }else if(type==3){
+                mBinding.ivOneDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingbinggan1);
+                mBinding.ivTwoDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingbinggan2);
+                mBinding.ivThreeDetail.setImageResource(R.mipmap.my_pic_wenzhangxiangqingbinggan3);
+            }
+        }
+        mBinding.viewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

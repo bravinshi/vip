@@ -74,6 +74,27 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Ba
 
     @Override
     public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
+        Bundle bundle = new Bundle();
+        switch (v.getId()){
+            case R.id.iv_1:
+                bundle.putInt("KEY_FAKE_DATA", 1);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            case R.id.iv_2:
+                bundle.putInt("KEY_FAKE_DATA", 6);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            case R.id.iv_3:
+                bundle.putInt("KEY_FAKE_DATA", 7);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            case R.id.iv_4:
+                bundle.putInt("KEY_FAKE_DATA", 8);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            default:
+                Starter.startCustomerServiceActivity(this,null);
+                break;
+        }
     }
 }

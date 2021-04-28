@@ -35,6 +35,27 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Base
 
     @Override
     public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
+        Bundle bundle = new Bundle();
+        switch (v.getId()){
+            case R.id.iv_1:
+                bundle.putInt("KEY_FAKE_DATA", 2);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            case R.id.iv_2:
+                bundle.putInt("KEY_FAKE_DATA", 5);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+            case R.id.iv_3:
+                bundle.putInt("KEY_FAKE_DATA", 3);
+                Starter.startGoodsDetailActivity(this, bundle);
+                break;
+//            case R.id.iv_4:
+//                bundle.putInt("KEY_FAKE_DATA", 8);
+//                Starter.startGoodsDetailActivity(this, bundle);
+//                break;
+            default:
+                Starter.startCustomerServiceActivity(this,null);
+                break;
+        }
     }
 }
