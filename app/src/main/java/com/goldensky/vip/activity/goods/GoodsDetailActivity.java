@@ -30,7 +30,7 @@ import java.util.List;
  * 类说明：
  */
 public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding,
-        GoodsDetailViewModel> {
+        GoodsDetailViewModel> implements View.OnClickListener{
 
     public static final String KEY_FAKE_DATA = "KEY_FAKE_DATA";
 
@@ -51,6 +51,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     public static final Integer KEY_FAKE_DATA_DANGAO = 15;// 蛋糕
     public static final Integer KEY_FAKE_DATA_YUNDOU = 16;// 熨斗
 
+    private Integer fakeKey;
+
 
 
     @Override
@@ -61,6 +63,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         LinearLayoutManager mLinearLayoutManager = new FullyLinearLayoutManager(GoodsDetailActivity.this);
 //        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
         mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
+        mBinding.tvBuy.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
@@ -68,7 +71,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             return;
         }
 
-        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
+         fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
         generateFakeData(fakeKey);
     }
 
@@ -282,6 +285,15 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }};
 
         goodsDetailAdapter.setPics(detailData);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.tv_buy) {
+            Bundle bundle = new Bundle();
+            bundle.putInt(KEY_FAKE_DATA, fakeKey);
+            Starter.startConfirmOrderActivity(this, bundle);
+        }
     }
 
     public static class FakeData {

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/F2F2F2">
+
+        <ImageView
+            android:id="@+id/nav_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/confirm_order_nav"/>
+
+        <View
+            android:id="@+id/back_v"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="@id/nav_iv"
+            app:layout_constraintTop_toTopOf="@id/nav_iv"></View>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/nav_iv"
+            app:layout_constraintBottom_toTopOf="@+id/price_iv">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/confirm_order_address"/>
+
+                <ImageView
+                    android:id="@+id/spinfo_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/confirm_order_pay"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <ImageView
+            android:id="@+id/price_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <View
+            android:id="@+id/confirm_v"
+            android:layout_width="130dp"
+            android:layout_height="57dp"
+            app:layout_constraintRight_toRightOf="@id/price_iv"
+            app:layout_constraintTop_toTopOf="@id/price_iv"></View>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

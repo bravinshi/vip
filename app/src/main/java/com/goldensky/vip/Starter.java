@@ -23,6 +23,7 @@ import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
+import com.goldensky.vip.activity.order.ConfirmOrderActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
@@ -285,4 +286,16 @@ public class Starter {
         context.startActivity(intent);
     }
 
+
+    /**
+     * 确认订单
+     */
+    public static void startConfirmOrderActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ConfirmOrderActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
 }
