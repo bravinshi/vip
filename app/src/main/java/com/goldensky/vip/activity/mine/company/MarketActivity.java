@@ -15,7 +15,7 @@ public class MarketActivity extends BaseActivity<ActivityMarketBinding, PublicVi
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        mBinding.topBarMarket.setBackListener(new View.OnClickListener() {
+        mBinding.topBarMarket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
