@@ -13,6 +13,15 @@ import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.framework.util.Utils;
 import com.goldensky.vip.helper.AccountHelper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @author bravin
@@ -36,12 +45,39 @@ public class MyApplication extends Application {
 //        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
         // 马晓伟
         apiConfiguration.setBaseUrl("http://172.25.0.159:9999/");
-        Gson gson = new Gson();
-        apiConfiguration.setGson(gson);
+        // 设置gson
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
+        apiConfiguration.setGson(gsonBuilder.create());
+        // 设置拦截器
+        apiConfiguration.setInterceptors(new ArrayList<Interceptor>(){{
+            add(createHeaderInterceptor());
+        }});
         RetrofitAgent.config(apiConfiguration);
 
         Utils.init(this);
         AccountHelper.deserializationAgent();
+    }
+
+    /**
+     * 请求头拦截器
+     */
+    private static Interceptor createHeaderInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(@NonNull Chain chain) throws IOException {
+                Request request = chain.request();
+                Request.Builder builder = request.newBuilder();
+                // TODO
+//                builder.addHeader("auth_uid", AccountHelper.getUserId());
+//                builder.addHeader("Authorization", AccountHelper.getToken());
+                try {
+                    Response mResponse = chain.proceed(builder.build());
+                    return mResponse;
+                } catch (SocketTimeoutException exception) {
+                    throw new SocketTimeoutException("网络超时");
+                }
+            }
+        };
     }
 
     public static class ProcessLifecycleObserver implements LifecycleObserver {
