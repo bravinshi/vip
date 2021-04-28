@@ -13,6 +13,8 @@ import com.goldensky.vip.activity.accountManager.JsAccountActivity;
 import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.brandcompany.SjczActivity;
+import com.goldensky.vip.activity.brandcompany.ZjCompanyActivity;
+import com.goldensky.vip.activity.brandcompany.ZjConfirmActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.MainGoodsActivity;
@@ -446,6 +448,29 @@ public class Starter {
     //升级合作实体
     public static void startSjstActivity(Context context) {
         Intent intent = new Intent(context, SjczActivity.class);
+        context.startActivity(intent);
+    }
+
+
+    /**
+     * 组建公司申请
+     */
+    public static void startZjCompanyActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ZjCompanyActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 组建公司申请确认
+     */
+    public static void startZjConfirmActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ZjConfirmActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         context.startActivity(intent);
     }
 }

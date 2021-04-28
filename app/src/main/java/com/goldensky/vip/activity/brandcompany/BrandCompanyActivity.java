@@ -3,9 +3,11 @@ package com.goldensky.vip.activity.brandcompany;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityBrandCompanyBinding;
 import com.goldensky.vip.viewmodel.PublicViewModel;
@@ -18,6 +20,7 @@ public class BrandCompanyActivity extends BaseActivity<ActivityBrandCompanyBindi
     public void onFinishInit(Bundle savedInstanceState) {
         mBinding.backV.setOnClickListener(this);
         mBinding.bottomIv.setOnClickListener(this);
+        mBinding.sqzjV.setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +38,22 @@ public class BrandCompanyActivity extends BaseActivity<ActivityBrandCompanyBindi
         switch (view.getId()) {
             case R.id.back_v:
                 finish();
+                break;
+            case R.id.sqzj_v:
+                Log.d("TAG", "onClick: " + count);
+              if (count == 3 || count == 5 || count == 7 || count == 9) {
+                  Bundle bundle = new Bundle();
+                  if (count == 3) {
+                      bundle.putInt(ZjCompanyActivity.ZJ_TYPE_KEY, 1);
+                  } else if (count == 5) {
+                      bundle.putInt(ZjCompanyActivity.ZJ_TYPE_KEY, 2);
+                  } else if (count == 7) {
+                      bundle.putInt(ZjCompanyActivity.ZJ_TYPE_KEY, 3);
+                  } else if (count == 9) {
+                      bundle.putInt(ZjCompanyActivity.ZJ_TYPE_KEY, 4);
+                  }
+                  Starter.startZjCompanyActivity(this, bundle);
+              }
                 break;
             case R.id.bottom_iv:
                 if (count > 8) return;
