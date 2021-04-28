@@ -12,37 +12,18 @@
         android:layout_height="match_parent"
         tools:context=".activity.mine.company.PerformanceActivity">
         <ImageView
-            android:id="@+id/iv_one"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/yj1"
-            android:adjustViewBounds="true"
+            android:layout_height="match_parent"
+            android:background="@mipmap/yjsy"
             />
         <ImageView
-            android:id="@+id/iv_two"
-            app:layout_constraintTop_toBottomOf="@+id/iv_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:src="@mipmap/yj2"
-            android:adjustViewBounds="true"
-            />
-        <ImageView
-            android:id="@+id/iv_three"
-            app:layout_constraintTop_toBottomOf="@+id/iv_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/yj3"
-            android:adjustViewBounds="true"
-            />
-        <com.goldensky.framework.ui.view.TopActionBar
-            android:id="@+id/top_bar_performance"
             app:layout_constraintTop_toTopOf="parent"
-            app:centerText="公司管理"
-            app:centerTextColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
