@@ -59,11 +59,7 @@ public class InviteCompanyActivity extends BaseActivity<ActivityInviteCompanyBin
         Window window = getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.alpha=0.1f;
-        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         window.setAttributes(attributes);
-        window.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setTouchable(true);
-        popupWindow.setOutsideTouchable(true);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {

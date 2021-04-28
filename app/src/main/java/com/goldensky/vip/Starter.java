@@ -13,6 +13,7 @@ import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
+import com.goldensky.vip.activity.message.TradeLogisticsActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
@@ -303,6 +304,17 @@ public class Starter {
      */
     public static void startConfirmOrderActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ConfirmOrderActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 交易物流
+     */
+    public static void startTradeLogisticsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, TradeLogisticsActivity.class);
 
         if (bundle != null) {
             intent.putExtras(bundle);

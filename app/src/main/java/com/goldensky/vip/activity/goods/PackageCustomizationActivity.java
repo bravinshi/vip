@@ -43,8 +43,11 @@ public class PackageCustomizationActivity extends BaseActivity<ActivityPackageCu
             case R.id.btn_service:
                 Starter.startCustomerServiceActivity(this,null);
                 break;
-            case R.id.iv_back:
+            case R.id.btn_back_package:
                 finish();
+                break;
+            case R.id.btn_all_package:
+                toast("尽请期待");
                 break;
         }
     }
