@@ -67,7 +67,7 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
                         bundle.putInt("KEY_FAKE_DATA",4);
                         break;
                 }
-                Starter.startConfirmOrderActivity(getContext(),bundle);
+                Starter.startGoodsDetailActivity(getContext(),bundle);
             }
         });
         mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()){

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
@@ -42,6 +43,12 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
         list.add(R.mipmap.my_pic_kepuxiaoxi);
         list.add(R.mipmap.my_pic_xiaoxitongzhi);
         adapter=new CircleFocusAdapter(list);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    
+            }
+        });
         mBinding.rvMessage.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.rvMessage.setAdapter(adapter);
     }
