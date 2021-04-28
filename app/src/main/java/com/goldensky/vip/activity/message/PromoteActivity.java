@@ -27,6 +27,8 @@ public class PromoteActivity extends BaseActivity<ActivityPromoteBinding, Public
                 finish();
             }
         });
+        list.add(R.mipmap.tgxx1);
+        list.add(R.mipmap.tgxx2);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvPromote.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvPromote.setAdapter(adapter);

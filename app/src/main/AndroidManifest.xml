@@ -37,7 +37,6 @@
         <activity android:name=".activity.message.PromoteActivity" />
         <activity android:name=".activity.message.LiveActivity" />
         <activity android:name=".activity.message.SystemMessageActivity" />
-        <activity android:name=".activity.message.DiscountsActivity" />
         <activity android:name=".activity.message.TradeLogisticsActivity" />
         <activity android:name=".activity.order.ConfirmOrderActivity" />
         <activity android:name=".activity.customer.VIPTalkActivity" />

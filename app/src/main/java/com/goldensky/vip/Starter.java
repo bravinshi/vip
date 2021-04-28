@@ -13,7 +13,6 @@ import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
-import com.goldensky.vip.activity.message.DiscountsActivity;
 import com.goldensky.vip.activity.message.LiveActivity;
 import com.goldensky.vip.activity.message.MessageActivity;
 import com.goldensky.vip.activity.message.PromoteActivity;
@@ -327,17 +326,7 @@ public class Starter {
         }
         context.startActivity(intent);
     }
-    /**
-     * 优惠活动
-     */
-    public static void startDiscountsActivity(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, DiscountsActivity.class);
 
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        context.startActivity(intent);
-    }
     /**
      * 系统消息
      */

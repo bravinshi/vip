@@ -27,6 +27,8 @@ public class ScienceActivity extends BaseActivity<ActivityScienceBinding, Public
                 finish();
             }
         });
+        list.add(R.mipmap.kpxx1);
+        list.add(R.mipmap.kpxx2);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvScience.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvScience.setAdapter(adapter);

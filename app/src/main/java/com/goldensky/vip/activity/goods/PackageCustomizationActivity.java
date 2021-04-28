@@ -47,7 +47,7 @@ public class PackageCustomizationActivity extends BaseActivity<ActivityPackageCu
                 finish();
                 break;
             case R.id.btn_all_package:
-                toast("尽请期待");
+                toast("敬请期待~");
                 break;
         }
     }

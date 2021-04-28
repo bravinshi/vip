@@ -27,6 +27,8 @@ public class LiveActivity extends BaseActivity<ActivityLiveBinding, PublicViewMo
                 finish();
             }
         });
+        list.add(R.mipmap.hzzb1);
+        list.add(R.mipmap.hzzb2);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvLive.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvLive.setAdapter(adapter);

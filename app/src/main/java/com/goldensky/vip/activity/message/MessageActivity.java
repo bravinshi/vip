@@ -27,6 +27,8 @@ public class MessageActivity extends BaseActivity<ActivityMessageBinding, Public
                 finish();
             }
         });
+        list.add(R.mipmap.xxtz1);
+        list.add(R.mipmap.xxtz2);
         adapter=new CircleFocusAdapter(list);
         mBinding.rvMsg.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvMsg.setAdapter(adapter);

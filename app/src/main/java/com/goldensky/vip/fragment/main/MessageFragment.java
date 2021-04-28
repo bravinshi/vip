@@ -76,7 +76,7 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
         mBinding.yhhd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Starter.startDiscountsActivity(getContext(),null);
+                Starter.startYhzqActivity(getContext(),null);
             }
         });
     }
