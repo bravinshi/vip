@@ -41,10 +41,10 @@ public class CouponActivity extends BaseActivity<ActivityCouponBinding, PublicVi
         allList.add(R.mipmap.my_pic_youhuiquan4);
         allList.add(R.mipmap.my_pic_youhuiquan5);
         unusedList.add(R.mipmap.my_pic_youhuiquan1);
-        unusedList.add(R.mipmap.my_pic_youhuiquan2);
+        unusedList.add(R.mipmap.my_pic_youhuiquan4);
         unusedList.add(R.mipmap.my_pic_youhuiquan5);
-        staleDatedList.add(R.mipmap.my_pic_youhuiquan4);
-        usedList.add(R.mipmap.my_pic_youhuiquan3);
+        staleDatedList.add(R.mipmap.my_pic_youhuiquan3);
+        usedList.add(R.mipmap.my_pic_youhuiquan2);
         adapter=new GoodsFocusAdapter(list);
         mBinding.rvCoupon.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvCoupon.setAdapter(adapter);

@@ -13,6 +13,12 @@ import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
+import com.goldensky.vip.activity.message.DiscountsActivity;
+import com.goldensky.vip.activity.message.LiveActivity;
+import com.goldensky.vip.activity.message.MessageActivity;
+import com.goldensky.vip.activity.message.PromoteActivity;
+import com.goldensky.vip.activity.message.ScienceActivity;
+import com.goldensky.vip.activity.message.SystemMessageActivity;
 import com.goldensky.vip.activity.message.TradeLogisticsActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
@@ -315,6 +321,72 @@ public class Starter {
      */
     public static void startTradeLogisticsActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TradeLogisticsActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 优惠活动
+     */
+    public static void startDiscountsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, DiscountsActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 系统消息
+     */
+    public static void startSystemMessageActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SystemMessageActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 合纵直播
+     */
+    public static void startLiveActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, LiveActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 推广消息
+     */
+    public static void startPromoteActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PromoteActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 科普消息
+     */
+    public static void startScienceActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ScienceActivity.class);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 消息通知
+     */
+    public static void startMessageActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MessageActivity.class);
 
         if (bundle != null) {
             intent.putExtras(bundle);

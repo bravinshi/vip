@@ -16,7 +16,6 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.databinding.FragmentMessageBinding;
-import com.goldensky.vip.databinding.FragmentMineBindingImpl;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 import java.util.ArrayList;
@@ -47,7 +46,23 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                switch (position){
+                    case 0:
+                        Starter.startSystemMessageActivity(getContext(),null);
+                        break;
+                    case 1:
+                        Starter.startLiveActivity(getContext(),null);
+                        break;
+                    case 2:
+                        Starter.startPromoteActivity(getContext(),null);
+                        break;
+                    case 3:
+                        Starter.startScienceActivity(getContext(),null);
+                        break;
+                    case 4:
+                        Starter.startMessageActivity(getContext(),null);
+                        break;
+                }
             }
         });
         mBinding.rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -56,6 +71,12 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
             @Override
             public void onClick(View v) {
                 Starter.startTradeLogisticsActivity(getContext(),null);
+            }
+        });
+        mBinding.yhhd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Starter.startDiscountsActivity(getContext(),null);
             }
         });
     }

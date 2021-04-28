@@ -32,7 +32,13 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.message.TradeLogisticsActivity"></activity>
+        <activity android:name=".activity.message.MessageActivity"></activity>
+        <activity android:name=".activity.message.ScienceActivity" />
+        <activity android:name=".activity.message.PromoteActivity" />
+        <activity android:name=".activity.message.LiveActivity" />
+        <activity android:name=".activity.message.SystemMessageActivity" />
+        <activity android:name=".activity.message.DiscountsActivity" />
+        <activity android:name=".activity.message.TradeLogisticsActivity" />
         <activity android:name=".activity.order.ConfirmOrderActivity" />
         <activity android:name=".activity.customer.VIPTalkActivity" />
         <activity android:name=".activity.customer.CustomerServiceActivity" />
