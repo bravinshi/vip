@@ -64,27 +64,24 @@ public class MyApplication extends Application {
      * 请求头拦截器
      */
     private static Interceptor createHeaderInterceptor() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(@NonNull Chain chain) throws IOException {
-                Request request = chain.request();
-                Request.Builder builder = request.newBuilder();
+        return chain -> {
+            Request request = chain.request();
+            Request.Builder builder = request.newBuilder();
 
-                String userId = AccountHelper.getUserId();
-                if (StringUtils.isTrimEmpty(userId)) {
-                    userId = "";
-                }
-                builder.addHeader("vip_user_id", userId);
-                builder.addHeader("Authorization", AccountHelper.getToken());
-                builder.addHeader("app_version_code", AppUtils.getAppVersionCode() + "");// 101
-                builder.addHeader("app_version", AppUtils.getAppVersionName());// 1.0.1
-                builder.addHeader("app_client", "vip");
-                try {
-                    Response mResponse = chain.proceed(builder.build());
-                    return mResponse;
-                } catch (SocketTimeoutException exception) {
-                    throw new SocketTimeoutException("网络超时");
-                }
+            String userId = AccountHelper.getUserId();
+            if (StringUtils.isTrimEmpty(userId)) {
+                userId = "";
+            }
+            builder.addHeader("vip_user_id", userId);
+            builder.addHeader("Authorization", AccountHelper.getToken());
+            builder.addHeader("app_version_code", AppUtils.getAppVersionCode() + "");// 101
+            builder.addHeader("app_version", AppUtils.getAppVersionName());// 1.0.1
+            builder.addHeader("app_client", "vip");
+            try {
+                Response mResponse = chain.proceed(builder.build());
+                return mResponse;
+            } catch (SocketTimeoutException exception) {
+                throw new SocketTimeoutException("网络超时");
             }
         };
     }

@@ -45,7 +45,13 @@
         <activity android:name=".activity.mine.settings.ChangePWDActivity" />
         <activity android:name=".activity.mine.settings.PersonalDetailsActivity" />
         <activity android:name=".activity.mine.settings.SettingsActivity" />
-        <activity android:name=".activity.SplashActivity" />
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="design_width_in_dp"
@@ -65,11 +71,7 @@
             android:value="portrait|landscape" />
 
         <activity android:name=".activity.account.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
