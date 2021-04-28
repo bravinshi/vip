@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.databinding.FragmentMessageBinding;
@@ -46,10 +47,16 @@ public class MessageFragment extends LazyLoadFragment<FragmentMessageBinding, Pu
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    
+
             }
         });
-        mBinding.rvMessage.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBinding.rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.rvMessage.setAdapter(adapter);
+        mBinding.jywl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Starter.startTradeLogisticsActivity(getContext(),null);
+            }
+        });
     }
 }

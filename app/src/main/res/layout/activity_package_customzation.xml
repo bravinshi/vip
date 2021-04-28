@@ -143,8 +143,24 @@
 
         </androidx.core.widget.NestedScrollView>
 
-
     </LinearLayout>
+        <View
+
+            android:id="@+id/btn_all_package"
+            android:layout_width="match_parent"
+            android:onClick="@{listener}"
+            android:layout_height="match_parent"
+            />
+        <View
+            app:layout_constraintTop_toTopOf="@+id/btn_all_package"
+            app:layout_constraintLeft_toLeftOf="@+id/btn_all_package"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/btn_back_package"
+            android:layout_width="30dp"
+            android:onClick="@{listener}"
+            android:layout_height="30dp"
+            />
         <ImageView
             android:id="@+id/btn_service"
             app:layout_constraintBottom_toBottomOf="parent"
