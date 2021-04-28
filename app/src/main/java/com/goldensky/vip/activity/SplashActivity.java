@@ -22,7 +22,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
 
     private CountDownTimer countDownTimer;
     private final long millisInFuture = 3000;
-    private Integer timeRemain = (int)(millisInFuture / 1000 + 1);
+    private Integer timeRemain = (int) (millisInFuture / 1000 + 1);
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
