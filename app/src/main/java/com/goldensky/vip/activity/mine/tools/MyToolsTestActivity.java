@@ -66,7 +66,7 @@ public class MyToolsTestActivity extends BaseActivity<ActivityMyToolsTestBinding
                 if (position == 0) {
                     Starter.startVipManageActivity(MyToolsTestActivity.this, null);
                 } else if (position == 1) {
-                    Starter.startMallMangeActivity(MyToolsTestActivity.this, null);
+                    Starter.startMallManageTestActivity(MyToolsTestActivity.this, null);
                 }
             }
         });

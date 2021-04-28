@@ -19,6 +19,7 @@ import com.goldensky.vip.activity.goods.MainGoodsActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
+import com.goldensky.vip.activity.mine.company.AssignedAccountActivity;
 import com.goldensky.vip.activity.mine.company.CompanyManageActivity;
 import com.goldensky.vip.activity.mine.company.MarketActivity;
 import com.goldensky.vip.activity.mine.company.PerformanceActivity;
@@ -27,6 +28,7 @@ import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
 import com.goldensky.vip.activity.mine.mall.MallManageActivity;
+import com.goldensky.vip.activity.mine.mall.MallManageTestActivity;
 import com.goldensky.vip.activity.mine.mall.MyLiveActivity;
 import com.goldensky.vip.activity.mine.mall.PromoteActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
@@ -344,6 +346,16 @@ public class Starter {
         context.startActivity(intent);
     }
     /**
+     * 商城管理
+     */
+    public static void startMallManageTestActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, MallManageTestActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
      * VIP管理
      */
     public static void startVipManageActivity(Context context, Bundle bundle) {
@@ -446,6 +458,11 @@ public class Starter {
     //升级合作实体
     public static void startSjstActivity(Context context) {
         Intent intent = new Intent(context, SjczActivity.class);
+        context.startActivity(intent);
+    }
+    //升级合作实体
+    public static void startAssignedAccountActivity(Context context) {
+        Intent intent = new Intent(context, AssignedAccountActivity.class);
         context.startActivity(intent);
     }
 }

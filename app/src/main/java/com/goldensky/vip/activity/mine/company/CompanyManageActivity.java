@@ -43,12 +43,19 @@ public class CompanyManageActivity extends BaseActivity<ActivityCompanyManageBin
                 Starter.startPerformanceActivity(CompanyManageActivity.this);
             }
         });
-        mBinding.btnFour.setOnClickListener(new View.OnClickListener() {
+        mBinding.ivTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Starter.startShenPiActivity(CompanyManageActivity.this);
+                Starter.startAssignedAccountActivity(CompanyManageActivity.this);
             }
         });
+
+//        mBinding.btnFour.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Starter.startShenPiActivity(CompanyManageActivity.this);
+//            }
+//        });
     }
 
     @Override

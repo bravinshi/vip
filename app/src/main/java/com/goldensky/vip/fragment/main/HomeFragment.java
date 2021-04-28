@@ -77,10 +77,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 Starter.startJsAccountActivity(getContext());
                 break;
             case R.id.styq_iv: //VIP管理
+
                 Starter.startVipManageActivity(getContext(),null);
                 break;
             case R.id.scgl_iv: //商城管理
-                Starter.startMallMangeActivity(getContext(),null);
+                if (isTYST) {
+                    Starter.startMallManageTestActivity(getContext(),null);
+                } else {
+                    Starter.startMallMangeActivity(getContext(),null);
+                }
+
                 break;
             case R.id.zysp_iv://主营商品
                 if (isTYST) {
