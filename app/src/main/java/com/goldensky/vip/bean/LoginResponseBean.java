@@ -11,7 +11,7 @@ import java.util.Date;
  * 包名： com.goldensky.together.bean
  * 类说明：
  */
-public class LoginResponseBean {
+public class LoginResponseBean implements Cloneable {
 
     private long expiresIn;
     private String refreshToken;
@@ -87,6 +87,27 @@ public class LoginResponseBean {
         private Double userSurplusIntegral;
         @SerializedName("userregisttime")
         private Date userRegisterTime;
+
+        public VipUser copy() {
+            VipUser vipUser = new VipUser();
+
+            vipUser.setInfoTips(infoTips);
+            vipUser.setUserBan(userBan);
+            vipUser.setUserDel(userDel);
+            vipUser.setUserSuperiorId(userSuperiorId);
+            vipUser.setIsNew(isNew);
+            vipUser.setSuperVipId(superVipId);
+            vipUser.setUserId(userId);
+            vipUser.setUserMobile(userMobile);
+            vipUser.setLimitAccount(limitAccount);
+            vipUser.setPreSettlementAccount(preSettlementAccount);
+            vipUser.setSettlementAccount(settlementAccount);
+            vipUser.setUnlimitedAccount(unlimitedAccount);
+            vipUser.setUserSurplusIntegral(userSurplusIntegral);
+            vipUser.setUserRegisterTime(userRegisterTime);
+
+            return vipUser;
+        }
 
         public Integer getInfoTips() {
             return infoTips;

@@ -16,27 +16,56 @@ public class AccountHelper {
     private AccountHelper() {
     }
 
+    public static LoginResponseBean copy() {
+        LoginResponseBean responseBean = new LoginResponseBean();
+
+        responseBean.setVipUser(loginResponse.getVipUser());
+        responseBean.setTokenHead(new String(loginResponse.getTokenHead()));
+        responseBean.setToken(loginResponse.getToken());
+        responseBean.setRefreshToken(loginResponse.getRefreshToken());
+        responseBean.setExpiresIn(loginResponse.getExpiresIn());
+
+        return responseBean;
+    }
+
     public static AccountHelper getInstance() {
         return instance;
     }
 
     public static void refresh(LoginResponseBean loginResponseBean) {
-//        AccountHelper.loginResponse.copy(loginResponseBean);
+        loginResponse.setExpiresIn(loginResponseBean.getExpiresIn());
+        loginResponse.setRefreshToken(loginResponseBean.getRefreshToken());
+        loginResponse.setToken(loginResponseBean.getToken());
+        loginResponse.setTokenHead(loginResponseBean.getTokenHead());
+        loginResponse.setVipUser(loginResponseBean.getVipUser());
+
         serialization();
     }
 
-    public static void deserialization() {
+    private static void deserialization() {
         String json = SPUtils.getInstance().getString(KEY_LOGIN_RESPONSE, "");
         if (StringUtils.isTrimEmpty(json)) {
             return;
         }
 
         Gson gson = new Gson();
-//        loginResponse.copy(gson.fromJson(json, LoginResponseBean.class));
+        refresh(gson.fromJson(json, LoginResponseBean.class));
     }
 
-    public static void serialization() {
+    private static void serialization() {
         Gson gson = new Gson();
         SPUtils.getInstance().put(KEY_LOGIN_RESPONSE, gson.toJson(loginResponse), true);
+    }
+
+    public static void deserializationAgent() {
+        deserialization();
+    }
+
+    public static void serializationAgent() {
+        serialization();
+    }
+
+    public static void login(LoginResponseBean loginResponseBean) {
+        refresh(loginResponseBean);
     }
 }

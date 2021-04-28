@@ -22,6 +22,7 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.databinding.ActivityLoginBinding;
 import com.goldensky.vip.enumerate.LoginTypeEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.LoginInputModel;
 import com.goldensky.vip.viewmodel.account.LoginViewModel;
 
@@ -74,7 +75,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
      */
     private void loginSuccess(LoginResponseBean loginResponseBean) {
         toast(getString(R.string.hint_login_success));
-//        AccountHelper.login(loginResponseBean);
+        AccountHelper.login(loginResponseBean);
         // 进入主页
 //        Starter.startMainActivity(this, null);
     }

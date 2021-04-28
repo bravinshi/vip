@@ -33,7 +33,7 @@ public class MyApplication extends Application {
         RetrofitAgent.config(apiConfiguration);
 
         Utils.init(this);
-        AccountHelper.deserialization();
+        AccountHelper.deserializationAgent();
     }
 
     /**
@@ -47,6 +47,6 @@ public class MyApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        AccountHelper.serialization();
+        AccountHelper.serializationAgent();
     }
 }
