@@ -33,7 +33,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".activity.mine.tools.adress.NewAddressActivity"></activity>
-        <activity android:name=".activity.customer.CustomerServiceActivity" />
+        <activity android:name=".activity.customer.CustomerServiceActivity"/>
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
         <activity android:name=".activity.mine.tools.adress.MyAddressActivity" />
@@ -46,6 +46,7 @@
         <activity android:name=".activity.mine.settings.ChangePWDActivity" />
         <activity android:name=".activity.mine.settings.PersonalDetailsActivity" />
         <activity android:name=".activity.mine.settings.SettingsActivity" />
+        <activity android:name=".activity.SplashActivity" />
 
         <meta-data
             android:name="design_width_in_dp"
@@ -64,19 +65,19 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".activity.account.LoginActivity" />
-        <activity android:name=".activity.account.ForgetPasswordActivity" />
-        <activity android:name=".activity.goods.PackageCustomizationActivity" />
-        <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.account.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.account.ForgetPasswordActivity" />
+        <activity android:name=".activity.goods.PackageCustomizationActivity" />
+        <activity android:name=".activity.goods.SearchActivity" />
+        <activity android:name=".MainActivity">
+        </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
-        <activity android:name=".activity.goods.GoodsDetail1Activity"></activity>
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />

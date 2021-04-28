@@ -1,8 +1,19 @@
 package com.goldensky.vip.activity.account;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
@@ -11,7 +22,7 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.databinding.ActivityLoginBinding;
 import com.goldensky.vip.enumerate.LoginTypeEnum;
-import com.goldensky.vip.enumerate.VerificationCodePurposeEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.LoginInputModel;
 import com.goldensky.vip.viewmodel.account.LoginViewModel;
 
@@ -41,10 +52,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         });
         // 忘记密码监听
         mBinding.tvUnableLogin.setOnClickListener(v -> forgetPassword());
-        // 注册监听
-        mBinding.tvRegeist.setOnClickListener(v -> register());
         // 绑定数据
         mBinding.setLoginInfo(loginInputModel);
+
+        initContentText();
     }
 
     @Override
@@ -64,7 +75,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
      */
     private void loginSuccess(LoginResponseBean loginResponseBean) {
         toast(getString(R.string.hint_login_success));
-//        AccountHelper.login(loginResponseBean);
+        AccountHelper.login(loginResponseBean);
+
+        System.out.println(AccountHelper.getUserId());
         // 进入主页
 //        Starter.startMainActivity(this, null);
     }
@@ -79,8 +92,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             return;
         }
         // 获取验证码
-        mViewModel.getVerificationCode(VerificationCodePurposeEnum.LOGIN.value,
-                loginInputModel.getPhoneOrLicense().trim());
+        mViewModel.getVerificationCode(loginInputModel.getPhoneOrLicense().trim());
     }
 
     /**
@@ -95,6 +107,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         // 检查是否有密码
         if (StringUtils.isTrimEmpty(loginInputModel.getPasswordOrVerificationCode())) {
             toast(R.string.hint_input_password);
+            return;
         }
 
         // 登录
@@ -137,13 +150,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     /**
-     * 注册
-     */
-    private void register() {
-//        Starter.startRegisterActivity(this, null);
-    }
-
-    /**
      * 更改登录类型并重新渲染界面
      *
      * @param type 登录类型
@@ -154,35 +160,85 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         switch (type) {
             case LOGIN_TYPE_PASSWORD:
                 // text
-                mBinding.tvLoginType.setText(R.string.login_type_hint_company);
                 mBinding.tvChangeLoginType.setText(R.string.text_login_type_verification_code);
+                mBinding.tvLogin.setText(R.string.text_login);
                 //hint
-                mBinding.etPhoneOrLicense.setHint(R.string.hint_input_phone_license);
                 mBinding.etPasswordOrVerificationCode.setHint(R.string.hint_input_password);
                 // Visibility
                 mBinding.btnGetVerificationCode.setVisibility(View.INVISIBLE);
                 mBinding.tvUnableLogin.setVisibility(View.VISIBLE);
-                mBinding.tvRegeist.setVisibility(View.VISIBLE);
                 // inputType
                 mBinding.etPasswordOrVerificationCode.setInputType(InputType
                         .TYPE_NUMBER_VARIATION_PASSWORD | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case LOGIN_TYPE_VERIFICATION_CODE:
                 // text
-                mBinding.tvLoginType.setText(R.string.text_login_type_verification_code);
                 mBinding.tvChangeLoginType.setText(R.string.text_login_type_password);
+                mBinding.tvLogin.setText(R.string.text_login_or_register);
                 //hint
-                mBinding.etPhoneOrLicense.setHint(R.string.hint_input_phone);
                 mBinding.etPasswordOrVerificationCode.setHint(R.string.hint_input_verification_code);
                 // Visibility
                 mBinding.btnGetVerificationCode.setVisibility(View.VISIBLE);
                 mBinding.tvUnableLogin.setVisibility(View.GONE);
-                mBinding.tvRegeist.setVisibility(View.INVISIBLE);
                 // inputType
                 mBinding.etPasswordOrVerificationCode.setInputType(InputType
                         .TYPE_CLASS_NUMBER);
                 break;
         }
+    }
+
+    private void initContentText() {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        String content = getResources().getString(R.string
+                .text_hint_protocol_policy);
+        int indexPolicy = content.indexOf("隐私政策");
+        int indexProtocol = content.indexOf("用户协议");
+        SpannableString spannableString = new SpannableString(content);
+
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(WebViewActivity.CENTER_TEXT, "隐私政策");
+//                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/privacy.htm");
+//                Starter.startWebViewActivity(widget.getContext(), bundle);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setUnderlineText(false);
+            }
+        }, indexPolicy, indexPolicy + 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color
+                .color_6)), indexPolicy, indexPolicy + 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);// 设置颜色
+        spannableString.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), indexPolicy, indexPolicy + 4, Spanned
+                .SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(WebViewActivity.CENTER_TEXT, "用户协议");
+//                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/register.htm");
+//                Starter.startWebViewActivity(widget.getContext(), bundle);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setUnderlineText(false);
+            }
+
+        }, indexProtocol, indexProtocol + 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color
+                .color_6)), indexProtocol, indexProtocol + 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);// 设置颜色
+        spannableString.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), indexProtocol, indexProtocol + 4, Spanned
+                .SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableStringBuilder.append(spannableString);
+
+        mBinding.tvProtocolPolicy.setText(spannableStringBuilder);
+        mBinding.tvProtocolPolicy.setMovementMethod(LinkMovementMethod.getInstance());
+        mBinding.tvProtocolPolicy.setHighlightColor(getResources().getColor(R.color.colorTransparent));// 设置点击时无颜色
     }
 
     @Override

@@ -2,11 +2,26 @@ package com.goldensky.vip;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
+
 import com.goldensky.framework.net.ApiConfiguration;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.framework.util.Utils;
 import com.goldensky.vip.helper.AccountHelper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @author bravin
@@ -21,30 +36,58 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new ProcessLifecycleObserver());
+
         ApiConfiguration apiConfiguration = new ApiConfiguration();
         // 财哥
-        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
-        // 涛哥
-//        apiConfiguration.setBaseUrl("http://25155vf240.qicp.vip:14022/");
-        Gson gson = new Gson();
-        apiConfiguration.setGson(gson);
+//        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
+        // 王涛
+//        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
+        // 马晓伟
+        apiConfiguration.setBaseUrl("http://172.25.0.159:9999/");
+        // 设置gson
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
+        apiConfiguration.setGson(gsonBuilder.create());
+        // 设置拦截器
+        apiConfiguration.setInterceptors(new ArrayList<Interceptor>(){{
+            add(createHeaderInterceptor());
+        }});
         RetrofitAgent.config(apiConfiguration);
 
         Utils.init(this);
-        AccountHelper.deserialization();
+        AccountHelper.deserializationAgent();
     }
 
     /**
-     * 方法不可靠
-     *
-     * This method is for use in emulated process environments.  It will
-     * never be called on a production Android device, where processes are
-     * removed by simply killing them; no user code (including this callback)
-     * is executed when doing so.
+     * 请求头拦截器
      */
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        AccountHelper.serialization();
+    private static Interceptor createHeaderInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(@NonNull Chain chain) throws IOException {
+                Request request = chain.request();
+                Request.Builder builder = request.newBuilder();
+                // TODO
+//                builder.addHeader("auth_uid", AccountHelper.getUserId());
+//                builder.addHeader("Authorization", AccountHelper.getToken());
+                try {
+                    Response mResponse = chain.proceed(builder.build());
+                    return mResponse;
+                } catch (SocketTimeoutException exception) {
+                    throw new SocketTimeoutException("网络超时");
+                }
+            }
+        };
+    }
+
+    public static class ProcessLifecycleObserver implements LifecycleObserver {
+        /**
+         * 当app变成后台进程或者退出调用
+         * 此方法一次app进入退出只会调用一次
+         */
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void exitAppListener(){
+            AccountHelper.serializationAgent();
+        }
     }
 }

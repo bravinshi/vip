@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="app_name">vip</string>
-    <string name="login_type_hint_company">企业登录</string>
+    <string name="login_type_hint_vip">vip登录</string>
     <string name="get_code">获取验证码</string>
     <string name="hint_input_phone_license">请输入手机号/营业执照编号</string>
     <string name="hint_input_phone">请输入手机号</string>
@@ -13,6 +13,7 @@
     <string name="hint_get_verification_code">获取验证码</string>
     <string name="hint_get_verification_code_count_hint">后重新获取</string>
     <string name="text_login">登录</string>
+    <string name="text_login_or_register">登录/注册</string>
     <string name="text_forget_password">忘记密码</string>
     <string name="text_register">注册</string>
     <string name="text_other_login_type">其他登录方式</string>
@@ -45,4 +46,5 @@
     <string name="text_wait_for_receiving">待收货</string>
     <string name="text_finished">已完成</string>
     <string name="text_wait_for_evaluated">待评价</string>
+    <string name="text_hint_protocol_policy">登录即同意并接受用户协议和隐私政策</string>
 </resources>

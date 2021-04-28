@@ -29,12 +29,10 @@ public interface PublicService {
      * 获取验证码
      *
      * @param mobile  手机号码
-     * @param forWhat 验证码用途。1登录,2注册, 3:修改密码 4更换手机原手机  5更换手机新手机
      * @return
      */
-    @GET("/goldendays-user/mbUserPer/getCode")
-    Observable<NetResponse<Boolean>> getVerifyCode(@Query("userMobile") String mobile,
-                                                   @Query("forwhat") String forWhat);
+    @GET("/goldendays-user/applet/user/getVipCode")
+    Observable<NetResponse<Boolean>> getVerifyCode(@Query("userMobile") String mobile);
 
     /**
      * 设置新密码/找回密码

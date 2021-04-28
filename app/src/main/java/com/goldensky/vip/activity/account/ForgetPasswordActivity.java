@@ -108,8 +108,8 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         // 获取验证码
-        mViewModel.getVerificationCode(VerificationCodePurposeEnum.CHANGE_PASSWORD.value,
-                inputModel.getPhone().trim());
+//        mViewModel.getVerificationCode(VerificationCodePurposeEnum.CHANGE_PASSWORD.value,
+//                inputModel.getPhone().trim());
     }
 
     private boolean notPhoneNumber(String paddingTestText) {

@@ -1,25 +1,19 @@
 package com.goldensky.vip.activity.goods;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldensky.vip.R;
-import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
-import com.goldensky.vip.databinding.ActivityGoodsDetail1Binding;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
