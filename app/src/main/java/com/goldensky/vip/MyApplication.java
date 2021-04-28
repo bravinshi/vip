@@ -10,6 +10,8 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.goldensky.framework.net.ApiConfiguration;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.framework.util.AppUtils;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.Utils;
 import com.goldensky.vip.helper.AccountHelper;
 import com.google.gson.Gson;
@@ -67,9 +69,16 @@ public class MyApplication extends Application {
             public Response intercept(@NonNull Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder builder = request.newBuilder();
-                // TODO
-//                builder.addHeader("auth_uid", AccountHelper.getUserId());
-//                builder.addHeader("Authorization", AccountHelper.getToken());
+
+                String userId = AccountHelper.getUserId();
+                if (StringUtils.isTrimEmpty(userId)) {
+                    userId = "";
+                }
+                builder.addHeader("vip_user_id", userId);
+                builder.addHeader("Authorization", AccountHelper.getToken());
+                builder.addHeader("app_version_code", AppUtils.getAppVersionCode() + "");// 101
+                builder.addHeader("app_version", AppUtils.getAppVersionName());// 1.0.1
+                builder.addHeader("app_client", "vip");
                 try {
                     Response mResponse = chain.proceed(builder.build());
                     return mResponse;

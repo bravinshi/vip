@@ -32,7 +32,16 @@ public class AccountHelper {
     public static String getUserId() {
         if (loginResponse.getVipUser() != null)
             return loginResponse.getVipUser().getUserId();
-        return null;
+        return "";
+    }
+
+    public static String getToken() {
+        if (StringUtils.isTrimEmpty(loginResponse.getTokenHead())
+        || StringUtils.isTrimEmpty(loginResponse.getToken())) {
+            return "";
+        }
+
+        return loginResponse.getTokenHead() + loginResponse.getToken();
     }
 
     public static void refresh(LoginResponseBean loginResponseBean) {
