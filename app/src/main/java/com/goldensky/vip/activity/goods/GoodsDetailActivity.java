@@ -2,11 +2,20 @@ package com.goldensky.vip.activity.goods;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
@@ -280,7 +289,43 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         List<Integer> detailData = new ArrayList<Integer>(){{
             addAll(data.detailIds);
         }};
-
+        mBinding.tvJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("加入购物车成功");
+            }
+        });
+        mBinding.ivShareGoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View inflate = LayoutInflater.from(GoodsDetailActivity.this).inflate(R.layout.pop_share,null);
+                ImageView ivShare = inflate.findViewById(R.id.iv_share);
+                Glide.with(GoodsDetailActivity.this).load(R.mipmap.my_pic_fenxiang).into(ivShare);
+                PopupWindow popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+                ivShare.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                Window window = getWindow();
+                WindowManager.LayoutParams attributes = window.getAttributes();
+                attributes.alpha=0.1f;
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                window.setAttributes(attributes);
+                window.setBackgroundDrawable(new BitmapDrawable());
+                popupWindow.setTouchable(true);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        attributes.alpha=1.0f;
+                        window.setAttributes(attributes);
+                    }
+                });
+                popupWindow.showAtLocation(mBinding.bottomView, Gravity.TOP, 0,0);
+            }
+        });
         goodsDetailAdapter.setPics(detailData);
     }
 

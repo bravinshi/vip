@@ -33,13 +33,29 @@ public class CircleFragment extends LazyLoadFragment<FragmentCircleBinding, Publ
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         mBinding.xjIv.setOnClickListener(this);
+        mBinding.fnIv.setOnClickListener(this);
+        mBinding.bgIv.setOnClickListener(this);
+        mBinding.talkIv.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        Bundle bundle = new Bundle();
         switch (view.getId()) {
+            case R.id.talk_iv:
+                Starter.startVIPTalkActivity(getContext(), null);
+                break;
             case R.id.xj_iv:
-                Starter.startArticleDetailActivity(getContext(), null);
+                bundle.putInt("goods",1);
+                Starter.startArticleDetailActivity(getContext(), bundle);
+                break;
+            case R.id.fn_iv:
+                bundle.putInt("goods",2);
+                Starter.startArticleDetailActivity(getContext(), bundle);
+                break;
+            case R.id.bg_iv:
+                bundle.putInt("goods",3);
+                Starter.startArticleDetailActivity(getContext(), bundle);
                 break;
         }
     }

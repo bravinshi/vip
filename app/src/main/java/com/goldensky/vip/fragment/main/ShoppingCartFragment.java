@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBinding, PublicViewModel> {
     private boolean isEdit=false;
-    private GoodsFocusAdapter adapter;
+    private CircleFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
     @Override
     protected int getLayoutRes() {
@@ -41,32 +41,12 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
 
             }
         });
-//        mBinding.tvEditFinish.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(isEdit){
-//                    mBinding.tvSum.setVisibility(View.VISIBLE);
-//                    mBinding.tvCloseAccount.setText("去结算");
-//                    mBinding.tvEditFinish.setText("编辑");
-//                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#333333"));
-//                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#ffffff"));
-//                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_red);
-//                }else {
-//                    mBinding.tvSum.setVisibility(View.GONE);
-//                    mBinding.tvCloseAccount.setText("删除");
-//                    mBinding.tvEditFinish.setText("完成");
-//                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#E65858"));
-//                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#888888"));
-//                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_gray);
-//                }
-//                isEdit=!isEdit;
-//            }
-//        });
-        list.add(R.mipmap.gwuc_img_cha);
-        list.add(R.mipmap.gwc_img_mangguo);
-        list.add(R.mipmap.gwc_img_chengzi);
-        list.add(R.mipmap.gwc_img_hongchang);
-        adapter=new GoodsFocusAdapter(list);
+
+        list.add(R.mipmap.gwc1);
+        list.add(R.mipmap.gwc2);
+        list.add(R.mipmap.gwc3);
+        list.add(R.mipmap.gwc4);
+        adapter=new CircleFocusAdapter(list);
         mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()){
             @Override
             public boolean canScrollVertically() {

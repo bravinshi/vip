@@ -8,6 +8,7 @@ import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.customer.VIPTalkActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
@@ -279,6 +280,16 @@ public class Starter {
      */
     public static void startArticleDetailActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * vip交流群
+     */
+    public static void startVIPTalkActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, VIPTalkActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
