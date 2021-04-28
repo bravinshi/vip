@@ -2,6 +2,12 @@ package com.goldensky.vip;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
+
 import com.goldensky.framework.net.ApiConfiguration;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.framework.util.Utils;
@@ -21,6 +27,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new ProcessLifecycleObserver());
+
         ApiConfiguration apiConfiguration = new ApiConfiguration();
         // 财哥
 //        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
@@ -36,17 +44,14 @@ public class MyApplication extends Application {
         AccountHelper.deserializationAgent();
     }
 
-    /**
-     * 方法不可靠
-     *
-     * This method is for use in emulated process environments.  It will
-     * never be called on a production Android device, where processes are
-     * removed by simply killing them; no user code (including this callback)
-     * is executed when doing so.
-     */
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        AccountHelper.serializationAgent();
+    public static class ProcessLifecycleObserver implements LifecycleObserver {
+        /**
+         * 当app变成后台进程或者退出调用
+         * 此方法一次app进入退出只会调用一次
+         */
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void exitAppListener(){
+            AccountHelper.serializationAgent();
+        }
     }
 }

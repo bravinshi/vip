@@ -2,6 +2,7 @@ package com.goldensky.vip.helper;
 
 import com.goldensky.framework.util.SPUtils;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.google.gson.Gson;
 
@@ -28,8 +29,10 @@ public class AccountHelper {
         return responseBean;
     }
 
-    public static AccountHelper getInstance() {
-        return instance;
+    public static String getUserId() {
+        if (loginResponse.getVipUser() != null)
+            return loginResponse.getVipUser().getUserId();
+        return null;
     }
 
     public static void refresh(LoginResponseBean loginResponseBean) {
