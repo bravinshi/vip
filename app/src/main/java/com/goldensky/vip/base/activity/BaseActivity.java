@@ -43,6 +43,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         initViewModel();
+        initListener();
         observe();
         onFinishInit(savedInstanceState);
     }
@@ -52,6 +53,9 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
     public abstract void observe();
 
     public void beforeSetContentView() {
+    }
+
+    public void initListener() {
     }
 
     public void toast(String message) {

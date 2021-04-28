@@ -23,7 +23,7 @@
             android:layout_marginTop="93dp"
             android:layout_marginBottom="14dp"
             android:gravity="center"
-            android:text="@string/login_type_hint_company"
+            android:text="@string/login_type_hint_vip"
             android:textColor="@color/color_333333"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -39,7 +39,7 @@
             android:layout_marginTop="34dp"
             android:layout_marginEnd="20dp"
             android:background="@color/white"
-            android:hint="@string/hint_input_phone_license"
+            android:hint="@string/hint_input_phone"
             android:imeOptions="actionNext"
             android:inputType="phone"
             android:maxLength="11"
@@ -83,7 +83,7 @@
             android:gravity="center"
             android:padding="3dp"
             android:text="@string/hint_get_verification_code"
-            android:textColor="@color/color_023894"
+            android:textColor="@color/color_EA483F"
             app:countHint="@string/hint_get_verification_code_count_hint"
             app:layout_constraintBaseline_toBaselineOf="@+id/et_password_or_verification_code"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,38 +116,39 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/shape_blue_gradient"
+            android:background="@drawable/shape_red_gradient"
             android:gravity="center"
-            android:text="@string/text_login"
+            android:text="@string/text_login_or_register"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_unable_login" />
 
-        <TextView
-            android:id="@+id/tv_regeist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingTop="16dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp"
-            android:text="@string/text_register"
-            android:textColor="@color/color_666666"
-            android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_regeist"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingLeft="20dp"-->
+<!--            android:paddingTop="16dp"-->
+<!--            android:paddingRight="20dp"-->
+<!--            android:paddingBottom="20dp"-->
+<!--            android:text="@string/text_register"-->
+<!--            android:textColor="@color/color_666666"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_login" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_login_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_protocol_policy"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
@@ -186,6 +187,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_change_password" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_marginBottom="30dp"
+            android:id="@+id/tv_protocol_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/text_hint_protocol_policy"
+            android:textColor="@color/color_CCCCCC"
+            android:textSize="12sp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

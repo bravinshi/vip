@@ -244,18 +244,20 @@ public final class ToastUtils {
             @Override
             public void run() {
                 cancel();
+//                View view = LayoutInflater.from(Utils.getApp()).inflate(android.R.layout.transient_notification, null);
                 sToast = Toast.makeText(Utils.getApp(), text, duration);
-                final TextView tvMessage = sToast.getView().findViewById(android.R.id.message);
-                if (sMsgColor != COLOR_DEFAULT) {
-                    tvMessage.setTextColor(sMsgColor);
-                }
-                if (sMsgTextSize != -1) {
-                    tvMessage.setTextSize(sMsgTextSize);
-                }
-                if (sGravity != -1 || sXOffset != -1 || sYOffset != -1) {
-                    sToast.setGravity(sGravity, sXOffset, sYOffset);
-                }
-                setBg(tvMessage);
+//                sToast.setView(view);
+//                final TextView tvMessage = sToast.getView().findViewById(android.R.id.message);
+//                if (sMsgColor != COLOR_DEFAULT) {
+//                    tvMessage.setTextColor(sMsgColor);
+//                }
+//                if (sMsgTextSize != -1) {
+//                    tvMessage.setTextSize(sMsgTextSize);
+//                }
+//                if (sGravity != -1 || sXOffset != -1 || sYOffset != -1) {
+//                    sToast.setGravity(sGravity, sXOffset, sYOffset);
+//                }
+//                setBg(tvMessage);
                 showToast();
             }
         });

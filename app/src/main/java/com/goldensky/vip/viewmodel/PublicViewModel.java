@@ -55,12 +55,11 @@ public class PublicViewModel extends NetWorkViewModel {
     /**
      * 获取验证码
      *
-     * @param forWhat 用途
      * @param mobile  手机号
      */
-    public void getVerificationCode(String forWhat, String mobile) {
+    public void getVerificationCode(String mobile) {
         RetrofitAgent.create(PublicService.class)
-                .getVerifyCode(mobile, forWhat)
+                .getVerifyCode(mobile)
                 .subscribe(new ToastNetObserver<Boolean>() {
                     @Override
                     public void onSuccess(Boolean data) {

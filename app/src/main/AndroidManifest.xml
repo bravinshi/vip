@@ -32,7 +32,7 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.customer.CustomerServiceActivity"></activity>
+        <activity android:name=".activity.customer.CustomerServiceActivity"/>
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
         <activity android:name=".activity.mine.tools.MyAddressActivity" />
@@ -63,16 +63,17 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".activity.account.LoginActivity" />
-        <activity android:name=".activity.account.ForgetPasswordActivity" />
-        <activity android:name=".activity.goods.PackageCustomizationActivity" />
-        <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.account.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.account.ForgetPasswordActivity" />
+        <activity android:name=".activity.goods.PackageCustomizationActivity" />
+        <activity android:name=".activity.goods.SearchActivity" />
+        <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />

@@ -31,7 +31,7 @@ public class LoginViewModel extends PublicViewModel {
         NetParams netParams = NetParams.create().add("username", mobile)
                 .add("password", passwordOrVerificationCode)
                 .add("appType", loginType)
-                .add("accounttype", "2")
+                .add("accounttype", "4")
                 .add("client_id", "admin-app")
                 .add("client_secret", "123456")
                 .add("grant_type", "password");

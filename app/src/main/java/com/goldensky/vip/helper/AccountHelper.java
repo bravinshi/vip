@@ -21,7 +21,7 @@ public class AccountHelper {
     }
 
     public static void refresh(LoginResponseBean loginResponseBean) {
-        AccountHelper.loginResponse.copy(loginResponseBean);
+//        AccountHelper.loginResponse.copy(loginResponseBean);
         serialization();
     }
 
@@ -32,7 +32,7 @@ public class AccountHelper {
         }
 
         Gson gson = new Gson();
-        loginResponse.copy(gson.fromJson(json, LoginResponseBean.class));
+//        loginResponse.copy(gson.fromJson(json, LoginResponseBean.class));
     }
 
     public static void serialization() {

@@ -23,9 +23,11 @@ public class MyApplication extends Application {
 
         ApiConfiguration apiConfiguration = new ApiConfiguration();
         // 财哥
-        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
-        // 涛哥
-//        apiConfiguration.setBaseUrl("http://25155vf240.qicp.vip:14022/");
+//        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
+        // 王涛
+//        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
+        // 马晓伟
+        apiConfiguration.setBaseUrl("http://172.25.0.159:9999/");
         Gson gson = new Gson();
         apiConfiguration.setGson(gson);
         RetrofitAgent.config(apiConfiguration);
