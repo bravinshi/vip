@@ -24,9 +24,9 @@ import com.goldensky.vip.databinding.ActivityLoginBinding;
 import com.goldensky.vip.enumerate.LoginTypeEnum;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.LoginInputModel;
-import com.goldensky.vip.viewmodel.account.LoginViewModel;
+import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
-public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountViewModel> {
 
     private static final int LOGIN_TYPE_PASSWORD = 1;// 登录类型 密码
     private static final int LOGIN_TYPE_VERIFICATION_CODE = 2;// 登录类型 验证码
@@ -77,9 +77,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         toast(getString(R.string.hint_login_success));
         AccountHelper.login(loginResponseBean);
 
-        System.out.println(AccountHelper.getUserId());
-        // 进入主页
-//        Starter.startMainActivity(this, null);
+        if (loginResponseBean.getVipUser().isNewUser()) {
+            // 进入设置密码页
+            Starter.startSetPasswordActivity(this, null);
+        } else {
+            Starter.startMainActivity(this, null);
+        }
     }
 
     /**

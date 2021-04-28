@@ -6,6 +6,7 @@ import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 
@@ -16,9 +17,10 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
  * 包名： com.goldensky.together.viewmodel
  * 类说明：
  */
-public class LoginViewModel extends PublicViewModel {
+public class AccountViewModel extends PublicViewModel {
 
     public MutableLiveData<LoginResponseBean> loginResponseLive = new MutableLiveData<>();
+    public MutableLiveData<Integer> userLive = new MutableLiveData<>();
 
     /**
      * 登录
@@ -46,4 +48,14 @@ public class LoginViewModel extends PublicViewModel {
     }
 
 
+    public void updateVipUser(UpdateVipUserReqBean reqBean) {
+        RetrofitAgent.create(AccountService.class)
+                .updateVipUser(reqBean)
+                .subscribe(new ToastNetObserver<Object>(){
+                    @Override
+                    public void onSuccess(Object data) {
+                        userLive.postValue(1);
+                    }
+                });
+    }
 }

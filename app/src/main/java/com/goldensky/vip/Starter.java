@@ -6,10 +6,13 @@ import android.os.Bundle;
 
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
+import com.goldensky.vip.activity.account.SetPasswordActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
+import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
 import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
@@ -24,8 +27,6 @@ import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
 import com.goldensky.vip.activity.mine.tools.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
-import com.goldensky.vip.activity.goods.RecommendActivity;
-import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 
 
 /**
@@ -285,4 +286,11 @@ public class Starter {
         context.startActivity(intent);
     }
 
+    public static void startSetPasswordActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SetPasswordActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
 }

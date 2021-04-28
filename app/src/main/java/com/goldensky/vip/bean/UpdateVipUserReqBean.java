@@ -7,48 +7,20 @@ import java.util.Date;
 /**
  * @author bravin
  * @version 1.0
- * 创建日期：2021/3/11 9:28
- * 包名： com.goldensky.together.bean
+ * 创建日期：2021/4/28 17:30
+ * 包名： com.goldensky.vip.bean
  * 类说明：
  */
-public class LoginResponseBean implements Cloneable {
-
-    private long expiresIn;
-    private String refreshToken;
-    private String token;
-    private String tokenHead;
+public class UpdateVipUserReqBean {
+    private String userId;
     private VipUser vipUser;
 
-    public long getExpiresIn() {
-        return expiresIn;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setExpiresIn(long expiresIn) {
-        this.expiresIn = expiresIn;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getTokenHead() {
-        return tokenHead;
-    }
-
-    public void setTokenHead(String tokenHead) {
-        this.tokenHead = tokenHead;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public VipUser getVipUser() {
@@ -87,31 +59,8 @@ public class LoginResponseBean implements Cloneable {
         private Double userSurplusIntegral;
         @SerializedName("userregisttime")
         private Date userRegisterTime;
-
-        public VipUser copy() {
-            VipUser vipUser = new VipUser();
-
-            vipUser.setInfoTips(infoTips);
-            vipUser.setUserBan(userBan);
-            vipUser.setUserDel(userDel);
-            vipUser.setUserSuperiorId(userSuperiorId);
-            vipUser.setIsNew(isNew);
-            vipUser.setSuperVipId(superVipId);
-            vipUser.setUserId(userId);
-            vipUser.setUserMobile(userMobile);
-            vipUser.setLimitAccount(limitAccount);
-            vipUser.setPreSettlementAccount(preSettlementAccount);
-            vipUser.setSettlementAccount(settlementAccount);
-            vipUser.setUnlimitedAccount(unlimitedAccount);
-            vipUser.setUserSurplusIntegral(userSurplusIntegral);
-            vipUser.setUserRegisterTime(userRegisterTime);
-
-            return vipUser;
-        }
-
-        public Boolean isNewUser() {
-            return "0".equals(isNew);
-        }
+        @SerializedName("userpassword")
+        private String userPassword;
 
         public Integer getInfoTips() {
             return infoTips;
@@ -224,6 +173,13 @@ public class LoginResponseBean implements Cloneable {
         public void setUserRegisterTime(Date userRegisterTime) {
             this.userRegisterTime = userRegisterTime;
         }
-    }
 
+        public String getUserPassword() {
+            return userPassword;
+        }
+
+        public void setUserPassword(String userPassword) {
+            this.userPassword = userPassword;
+        }
+    }
 }

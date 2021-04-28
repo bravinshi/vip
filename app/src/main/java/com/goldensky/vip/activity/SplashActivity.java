@@ -64,13 +64,13 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
      * 检查登录状态
      */
     private void checkLoginState() {
-        if (StringUtils.isTrimEmpty(AccountHelper.getToken())) {
-            // 没有登录信息 跳转到登录界面
-            Starter.startLoginActivity(SplashActivity.this, null);
-        } else {
-            Starter.startMainActivity(SplashActivity.this, null);
-        }
-
+//        if (StringUtils.isTrimEmpty(AccountHelper.getToken())) {
+//            // 没有登录信息 跳转到登录界面
+//            Starter.startLoginActivity(SplashActivity.this, null);
+//        } else {
+//            Starter.startMainActivity(SplashActivity.this, null);
+//        }
+        Starter.startLoginActivity(SplashActivity.this, null);
         finish();
     }
 
