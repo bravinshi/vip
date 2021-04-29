@@ -27,7 +27,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/home_tiyan_top"/>
+                    android:src="@mipmap/home_tiyan_top"
+                    android:layout_marginTop="20dp"/>
 
                 <View
                     android:id="@+id/order_layout"
