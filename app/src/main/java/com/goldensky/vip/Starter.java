@@ -482,6 +482,7 @@ public class Starter {
         if (bundle != null) {
             intent.putExtras(bundle);
         }
+        context.startActivity(intent);
     }
 
     //升级合作实体
