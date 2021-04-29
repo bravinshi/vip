@@ -30,7 +30,7 @@ public class OrderListActivity extends BaseActivity<ActivityOrderListBinding, Pu
         mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_all)));
         mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_obligation)));
         mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_wait_for_receiving)));
-        mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_finished)));
+//        mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_finished)));
         mBinding.tabOrderList.addTab(mBinding.tabOrderList.newTab().setText(getString(R.string.text_wait_for_evaluated)));
         int type = getIntent().getIntExtra("orderType", 0);
 
