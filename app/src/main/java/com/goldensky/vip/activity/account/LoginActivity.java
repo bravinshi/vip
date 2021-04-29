@@ -26,6 +26,10 @@ import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.LoginInputModel;
 import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountViewModel> {
 
     private static final int LOGIN_TYPE_PASSWORD = 1;// 登录类型 密码
@@ -35,6 +39,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        // 绑定数据
+        mBinding.setLoginInfo(loginInputModel);
+
+        initContentText();
+    }
+
+    @Override
+    public void initListener() {
         // 切换登录方式监听
         mBinding.clLoginType.setOnClickListener(v -> changeLoginType(CURRENT_LOGIN_TYPE
                 == LOGIN_TYPE_PASSWORD ? LOGIN_TYPE_VERIFICATION_CODE : LOGIN_TYPE_PASSWORD));
@@ -52,10 +64,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         });
         // 忘记密码监听
         mBinding.tvUnableLogin.setOnClickListener(v -> forgetPassword());
-        // 绑定数据
-        mBinding.setLoginInfo(loginInputModel);
-
-        initContentText();
     }
 
     @Override
@@ -115,7 +123,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
 
         // 登录
         mViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
-                loginInputModel.getPasswordOrVerificationCode(), LoginTypeEnum.PASSWORD.value);
+                loginInputModel.getPasswordOrVerificationCode(), LoginTypeEnum.PASSWORD.value, mBinding.tvLogin);
     }
 
     /**
@@ -136,7 +144,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         // 登录
         mViewModel.login(loginInputModel.getPhoneOrLicense().trim(),
                 loginInputModel.getPasswordOrVerificationCode(),
-                LoginTypeEnum.VERIFICATION_CODE.value);
+                LoginTypeEnum.VERIFICATION_CODE.value, mBinding.tvLogin);
     }
 
     private boolean notPhoneNumber(String paddingTestText) {

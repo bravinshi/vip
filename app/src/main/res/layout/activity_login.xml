@@ -125,23 +125,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_unable_login" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_regeist"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingLeft="20dp"-->
-<!--            android:paddingTop="16dp"-->
-<!--            android:paddingRight="20dp"-->
-<!--            android:paddingBottom="20dp"-->
-<!--            android:text="@string/text_register"-->
-<!--            android:textColor="@color/color_666666"-->
-<!--            android:textSize="16sp"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_login" />-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_login_type"
             android:layout_width="wrap_content"

@@ -1,5 +1,8 @@
 package com.goldensky.vip.viewmodel.account;
 
+import android.view.View;
+
+import androidx.annotation.MainThread;
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.vip.api.account.AccountService;
@@ -8,6 +11,9 @@ import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 /**
@@ -29,7 +35,7 @@ public class AccountViewModel extends PublicViewModel {
      * @param passwordOrVerificationCode 密码或者验证码
      * @param loginType                  登录方式
      */
-    public void login(String mobile, String passwordOrVerificationCode, String loginType) {
+    public void login(String mobile, String passwordOrVerificationCode, String loginType, View view) {
         NetParams netParams = NetParams.create().add("username", mobile)
                 .add("password", passwordOrVerificationCode)
                 .add("appType", loginType)
@@ -44,7 +50,7 @@ public class AccountViewModel extends PublicViewModel {
                     public void onSuccess(LoginResponseBean data) {
                         loginResponseLive.postValue(data);
                     }
-                });
+                }.watchView(view));
     }
 
 

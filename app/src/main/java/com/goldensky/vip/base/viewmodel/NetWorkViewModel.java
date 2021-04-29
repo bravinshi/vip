@@ -1,5 +1,7 @@
 package com.goldensky.vip.base.viewmodel;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 
 import com.goldensky.vip.BuildConfig;
@@ -14,9 +16,11 @@ import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.MalformedJsonException;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.time.temporal.WeekFields;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -33,9 +37,22 @@ public class NetWorkViewModel extends BaseViewModel {
 
     public abstract class BaseNetObserver<T> implements Observer<NetResponse<T>> {
 
+        private WeakReference<View> viewWeakReference = new WeakReference<>(null);
+
+        public BaseNetObserver<T> watchView(View view) {
+            if (view != null) {
+                viewWeakReference = new WeakReference<>(view);
+            }
+            return this;
+        }
+
         @Override
         public void onSubscribe(@NonNull Disposable d) {
             compositeDisposable.add(d);
+            View temp = viewWeakReference.get();
+            if (temp != null) {
+                temp.setClickable(false);
+            }
         }
 
         @Override
@@ -48,10 +65,20 @@ public class NetWorkViewModel extends BaseViewModel {
                     onFail(tNetResponse);
                 }
             }
+
+            View temp = viewWeakReference.get();
+            if (temp != null) {
+                temp.setClickable(true);
+            }
         }
 
         @Override
         public void onError(@NonNull Throwable e) {
+            View temp = viewWeakReference.get();
+            if (temp != null) {
+                temp.setClickable(true);
+            }
+
             if (BuildConfig.DEBUG) {
                 e.printStackTrace();
             }

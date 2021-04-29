@@ -21,6 +21,7 @@ import com.goldensky.vip.viewmodel.account.AccountViewModel;
  */
 public class SetPasswordActivity extends BaseActivity<ActivitySetPasswordBinding, AccountViewModel> {
     private final SetPasswordInputModel model = new SetPasswordInputModel();
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         mBinding.setModel(model);

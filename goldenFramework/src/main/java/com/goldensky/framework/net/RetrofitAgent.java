@@ -77,7 +77,8 @@ public class RetrofitAgent {
         retrofit = new Retrofit.Builder()
                 .baseUrl(apiConfiguration.getBaseUrl())
                 .addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory
+                .addCallAdapterFactory(MainThreadObservableCallAdapterFactory
                         .createWithScheduler(Schedulers.from(EXECUTOR)))
                 .client(httpClient)
                 .build();
