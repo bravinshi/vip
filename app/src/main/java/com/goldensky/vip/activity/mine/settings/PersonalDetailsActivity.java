@@ -14,12 +14,6 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, PublicViewModel> implements View.OnClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_details);
-    }
-
-    @Override
     public void onFinishInit(Bundle savedInstanceState) {
         mBinding.topBarPersonDetail.setBackListener(new View.OnClickListener() {
             @Override

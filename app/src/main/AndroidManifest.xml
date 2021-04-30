@@ -25,17 +25,18 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".activity.mine.tools.adress.NewAddressActivity"></activity>
         <activity android:name=".activity.customer.CustomerServiceActivity"/>
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
         <activity android:name=".activity.mine.tools.ShareToFriendActivity" />
-        <activity android:name=".activity.mine.tools.MyAddressActivity" />
+        <activity android:name=".activity.mine.tools.adress.MyAddressActivity" />
         <activity android:name=".activity.mine.tools.CouponActivity" />
         <activity android:name=".activity.order.OrderListActivity" />
         <activity android:name=".activity.mine.focus.RecentBrowseActivity" />
@@ -77,6 +78,11 @@
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />

@@ -10,18 +10,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/F2F2F2"
         tools:context=".activity.mine.settings.ChangeNickActivity">
         <com.goldensky.framework.ui.view.TopActionBar
             android:id="@+id/top_bar_nick"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:centerText="修改昵称"
-            app:rightText="保存"
+            app:centerText="@string/text_change_nick"
+            app:rightText="@string/text_save"
             app:showIvBack="false"
-            app:leftText="取消"
+            app:leftText="@string/text_cancel"
             app:leftTextSize="14"
-            app:leftTextColor="@color/F2F2F2"
+            android:background="@color/white"
+            app:leftTextColor="@color/color_9"
             app:rightTextSize="14"
             app:rightTextColor="@color/EA483F"
             />
@@ -30,7 +32,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-
+            <EditText
+                android:id="@+id/et_nick_change_nick"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:paddingLeft="15dp"
+                android:text="13963687986"
+                android:textColor="@color/color_9"
+                android:background="@color/white"
+                android:paddingTop="27dp"
+                android:paddingBottom="27dp"
+                android:layout_height="75dp"
+                />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/et_nick_change_nick"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/hint_input_nick"
+                android:textColor="@color/color_CCCCCC"
+                android:textSize="14sp"
+            />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

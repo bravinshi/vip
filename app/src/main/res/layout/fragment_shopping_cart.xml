@@ -15,7 +15,6 @@
             app:rightTextSize="14"
             android:layout_height="wrap_content"
             app:centerText="购物车"
-            app:rightText="编辑"
             />
 
         <RelativeLayout
@@ -29,21 +28,21 @@
                 android:text="全选"
                 android:gravity="center"
                 android:button="@drawable/selector_checkbox_shopping_cart"
-                android:theme="@style/CheckBoxTheme"
+                android:theme="@style/AppRedTheme"
                 android:layout_marginLeft="20dp"
                 android:textSize="16sp"
                 />
-<!--            <TextView-->
-<!--                android:id="@+id/tv_edit_finish"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textColor="@color/color_3"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:text="编辑"-->
-<!--                android:textSize="16sp"-->
-<!--                />-->
+            <TextView
+                android:id="@+id/tv_edit_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_3"
+                android:layout_marginRight="10dp"
+                android:text="编辑"
+                android:textSize="16sp"
+                />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,13 +54,12 @@
                 android:paddingTop="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/shape_list_shopping_cart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 />
         </LinearLayout>
 
@@ -100,7 +98,7 @@
                 android:background="@drawable/shape_btn_red"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
-                android:text="去结算"
+                android:text="@string/text_go_close_account"
                 android:layout_centerVertical="true"
                 android:layout_height="40dp"/>
 

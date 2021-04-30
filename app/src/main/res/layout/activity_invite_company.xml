@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:showIvBack="true"
-            app:centerText="邀请企业"
+            app:centerText="@string/text_invite_company"
             />
         <ImageView
             app:layout_constraintTop_toBottomOf="@+id/top_bar_invite_company"
