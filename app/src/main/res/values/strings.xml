@@ -19,7 +19,6 @@
     <string name="text_register">注册</string>
     <string name="text_not_set_temporarily">暂不设置</string>
     <string name="text_set_password">设置密码</string>
-    <string name="text_set_new_password">设置新密码</string>
     <string name="text_other_login_type">其他登录方式</string>
     <string name="text_login_type_verification_code">验证码登录</string>
     <string name="text_login_type_password">密码登录</string>
