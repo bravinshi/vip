@@ -1,4 +1,4 @@
-package com.goldensky.vip.constant;
+package com.goldensky.framework.constant;
 
 /**
  * @author bravin

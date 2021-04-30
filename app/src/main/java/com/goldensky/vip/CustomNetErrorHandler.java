@@ -2,6 +2,8 @@ package com.goldensky.vip;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.error.NetErrorHandler;
+import com.goldensky.framework.util.ActivityUtils;
+import com.goldensky.framework.util.AppUtils;
 
 /**
  * @author bravin
@@ -31,6 +33,18 @@ public class CustomNetErrorHandler implements NetErrorHandler {
      */
     @Override
     public boolean onFail(NetResponse error) {
+        if (error == null) {
+            return false;
+        }
+
+        // token过期  账号冻结 多设备登录 都跳转到登录页
+        if (error.isAccountFrozen()
+        || error.isMultiDeviceLogin()
+        || error.isTokenExpired()) {
+            Starter.startLoginActivity(ActivityUtils.getTopActivity(), null);
+            return true;
+        }
+
         return false;
     }
 }

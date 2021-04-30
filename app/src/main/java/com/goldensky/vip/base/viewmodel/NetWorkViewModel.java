@@ -4,15 +4,14 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.goldensky.vip.BuildConfig;
-import com.goldensky.vip.CustomNetErrorHandler;
-import com.goldensky.vip.constant.NetCodeConstant;
-import com.goldensky.vip.constant.NetCodeExceptionConstant;
-import com.goldensky.vip.util.NetResponseUtil;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.constant.NetCodeConstant;
+import com.goldensky.framework.constant.NetCodeExceptionConstant;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.framework.viewmodel.BaseViewModel;
+import com.goldensky.vip.BuildConfig;
+import com.goldensky.vip.CustomNetErrorHandler;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.MalformedJsonException;
 
@@ -20,7 +19,6 @@ import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.time.temporal.WeekFields;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -39,7 +37,7 @@ public class NetWorkViewModel extends BaseViewModel {
 
         private WeakReference<View> viewWeakReference = new WeakReference<>(null);
 
-        public BaseNetObserver<T> watchView(View view) {
+        public BaseNetObserver<T> watchViewClickable(View view) {
             if (view != null) {
                 viewWeakReference = new WeakReference<>(view);
             }
@@ -49,6 +47,7 @@ public class NetWorkViewModel extends BaseViewModel {
         @Override
         public void onSubscribe(@NonNull Disposable d) {
             compositeDisposable.add(d);
+
             View temp = viewWeakReference.get();
             if (temp != null) {
                 temp.setClickable(false);
@@ -57,18 +56,18 @@ public class NetWorkViewModel extends BaseViewModel {
 
         @Override
         public void onNext(@NonNull NetResponse<T> tNetResponse) {
-            if (NetResponseUtil.isSuccess(tNetResponse)) {
+            View temp = viewWeakReference.get();
+            if (temp != null) {
+                temp.setClickable(true);
+            }
+
+            if (tNetResponse.isLogicSuccess()) {
                 onSuccess(tNetResponse.getData());
             } else {
                 // 在特殊处理之前先走NetErrorHandler处理逻辑
                 if (!CustomNetErrorHandler.getInstance().onFail(tNetResponse)) {
                     onFail(tNetResponse);
                 }
-            }
-
-            View temp = viewWeakReference.get();
-            if (temp != null) {
-                temp.setClickable(true);
             }
         }
 
