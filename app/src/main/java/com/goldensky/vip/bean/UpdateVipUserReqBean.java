@@ -61,6 +61,24 @@ public class UpdateVipUserReqBean {
         private Date userRegisterTime;
         @SerializedName("userpassword")
         private String userPassword;
+        private String phoneCode;
+        private String newPwd;
+
+        public String getNewPwd() {
+            return newPwd;
+        }
+
+        public void setNewPwd(String newPwd) {
+            this.newPwd = newPwd;
+        }
+
+        public String getPhoneCode() {
+            return phoneCode;
+        }
+
+        public void setPhoneCode(String phoneCode) {
+            this.phoneCode = phoneCode;
+        }
 
         public Integer getInfoTips() {
             return infoTips;

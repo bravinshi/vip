@@ -8,7 +8,8 @@
     <string name="hint_confirm_password">请确认密码</string>
     <string name="hint_input_new_password">请输入新密码</string>
     <string name="hint_input_new_password_confirm">请确认新密码</string>
-    <string name="hint__new_password_length_is_wrong">请输入6至16位的密码</string>
+    <string name="hint_new_password_length_is_wrong">请输入6至16位的密码</string>
+    <string name="hint_password_set_success">密码设置成功</string>
     <string name="hint_password_not_equal">两次输入的密码不一致</string>
     <string name="hint_input_verification_code">请输入验证码</string>
     <string name="hint_get_verification_code">获取验证码</string>

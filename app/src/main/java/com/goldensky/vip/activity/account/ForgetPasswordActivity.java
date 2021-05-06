@@ -3,16 +3,17 @@ package com.goldensky.vip.activity.account;
 import android.os.Bundle;
 import android.view.View;
 
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.databinding.ActivityForgetPasswordBinding;
-import com.goldensky.vip.enumerate.VerificationCodePurposeEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.ForgetPasswordInputModel;
-import com.goldensky.vip.viewmodel.PublicViewModel;
-import com.goldensky.framework.util.StringUtils;
+import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
-public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordBinding, PublicViewModel> {
+public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordBinding, AccountViewModel> {
 
     private final ForgetPasswordInputModel inputModel = new ForgetPasswordInputModel();// 数据和界面双向绑定
 
@@ -58,7 +59,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
 
         if (inputModel.getNewPassword().trim().length() < 6
                 || inputModel.getNewPassword().trim().length() > 16) {
-            toast(R.string.hint__new_password_length_is_wrong);
+            toast(R.string.hint_new_password_length_is_wrong);
             return;
         }
 
@@ -73,9 +74,16 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         // 修改密码
-        mViewModel.updatePassword(inputModel.getPhone().trim(), inputModel
-                .getVerificationCode().trim(), inputModel.getNewPassword()
-                .trim());
+        UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
+        UpdateVipUserReqBean.VipUser vipUser = new UpdateVipUserReqBean.VipUser();
+
+        vipUser.setPhoneCode(inputModel.getVerificationCode().trim());
+        vipUser.setUserPassword(inputModel.getNewPasswordConfirm().trim());
+        vipUser.setNewPwd(inputModel.getNewPassword().trim());
+
+        userInfo.setVipUser(vipUser);
+        userInfo.setUserId(AccountHelper.getUserId());
+        mViewModel.updateVipUser(userInfo);
     }
 
     /**
@@ -108,8 +116,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         // 获取验证码
-//        mViewModel.getVerificationCode(VerificationCodePurposeEnum.CHANGE_PASSWORD.value,
-//                inputModel.getPhone().trim());
+        mViewModel.getVerificationCode(inputModel.getPhone().trim());
     }
 
     private boolean notPhoneNumber(String paddingTestText) {
@@ -125,9 +132,10 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
             mBinding.btnGetVerificationCode.startCountDown();
         });
 
-        mViewModel.changePasswordLive.observe(this, o -> {
-            toast(getString(R.string.hint__new_password_length_is_wrong));
+        mViewModel.userLive.observe(this, o -> {
+            toast(getString(R.string.hint_password_set_success));
             Starter.startLoginActivity(ForgetPasswordActivity.this, null);
+            finish();
         });
     }
 
