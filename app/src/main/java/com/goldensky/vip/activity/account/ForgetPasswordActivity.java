@@ -29,6 +29,9 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         refreshView();
     }
 
+    /**
+     * 刷新界面
+     */
     private void refreshView() {
         mBinding.clPassword.setVisibility(isInputPasswordNow ? View.VISIBLE : View.GONE);
         mBinding.clVerificationCode.setVisibility(!isInputPasswordNow ? View.VISIBLE : View.GONE);
