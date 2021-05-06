@@ -48,13 +48,24 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
         onFinishInit(savedInstanceState);
     }
 
+    /**
+     * 在create中最后执行的方法，用于业务逻辑的开始
+     *
+     * @param savedInstanceState bundle
+     */
     public abstract void onFinishInit(Bundle savedInstanceState);
 
+    /**
+     * 用于观察者模式中绑定观察
+     */
     public abstract void observe();
 
     public void beforeSetContentView() {
     }
 
+    /**
+     * 初始化监听
+     */
     public void initListener() {
     }
 

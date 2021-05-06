@@ -87,15 +87,4 @@ public class PublicViewModel extends NetWorkViewModel {
                     }
                 });
     }
-
-    public void updatePassword(String mobile, String verificationCode, String password) {
-        RetrofitAgent.create(PublicService.class)
-                .updatePwd(mobile, verificationCode, password)
-                .subscribe(new ToastNetObserver<Object>() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        changePasswordLive.postValue(true);
-                    }
-                });
-    }
 }

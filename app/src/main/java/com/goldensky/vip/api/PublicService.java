@@ -34,20 +34,6 @@ public interface PublicService {
     @GET("/goldendays-user/applet/user/getVipCode")
     Observable<NetResponse<Boolean>> getVerifyCode(@Query("userMobile") String mobile);
 
-    /**
-     * 设置新密码/找回密码
-     *
-     * @param mobile
-     * @param code
-     * @param password
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("/goldendays-user/mbUser/updatePwd")
-    Observable<NetResponse<Object>> updatePwd(@Field("userMobile") String mobile,
-                                              @Field("userCode") String code,
-                                              @Field("userPwd") String password);
-
     @GET("/goldendays-user/mbUserPer/checkCode")
     Observable<NetResponse<Object>> checkVerifyCode(@Query("userMobile") String mobile,
                                                     @Query("userCode") String verifyCode);

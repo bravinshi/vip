@@ -49,7 +49,11 @@ public class AccountViewModel extends PublicViewModel {
                 }.watchViewClickable(view));
     }
 
-
+    /**
+     * 更新用户信息
+     *
+     * @param reqBean
+     */
     public void updateVipUser(UpdateVipUserReqBean reqBean) {
         RetrofitAgent.create(AccountService.class)
                 .updateVipUser(reqBean)
