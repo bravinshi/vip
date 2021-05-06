@@ -24,7 +24,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Pu
                 finish();
             }
         });
-
+        mBinding.setListener(this);
     }
 
     @Override
