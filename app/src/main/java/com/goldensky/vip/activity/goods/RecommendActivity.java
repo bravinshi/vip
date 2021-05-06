@@ -3,11 +3,16 @@ package com.goldensky.vip.activity.goods;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
+import com.goldensky.vip.adapter.NormalGoodsAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityRecommendBinding;
 import com.goldensky.vip.entity.TabEntity;
@@ -22,44 +27,26 @@ import java.util.ArrayList;
  * 包名： com.goldensky.vip.activity.account
  * 类说明：
  */
-public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, BaseViewModel> implements View.OnClickListener {
+public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, BaseViewModel> {
+
+    private final NormalGoodsAdapter normalGoodsAdapter = new NormalGoodsAdapter();
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        // TODO 请求数据
+    }
 
-        ImmersionBar.with(this).statusBarDarkFont(true)
-                .statusBarView(mBinding.vStatusBar).init();
-
-        mBinding.ivBack.setOnClickListener(v -> RecommendActivity.this.finish());
-
-        ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
-        tabEntities.add(new TabEntity("商品推荐"));
-        tabEntities.add(new TabEntity("服务推荐"));
-
-        mBinding.ctl.setTabData(tabEntities);
-        mBinding.ctl.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelect(int position) {
-                if (position == 0) {
-                    mBinding.clGoods.setVisibility(View.VISIBLE);
-                    mBinding.llService.setVisibility(View.GONE);
-                } else {
-                    mBinding.clGoods.setVisibility(View.GONE);
-                    mBinding.llService.setVisibility(View.VISIBLE);
-                }
-            }
+    @Override
+    public void initListener() {
+        normalGoodsAdapter.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onTabReselect(int position) {
-
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                // TODO 跳转到商品详情
             }
         });
 
-        mBinding.clGoods.setVisibility(View.VISIBLE);
-        mBinding.llService.setVisibility(View.GONE);
-
-        mBinding.ctl.setCurrentTab(0);
-        mBinding.setListener(this);
-
+        mBinding.tabBar.setBackListener(v -> RecommendActivity.this.finish());
     }
 
     @Override
@@ -70,10 +57,5 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Ba
     @Override
     public int getLayoutId() {
         return R.layout.activity_recommend;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
     }
 }

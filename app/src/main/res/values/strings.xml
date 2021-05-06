@@ -53,4 +53,5 @@
     <string name="text_wait_for_evaluated">待评价</string>
     <string name="text_hint_protocol_policy">登录即同意并接受用户协议和隐私政策</string>
     <string name="text_hint_twice_input_not_same">两次输入不一致</string>
+    <string name="text_hot_today">今日爆款</string>
 </resources>

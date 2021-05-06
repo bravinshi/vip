@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
 
 import java.util.List;
@@ -18,6 +18,6 @@ public class GoodsFocusAdapter extends BaseQuickAdapter<Integer, BaseViewHolder>
 
     @Override
     protected void convert(BaseViewHolder helper, Integer item) {
-        Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.iv_item_goods_focus));
+        Glide.with(getContext()).load(item).into((ImageView) helper.getView(R.id.iv_item_goods_focus));
     }
 }

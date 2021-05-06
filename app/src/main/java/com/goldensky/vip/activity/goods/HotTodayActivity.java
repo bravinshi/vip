@@ -3,11 +3,15 @@ package com.goldensky.vip.activity.goods;
 import android.os.Bundle;
 import android.view.View;
 
-import com.goldensky.framework.viewmodel.BaseViewModel;
+import androidx.annotation.NonNull;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.vip.R;
-import com.goldensky.vip.Starter;
+import com.goldensky.vip.adapter.NormalGoodsAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityHotTodayBinding;
+import com.goldensky.vip.viewmodel.PublicViewModel;
 
 /**
  * @author bravin
@@ -16,11 +20,25 @@ import com.goldensky.vip.databinding.ActivityHotTodayBinding;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, BaseViewModel> implements View.OnClickListener {
+public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, PublicViewModel> {
+    private final NormalGoodsAdapter normalGoodsAdapter = new NormalGoodsAdapter();
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        // TODO 请求数据
+    }
+
+    @Override
+    public void initListener() {
+        normalGoodsAdapter.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                // TODO 跳转到商品详情
+            }
+        });
+
         mBinding.tabBar.setBackListener(v -> HotTodayActivity.this.finish());
-        mBinding.setListener(this);
     }
 
     @Override
@@ -31,10 +49,5 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Base
     @Override
     public int getLayoutId() {
         return R.layout.activity_hot_today;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
     }
 }

@@ -1,22 +1,16 @@
 package com.goldensky.vip.fragment.main;
 
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.MineToolAdapter;
-import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.bean.MineToolBean;
 import com.goldensky.vip.databinding.FragmentMineBinding;
@@ -67,7 +61,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
             mBinding.rvOrderMine.setAdapter(orderAdapter);
             mBinding.rvToolMine.setAdapter(toolAdapter);
             mBinding.setListener(this);
-            orderAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            orderAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
@@ -91,7 +85,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
 
                 }
             });
-            toolAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            toolAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     switch (position){

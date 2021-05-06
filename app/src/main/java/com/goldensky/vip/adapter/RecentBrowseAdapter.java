@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.RecentBrowseBean;
 
@@ -29,6 +29,6 @@ public class RecentBrowseAdapter extends BaseQuickAdapter<RecentBrowseBean, Base
             TextView dataView = helper.getView(R.id.data_item_circle_focus);
             dataView.setVisibility(View.GONE);
         }
-        Glide.with(mContext).load(item.getImage()).into((ImageView) helper.getView(R.id.iv_item_circle_focus));
+        Glide.with(getContext()).load(item.getImage()).into((ImageView) helper.getView(R.id.iv_item_circle_focus));
     }
 }

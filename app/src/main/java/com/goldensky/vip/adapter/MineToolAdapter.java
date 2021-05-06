@@ -2,13 +2,10 @@ package com.goldensky.vip.adapter;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.goldensky.framework.util.ImageUtils;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.MineToolBean;
 import com.goldensky.vip.databinding.ItemToolMineBinding;
@@ -26,6 +23,6 @@ public class MineToolAdapter extends BaseQuickAdapter<MineToolBean, BaseViewHold
         ItemToolMineBinding bind = DataBindingUtil.<ItemToolMineBindingImpl>bind(helper.itemView);
         bind.setBean(item);
         bind.notifyChange();
-        Glide.with(mContext).load(item.getSign()).into(bind.ivSignItemMine);
+        Glide.with(getContext()).load(item.getSign()).into(bind.ivSignItemMine);
     }
 }
