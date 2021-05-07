@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="315dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_corner_white_bg"
+        android:layout_height="145dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@string/hint_confirm_delete"
+            android:gravity="center"
+            android:layout_weight="5"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_EEEEEF"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/btn_cancel_delete_address"
+                android:layout_width="0dp"
+                android:text="@string/text_cancel_delete"
+                android:textColor="@color/EA483F"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color_EEEEEF"
+                />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/EA483F"
+                android:id="@+id/btn_confirm_delete_address"
+                android:layout_width="0dp"
+                android:text="@string/text_confirm_delete"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

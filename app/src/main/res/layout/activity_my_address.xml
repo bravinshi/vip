@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.mine.tools.MyAddressActivity">
+        tools:context=".activity.mine.tools.adress.MyAddressActivity">
         <com.goldensky.framework.ui.view.TopActionBar
             android:id="@+id/top_bar_my_dress"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:showIvBack="true"
-            app:centerText="收货地址"
+            app:centerText="@string/text_shipping_address"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_address"
@@ -31,14 +33,14 @@
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="╋   新建收货地址"
+            android:text="@string/text_btn_new_address"
             android:gravity="center"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:onClick="@{listener}"
             android:layout_marginBottom="50dp"
             android:textColor="@color/white"
             android:background="@drawable/shape_btn_red"
-
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

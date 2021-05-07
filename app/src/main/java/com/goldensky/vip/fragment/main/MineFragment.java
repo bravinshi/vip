@@ -40,10 +40,10 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
             orderList.add(new MineToolBean(R.mipmap.my_icon_daipingjia,"待评价"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_shouhou,"退款/售后"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_dingdan,"我的订单"));
-            toolList.add(new MineToolBean(R.mipmap.my_icon_youhuijuan,"优惠券"));
+//            toolList.add(new MineToolBean(R.mipmap.my_icon_youhuijuan,"优惠券"));
             toolList.add(new MineToolBean(R.mipmap.my_icon_dizhi,"我的地址"));
             toolList.add(new MineToolBean(R.mipmap.my_icon_fenxiang,"好友分享"));
-            toolList.add(new MineToolBean(R.mipmap.my_icon_registered2,"邀请企业"));
+//            toolList.add(new MineToolBean(R.mipmap.my_icon_registered2,"邀请企业"));
             mBinding.rvOrderMine.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL){
                 @Override
                 public boolean canScrollVertically() {
@@ -76,9 +76,9 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                             startOrderList(4);
                             break;
                         case 3:
-//                            startOrderList(4);
-                            break;
-                        case 4:
+////                            startOrderList(4);
+//                            break;
+//                        case 4:
                             startOrderList(0);
                             break;
                     }
@@ -89,18 +89,25 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     switch (position){
+//                        case 0:
+//                            Starter.startCouponActivity(getContext(),null);
+//                            break;
+//                        case 1:
+//                            Starter.startMyAddressActivity(getContext(),null);
+//                            break;
+//                        case 2:
+//                            Starter.startShareToFriendActivity(getContext(),null);
+//                            break;
+//                        case 3:
+//                            Starter.startInviteCompanyActivity(getContext(),null);
+//                            break;
                         case 0:
-                            Starter.startCouponActivity(getContext(),null);
-                            break;
-                        case 1:
                             Starter.startMyAddressActivity(getContext(),null);
                             break;
-                        case 2:
+                        case 1:
                             Starter.startShareToFriendActivity(getContext(),null);
                             break;
-                        case 3:
-                            Starter.startInviteCompanyActivity(getContext(),null);
-                            break;
+
                     }
                 }
             });
@@ -129,15 +136,15 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
             case R.id.iv_settings_mine:
                 Starter.startSettingsActivity(getContext(),null);
                 break;
-            case R.id.goods_focus_mine:
-                Starter.startGoodsFocusActivity(getContext(),null);
-                break;
-            case R.id.circle_focus_mine:
-                Starter.startCircleFocusActivity(getContext(),null);
-                break;
-            case R.id.recent_browse_mine:
-                Starter.startRecentBrowseActivity(getContext(),null);
-                break;
+//            case R.id.goods_focus_mine:
+//                Starter.startGoodsFocusActivity(getContext(),null);
+//                break;
+//            case R.id.circle_focus_mine:
+//                Starter.startCircleFocusActivity(getContext(),null);
+//                break;
+//            case R.id.recent_browse_mine:
+//                Starter.startRecentBrowseActivity(getContext(),null);
+//                break;
         }
     }
 

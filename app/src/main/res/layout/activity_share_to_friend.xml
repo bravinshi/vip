@@ -21,17 +21,70 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:showIvBack="true"
-            app:centerText="好友分享"
+            app:centerText="@string/text_share_to_friend"
             />
-        <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintTop_toBottomOf="@+id/top_bar_share_to_friend"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/my_pic_shaoyoufenxiang"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="315dp"
+            android:layout_height="375dp"
+            android:background="@drawable/shape_corner_white_bg"
+            android:layout_marginTop="40dp"
+            >
+            <ImageView
+                android:id="@+id/iv_head_share_to_friend"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/home_icon_touxiang"
+                />
+            <TextView
+                android:id="@+id/name_share_to_firend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/iv_head_share_to_friend"
+                app:layout_constraintTop_toTopOf="@+id/iv_head_share_to_friend"
+                android:layout_marginTop="7dp"
+                android:text="阿妹水果"
+                android:textSize="16sp"
+                android:textColor="@color/color_333333"
+                android:layout_marginLeft="15dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/name_share_to_firend"
+                app:layout_constraintTop_toBottomOf="@+id/name_share_to_firend"
+                android:layout_marginTop="5dp"
+                android:text="高质 优价 有保障"
+                android:textSize="14sp"
+                android:textColor="@color/color_888888"
+                />
+            <ImageView
+                android:id="@+id/iv_code_share_to_friend"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="75dp"
+                />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/iv_code_share_to_friend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/hint_code_usage"
+                android:textSize="14sp"
+                android:textColor="@color/color_888888"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView
             android:id="@+id/btn_share_to_friend"
             app:layout_constraintBottom_toBottomOf="parent"

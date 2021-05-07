@@ -39,11 +39,11 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.cl_person_settings:
-//                Starter.startPersonDetailActivity(this,null);
-//                break;
+            case R.id.cl_person_settings:
+                Starter.startPersonDetailActivity(this,null);
+                break;
             case R.id.cl_change_password_settings:
-//                Starter.startChangePWDActivity(this,null);
+                Starter.startChangePWDActivity(this,null);
                 break;
             case R.id.cl_current_version_settings:
 
