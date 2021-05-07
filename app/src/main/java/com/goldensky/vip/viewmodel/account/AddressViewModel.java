@@ -20,23 +20,11 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class AddressViewModel extends PublicViewModel {
-    public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
+
     public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
-    public void getUserAddress(String userId){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("userid",userId);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
-        RetrofitAgent.create(AddressService.class)
-                .getUserAddressList(requestBody)
-                .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
-                    @Override
-                    public void onSuccess(List<UserAddressBean> data) {
-                        userAddressLive.postValue(data);
-                    }
-                });
-    }
+
     public void deleteUserAddress(String userAddressId){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("useraddressid",userAddressId);

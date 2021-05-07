@@ -21,7 +21,7 @@ public interface GoodsService {
     Observable<NetResponse<CommodityResBean>> getGoodsDetail(@Query("commodityId") Integer goodsId);
 
     @GET("/goldendays-goods/commodity/getCommodityComment")
-    Observable<NetResponse<GoodsCommentResBean>> getGoodsComment(@Query("currentPage") String currentPage,
+    Observable<NetResponse<GoodsCommentResBean>> getGoodsComment(@Query("currentPage") Integer currentPage,
                                                                 @Query("pageSize") Integer pageSize,
                                                                 @Query("commodityId") String commodityId,
                                                                 @Query("evaluateType") Integer evaluateType);// 评论类型 不传为全部 1:好 2:中 3:差 4:是否有图

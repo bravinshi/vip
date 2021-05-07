@@ -19,6 +19,7 @@ import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.CommodityResBean;
+import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
@@ -44,7 +45,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         GoodsDetailViewModel> {
 
     public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
-
+    private String goodsId = "";
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
 //        Bundle bundle = getIntent().getExtras();
@@ -56,8 +57,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 //        if (goodsId == -1) {
 //            return;
 //        }
-
+        // 获取商品详情
         mViewModel.getGoodsDetail(140);
+        // 获取评论信息
+        mViewModel.getGoodsComment(1, 1, goodsId, null);
+        // 获取地址信息
+        mViewModel.
     }
 
     public void showGoodsDetail(CommodityResBean data) {
@@ -85,12 +90,17 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mBinding.tvPrice.setText("￥" + detail.getCommodityOldPrice());
         // 标题
         mBinding.tvTitle.setText(detail.getCommodityName());
+        // 详情
         String content = detail.getCommodityDesc().replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
     }
 
     @Override
     public void observe() {
+        mViewModel.goodsCommentLive.observe(this, goodsCommentResBean -> {
+            mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")");
+        });
+
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
     }
 

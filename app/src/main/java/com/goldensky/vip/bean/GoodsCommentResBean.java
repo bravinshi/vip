@@ -17,4 +17,36 @@ public class GoodsCommentResBean {
     private Integer praiseCount;
     @SerializedName("zhongCount")
     private Integer totalCount;
+
+    public List<GoodsCommentItemBean> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<GoodsCommentItemBean> commentList) {
+        this.commentList = commentList;
+    }
+
+    public Integer getDifferenceCount() {
+        return differenceCount;
+    }
+
+    public void setDifferenceCount(Integer differenceCount) {
+        this.differenceCount = differenceCount;
+    }
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
 }

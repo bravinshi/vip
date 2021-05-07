@@ -3,15 +3,19 @@ package com.goldensky.vip.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.vip.api.PublicService;
+import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.api.goods.GoodsService;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.GoodsCommentResBean;
+import com.goldensky.vip.bean.UserAddressBean;
+import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.net.URLConnection;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -32,6 +36,7 @@ public class PublicViewModel extends NetWorkViewModel {
 
     public MutableLiveData<String> uploadPicLiveData = new MutableLiveData<>();
     public MutableLiveData<GoodsCommentResBean> goodsCommentLive = new MutableLiveData<>();
+    public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -99,7 +104,7 @@ public class PublicViewModel extends NetWorkViewModel {
      * @param commodityId 商品id
      * @param evaluateType 筛选条件
      */
-    public void getGoodsComment(String currentPage, Integer pageSize,
+    public void getGoodsComment(Integer currentPage, Integer pageSize,
                                 String commodityId, Integer evaluateType) {
         RetrofitAgent.create(GoodsService.class)
                 .getGoodsComment(currentPage, pageSize, commodityId, evaluateType)
@@ -107,6 +112,20 @@ public class PublicViewModel extends NetWorkViewModel {
                     @Override
                     public void onSuccess(GoodsCommentResBean data) {
                         goodsCommentLive.postValue(data);
+                    }
+                });
+    }
+
+    public void getUserAddress(String userId){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("userid",userId);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitAgent.create(AddressService.class)
+                .getUserAddressList(requestBody)
+                .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
+                    @Override
+                    public void onSuccess(List<UserAddressBean> data) {
+                        userAddressLive.postValue(data);
                     }
                 });
     }
