@@ -12,9 +12,7 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.databinding.ActivityNewAddressBinding;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
-import com.lljjcoder.bean.CustomCityData;
-import com.lljjcoder.style.citycustome.CustomCityPicker;
-import com.lljjcoder.style.citypickerview.CityPickerView;
+
 
 
 import java.util.ArrayList;
