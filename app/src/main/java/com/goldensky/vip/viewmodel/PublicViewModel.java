@@ -11,6 +11,7 @@ import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.UserAddressBean;
+import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.google.gson.JsonObject;
 
 import java.io.File;
@@ -117,11 +118,10 @@ public class PublicViewModel extends NetWorkViewModel {
     }
 
     public void getUserAddress(String userId){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("userid",userId);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        UserAddressListReqBean reqBean = new UserAddressListReqBean();
+        reqBean.setUserId(userId);
         RetrofitAgent.create(AddressService.class)
-                .getUserAddressList(requestBody)
+                .getUserAddressList(reqBean)
                 .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
                     @Override
                     public void onSuccess(List<UserAddressBean> data) {
