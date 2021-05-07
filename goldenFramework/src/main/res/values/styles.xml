@@ -11,4 +11,11 @@
         <attr name="centerTextColor" format="color|reference"/>
         <attr name="leftTextColor" format="color|reference"/>
     </declare-styleable>
+
+    <style name="hand_popupwindow_anim_style">
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowEnterAnimation">@anim/hand_show_from_bottom</item>
+        <!-- 指定消失的动画xml -->
+        <item name="android:windowExitAnimation">@anim/hand_hide_to_bottom</item>
+    </style>
 </resources>

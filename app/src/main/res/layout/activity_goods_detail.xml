@@ -43,30 +43,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/iv_main"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:src="@mipmap/pingguozhutu"
-                            app:layout_constraintDimensionRatio="1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.viewpager2.widget.ViewPager2
+                        <com.youth.banner.Banner
                             android:id="@+id/vp_image"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:visibility="gone"
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <me.relex.circleindicator.CircleIndicator
-                            android:id="@+id/indicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@+id/vp_image" />
 
                         <TextView
                             android:id="@+id/tv_price"
@@ -75,11 +58,11 @@
                             android:layout_marginStart="14dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="15dp"
-                            android:text="￥49.80"
+                            android:text=""
                             android:textColor="@color/color_EA483F"
                             android:textSize="18sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_main" />
+                            app:layout_constraintTop_toBottomOf="@+id/vp_image" />
 
                         <TextView
                             android:id="@+id/tv_title"
@@ -88,7 +71,7 @@
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="12dp"
                             android:layout_marginEnd="15dp"
-                            android:text="山东红富士高端礼盒顺丰包邮整箱3.7KG水果苹果脆甜"
+                            android:text=""
                             android:textColor="@color/color_333333"
                             android:textSize="17sp"
                             android:textStyle="bold"
@@ -132,7 +115,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="15dp"
                                 android:singleLine="true"
-                                android:text="3.7kg/份"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -187,7 +170,7 @@
                                 android:layout_marginStart="7dp"
                                 android:ellipsize="end"
                                 android:singleLine="true"
-                                android:text="江苏省南京浦口区江浦街道光电科技园C栋"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -254,7 +237,7 @@
                                 android:layout_height="0dp"
                                 android:layout_marginStart="4dp"
                                 android:gravity="center_vertical"
-                                android:text="(213829)"
+                                android:text=""
                                 android:textColor="@color/color_888888"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -298,8 +281,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <com.goldensky.vip.base.ui.view.CustomRecyclerView
-                            android:id="@+id/rv_detail"
+                        <WebView
+                            android:id="@+id/wv_detail"
                             android:overScrollMode="never"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

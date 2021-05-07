@@ -1,20 +1,37 @@
 package com.goldensky.vip.activity.goods;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.goldensky.framework.util.CollectionUtils;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
+import com.goldensky.vip.bean.CommodityBean;
+import com.goldensky.vip.bean.CommodityPicBean;
+import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
+import com.youth.banner.Banner;
+import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * @author bravin
@@ -26,168 +43,55 @@ import java.util.List;
 public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding,
         GoodsDetailViewModel> {
 
-    public static final String KEY_FAKE_DATA = "KEY_FAKE_DATA";
-
-    public static final Integer KEY_FAKE_DATA_APPLE = 1;// 苹果
-    public static final Integer KEY_FAKE_DATA_MANGO = 2;// 芒果
-    public static final Integer KEY_FAKE_DATA_EGG = 3;// 鸭蛋
-    public static final Integer KEY_FAKE_DATA_SAUSAGE = 4;// 红肠
-    public static final Integer KEY_FAKE_DATA_WINE = 5;// 酒
+    public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle == null) {
+//            return;
+//        }
+//
+//        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+//        if (goodsId == -1) {
+//            return;
+//        }
 
-
-
-        LinearLayoutManager mLinearLayoutManager = new FullyLinearLayoutManager(GoodsDetailActivity.this);
-//        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
-        mBinding.rvDetail.setLayoutManager(mLinearLayoutManager);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            generateFakeData(1);
-            return;
-        }
-
-        Integer fakeKey = bundle.getInt(KEY_FAKE_DATA, 0);
-        generateFakeData(fakeKey);
+        mViewModel.getGoodsDetail(140);
     }
 
-    public void generateFakeData(Integer fakeKey) {
-
-        if (fakeKey == null) {
-            return;
+    public void showGoodsDetail(CommodityResBean data) {
+        CommodityBean detail = data.getCommodity();
+        // 轮播图片
+        Set<String> pics = new HashSet<>();
+        if (!StringUtils.isTrimEmpty(detail.getCommodityIcon())) {
+            pics.add(detail.getCommodityIcon());
         }
-
-        FakeData fakeData = FakeData.create();
-
-        if (fakeKey.equals(KEY_FAKE_DATA_APPLE)) {
-            fakeData.mainImage(R.mipmap.pingguozhutu)
-                    .price("￥49.80")
-                    .title("山东红富士高端礼盒顺丰包邮整箱3.7KG水果苹果脆甜")
-                    .specification("3.75kg/份 1件")
-                    .commentNum(2121)
-                    .detailIds(new ArrayList<Integer>(){{
-                        add(R.mipmap.pingguo1);
-                        add(R.mipmap.pingguo2);
-                        add(R.mipmap.pingguo3);
-                    }});
-        } else if (fakeKey.equals(KEY_FAKE_DATA_MANGO)) {
-            fakeData.mainImage(R.mipmap.mangguozhutu)
-                    .price("￥34.90")
-                    .title("三亚芒果新鲜采摘顺丰包邮整箱5KG热带水果香甜多汁")
-                    .specification("3.75kg/份 1件")
-                    .commentNum(9852)
-                    .detailIds(new ArrayList<Integer>(){{
-                        add(R.mipmap.mangguo1);
-                        add(R.mipmap.mangguo2);
-                        add(R.mipmap.mangguo3);
-                    }});
-        } else if (fakeKey.equals(KEY_FAKE_DATA_EGG)) {
-            fakeData.mainImage(R.mipmap.yadanzhutu)
-                    .price("￥29.90")
-                    .title("正宗骆马湖咸鸭蛋纯天然多有鸭蛋20枚/40枚/60枚")
-                    .specification("3.75kg/份 1件")
-                    .commentNum(121)
-                    .detailIds(new ArrayList<Integer>(){{
-                        add(R.mipmap.yadan1);
-                        add(R.mipmap.yadan2);
-                        add(R.mipmap.yadan3);
-                    }});
-        } else if (fakeKey.equals(KEY_FAKE_DATA_SAUSAGE)) {
-            fakeData.mainImage(R.mipmap.hongchangzhutu)
-                    .price("￥19.90")
-                    .title("正宗哈尔滨红肠熏火腿肠香肠腊肠方便速食老字号东北特产")
-                    .specification("3.75kg/份 1件")
-                    .commentNum(6554)
-                    .detailIds(new ArrayList<Integer>(){{
-                        add(R.mipmap.hongchang1);
-                        add(R.mipmap.hongchang2);
-                        add(R.mipmap.hongchang3);
-                    }});
-        } else if (fakeKey.equals(KEY_FAKE_DATA_WINE)) {
-            fakeData.mainImage(R.mipmap.jiuzhutu)
-                    .price("￥299.00")
-                    .title("金天国际金天喝睿酒52度浓香型整箱500ml6瓶礼盒精装送礼纯粮食白酒")
-                    .specification("3.75kg/份 1件")
-                    .commentNum(56232)
-                    .detailIds(new ArrayList<Integer>(){{
-                        add(R.mipmap.jiu1);
-                    }});
-        }
-
-        showFakeData(fakeData);
-        mBinding.topBarGoodsDetail.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        if (!CollectionUtils.nullOrEmpty(detail.getCommodityPicList())) {
+            for (CommodityPicBean picBean : detail.getCommodityPicList()) {
+                if (!StringUtils.isTrimEmpty(picBean.getPicUrl())) {
+                    pics.add(picBean.getPicUrl());
+                }
             }
-        });
-    }
-
-    public void showFakeData(FakeData data) {
-        ImageLoaderHelper.loadImage(mBinding.ivMain, data.mainImage);
-        mBinding.tvPrice.setText(data.price);
-        mBinding.tvTitle.setText(data.title);
-        mBinding.tvSpecification.setText(data.specification);
-        mBinding.tvCommentNum.setText("(" + data.commentNum + ")");
-        mBinding.tvPrice.setText(data.price);
-
-        GoodsDetailAdapter goodsDetailAdapter = new GoodsDetailAdapter();
-        mBinding.rvDetail.setAdapter(goodsDetailAdapter);
-
-        List<Integer> detailData = new ArrayList<Integer>(){{
-            addAll(data.detailIds);
-        }};
-
-        goodsDetailAdapter.setPics(detailData);
-    }
-
-    public static class FakeData {
-        Integer mainImage;
-        String price;
-        String title;
-        String specification;
-        Integer commentNum;
-        List<Integer> detailIds;
-
-        public static FakeData create() {
-            return new FakeData();
         }
-
-        public FakeData mainImage(Integer mainImage) {
-            this.mainImage = mainImage;
-            return this;
+        if (!pics.isEmpty()) {
+            mBinding.vpImage.setAdapter(new BannerImageAdapter(new ArrayList<>(pics)))
+            .addBannerLifecycleObserver(this)//添加生命周期观察者
+            .setIndicator(new CircleIndicator(this));
+        } else {
+            mBinding.vpImage.setVisibility(View.GONE);
         }
-
-        public FakeData commentNum(Integer commentNum) {
-            this.commentNum = commentNum;
-            return this;
-        }
-
-        public FakeData price(String price) {
-            this.price = price;
-            return this;
-        }
-
-        public FakeData title(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public FakeData specification(String specification) {
-            this.specification = specification;
-            return this;
-        }
-
-        public FakeData detailIds(List<Integer> detailIds) {
-            this.detailIds = detailIds;
-            return this;
-        }
+        // 价格
+        mBinding.tvPrice.setText("￥" + detail.getCommodityOldPrice());
+        // 标题
+        mBinding.tvTitle.setText(detail.getCommodityName());
+        String content = detail.getCommodityDesc().replace("<img", "<img style=\"max-width:100%;height:auto\"");
+        mBinding.wvDetail.loadData(content, "text/html", "utf-8");
     }
 
     @Override
     public void observe() {
+        mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
     }
 
     @Override

@@ -67,7 +67,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
             // 没有登录信息 跳转到登录界面
             Starter.startLoginActivity(SplashActivity.this, null);
         } else {
-            Starter.startMainActivity(SplashActivity.this, null);
+//            Starter.startMainActivity(SplashActivity.this, null);
+            Starter.startGoodsDetailActivity(SplashActivity.this, null);
         }
 
         finish();

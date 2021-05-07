@@ -26,7 +26,6 @@ public class PublicViewModel extends NetWorkViewModel {
 
     public MutableLiveData<Boolean> verificationCodeLive = new MutableLiveData<>();
     public MutableLiveData<Boolean> checkCodeLive = new MutableLiveData<>();
-    public MutableLiveData<Object> changePasswordLive = new MutableLiveData<>();
 
     public MutableLiveData<String> uploadPicLiveData = new MutableLiveData<>();
 
