@@ -32,7 +32,8 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.order.OrderDetailActivity"></activity>
+        <activity android:name=".activity.mine.tools.adress.EditAddressActivity"></activity>
+        <activity android:name=".activity.order.OrderDetailActivity" />
         <activity android:name=".activity.mine.tools.adress.NewAddressActivity" />
         <activity android:name=".activity.customer.CustomerServiceActivity" />
         <activity android:name=".activity.mine.tools.InviteCompanyActivity" />
@@ -47,9 +48,7 @@
         <activity android:name=".activity.mine.settings.ChangePWDActivity" />
         <activity android:name=".activity.mine.settings.PersonalDetailsActivity" />
         <activity android:name=".activity.mine.settings.SettingsActivity" />
-        <activity android:name=".activity.SplashActivity">
-
-        </activity>
+        <activity android:name=".activity.SplashActivity"></activity>
 
         <meta-data
             android:name="design_width_in_dp"
@@ -68,7 +67,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".activity.account.LoginActivity"></activity>
+        <activity android:name=".activity.account.LoginActivity" />
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />

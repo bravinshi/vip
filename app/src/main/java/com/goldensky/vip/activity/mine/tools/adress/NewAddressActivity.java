@@ -3,6 +3,7 @@ package com.goldensky.vip.activity.mine.tools.adress;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -14,7 +15,12 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-
+        mBinding.topBarNewAddress.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

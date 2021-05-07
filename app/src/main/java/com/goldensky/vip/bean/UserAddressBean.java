@@ -6,52 +6,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public class UserAddressBean implements Serializable {
-
-    private Integer code;
-    private String message;
-    private Integer status;
-    private List<DataDTO> data;
-
-    public UserAddressBean(Integer code, String message, Integer status, List<DataDTO> data) {
-        this.code = code;
-        this.message = message;
-        this.status = status;
-        this.data = data;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public List<DataDTO> getData() {
-        return data;
-    }
-
-    public void setData(List<DataDTO> data) {
-        this.data = data;
-    }
-
-    public static class DataDTO implements Serializable {
         private String area;
         private Integer areaid;
         private String city;
@@ -66,25 +20,26 @@ public class UserAddressBean implements Serializable {
         private String useraddressphone;
         private String useraddresstime;
         private String userid;
+        private String location;
 
-        public DataDTO(String area, Integer areaid, String city, Integer cityid, Integer isdel, String province, Integer provinceid, String useraddress, Integer useraddressdefault, String useraddressid, String useraddressname, String useraddressphone, String useraddresstime, String userid) {
-            this.area = area;
-            this.areaid = areaid;
-            this.city = city;
-            this.cityid = cityid;
-            this.isdel = isdel;
-            this.province = province;
-            this.provinceid = provinceid;
-            this.useraddress = useraddress;
-            this.useraddressdefault = useraddressdefault;
-            this.useraddressid = useraddressid;
-            this.useraddressname = useraddressname;
-            this.useraddressphone = useraddressphone;
-            this.useraddresstime = useraddresstime;
-            this.userid = userid;
-        }
+    public UserAddressBean(String area, Integer areaid, String city, Integer cityid, Integer isdel, String province, Integer provinceid, String useraddress, Integer useraddressdefault, String useraddressid, String useraddressname, String useraddressphone, String useraddresstime, String userid) {
+        this.area = area;
+        this.areaid = areaid;
+        this.city = city;
+        this.cityid = cityid;
+        this.isdel = isdel;
+        this.province = province;
+        this.provinceid = provinceid;
+        this.useraddress = useraddress;
+        this.useraddressdefault = useraddressdefault;
+        this.useraddressid = useraddressid;
+        this.useraddressname = useraddressname;
+        this.useraddressphone = useraddressphone;
+        this.useraddresstime = useraddresstime;
+        this.userid = userid;
+    }
 
-        public String getArea() {
+    public String getArea() {
             return area;
         }
 
@@ -195,6 +150,10 @@ public class UserAddressBean implements Serializable {
         public void setUserid(String userid) {
             this.userid = userid;
         }
-    }
+
+        public String getLocation() {
+            return province+city+area;
+        }
+
 
 }

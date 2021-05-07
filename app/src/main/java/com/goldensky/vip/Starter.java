@@ -24,6 +24,7 @@ import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
 import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
+import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
@@ -299,6 +300,16 @@ public class Starter {
 
     public static void startSetPasswordActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, SetPasswordActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    /**
+     * 修改收货地址
+     */
+    public static void startEditAddressActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, EditAddressActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

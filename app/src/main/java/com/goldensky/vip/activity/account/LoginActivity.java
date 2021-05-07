@@ -28,7 +28,6 @@ import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountViewModel> {
 
