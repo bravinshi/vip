@@ -62,7 +62,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId, null);
         // 获取地址信息
-        mViewModel.
+//        mViewModel.
     }
 
     public void showGoodsDetail(CommodityResBean data) {
