@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -13,8 +14,10 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.UserAddressAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityMyAddressBinding;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
 
@@ -63,12 +66,14 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                         });
                         builder.setView(popView);
                         dialog = builder.create();
+                        dialog.show();
                         break;
                 }
             }
         });
         mBinding.rvMyAddress.setAdapter(adapter);
-        mViewModel.getUserAddress("");
+        String userId = AccountHelper.getUserId();
+        mViewModel.getUserAddress(userId);
     }
 
     @Override
@@ -81,6 +86,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 
     @Override

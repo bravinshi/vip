@@ -57,6 +57,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
             }
             return true;
         });
+        mBinding.bottomTabMain.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
         mBinding.viewPagerMain.setOffscreenPageLimit(5);
         mBinding.setListener(this);
     }
