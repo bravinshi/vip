@@ -1,5 +1,7 @@
 package com.goldensky.vip.event;
 
+import com.goldensky.vip.bean.UserAddressBean;
+
 /**
  * @author bravin
  * @version 1.0
@@ -9,6 +11,15 @@ package com.goldensky.vip.event;
  */
 public class RetrieveAddressEvent {
     private String address;
+    private UserAddressBean addressBean;
+
+    public UserAddressBean getAddressBean() {
+        return addressBean;
+    }
+
+    public void setAddressBean(UserAddressBean addressBean) {
+        this.addressBean = addressBean;
+    }
 
     public String getAddress() {
         return address;

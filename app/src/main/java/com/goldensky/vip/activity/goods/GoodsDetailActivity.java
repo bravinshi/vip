@@ -32,6 +32,7 @@ import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -57,9 +58,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private String goodsId = "";
     private SelectAddressDialog selectAddressDialog;
     private String selectAddressDialogTag = "selectAddress";
+    private UserAddressBean selectedAddress = null;
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
 //        Bundle bundle = getIntent().getExtras();
 //        if (bundle == null) {
 //            return;
@@ -115,13 +118,14 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     /**
-     * 订阅添加地址处理结果
+     * 订阅选择地址
      *
-     * @param retrieveAddressEvent 事件
+     * @param event 事件
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void changeAddress(RetrieveAddressEvent retrieveAddressEvent) {
-        mBinding.tvAddress.setText(retrieveAddressEvent.getAddress());
+    public void changeAddress(RetrieveAddressEvent event) {
+        selectedAddress = event.getAddressBean();
+        mBinding.tvAddress.setText(event.getAddress());
     }
 
     public void showGoodsDetail(CommodityResBean data) {
@@ -190,6 +194,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 selectAddressDialog.show(getSupportFragmentManager(), selectAddressDialogTag);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

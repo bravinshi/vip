@@ -14,8 +14,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.framework.ui.dialog.BottomDialog;
-import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.DialogSelectAddressBinding;
@@ -67,25 +67,23 @@ public class SelectAddressDialog extends BottomDialog {
         mBinding.btnAddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Starter.startNewAddressActivity(v.getContext(), null);
                 dismissAllowingStateLoss();
             }
         });
 
         mBinding.recyclerView.setAdapter(addressAdapter);
-        addressAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                addressAdapter.selectedPos = position;
-                addressAdapter.notifyDataSetChanged();
-                // 发送事件修改地址
-                RetrieveAddressEvent event = new RetrieveAddressEvent();
-                TextView textView = view.findViewById(R.id.tv_address);
-                event.setAddress(textView.getText().toString());
-                EventBus.getDefault().post(event);
+        addressAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            addressAdapter.selectedPos = position;
+            addressAdapter.notifyDataSetChanged();
+            // 发送事件修改地址
+            RetrieveAddressEvent event = new RetrieveAddressEvent();
+            TextView textView = view1.findViewById(R.id.tv_address);
+            event.setAddress(textView.getText().toString());
+            event.setAddressBean((UserAddressBean) adapter.getItem(position));
+            EventBus.getDefault().post(event);
 
-                dismissAllowingStateLoss();
-            }
+            dismissAllowingStateLoss();
         });
     }
 
