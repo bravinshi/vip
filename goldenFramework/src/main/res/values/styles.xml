@@ -18,4 +18,8 @@
         <!-- 指定消失的动画xml -->
         <item name="android:windowExitAnimation">@anim/hand_hide_to_bottom</item>
     </style>
+
+    <declare-styleable name="MeasureFixedLayout">
+        <attr name="measureFixed_half_height" format="boolean"/>
+    </declare-styleable>
 </resources>

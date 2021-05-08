@@ -1,7 +1,5 @@
 package com.goldensky.vip.viewmodel.account;
 
-import android.view.View;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.framework.net.RetrofitAgent;
@@ -11,30 +9,25 @@ import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.ChangeUserAddressReqBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.EditAddressBean;
-import com.goldensky.vip.bean.GetUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
+import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
-import com.google.gson.JsonObject;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class AddressViewModel extends PublicViewModel {
-    public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
+
     public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> addAddressLive = new MutableLiveData<>();
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
 
+
     /**
      * 获取收货地址列表
      * @param body
      */
-    public void getUserAddress(GetUserAddressReqBean body){
+    public void getUserAddress(UserAddressListReqBean body){
         RetrofitAgent.create(AddressService.class)
                 .getUserAddressList(body)
                 .subscribe(new ToastNetObserver<List<UserAddressBean>>() {

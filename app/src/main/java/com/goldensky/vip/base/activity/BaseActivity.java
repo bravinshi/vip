@@ -9,10 +9,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.goldensky.framework.util.StatusBarUtil;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.framework.viewmodel.BaseViewModel;
-import com.gyf.immersionbar.ImmersionBar;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

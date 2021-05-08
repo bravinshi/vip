@@ -17,8 +17,8 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.EditAddressBean;
-import com.goldensky.vip.bean.GetUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
+import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.goldensky.vip.databinding.ActivityMyAddressBinding;
 import com.goldensky.vip.enumerate.StatusTypeEnum;
 import com.goldensky.vip.enumerate.UserAddressChangeEnum;
@@ -85,7 +85,8 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         });
         mBinding.rvMyAddress.setAdapter(adapter);
         String userId = AccountHelper.getUserId();
-        GetUserAddressReqBean bean = new GetUserAddressReqBean(userId);
+        UserAddressListReqBean bean = new UserAddressListReqBean();
+        bean.setUserId(userId);
         if(UserAddressHelper.getInstance().isUserAddressLoad()){
            list=UserAddressHelper.getInstance().getUserAddressList();
            adapter.notifyDataSetChanged();
