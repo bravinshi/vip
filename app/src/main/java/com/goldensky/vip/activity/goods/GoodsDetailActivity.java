@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.ArraySet;
 import android.view.View;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,11 +21,19 @@ import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
+import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
+import com.goldensky.vip.event.AddAddressEvent;
+import com.goldensky.vip.event.RetrieveAddressEvent;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ImageLoaderHelper;
+import com.goldensky.vip.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +55,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
     private String goodsId = "";
+    private SelectAddressDialog selectAddressDialog;
+    private String selectAddressDialogTag = "selectAddress";
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
 //        Bundle bundle = getIntent().getExtras();
@@ -62,7 +74,54 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId, null);
         // 获取地址信息
-//        mViewModel.
+        mViewModel.getUserAddress(AccountHelper.getUserId());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<UserAddressBean> userAddresses = new ArrayList<>();
+        UserAddressBean userAddressBean1 = new UserAddressBean();
+        UserAddressBean userAddressBean2 = new UserAddressBean();
+        userAddressBean1.setArea("area1");
+        userAddressBean2.setArea("area2");
+        userAddressBean1.setCity("city1");
+        userAddressBean2.setCity("city2");
+        userAddressBean1.setProvince("province1");
+        userAddressBean2.setProvince("province2");
+        userAddressBean1.setUseraddress("setUseraddress1");
+        userAddressBean2.setUseraddress("setUseraddress2");
+        userAddressBean1.setUseraddressname("addressname1");
+        userAddressBean2.setUseraddressname("addressname2");
+        userAddressBean1.setUseraddressphone("13651862222");
+        userAddressBean2.setUseraddressphone("13651862223");
+        userAddresses.add(userAddressBean1);
+        userAddresses.add(userAddressBean2);
+
+        handleAddress(userAddresses);
+    }
+
+    /**
+     * 订阅添加地址处理结果
+     *
+     * @param addAddressEvent 事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleAddAddress(AddAddressEvent addAddressEvent) {
+        if (addAddressEvent.getSuccess()) {
+            // 刷新地址信息
+            mViewModel.getUserAddress(AccountHelper.getUserId());
+        }
+    }
+
+    /**
+     * 订阅添加地址处理结果
+     *
+     * @param retrieveAddressEvent 事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeAddress(RetrieveAddressEvent retrieveAddressEvent) {
+        mBinding.tvAddress.setText(retrieveAddressEvent.getAddress());
     }
 
     public void showGoodsDetail(CommodityResBean data) {
@@ -81,8 +140,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
         if (!pics.isEmpty()) {
             mBinding.vpImage.setAdapter(new BannerImageAdapter(new ArrayList<>(pics)))
-            .addBannerLifecycleObserver(this)//添加生命周期观察者
-            .setIndicator(new CircleIndicator(this));
+                    .addBannerLifecycleObserver(this)//添加生命周期观察者
+                    .setIndicator(new CircleIndicator(this));
         } else {
             mBinding.vpImage.setVisibility(View.GONE);
         }
@@ -95,6 +154,22 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
     }
 
+    private void handleAddress(List<UserAddressBean> userAddresses) {
+        if (CollectionUtils.nullOrEmpty(userAddresses)) {
+            return;
+        }
+
+        if (selectAddressDialog == null) {
+            selectAddressDialog = new SelectAddressDialog();
+        }
+
+        if (!selectAddressDialog.isVisible()) {
+            selectAddressDialog.show(getSupportFragmentManager(), selectAddressDialogTag);
+        }
+
+        selectAddressDialog.setData(userAddresses);
+    }
+
     @Override
     public void observe() {
         mViewModel.goodsCommentLive.observe(this, goodsCommentResBean -> {
@@ -102,6 +177,19 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         });
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
+
+        mViewModel.userAddressLive.observe(this, this::handleAddress);
+    }
+
+    @Override
+    public void initListener() {
+        mBinding.topBarGoodsDetail.setBackListener(v -> finish());
+
+        mBinding.clAddress.setOnClickListener(v -> {
+            if (selectAddressDialog != null) {
+                selectAddressDialog.show(getSupportFragmentManager(), selectAddressDialogTag);
+            }
+        });
     }
 
     @Override

@@ -14,6 +14,8 @@ import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.framework.viewmodel.BaseViewModel;
 import com.gyf.immersionbar.ImmersionBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -45,6 +47,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
         initViewModel();
         initListener();
         observe();
+        EventBus.getDefault().register(this);
         onFinishInit(savedInstanceState);
     }
 
@@ -87,5 +90,11 @@ public abstract class BaseActivity<T extends ViewDataBinding, VM extends BaseVie
             // BaseActivity必须被继承并实现子类
             throw new IllegalStateException("BaseActivity must be extended by subclass");
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
