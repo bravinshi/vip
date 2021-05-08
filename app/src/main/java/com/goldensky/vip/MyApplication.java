@@ -44,9 +44,9 @@ public class MyApplication extends Application {
         // 财哥
 //        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
         // 王涛
-//        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
+        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
         // 马晓伟
-        apiConfiguration.setBaseUrl("http://172.25.0.214:9999/");
+//        apiConfiguration.setBaseUrl("http://172.25.0.214:9999/");
         // 设置gson
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
         apiConfiguration.setGson(gsonBuilder.create());

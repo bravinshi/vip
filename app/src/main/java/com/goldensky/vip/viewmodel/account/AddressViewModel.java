@@ -6,8 +6,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.account.AddressService;
+import com.goldensky.vip.bean.AddUserAddressReqBean;
 import com.goldensky.vip.bean.AreaListBean;
+import com.goldensky.vip.bean.ChangeUserAddressReqBean;
+import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.EditAddressBean;
+import com.goldensky.vip.bean.GetUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.google.gson.JsonObject;
@@ -23,13 +27,16 @@ public class AddressViewModel extends PublicViewModel {
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
+    public MutableLiveData<EditAddressBean> addAddressLive = new MutableLiveData<>();
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
-    public void getUserAddress(String userId){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("userid",userId);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+
+    /**
+     * 获取收货地址列表
+     * @param body
+     */
+    public void getUserAddress(GetUserAddressReqBean body){
         RetrofitAgent.create(AddressService.class)
-                .getUserAddressList(requestBody)
+                .getUserAddressList(body)
                 .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
                     @Override
                     public void onSuccess(List<UserAddressBean> data) {
@@ -37,12 +44,15 @@ public class AddressViewModel extends PublicViewModel {
                     }
                 });
     }
-    public void deleteUserAddress(String userAddressId){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("useraddressid",userAddressId);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+
+    /**
+     * 删除收货地址
+     * @param body
+     */
+    public void deleteUserAddress(DeleteUserAddressReqBean body){
+
         RetrofitAgent.create(AddressService.class)
-                .deleteUserAddress(requestBody)
+                .deleteUserAddress(body)
                 .subscribe(new ToastNetObserver<EditAddressBean>() {
                     @Override
                     public void onSuccess(EditAddressBean data) {
@@ -50,20 +60,15 @@ public class AddressViewModel extends PublicViewModel {
                     }
                 });
     }
-    public void editUserAddress(HashMap<String,Object> map){
-        JsonObject jsonObject = new JsonObject();
-        Set<String> keys = map.keySet();
-        for (String key : keys) {
-            if(map.get(key)instanceof Integer){
-                jsonObject.addProperty(key, (Integer) map.get(key));
-            }else if(map.get(key) instanceof String){
-                jsonObject.addProperty(key, (String) map.get(key));
-            }
 
-        }
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+    /**
+     * 编辑收货地址
+     * @param body
+     */
+    public void editUserAddress(ChangeUserAddressReqBean body){
+
         RetrofitAgent.create(AddressService.class)
-                .changeUserAddress(requestBody)
+                .changeUserAddress(body)
                 .subscribe(new ToastNetObserver<EditAddressBean>() {
                     @Override
                     public void onSuccess(EditAddressBean data) {
@@ -71,6 +76,10 @@ public class AddressViewModel extends PublicViewModel {
                     }
                 });
     }
+
+    /**
+     * 获取省市县列表
+     */
     public void getAreaList(){
         RetrofitAgent.create(AddressService.class)
                 .getAreaList()
@@ -78,6 +87,21 @@ public class AddressViewModel extends PublicViewModel {
                     @Override
                     public void onSuccess(List<AreaListBean> data) {
                         areaListLive.postValue(data);
+                    }
+                });
+    }
+
+    /**
+     * 新建收货地址
+     * @param body
+     */
+    public void addUserAddress(AddUserAddressReqBean body){
+        RetrofitAgent.create(AddressService.class)
+                .addUserAddress(body)
+                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                    @Override
+                    public void onSuccess(EditAddressBean data) {
+                        addAddressLive.postValue(data);
                     }
                 });
     }

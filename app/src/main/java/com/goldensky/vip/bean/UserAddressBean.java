@@ -37,6 +37,7 @@ public class UserAddressBean implements Serializable {
         this.useraddressphone = useraddressphone;
         this.useraddresstime = useraddresstime;
         this.userid = userid;
+
     }
 
     public String getArea() {

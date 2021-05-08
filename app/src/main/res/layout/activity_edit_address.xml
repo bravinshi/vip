@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="editAddressModel"
+            type="com.goldensky.vip.model.EditAddressModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +52,7 @@
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_name"
+                android:text="@={editAddressModel.consigneeName}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -78,6 +84,7 @@
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_phone"
+                android:text="@={editAddressModel.consigneePhone}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,6 +116,7 @@
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_location"
+                android:text="@={editAddressModel.area}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,6 +150,7 @@
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_address"
                 android:gravity="top"
+                android:text="@={editAddressModel.location}"
                 android:layout_marginBottom="17dp"
                 android:layout_height="match_parent"
                 />
@@ -187,6 +196,7 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/btn_save_edit_address"
             android:layout_width="315dp"
             android:layout_height="40dp"
             app:layout_constraintStart_toStartOf="parent"

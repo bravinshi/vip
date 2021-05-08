@@ -7,6 +7,9 @@
         <variable
             name="listener"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="newAdressModel"
+            type="com.goldensky.vip.model.EditAddressModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +53,7 @@
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_name"
+                android:text="@={newAdressModel.consigneeName}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -80,6 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
+                android:text="@={newAdressModel.consigneePhone}"
                 android:hint="@string/hint_input_consignee_phone"
                 android:layout_height="match_parent"
                 />
@@ -115,6 +120,7 @@
                 android:onClick="@{listener}"
                 android:gravity="center_vertical"
                 android:hint="@string/hint_input_consignee_location"
+                android:text="@={newAdressModel.location}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -148,6 +154,7 @@
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_address"
                 android:gravity="top"
+                android:text="@={newAdressModel.area}"
                 android:layout_marginBottom="17dp"
                 android:layout_height="match_parent"
                 />
@@ -193,6 +200,7 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/btn_save_new_address"
             android:layout_width="315dp"
             android:layout_height="40dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,6 +209,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/text_save"
             android:textSize="16sp"
+            android:onClick="@{listener}"
             android:textColor="@color/white"
             android:gravity="center"
             android:layout_marginBottom="50dp"
