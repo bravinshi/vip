@@ -106,13 +106,22 @@ public class PublicViewModel extends NetWorkViewModel {
      * @param evaluateType 筛选条件
      */
     public void getGoodsComment(Integer currentPage, Integer pageSize,
-                                String commodityId, Integer evaluateType) {
+                                String commodityId, Integer evaluateType, final FailCallback callback) {
         RetrofitAgent.create(GoodsService.class)
                 .getGoodsComment(currentPage, pageSize, commodityId, evaluateType)
                 .subscribe(new ToastNetObserver<GoodsCommentResBean>(){
                     @Override
                     public void onSuccess(GoodsCommentResBean data) {
                         goodsCommentLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<GoodsCommentResBean> data) {
+                         super.onFail(data);
+                        if (callback != null) {
+                            callback.onFail(data);
+                        }
+                         return false;
                     }
                 });
     }
