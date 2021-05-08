@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:duplicateParentState="true"
-                android:text="@{bean.province + bean.city + bean.area + bean.useraddress}"
+                android:text="@{bean.address}"
                 android:textColor="@color/primary_6_selector"
                 android:textSize="14dp" />
 

@@ -22,6 +22,7 @@ import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.UserAddressBean;
+import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
@@ -58,7 +59,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private String goodsId = "";
     private SelectAddressDialog selectAddressDialog;
     private String selectAddressDialogTag = "selectAddress";
-    private UserAddressBean selectedAddress = null;
+    private UserAddressBean selectedAddress = null;// 选择的地址
+    private boolean showDefaultAddress = false;// 是否展示过默认地址
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         userAddressBean2.setUseraddressname("addressname2");
         userAddressBean1.setUseraddressphone("13651862222");
         userAddressBean2.setUseraddressphone("13651862223");
+        userAddressBean2.setUseraddressdefault(1);
         userAddresses.add(userAddressBean1);
         userAddresses.add(userAddressBean2);
 
@@ -128,6 +131,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mBinding.tvAddress.setText(event.getAddress());
     }
 
+    /**
+     * 展示商品详情信息
+     *
+     * @param data 详情信息
+     */
     public void showGoodsDetail(CommodityResBean data) {
         CommodityBean detail = data.getCommodity();
         // 轮播图片
@@ -154,24 +162,47 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         // 标题
         mBinding.tvTitle.setText(detail.getCommodityName());
         // 详情
-        String content = detail.getCommodityDesc().replace("<img", "<img style=\"max-width:100%;height:auto\"");
+        String content = detail.getCommodityDesc()
+                .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
     }
 
+    /**
+     * 处理地址列表
+     *
+     * @param userAddresses 地址列表
+     */
     private void handleAddress(List<UserAddressBean> userAddresses) {
         if (CollectionUtils.nullOrEmpty(userAddresses)) {
             return;
+        }
+
+        // 检查是否展示过默认地址
+        if (!showDefaultAddress) {
+            showDefaultAddress = true;
+            showDefaultAddress(userAddresses);
         }
 
         if (selectAddressDialog == null) {
             selectAddressDialog = new SelectAddressDialog();
         }
 
-        if (!selectAddressDialog.isVisible()) {
-            selectAddressDialog.show(getSupportFragmentManager(), selectAddressDialogTag);
-        }
-
         selectAddressDialog.setData(userAddresses);
+    }
+
+    /**
+     * 第一次进入界面后展示默认地址
+     *
+     * @param userAddresses 地址列表
+     */
+    private void showDefaultAddress(List<UserAddressBean> userAddresses) {
+        for (UserAddressBean userAddressBean : userAddresses) {
+            if (BusinessConstant.VALUE_DEFAULT_ADDRESS.equals(userAddressBean.getUseraddressdefault())) {
+                selectedAddress = userAddressBean;
+                mBinding.tvAddress.setText(selectedAddress.getAddress());
+                break;
+            }
+        }
     }
 
     @Override

@@ -26,6 +26,10 @@ public class UserAddressBean implements Serializable {
 
     }
 
+    public String getAddress() {
+        return province + city + area + useraddress;
+    }
+
     public UserAddressBean(String area, Integer areaid, String city, Integer cityid, Integer isdel, String province, Integer provinceid, String useraddress, Integer useraddressdefault, String useraddressid, String useraddressname, String useraddressphone, String useraddresstime, String userid) {
         this.area = area;
         this.areaid = areaid;
