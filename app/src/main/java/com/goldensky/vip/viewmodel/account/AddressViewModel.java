@@ -5,21 +5,15 @@ import androidx.lifecycle.MutableLiveData;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.bean.AddUserAddressReqBean;
-import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.ChangeUserAddressReqBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
-import com.goldensky.vip.bean.EditAddressBean;
-import com.goldensky.vip.bean.UserAddressBean;
-import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
-
-import java.util.List;
 
 public class AddressViewModel extends PublicViewModel {
 
-    public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
-    public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
-    public MutableLiveData<EditAddressBean> addAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Object> deleteAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Object> editAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Object> addAddressLive = new MutableLiveData<>();
 
 
 
@@ -33,9 +27,9 @@ public class AddressViewModel extends PublicViewModel {
 
         RetrofitAgent.create(AddressService.class)
                 .deleteUserAddress(body)
-                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(EditAddressBean data) {
+                    public void onSuccess(Object data) {
                         deleteAddressLive.postValue(data);
                     }
                 });
@@ -49,9 +43,9 @@ public class AddressViewModel extends PublicViewModel {
 
         RetrofitAgent.create(AddressService.class)
                 .changeUserAddress(body)
-                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(EditAddressBean data) {
+                    public void onSuccess(Object data) {
                         editAddressLive.postValue(data);
                     }
                 });
@@ -66,9 +60,9 @@ public class AddressViewModel extends PublicViewModel {
     public void addUserAddress(AddUserAddressReqBean body){
         RetrofitAgent.create(AddressService.class)
                 .addUserAddress(body)
-                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(EditAddressBean data) {
+                    public void onSuccess(Object data) {
                         addAddressLive.postValue(data);
                     }
                 });

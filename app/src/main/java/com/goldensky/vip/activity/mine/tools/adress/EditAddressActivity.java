@@ -1,6 +1,5 @@
 package com.goldensky.vip.activity.mine.tools.adress;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -15,18 +14,13 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
-import com.goldensky.vip.bean.AddUserAddressReqBean;
 import com.goldensky.vip.bean.ChangeUserAddressReqBean;
-import com.goldensky.vip.bean.EditAddressBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityEditAddressBinding;
-import com.goldensky.vip.enumerate.StatusTypeEnum;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.model.EditAddressModel;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
-
-import java.io.Serializable;
 
 public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding, AddressViewModel> implements View.OnClickListener {
     private int isDefaultCode=0;
@@ -60,9 +54,9 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
     @Override
     public void observe() {
 
-        mViewModel.addAddressLive.observe(this, new Observer<EditAddressBean>() {
+        mViewModel.addAddressLive.observe(this, new Observer<Object>() {
             @Override
-            public void onChanged(EditAddressBean editAddressBean) {
+            public void onChanged(Object editAddressBean) {
                     UserAddressBean addressBean = new UserAddressBean(bean.getArea(),bean.getAreaid(),bean.getCity(),bean.getCityid(),bean.getIsdel(),bean.getProvince(),bean.getProvinceid(),bean.getUseraddress(),bean.getUseraddressdefault(),bean.getUseraddressid(),bean.getUseraddressname(),bean.getUseraddressphone(),"",bean.getUserid());
                     UserAddressHelper.getInstance().editUserAddress(addressBean);
             }

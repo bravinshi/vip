@@ -15,9 +15,7 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.UserAddressAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
-import com.goldensky.vip.bean.EditAddressBean;
 import com.goldensky.vip.bean.UserAddressBean;
-import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.goldensky.vip.databinding.ActivityMyAddressBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
@@ -116,9 +114,9 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
             }
         });
 
-        mViewModel.deleteAddressLive.observe(this, new Observer<EditAddressBean>() {
+        mViewModel.deleteAddressLive.observe(this, new Observer<Object>() {
             @Override
-            public void onChanged(EditAddressBean editAddressBean) {
+            public void onChanged(Object editAddressBean) {
                     UserAddressHelper.getInstance().deleteUserAddress(bean);
             }
         });

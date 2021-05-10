@@ -75,13 +75,10 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
 
         // 修改密码
         UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
-        UpdateVipUserReqBean.VipUser vipUser = new UpdateVipUserReqBean.VipUser();
 
-        vipUser.setPhoneCode(inputModel.getVerificationCode().trim());
-        vipUser.setUserPassword(inputModel.getNewPasswordConfirm().trim());
-        vipUser.setNewPwd(inputModel.getNewPassword().trim());
-
-        userInfo.setVipUser(vipUser);
+        userInfo.setPhoneCode(inputModel.getVerificationCode().trim());
+        userInfo.setUserPassword(inputModel.getNewPasswordConfirm().trim());
+        userInfo.setNewPwd(inputModel.getNewPassword().trim());
         userInfo.setUserId(AccountHelper.getUserId());
         mViewModel.updateVipUser(userInfo);
     }

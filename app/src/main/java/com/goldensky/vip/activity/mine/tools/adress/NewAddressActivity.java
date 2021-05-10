@@ -3,7 +3,6 @@ package com.goldensky.vip.activity.mine.tools.adress;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 
@@ -14,25 +13,15 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.goldensky.framework.util.StringUtils;
-import com.goldensky.framework.util.TimeUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.AddUserAddressReqBean;
-import com.goldensky.vip.bean.AreaListBean;
-import com.goldensky.vip.bean.AreaPickerBean;
-import com.goldensky.vip.bean.ChangeUserAddressReqBean;
-import com.goldensky.vip.bean.EditAddressBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityNewAddressBinding;
-import com.goldensky.vip.enumerate.StatusTypeEnum;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.model.EditAddressModel;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, AddressViewModel> implements View.OnClickListener {
@@ -60,9 +49,9 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
     @Override
     public void observe() {
 
-        mViewModel.addAddressLive.observe(this, new Observer<EditAddressBean>() {
+        mViewModel.addAddressLive.observe(this, new Observer<Object>() {
             @Override
-            public void onChanged(EditAddressBean editAddressBean) {
+            public void onChanged(Object editAddressBean) {
                     UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), 1, "", newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), "", AccountHelper.getUserId());
                     UserAddressHelper.getInstance().addUserAddress(bean);
                     toast(UserAddressHelper.getInstance().getUserAddressList().size()+"");
