@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -36,6 +38,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -66,6 +69,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
         List<First> firsts = transData(inventoryBeans);
         InventoryBean defaultSelectInventory = defaultSelectInventory(inventoryBeans, firsts);
         setSelectedInventory(defaultSelectInventory);
+        checkSecondSelectState(firsts);
         firstAdapter.setNewInstance(firsts);
     }
 
@@ -90,15 +94,123 @@ public class GoodsSpecificationDialog extends BottomDialog {
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSecondClick(SpecificationItemClickEvent specificationItemClickEvent) {
+        Second second = specificationItemClickEvent.getSecond();
+        int firstPosition = specificationItemClickEvent.getFirstPosition();
+        List<First> firsts = firstAdapter.getData();
+        if (second.selectState.equals(SpecificationItemView.SELECT_STATE_NOT_AVAILABLE)) {
+            // 不可点击的状态，忽略
+            return;
+        }
 
+        if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
+            // 取消选择
+            // 去掉second的选择状态
+            second.selectState = SpecificationItemView.SELECT_STATE_UNSELECTED;
+            // 检查所有second的选择状态
+            checkSecondSelectState(firstAdapter.getData());
+            firstAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        if (second.selectState.equals(SpecificationItemView.SELECT_STATE_UNSELECTED)) {
+            // 选择
+            // 将同层的其它second设置成未选择状态，将点击的second设置成选择状态
+            for (Second secondTemp : firsts.get(firstPosition).seconds) {
+                secondTemp.selectState = SpecificationItemView.SELECT_STATE_UNSELECTED;
+            }
+            second.selectState = SpecificationItemView.SELECT_STATE_SELECTED;
+            // 检查所有second的选择状态
+            checkSecondSelectState(firstAdapter.getData());
+            firstAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    public void checkSecondSelectState(List<First> firsts) {
+        if (CollectionUtils.nullOrEmpty(firsts)) {
+            return;
+        }
+        // 1 拿到所有被选择的Second 每层的被选择的second只有一个
+        Map<Integer, Second> selectedSecondsMap = new HashMap<>();
+        for (int i = 0; i < firsts.size(); i++) {
+            for (Second second : firsts.get(i).seconds) {
+                if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
+                    selectedSecondsMap.put(i, second);// 只有一个，所以跳出
+                    break;
+                }
+            }
+        }
+
+        if (selectedSecondsMap.size() == 0) {
+            for (First first : firsts) {
+                for (Second second : first.seconds) {
+                    second.selectState = SpecificationItemView.SELECT_STATE_UNSELECTED;
+                }
+            }
+
+            return;
+        }
+        // 当判断每层的second的选择状态时
+        // 如果定义selectedSeconds中除去待检验层的second后剩余的所有second中的规格交集为A，则有如下结论
+        // 遍历待检验层的second，如果second中的规格列表中包含A中所有的元素，则second应置为可选择状态，否则设置为不可选状态
+        // 1 拿到除去待检验层的second规格交集
+        for (int i = 0; i < firsts.size(); i++) {
+            // i 为待检验层的标识
+            First first = firsts.get(i);
+            List<InventoryBean> intersection = new ArrayList<>();
+            Second removed = selectedSecondsMap.remove(i);
+            // 拿到其它层包含的所有的规格
+            Set<Second> remainder = new HashSet<>(selectedSecondsMap.values());
+            if (remainder.size() == 0) {
+                // 其它层没有被选中的second
+                // 当前层的所有未选中状态的second都设置成可选择
+                for (Second second : first.seconds) {
+                    if (!second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
+                        second.selectState = SpecificationItemView. SELECT_STATE_UNSELECTED;
+                    }
+                }
+
+                continue;
+            }
+            // 先求并集
+            for (Second second : remainder) {
+                intersection.addAll(second.inventories);
+            }
+            // 再求交集
+            for (Second second : remainder) {
+                intersection.retainAll(second.inventories);
+            }
+            // 逻辑上来说intersection内必然有元素，选择的second不可能不在同一个规格内
+            // 检查i层的每个second状态
+
+            for (Second second : first.seconds) {
+                if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
+                    // 已选择状态的second忽略
+                    continue;
+                }
+
+                // 先置为不可选状态
+                second.selectState = SpecificationItemView.SELECT_STATE_NOT_AVAILABLE;
+
+                for (InventoryBean inventoryBean : second.inventories) {
+                    if (intersection.contains(inventoryBean)) {// 可以被选择
+                        second.selectState = SpecificationItemView.SELECT_STATE_UNSELECTED;
+                        break;
+                    }
+                }
+            }
+
+            if (removed != null) {// 放回removed
+                selectedSecondsMap.put(i, removed);
+            }
+        }
     }
 
     /**
      * 默认选择第一个规格
      *
      * @param inventoryBeans 规格列表
-     * @param firsts 渲染的数据结构
-     *
+     * @param firsts         渲染的数据结构
      * @return 选择的规格
      */
     public InventoryBean defaultSelectInventory(List<InventoryBean> inventoryBeans, List<First> firsts) {
@@ -121,7 +233,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
     }
 
     /**
-     *
      * @param inventory
      * @param firsts
      */
@@ -223,7 +334,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
      * 设置立刻购买和加入购物车按钮显示状态
      *
      * @param joinVis 加入购物车按钮显示状态
-     * @param buyVis 立刻购买按钮显示状态
+     * @param buyVis  立刻购买按钮显示状态
      */
     public void setBtnState(int joinVis, int buyVis) {
         this.joinVis = joinVis;
@@ -315,9 +426,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
                 // 次级的recyclerView绑定adapter
                 secondAdapter = new SecondAdapter();
                 itemSpecificationBinding.rvSpecification.setAdapter(secondAdapter);
-                itemSpecificationBinding.rvSpecification
-                        .setLayoutManager(new FlexboxLayoutManager(mBinding.recyclerView.getContext(),
-                        FlexDirection.ROW, FlexWrap.WRAP));
                 secondAdapter.setNewInstance(first.seconds);
                 secondAdapter.setOnItemClickListener((adapter, view, position) -> {
                     // 次级item被点击
@@ -339,7 +447,10 @@ public class GoodsSpecificationDialog extends BottomDialog {
                     EventBus.getDefault().post(specificationItemClickEvent);
                 });
             }
-
+            // 每次convert都重新设置LayoutManager是为了让每个内层的recyclerView都能在外层的adapter notifyDataSetChanged的时候重新绘制
+            itemSpecificationBinding.rvSpecification
+                    .setLayoutManager(new FlexboxLayoutManager(mBinding.recyclerView.getContext(),
+                            FlexDirection.ROW, FlexWrap.WRAP));
             itemSpecificationBinding.rvSpecification.setTag(first);
         }
     }
