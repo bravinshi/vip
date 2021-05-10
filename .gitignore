@@ -8,5 +8,6 @@
 .cxx
 local.properties
 /app/build
+/app/debug
 /goldenFramework/build
 /.idea/
