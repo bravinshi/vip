@@ -52,7 +52,7 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
         mViewModel.addAddressLive.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object editAddressBean) {
-                    UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), 1, "", newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), "", AccountHelper.getUserId());
+                    UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, "", newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), "", AccountHelper.getUserId());
                     UserAddressHelper.getInstance().addUserAddress(bean);
                     toast(UserAddressHelper.getInstance().getUserAddressList().size()+"");
                     toast("添加成功");
@@ -85,10 +85,11 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
         if(isNotNull(newAddressModel.getConsigneeName())){
             if(isNotNull(newAddressModel.getConsigneePhone())&&!notPhoneNumber(newAddressModel.getConsigneePhone())){
                 if(isNotNull(newAddressModel.getLocation())){
+                    newAddressModel.setDefault(mBinding.isDefaultNewAddress.isChecked());
                     if(newAddressModel.isDefault()){
                         isDefaultCode=1;
                     }
-                    bean = new AddUserAddressReqBean(selectAreaName, selectAreaId, selectCityName, selectCityId,0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, newAddressModel.getConsigneeName(), newAddressModel.getConsigneeName(), AccountHelper.getUserId());
+                    bean = new AddUserAddressReqBean(selectAreaName, selectAreaId, selectCityName, selectCityId,0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), AccountHelper.getUserId());
                     mViewModel.addUserAddress(bean);
                 }else {
                     toast(getResources().getString(R.string.hint_input_consignee_area_nonull));

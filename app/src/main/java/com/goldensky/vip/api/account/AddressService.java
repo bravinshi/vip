@@ -14,12 +14,12 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface AddressService {
-    @POST("/goldendays-user/vipAddress/getUserAddressListByUserId")
+    @POST("/goldendays-user/vipAddress/getUserAddressListByUserId")//加载收货地址列表
     Observable<NetResponse<List<UserAddressBean>>> getUserAddressList(@Body UserAddressListReqBean body);
-    @POST("/goldendays-user/vipAddress/deleteUserAddressByAddressId")
+    @POST("/goldendays-user/vipAddress/deleteUserAddressByAddressId")//删除收货地址
     Observable<NetResponse<Object>> deleteUserAddress(@Body DeleteUserAddressReqBean body);
-    @POST("/goldendays-user/vipAddress/addVipAddress")
+    @POST("/goldendays-user/vipAddress/updateByUserAddressId")//修改收货地址
     Observable<NetResponse<Object>> changeUserAddress(@Body ChangeUserAddressReqBean body);
-    @POST("/goldendays-user/vipAddress/addVipAddress")
+    @POST("/goldendays-user/vipAddress/addVipAddress")//增加新地址
     Observable<NetResponse<Object>> addUserAddress(@Body AddUserAddressReqBean body);
 }

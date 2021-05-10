@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +48,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         mBinding.setListener(this);
         mBinding.rvMyAddress.setLayoutManager(new LinearLayoutManager(this));
         adapter=new UserAddressAdapter(list);
+        adapter.addChildClickViewIds(new int[]{R.id.edit_item_myaddress,R.id.delete_item_myaddress});
         adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -57,24 +60,31 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                         break;
                     case R.id.delete_item_myaddress:
                         AlertDialog.Builder builder = new AlertDialog.Builder(MyAddressActivity.this);
+
                         View popView = LayoutInflater.from(MyAddressActivity.this).inflate(R.layout.pop_delete_user_address, null);
-                        popView.setOnClickListener(new View.OnClickListener() {
+                        TextView confirm = popView.findViewById(R.id.btn_confirm_delete_address);
+                        TextView cancel = popView.findViewById(R.id.btn_cancel_delete_address);
+                        confirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                switch (v.getId()){
-                                    case R.id.btn_confirm_delete_address:
-                                        bean = new DeleteUserAddressReqBean(list.get(position).getUseraddressid());
-                                        mViewModel.deleteUserAddress(bean);
-                                        break;
-                                    case R.id.btn_cancel_delete_address:
-                                        dialog.dismiss();
-                                        break;
-                                }
+                                bean = new DeleteUserAddressReqBean(list.get(position).getUseraddressid());
+                                mViewModel.deleteUserAddress(bean);
+                                dialog.dismiss();
+                            }
+                        });
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
                             }
                         });
                         builder.setView(popView);
                         dialog = builder.create();
                         dialog.show();
+                        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                        params.width=550;
+                        params.height=350;
+                        dialog.getWindow().setAttributes(params);
                         break;
                 }
             }
@@ -82,12 +92,17 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         mBinding.rvMyAddress.setAdapter(adapter);
         String userId = AccountHelper.getUserId();
         if(UserAddressHelper.getInstance().isUserAddressLoad()){
-           list=UserAddressHelper.getInstance().getUserAddressList();
-           adapter.notifyDataSetChanged();
+            refreshAddressList();
         }else {
             mViewModel.getUserAddress(userId);
         }
 
+    }
+
+    private void refreshAddressList() {
+        list.clear();
+        list .addAll(UserAddressHelper.getInstance().getUserAddressList());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -99,7 +114,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
     public void refreshAddressList(AddAddressEvent addAddressEvent){
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
-            adapter.notifyDataSetChanged();
+            refreshAddressList();
         }
 
     }
@@ -109,8 +124,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
             @Override
             public void onChanged(List<UserAddressBean> userAddressBeans) {
                 UserAddressHelper.getInstance().setUserAddressList(userAddressBeans);
-                list=UserAddressHelper.getInstance().getUserAddressList();
-                adapter.notifyDataSetChanged();
+                refreshAddressList();
             }
         });
 

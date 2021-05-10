@@ -68,11 +68,14 @@ public class UserAddressHelper {
         return userAddressList;
     }
     public void editUserAddress(UserAddressBean bean) {
+        int editPosition=0;
         for (UserAddressBean userAddressBean : userAddressList) {
             if(userAddressBean.getUseraddressid()==bean.getUseraddressid()){
-                userAddressBean=bean;
+                editPosition=userAddressList.indexOf(userAddressBean);
             }
         }
+        userAddressList.remove(editPosition);
+        userAddressList.add(editPosition,bean);
         changeAddressList();
     }
     public void addUserAddress(UserAddressBean bean) {

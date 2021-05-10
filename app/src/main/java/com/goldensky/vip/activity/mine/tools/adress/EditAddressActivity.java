@@ -43,22 +43,39 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
         });
         mBinding.setEditAddressModel(editAddressModel);
         mBinding.setListener(this);
+        addressbean = (UserAddressBean) getIntent().getSerializableExtra("addressbean");
+        if(addressbean!=null){
+            editAddressModel.setConsigneeName(addressbean.getUseraddressname());
+            editAddressModel.setConsigneePhone(addressbean.getUseraddressphone());
+            editAddressModel.setLocation(addressbean.getUseraddress());
+            selectProvinceId=addressbean.getProvinceid();
+            selectCityId=addressbean.getCityid();
+            selectAreaId=addressbean.getAreaid();
+            selectProvinceName=addressbean.getProvince();
+            selectCityName=addressbean.getCity();
+            selectAreaName=addressbean.getArea();
+            mBinding.etRegionEditAddress.setText(addressbean.getLocation());
+            Integer integer = addressbean.getUseraddressdefault();
+            if(integer==0){
+                mBinding.isDefaultEditAddress.setChecked(false);
+                editAddressModel.setDefault(false);
+            }else {
+                mBinding.isDefaultEditAddress.setChecked(true);
+                editAddressModel.setDefault(true);
+            }
+        }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        addressbean = (UserAddressBean) intent.getSerializableExtra("addressbean");
-    }
 
     @Override
     public void observe() {
 
-        mViewModel.addAddressLive.observe(this, new Observer<Object>() {
+        mViewModel.editAddressLive.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object editAddressBean) {
                     UserAddressBean addressBean = new UserAddressBean(bean.getArea(),bean.getAreaid(),bean.getCity(),bean.getCityid(),bean.getIsdel(),bean.getProvince(),bean.getProvinceid(),bean.getUseraddress(),bean.getUseraddressdefault(),bean.getUseraddressid(),bean.getUseraddressname(),bean.getUseraddressphone(),"",bean.getUserid());
                     UserAddressHelper.getInstance().editUserAddress(addressBean);
+                    finish();
             }
         });
     }
@@ -87,6 +104,7 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
         if(isNotNull(editAddressModel.getConsigneeName())){
             if(isNotNull(editAddressModel.getConsigneePhone())&&!notPhoneNumber(editAddressModel.getConsigneePhone())){
                 if(isNotNull(editAddressModel.getLocation())){
+                    editAddressModel.setDefault(mBinding.isDefaultEditAddress.isChecked());
                     if(editAddressModel.isDefault()){
                         isDefaultCode=1;
                     }

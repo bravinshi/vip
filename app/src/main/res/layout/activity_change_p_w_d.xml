@@ -21,47 +21,56 @@
             app:centerText="@string/text_change_psd"
             app:showIvBack="true"
             />
-        <TextView
-            android:id="@+id/tv_prompt_change_pwd"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar_change_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_888888"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="40dp"
-            android:text="本次操作需要短信确认，短信验证码已发送至136****3697，请注意查收"
-            />
         <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintTop_toBottomOf="@+id/tv_prompt_change_pwd"
-            android:layout_marginTop="15dp"
-            android:background="@color/white"
+            android:id="@+id/send_code_change_pwd"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_change_pwd"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
             >
-            <EditText
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:textSize="14sp"
-                android:hint="@string/hint_input_verification_code"
-                />
             <TextView
+                android:id="@+id/tv_prompt_change_pwd"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textSize="16sp"
-                android:textColor="@color/color_6E788C"
-                android:id="@+id/btn_get_code_change_pwd"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hint_get_verification_code"
-                android:layout_marginRight="15dp"
+                android:textColor="@color/color_888888"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="40dp"
+                android:text="本次操作需要短信确认，短信验证码已发送至136****3697，请注意查收"
                 />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:layout_constraintTop_toBottomOf="@+id/tv_prompt_change_pwd"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                >
+                <EditText
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:textSize="14sp"
+                    android:hint="@string/hint_input_verification_code"
+                    />
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_6E788C"
+                    android:id="@+id/btn_get_code_change_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_get_verification_code"
+                    android:layout_marginRight="15dp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             app:layout_constraintBottom_toBottomOf="parent"
