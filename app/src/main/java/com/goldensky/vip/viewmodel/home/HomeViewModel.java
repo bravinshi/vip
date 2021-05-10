@@ -157,7 +157,7 @@ public class HomeViewModel extends PublicViewModel {
 
         List<Integer>jtyxImgIds2 = new ArrayList();
         jtyxImgIds2.add(R.mipmap.home_test_buxie);
-        jtyxImgIds2.add(R.mipmap.home_test222);
+        jtyxImgIds2.add(R.mipmap.home_test22);
         jtyxImgIds2.add(R.mipmap.home_test23);
 
         List<String> jtyxNames2 = new ArrayList();
