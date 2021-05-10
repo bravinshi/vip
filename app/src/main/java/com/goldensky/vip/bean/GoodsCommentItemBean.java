@@ -1,5 +1,7 @@
 package com.goldensky.vip.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.goldensky.vip.adapter.CommentAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -12,7 +14,7 @@ import java.util.List;
  * 包名： com.goldensky.vip.bean
  * 类说明：
  */
-public class GoodsCommentItemBean {
+public class GoodsCommentItemBean implements MultiItemEntity {
     private List<CommentPicBean> busCommodityCommentPics;
     @SerializedName("commentid")
     private String commentId;
@@ -129,6 +131,14 @@ public class GoodsCommentItemBean {
 
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
+    }
+
+    @Override
+    public int getItemType() {
+        if (busCommodityCommentPics == null || busCommodityCommentPics.size() == 0) {
+            return CommentAdapter.COMMENT_TYPE_TEXT;
+        }
+        return CommentAdapter.COMMENT_TYPE_PIC;
     }
 
     public static class CommentPicBean {
