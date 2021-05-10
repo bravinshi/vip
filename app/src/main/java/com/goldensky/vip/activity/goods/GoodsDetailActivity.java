@@ -59,6 +59,14 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     public static final Integer KEY_FAKE_DATA_FENGMI = 14;// 蜂蜜
     public static final Integer KEY_FAKE_DATA_DANGAO = 15;// 蛋糕
     public static final Integer KEY_FAKE_DATA_YUNDOU = 16;// 熨斗
+    public static final Integer KEY_FAKE_DATA_NIUNAN = 17;// 牛腩
+    public static final Integer KEY_FAKE_DATA_FANGSHAIYI = 18;// 防晒服
+    public static final Integer KEY_FAKE_DATA_TAIYANGSAN = 19;// 太阳伞
+    public static final Integer KEY_FAKE_DATA_JIUYANG = 20;// 九阳榨汁机
+    public static final Integer KEY_FAKE_DATA_XIANGXUN = 21;// 香薰
+    public static final Integer KEY_FAKE_DATA_BUXIE = 22;// 布鞋
+    public static final Integer KEY_FAKE_DATA_KANGJIA = 23;// 康佳手机
+    public static final Integer KEY_FAKE_DATA_XIYIYE = 24;// 吊牌洗衣液
 
     private Integer fakeKey;
 
@@ -266,6 +274,107 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     .detailIds(new ArrayList<Integer>(){{
                         add(R.mipmap.my_pic_yundou1);
                         add(R.mipmap.my_pic_yundou2);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_NIUNAN)) {
+            fakeData.mainImage(R.mipmap.niunan1)
+                    .price("59.90")
+                    .title("进口牛腩肉冷鲜1000g生鲜冷冻牛腩块牛肉粒真牛肉")
+                    .specification("1000g/份 1件")
+                    .commentNum(13988)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.niunan2);
+                        add(R.mipmap.niunan3);
+                        add(R.mipmap.niunan4);
+                        add(R.mipmap.niunan5);
+                        add(R.mipmap.niunan6);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_FANGSHAIYI)) {
+            fakeData.mainImage(R.mipmap.fangshai1)
+                    .price("179.80")
+                    .title("防晒衣2021新款中长款透气防晒服防紫外线运动风衣")
+                    .specification("均码 1件")
+                    .commentNum(11829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.fangshai2);
+                        add(R.mipmap.fangshai3);
+                        add(R.mipmap.fangshai4);
+                        add(R.mipmap.fangshai5);
+
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_TAIYANGSAN)) {
+            fakeData.mainImage(R.mipmap.yusan1)
+                    .price("39.90")
+                    .title("雨伞双人防风超大雨伞太阳伞自动折叠伞男士晴雨两用")
+                    .specification("黑色")
+                    .commentNum(5493)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.yusan2);
+                        add(R.mipmap.yusan3);
+                        add(R.mipmap.yusan4);
+                        add(R.mipmap.yusan5);
+                        add(R.mipmap.yusan6);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_KANGJIA)) {
+            fakeData.mainImage(R.mipmap.kangjia1)
+                    .price("218.00")
+                    .title("康佳u18超长待机正品老人老年手机大屏幕大字大声音")
+                    .specification("24MB 官方标配")
+                    .commentNum(8829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.kangjia2);
+                        add(R.mipmap.kangjia3);
+                        add(R.mipmap.kangjia4);
+                        add(R.mipmap.kangjia5);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_XIYIYE)) {
+            fakeData.mainImage(R.mipmap.xiyiye1)
+                    .price("49.90")
+                    .title("雕牌洗衣液除菌馨香家庭装促销整箱装除菌99%12斤")
+                    .specification("12斤装整箱")
+                    .commentNum(6398)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.xiyiye2);
+                        add(R.mipmap.xiyiye3);
+                        add(R.mipmap.xiyiye4);
+                        add(R.mipmap.xiyiye5);
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_JIUYANG)) {
+            fakeData.mainImage(R.mipmap.jiuyang1)
+                    .price("189.00")
+                    .title("家用型原汁机榨水果全自动果蔬多功能小型渣汁分离")
+                    .specification("红色 1件")
+                    .commentNum(213829)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.jiuyang2);
+                        add(R.mipmap.jiuyang3);
+                        add(R.mipmap.jiuyang4);
+                        add(R.mipmap.jiuyang5);
+
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_XIANGXUN)) {
+            fakeData.mainImage(R.mipmap.xiangxun1)
+                    .price("34.20")
+                    .title("车载香薰加湿器无线可充电不插电车内空气净化办公室桌面")
+                    .specification("充电款 白色")
+                    .commentNum(69783)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.xiangxun2);
+                        add(R.mipmap.xiangxun3);
+                        add(R.mipmap.xiangxun4);
+                        add(R.mipmap.xiangxun5);
+
+                    }});
+        }else if (fakeKey.equals(KEY_FAKE_DATA_BUXIE)) {
+            fakeData.mainImage(R.mipmap.buxie1)
+                    .price("99.90")
+                    .title("夏季老北京布鞋男休闲鞋牛筋千层底中国风透气防臭一脚蹬")
+                    .specification("黑色 42码")
+                    .commentNum(369874)
+                    .detailIds(new ArrayList<Integer>(){{
+                        add(R.mipmap.buxie2);
+                        add(R.mipmap.buxie3);
+                        add(R.mipmap.buxie4);
+                        add(R.mipmap.buxie5);
                     }});
         }
 
