@@ -166,7 +166,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
                 // 当前层的所有未选中状态的second都设置成可选择
                 for (Second second : first.seconds) {
                     if (!second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
-                        second.selectState = SpecificationItemView. SELECT_STATE_UNSELECTED;
+                        second.selectState = SpecificationItemView.SELECT_STATE_UNSELECTED;
                     }
                 }
 
@@ -182,7 +182,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
             }
             // 逻辑上来说intersection内必然有元素，选择的second不可能不在同一个规格内
             // 检查i层的每个second状态
-
             for (Second second : first.seconds) {
                 if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
                     // 已选择状态的second忽略
