@@ -2,10 +2,9 @@ package com.goldensky.vip.helper;
 
 import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.AreaPickerBean;
-import com.goldensky.vip.bean.ChangeUserAddressReqBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
-import com.goldensky.vip.enumerate.UserAddressChangeEnum;
+import com.goldensky.vip.event.AddAddressEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -63,7 +62,7 @@ public class UserAddressHelper {
         return userAddressList!=null;
     }
     public Boolean isAreaLoad(){
-        return provinceList!=null;
+        return provinceList.size()!=0;
     }
     public List<UserAddressBean> getUserAddressList() {
         return userAddressList;
@@ -72,9 +71,9 @@ public class UserAddressHelper {
         for (UserAddressBean userAddressBean : userAddressList) {
             if(userAddressBean.getUseraddressid()==bean.getUseraddressid()){
                 userAddressBean=bean;
-                changeAddressList();
             }
         }
+        changeAddressList();
     }
     public void addUserAddress(UserAddressBean bean) {
         if(bean.getUseraddressdefault()==1){
@@ -85,7 +84,13 @@ public class UserAddressHelper {
             }
             userAddressList.add(0,bean);
         }else {
-            userAddressList.add(1,bean);
+            if(userAddressList.size()==0){
+                bean.setUseraddressdefault(1);
+                userAddressList.add(0,bean);
+            }else {
+                userAddressList.add(1,bean);
+            }
+
         }
         changeAddressList();
     }
@@ -100,7 +105,7 @@ public class UserAddressHelper {
         changeAddressList();
     }
     private void changeAddressList(){
-        EventBus.getDefault().post(UserAddressChangeEnum.USERADDRESSCHANGE);
+        EventBus.getDefault().post(new AddAddressEvent(true));
     }
 
     public void loadAddressList(List<AreaListBean> areaListBean) {

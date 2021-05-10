@@ -63,11 +63,8 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
         mViewModel.addAddressLive.observe(this, new Observer<EditAddressBean>() {
             @Override
             public void onChanged(EditAddressBean editAddressBean) {
-                Integer status = editAddressBean.getStatus();
-                if(status== StatusTypeEnum.SUCCSESS.value){
                     UserAddressBean addressBean = new UserAddressBean(bean.getArea(),bean.getAreaid(),bean.getCity(),bean.getCityid(),bean.getIsdel(),bean.getProvince(),bean.getProvinceid(),bean.getUseraddress(),bean.getUseraddressdefault(),bean.getUseraddressid(),bean.getUseraddressname(),bean.getUseraddressphone(),"",bean.getUserid());
                     UserAddressHelper.getInstance().editUserAddress(addressBean);
-                }
             }
         });
     }
@@ -95,7 +92,7 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
     private void editAddress() {
         if(isNotNull(editAddressModel.getConsigneeName())){
             if(isNotNull(editAddressModel.getConsigneePhone())&&!notPhoneNumber(editAddressModel.getConsigneePhone())){
-                if(isNotNull(editAddressModel.getArea())&&isNotNull(editAddressModel.getLocation())){
+                if(isNotNull(editAddressModel.getLocation())){
                     if(editAddressModel.isDefault()){
                         isDefaultCode=1;
                     }
@@ -126,10 +123,10 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
             public void onOptionsSelect(int options1, int option2, int options3 , View v) {
                 //返回的分别是三个级别的选中位置
                 if(instance.getProvinceNameList().get(options1).equals("北京")||instance.getProvinceNameList().get(options1).equals("重庆")||instance.getProvinceNameList().get(options1).equals("天津")||instance.getProvinceNameList().get(options1).equals("上海")){
-                    editAddressModel.setArea(instance.getProvinceNameList().get(options1)+"市"
+                    mBinding.etRegionEditAddress.setText(instance.getProvinceNameList().get(options1)+"市"
                             + instance.getAreaNameList().get(options1).get(option2).get(options3));
                 }else {
-                    editAddressModel.setArea(instance.getProvinceNameList().get(options1)+"省"
+                    mBinding.etRegionEditAddress.setText(instance.getProvinceNameList().get(options1)+"省"
                             + instance.getCityNameList().get(options1).get(option2)+"市"
                             +instance.getAreaNameList().get(options1).get(option2).get(options3));
                 }

@@ -14,14 +14,12 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.UserAddressAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
-import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.EditAddressBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.goldensky.vip.databinding.ActivityMyAddressBinding;
-import com.goldensky.vip.enumerate.StatusTypeEnum;
-import com.goldensky.vip.enumerate.UserAddressChangeEnum;
+import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
@@ -85,17 +83,13 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         });
         mBinding.rvMyAddress.setAdapter(adapter);
         String userId = AccountHelper.getUserId();
-        UserAddressListReqBean bean = new UserAddressListReqBean();
-        bean.setUserId(userId);
         if(UserAddressHelper.getInstance().isUserAddressLoad()){
            list=UserAddressHelper.getInstance().getUserAddressList();
            adapter.notifyDataSetChanged();
         }else {
-            mViewModel.getUserAddress(bean);
+            mViewModel.getUserAddress(userId);
         }
-        if(!UserAddressHelper.getInstance().isAreaLoad()){
-            mViewModel.getAreaList();
-        }
+
     }
 
     @Override
@@ -104,10 +98,12 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         EventBus.getDefault().unregister(this);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refreshAddressList(String action){
-        if(action.equals(UserAddressChangeEnum.USERADDRESSCHANGE.value)){
+    public void refreshAddressList(AddAddressEvent addAddressEvent){
+        if (addAddressEvent.getSuccess()) {
+            // 刷新地址信息
             adapter.notifyDataSetChanged();
         }
+
     }
     @Override
     public void observe() {
@@ -119,19 +115,11 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                 adapter.notifyDataSetChanged();
             }
         });
-        mViewModel.areaListLive.observe(this, new Observer<List<AreaListBean>>() {
-            @Override
-            public void onChanged(List<AreaListBean> areaListBean) {
-                UserAddressHelper.getInstance().loadAddressList(areaListBean);
-            }
-        });
+
         mViewModel.deleteAddressLive.observe(this, new Observer<EditAddressBean>() {
             @Override
             public void onChanged(EditAddressBean editAddressBean) {
-                Integer status = editAddressBean.getStatus();
-                if(status== StatusTypeEnum.SUCCSESS.value){
                     UserAddressHelper.getInstance().deleteUserAddress(bean);
-                }
             }
         });
     }

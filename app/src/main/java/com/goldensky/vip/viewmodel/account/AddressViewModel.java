@@ -20,23 +20,10 @@ public class AddressViewModel extends PublicViewModel {
     public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
     public MutableLiveData<EditAddressBean> addAddressLive = new MutableLiveData<>();
-    public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
 
 
-    /**
-     * 获取收货地址列表
-     * @param body
-     */
-    public void getUserAddress(UserAddressListReqBean body){
-        RetrofitAgent.create(AddressService.class)
-                .getUserAddressList(body)
-                .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
-                    @Override
-                    public void onSuccess(List<UserAddressBean> data) {
-                        userAddressLive.postValue(data);
-                    }
-                });
-    }
+
+
 
     /**
      * 删除收货地址
@@ -70,19 +57,7 @@ public class AddressViewModel extends PublicViewModel {
                 });
     }
 
-    /**
-     * 获取省市县列表
-     */
-    public void getAreaList(){
-        RetrofitAgent.create(AddressService.class)
-                .getAreaList()
-                .subscribe(new ToastNetObserver<List<AreaListBean>>() {
-                    @Override
-                    public void onSuccess(List<AreaListBean> data) {
-                        areaListLive.postValue(data);
-                    }
-                });
-    }
+
 
     /**
      * 新建收货地址

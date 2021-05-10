@@ -1,6 +1,9 @@
 package com.goldensky.vip.api;
 
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.vip.bean.AreaListBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -37,4 +40,11 @@ public interface PublicService {
     @GET("/goldendays-user/mbUserPer/checkCode")
     Observable<NetResponse<Object>> checkVerifyCode(@Query("userMobile") String mobile,
                                                     @Query("userCode") String verifyCode);
+
+    /**
+     * 获取省市县列表
+     * @return
+     */
+    @GET("/goldendays-currency/sysArea/getAreaListAll")
+    Observable<NetResponse<List<AreaListBean>>> getAreaList();
 }

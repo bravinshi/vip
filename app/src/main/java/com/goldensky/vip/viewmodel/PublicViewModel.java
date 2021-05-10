@@ -9,6 +9,7 @@ import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.bean.UserAddressListReqBean;
@@ -39,6 +40,7 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<GoodsCommentResBean> goodsCommentLive = new MutableLiveData<>();
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
 
+    public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
         RequestBody requestBody = RequestBody.create(MediaType.parse(URLConnection.guessContentTypeFromName(filePath)), file);
@@ -119,13 +121,26 @@ public class PublicViewModel extends NetWorkViewModel {
 
     public void getUserAddress(String userId){
         UserAddressListReqBean reqBean = new UserAddressListReqBean();
-        reqBean.setUserId(userId);
+        reqBean.setUserid(userId);
         RetrofitAgent.create(AddressService.class)
                 .getUserAddressList(reqBean)
                 .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
                     @Override
                     public void onSuccess(List<UserAddressBean> data) {
                         userAddressLive.postValue(data);
+                    }
+                });
+    }
+    /**
+     * 获取省市县列表
+     */
+    public void getAreaList(){
+        RetrofitAgent.create(PublicService.class)
+                .getAreaList()
+                .subscribe(new ToastNetObserver<List<AreaListBean>>() {
+                    @Override
+                    public void onSuccess(List<AreaListBean> data) {
+                        areaListLive.postValue(data);
                     }
                 });
     }

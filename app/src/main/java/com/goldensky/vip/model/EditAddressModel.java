@@ -11,7 +11,6 @@ public class EditAddressModel {
     private String consigneeName;
     private String consigneePhone;
     private String location;
-    private String area;
     private boolean isDefault;
 
     public String getConsigneeName() {
@@ -38,13 +37,6 @@ public class EditAddressModel {
         this.location = location;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
 
     public boolean isDefault() {
         return isDefault;

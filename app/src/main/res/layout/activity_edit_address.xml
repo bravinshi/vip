@@ -116,7 +116,6 @@
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_location"
-                android:text="@={editAddressModel.area}"
                 android:layout_height="match_parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -185,6 +184,7 @@
                 android:textColor="@color/color_888888"
                 />
             <Switch
+                android:id="@+id/isDefault_edit_address"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="24dp"
