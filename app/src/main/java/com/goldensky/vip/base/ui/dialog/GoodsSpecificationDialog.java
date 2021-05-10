@@ -6,25 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.framework.ui.dialog.BottomDialog;
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.ui.view.SpecificationItemView;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.databinding.DialogGoodSpecificationBinding;
-import com.goldensky.vip.databinding.DialogSelectAddressBinding;
 import com.goldensky.vip.databinding.ItemSpecificationBinding;
 import com.goldensky.vip.databinding.ItemSpecificationValueBinding;
+import com.goldensky.vip.helper.ImageLoaderHelper;
+import com.goldensky.vip.model.PurchaseQuantityModel;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -56,10 +55,112 @@ public class GoodsSpecificationDialog extends BottomDialog {
     private int joinVis = View.VISIBLE;
     private int buyVis = View.VISIBLE;
 
-    public void  setData(List<InventoryBean> inventoryBeans) {
+    private InventoryBean selectedInventory;// 选择的规格
+    private final PurchaseQuantityModel purchaseQuantityModel = new PurchaseQuantityModel("1");
+
+    public void setData(List<InventoryBean> inventoryBeans) {
         if (CollectionUtils.nullOrEmpty(inventoryBeans)) {
             return;
         }
+
+        List<First> firsts = transData(inventoryBeans);
+        InventoryBean defaultSelectInventory = defaultSelectInventory(inventoryBeans, firsts);
+        setSelectedInventory(defaultSelectInventory);
+        firstAdapter.setNewInstance(firsts);
+    }
+
+    public void setSelectedInventory(InventoryBean inventory) {
+        selectedInventory = inventory;
+    }
+
+    public void refresh() {
+        if (selectedInventory != null) {
+            // 图片
+            ImageLoaderHelper.loadImage(mBinding.ivPic, selectedInventory.getInventoryPic());
+            // 价格
+            mBinding.tvPrice.setText(selectedInventory.getCommodityOldPrice() + "");
+            mBinding.tvBuyFromNum.setText("最小购买数量:" + selectedInventory.getBuyFromNum());
+        }
+    }
+
+    /**
+     * 响应second点击事件
+     *
+     * @param specificationItemClickEvent 点击事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSecondClick(SpecificationItemClickEvent specificationItemClickEvent) {
+
+    }
+
+    /**
+     * 默认选择第一个规格
+     *
+     * @param inventoryBeans 规格列表
+     * @param firsts 渲染的数据结构
+     *
+     * @return 选择的规格
+     */
+    public InventoryBean defaultSelectInventory(List<InventoryBean> inventoryBeans, List<First> firsts) {
+        // 默认选中第一个规格
+        InventoryBean inventory = null;
+        for (InventoryBean inventoryTemp : inventoryBeans) {
+            String inventoryStr = inventoryTemp.getInventory();
+            if (StringUtils.isTrimEmpty(inventoryStr)) {
+                continue;
+            }
+
+            inventory = inventoryTemp;
+            break;
+        }
+        if (inventory != null) {
+            selectGivenInventory(inventory, firsts);
+        }
+
+        return inventory;
+    }
+
+    /**
+     *
+     * @param inventory
+     * @param firsts
+     */
+    public void selectGivenInventory(InventoryBean inventory, List<First> firsts) {
+        if (inventory == null) {
+            return;
+        }
+
+        String inventoryStr = inventory.getInventory();
+        Gson gson = new Gson();
+        // 转成map结构
+        JsonObject jsonObject = gson.fromJson(inventoryStr, JsonObject.class);
+        Set<String> keySet = jsonObject.keySet();
+        Map<String, String> jsonObjectMap = new HashMap<>();
+        for (String key : keySet) {
+            String value = jsonObject.get(key).getAsString();
+            jsonObjectMap.put(key, value);
+        }
+
+        for (First first : firsts) {
+            String name = first.name;
+            String value = jsonObjectMap.get(name);
+            // 拿到second中对应对应value的second
+            for (Second second : first.seconds) {
+                if (second.content.equals(value)) {
+                    second.selectState = SpecificationItemView.SELECT_STATE_SELECTED;
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 把规格列表的数据结构转换成用于渲染的列表数据结构
+     *
+     * @param inventoryBeans 规格列表的数据结构
+     * @return 用于渲染的列表数据结构
+     */
+    public List<First> transData(List<InventoryBean> inventoryBeans) {
         // 转换数据结构
         Gson gson = new Gson();
 
@@ -115,20 +216,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
             }
         }
 
-        List<First> firsts = new ArrayList<>(firstTempMap.values());
-        // 初始化规格中每个second的选择状态，如果只有唯一的可选值，默认second为选中状态
-        for (First first : firsts) {
-            if (first.seconds.size() == 1) {
-                first.seconds.get(0).selectState = SpecificationItemView.SELECT_STATE_SELECTED;
-            }
-        }
-
-        firstAdapter.setNewInstance(firsts);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSecondClick(String item) {
-
+        return new ArrayList<>(firstTempMap.values());
     }
 
     /**
@@ -148,7 +236,25 @@ public class GoodsSpecificationDialog extends BottomDialog {
         if (mBinding != null) {
             mBinding.tvBuyRightNow.setVisibility(buyVis);
             mBinding.tvJoinInfoShoppingCart.setVisibility(joinVis);
+
+            refresh();
         }
+    }
+
+    private void initListener() {
+        mBinding.btnClose.setOnClickListener(v -> dismissAllowingStateLoss());
+        // 加入购物车监听
+        mBinding.tvJoinInfoShoppingCart.setOnClickListener(v -> {
+
+        });
+        // 立即购买监听
+        mBinding.tvJoinInfoShoppingCart.setOnClickListener(v -> {
+
+        });
+
+        mBinding.btnDecrease.setOnClickListener(v -> purchaseQuantityModel.decrease());
+
+        mBinding.btnIncrease.setOnClickListener(v -> purchaseQuantityModel.increase());
     }
 
     @Nullable
@@ -156,6 +262,8 @@ public class GoodsSpecificationDialog extends BottomDialog {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_good_specification, container, false);
         mBinding.recyclerView.setAdapter(firstAdapter);
+        mBinding.setModel(purchaseQuantityModel);
+        initListener();
         return mBinding.getRoot();
     }
 
@@ -168,6 +276,27 @@ public class GoodsSpecificationDialog extends BottomDialog {
         public String content;
         public Integer selectState;// 1 未选中 2 不可选中 3 选中
         public List<InventoryBean> inventories;// 当前可选项存在这些规格中
+    }
+
+    public static class SpecificationItemClickEvent {
+        private Integer firstPosition;
+        private Second second;
+
+        public Integer getFirstPosition() {
+            return firstPosition;
+        }
+
+        public void setFirstPosition(Integer firstPosition) {
+            this.firstPosition = firstPosition;
+        }
+
+        public Second getSecond() {
+            return second;
+        }
+
+        public void setSecond(Second second) {
+            this.second = second;
+        }
     }
 
     private class FirstAdapter extends BaseQuickAdapter<First, BaseViewHolder> {
@@ -194,14 +323,24 @@ public class GoodsSpecificationDialog extends BottomDialog {
                     // 次级item被点击
                     Second secondItem = (Second) adapter.getItem(position);
                     // 拿到item在外层recyclerView的层级
-                    Integer index = firstAdapter.getData().indexOf(secondItem);
+                    First firstTag = (First) adapter.getRecyclerView().getTag();
+                    Integer index = firstAdapter.getData().indexOf(firstTag);
                     if (index == -1) {
                         // 逻辑上不会出现-1
                         Log.w("SecondAdapter", "the index of secondItem is -1");
                         return;
                     }
+                    // 发送点击事件
+                    SpecificationItemClickEvent specificationItemClickEvent = new SpecificationItemClickEvent();
+
+                    specificationItemClickEvent.setFirstPosition(index);
+                    specificationItemClickEvent.setSecond(secondItem);
+
+                    EventBus.getDefault().post(specificationItemClickEvent);
                 });
             }
+
+            itemSpecificationBinding.rvSpecification.setTag(first);
         }
     }
 

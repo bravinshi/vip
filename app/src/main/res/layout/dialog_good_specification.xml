@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="model"
+            type="com.goldensky.vip.model.PurchaseQuantityModel" />
+
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -23,11 +31,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/iv_pic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:scaleType="centerCrop" />
 
                 <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12313.23"
@@ -107,6 +118,7 @@
                             android:minWidth="40dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
+                            android:text="@={model.purchaseQuantity}"
                             android:textColor="@color/color_3"
                             android:textSize="14sp" />
 
