@@ -29,6 +29,7 @@ import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
+import com.goldensky.vip.activity.order.OrderCommentActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 
 
@@ -320,6 +321,15 @@ public class Starter {
     //商品评价全部
     public static void startGoodsCommentActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, GoodsCommentActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //订单发表评价
+    public static void startOrderCommentActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OrderCommentActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

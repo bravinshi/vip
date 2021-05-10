@@ -30,10 +30,11 @@
         android:roundIcon="@mipmap/icon_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.VIP"
-        tools:replace="android:theme"
         android:usesCleartextTraffic="true"
+        tools:replace="android:theme"
         tools:targetApi="m">
-        <activity android:name=".activity.mine.tools.adress.EditAddressActivity"></activity>
+        <activity android:name=".activity.order.OrderCommentActivity"></activity>
+        <activity android:name=".activity.mine.tools.adress.EditAddressActivity" />
         <activity android:name=".activity.order.OrderDetailActivity" />
         <activity android:name=".activity.mine.tools.adress.NewAddressActivity" />
         <activity android:name=".activity.customer.CustomerServiceActivity" />
@@ -79,9 +80,7 @@
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
