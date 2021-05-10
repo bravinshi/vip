@@ -88,6 +88,38 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_yundouxinxi);
                     mBinding.priceIv.setImageResource(R.mipmap.my_pic_yundoujiage);
                     break;
+                case 17:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_niunanxinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_niunanjiage);
+                    break;
+                case 18:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_fangshaifuxinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_fangshaifujiage);
+                    break;
+                case 19:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_yusanxinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_yusanjiage);
+                    break;
+                case 20:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_jiuyangxinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_jiuyangjiage);
+                    break;
+                case 21:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_xiangxunxinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_xiangxunjiage);
+                    break;
+                case 22:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_buxiexinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_buxiejiage);
+                    break;
+                case 23:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_shoujixinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_shoujijiage);
+                    break;
+                case 24:
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_xiyiyexinxi);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_xiyiyejiage);
+                    break;
             }
         }
     }

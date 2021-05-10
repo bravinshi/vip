@@ -46,26 +46,26 @@ public class HomeViewModel extends PublicViewModel {
         HomeBean rmdBean = new HomeBean(HomeAdapter.ITEM_TYPE_RMD);
         rmdBean.setItemTitle("为你推荐");
         List<Integer>rmdImgIds = new ArrayList();
-        rmdImgIds.add(R.mipmap.home_test_pg);
-        rmdImgIds.add(R.mipmap.home_test_cz);
+        rmdImgIds.add(R.mipmap.home_test_niunan);
+        rmdImgIds.add(R.mipmap.home_test_fangshaifu);
         rmdImgIds.add(R.mipmap.home_test_mg);
         rmdImgIds.add(R.mipmap.home_test_bz);
 
         List<String> rmdNames = new ArrayList();
-        rmdNames.add("高端红富士");
-        rmdNames.add("赣南脐橙");
+        rmdNames.add("进口牛腩块");
+        rmdNames.add("高效防晒衣");
         rmdNames.add("切芒果神器");
         rmdNames.add("榨汁杯马卡龙色");
 
         List<String> rmdPrices = new ArrayList();
-        rmdPrices.add("49.80");
-        rmdPrices.add("30.80");
+        rmdPrices.add("59.90");
+        rmdPrices.add("179.80");
         rmdPrices.add("19.90");
         rmdPrices.add("159.80");
 
         List<Integer>rmdPdIds = new ArrayList();
-        rmdPdIds.add(1);
-        rmdPdIds.add(6);
+        rmdPdIds.add(17);
+        rmdPdIds.add(18);
         rmdPdIds.add(7);
         rmdPdIds.add(8);
 
@@ -84,22 +84,22 @@ public class HomeViewModel extends PublicViewModel {
         List<Integer>jrbkImgIds = new ArrayList();
         jrbkImgIds.add(R.mipmap.home_test_mg_1);
         jrbkImgIds.add(R.mipmap.home_test_bj);
-        jrbkImgIds.add(R.mipmap.home_test_yadan);
+        jrbkImgIds.add(R.mipmap.home_test_yusan);
 
         List<String> jrbkNames = new ArrayList();
         jrbkNames.add("三亚芒果新鲜采摘");
         jrbkNames.add("金天喝睿酒");
-        jrbkNames.add("宿迁骆马湖咸鸭蛋");
+        jrbkNames.add("双人雨伞太阳伞");
 
         List<String> jrbkPrices = new ArrayList();
         jrbkPrices.add("34.90");
         jrbkPrices.add("299.00");
-        jrbkPrices.add("29.90");
+        jrbkPrices.add("39.90");
 
         List<Integer>jrbkPdIds = new ArrayList();
         jrbkPdIds.add(2);
         jrbkPdIds.add(5);
-        jrbkPdIds.add(3);
+        jrbkPdIds.add(19);
 
         List<HomeBean.ProductBean> jrbkProducts = new ArrayList<>();
         for (int i = 0 ; i < jrbkImgIds.size(); i ++) {
@@ -124,28 +124,28 @@ public class HomeViewModel extends PublicViewModel {
 
         List<Integer>jtyxImgIds1 = new ArrayList();
         jtyxImgIds1.add(R.mipmap.home_test11);
-        jtyxImgIds1.add(R.mipmap.home_test12);
-        jtyxImgIds1.add(R.mipmap.home_test13);
+        jtyxImgIds1.add(R.mipmap.home_test_jiuyang);
+        jtyxImgIds1.add(R.mipmap.home_test_xiangxun);
 
         List<String> jtyxNames1 = new ArrayList();
         jtyxNames1.add("哈尔滨风味红肠");
-        jtyxNames1.add("碳烤鱿鱼条");
-        jtyxNames1.add("可口饼干天然…");
+        jtyxNames1.add("九阳榨汁机");
+        jtyxNames1.add("车载香薰 加湿…");
 
         List<String> jtyxPrices1 = new ArrayList();
         jtyxPrices1.add("19.90");
-        jtyxPrices1.add("14.80");
-        jtyxPrices1.add("46.00");
+        jtyxPrices1.add("189.00");
+        jtyxPrices1.add("34.20");
 
         List<String> jtyxOPrices1 = new ArrayList();
         jtyxOPrices1.add("28.90");
-        jtyxOPrices1.add("18.80");
+        jtyxOPrices1.add("205.00");
         jtyxOPrices1.add("88.00");
 
         List<Integer>jtyxPdIds1 = new ArrayList();
         jtyxPdIds1.add(4);
-        jtyxPdIds1.add(9);
-        jtyxPdIds1.add(10);
+        jtyxPdIds1.add(20);
+        jtyxPdIds1.add(21);
 
         List<HomeBean.ProductBean> jtyxProducts1 = new ArrayList<>();
         for (int i = 0 ; i < jtyxImgIds1.size(); i ++) {
@@ -156,28 +156,28 @@ public class HomeViewModel extends PublicViewModel {
 
 
         List<Integer>jtyxImgIds2 = new ArrayList();
-        jtyxImgIds2.add(R.mipmap.home_test21);
+        jtyxImgIds2.add(R.mipmap.home_test_buxie);
         jtyxImgIds2.add(R.mipmap.home_test222);
         jtyxImgIds2.add(R.mipmap.home_test23);
 
         List<String> jtyxNames2 = new ArrayList();
-        jtyxNames2.add("USB-C数据线");
-        jtyxNames2.add("高硼硅耐热玻");
+        jtyxNames2.add("夏季老北京布…");
+        jtyxNames2.add("康佳康u18老…");
         jtyxNames2.add("景德镇陶瓷碗");
 
         List<String> jtyxPrices2 = new ArrayList();
-        jtyxPrices2.add("9.90");
-        jtyxPrices2.add("15.90");
+        jtyxPrices2.add("99.90");
+        jtyxPrices2.add("218.00");
         jtyxPrices2.add("586.00");
 
         List<String> jtyxOPrices2 = new ArrayList();
-        jtyxOPrices2.add("19.60");
-        jtyxOPrices2.add("22.60");
+        jtyxOPrices2.add("119.60");
+        jtyxOPrices2.add("329.00");
         jtyxOPrices2.add("988.00");
 
         List<Integer>jtyxPdIds2 = new ArrayList();
-        jtyxPdIds2.add(11);
-        jtyxPdIds2.add(12);
+        jtyxPdIds2.add(22);
+        jtyxPdIds2.add(23);
         jtyxPdIds2.add(13);
 
         List<HomeBean.ProductBean> jtyxProducts2 = new ArrayList<>();
@@ -189,27 +189,27 @@ public class HomeViewModel extends PublicViewModel {
 
 
         List<Integer>jtyxImgIds3 = new ArrayList();
-        jtyxImgIds3.add(R.mipmap.home_test31);
+        jtyxImgIds3.add(R.mipmap.home_test_xiyiye);
         jtyxImgIds3.add(R.mipmap.home_test32);
         jtyxImgIds3.add(R.mipmap.home_test33);
 
         List<String> jtyxNames3 = new ArrayList();
-        jtyxNames3.add("蜂蜜正品农家");
+        jtyxNames3.add("雕牌洗衣液家...");
         jtyxNames3.add("鸡蛋松饼松可");
         jtyxNames3.add("熨斗界的颜值");
 
         List<String> jtyxPrices3 = new ArrayList();
-        jtyxPrices3.add("29.90");
+        jtyxPrices3.add("49.90");
         jtyxPrices3.add("14.90");
         jtyxPrices3.add("244.90");
 
         List<String> jtyxOPrices3 = new ArrayList();
-        jtyxOPrices3.add("39.60");
+        jtyxOPrices3.add("69.90");
         jtyxOPrices3.add("20.60");
         jtyxOPrices3.add("360.60");
 
         List<Integer>jtyxPdIds3 = new ArrayList();
-        jtyxPdIds3.add(14);
+        jtyxPdIds3.add(24);
         jtyxPdIds3.add(15);
         jtyxPdIds3.add(16);
 
