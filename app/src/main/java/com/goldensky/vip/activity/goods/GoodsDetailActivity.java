@@ -1,36 +1,26 @@
 package com.goldensky.vip.activity.goods;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.util.ArraySet;
 import android.view.View;
-
-import androidx.annotation.MainThread;
-import androidx.annotation.RequiresApi;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.BannerImageAdapter;
-import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
-import com.goldensky.vip.base.ui.view.FullyLinearLayoutManager;
+import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.CommodityResBean;
-import com.goldensky.vip.bean.GoodsCommentResBean;
+import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
-import com.goldensky.vip.helper.ImageLoaderHelper;
-import com.goldensky.vip.ui.dialog.SelectAddressDialog;
+import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
-import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,12 +28,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /**
  * @author bravin
@@ -58,7 +45,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
     private String goodsId = "";
     private SelectAddressDialog selectAddressDialog;
-    private String selectAddressDialogTag = "selectAddress";
+    private GoodsSpecificationDialog goodsSpecificationDialog;
+    private String selectAddressDialogTag = "selectAddressDialog";
+    private String goodsSpecificationDialogTag = "goodsSpecificationDialog";
     private UserAddressBean selectedAddress = null;// 选择的地址
     private boolean showDefaultAddress = false;// 是否展示过默认地址
 
@@ -75,7 +64,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 //            return;
 //        }
         // 获取商品详情
-        mViewModel.getGoodsDetail(140);
+        mViewModel.getGoodsDetail(347);
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId, null);
         // 获取地址信息
@@ -165,6 +154,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         String content = detail.getCommodityDesc()
                 .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
+
+        handleInventory(data.getInventories());
+    }
+
+    // 处理规格
+    private void handleInventory(List<InventoryBean> inventoryBeans) {
+        if (CollectionUtils.nullOrEmpty(inventoryBeans)) {
+            return;
+        }
+
+        if (goodsSpecificationDialog == null) {
+            goodsSpecificationDialog = new GoodsSpecificationDialog();
+        }
+
+        goodsSpecificationDialog.setData(inventoryBeans);
     }
 
     /**
@@ -223,6 +227,27 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mBinding.clAddress.setOnClickListener(v -> {
             if (selectAddressDialog != null) {
                 selectAddressDialog.show(getSupportFragmentManager(), selectAddressDialogTag);
+            }
+        });
+        // 已选规格区域点击
+        mBinding.clSpecification.setOnClickListener(v -> {
+            if (goodsSpecificationDialog != null) {
+                goodsSpecificationDialog.setBtnState(View.VISIBLE, View.VISIBLE);
+                goodsSpecificationDialog.show(getSupportFragmentManager(), goodsSpecificationDialogTag);
+            }
+        });
+        // 加入购物车监听
+        mBinding.tvJoin.setOnClickListener(v -> {
+            if (goodsSpecificationDialog != null) {
+                goodsSpecificationDialog.setBtnState(View.VISIBLE, View.GONE);
+                goodsSpecificationDialog.show(getSupportFragmentManager(), goodsSpecificationDialogTag);
+            }
+        });
+        // 立刻购买监听
+        mBinding.tvBuy.setOnClickListener(v -> {
+            if (goodsSpecificationDialog != null) {
+                goodsSpecificationDialog.setBtnState(View.GONE, View.VISIBLE);
+                goodsSpecificationDialog.show(getSupportFragmentManager(), goodsSpecificationDialogTag);
             }
         });
     }

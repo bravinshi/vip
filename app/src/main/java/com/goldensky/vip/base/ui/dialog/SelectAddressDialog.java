@@ -1,4 +1,4 @@
-package com.goldensky.vip.ui.dialog;
+package com.goldensky.vip.base.ui.dialog;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ import java.util.List;
  * 类说明：
  */
 public class SelectAddressDialog extends BottomDialog {
-    private SelectAddressAdapter addressAdapter = new SelectAddressAdapter(R.layout.item_select_address);
+    private final SelectAddressAdapter addressAdapter = new SelectAddressAdapter(R.layout.item_select_address);
 
     private DialogSelectAddressBinding mBinding;
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_specification_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:textColor="@color/color_3"
+            android:textSize="14sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_specification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+
+</layout>
