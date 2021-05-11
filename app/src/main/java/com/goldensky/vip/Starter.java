@@ -9,6 +9,7 @@ import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.account.SetPasswordActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
@@ -310,6 +311,15 @@ public class Starter {
      */
     public static void startEditAddressActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, EditAddressActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //商品评价全部
+    public static void startGoodsCommentActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, GoodsCommentActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

@@ -43,6 +43,7 @@
                 android:textColor="@color/color_3"
                 />
             <ImageView
+                android:id="@+id/iv_head_personal_detail"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="15dp"
@@ -83,6 +84,7 @@
                 android:textColor="@color/color_3"
                 />
             <TextView
+                android:id="@+id/tv_nick_personal_detail"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="27dp"

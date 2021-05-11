@@ -9,6 +9,7 @@ import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -41,6 +42,8 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
     public MutableLiveData<Boolean> joinIntoShoppingCartResultLive = new MutableLiveData<>();
 
+    public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
+
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
         RequestBody requestBody = RequestBody.create(MediaType.parse(URLConnection.guessContentTypeFromName(filePath)), file);
@@ -63,10 +66,11 @@ public class PublicViewModel extends NetWorkViewModel {
             }
         });
     }
+
     /**
      * 获取验证码
      *
-     * @param mobile  手机号
+     * @param mobile 手机号
      */
     public void getVerificationCode(String mobile) {
         RetrofitAgent.create(PublicService.class)
@@ -102,26 +106,35 @@ public class PublicViewModel extends NetWorkViewModel {
     /**
      * 获取商品评价列表
      *
-     * @param currentPage 当前页
-     * @param pageSize 页大小
-     * @param commodityId 商品id
+     * @param currentPage  当前页
+     * @param pageSize     页大小
+     * @param commodityId  商品id
      * @param evaluateType 筛选条件
      */
     public void getGoodsComment(Integer currentPage, Integer pageSize,
-                                String commodityId, Integer evaluateType) {
+                                String commodityId, Integer evaluateType, final FailCallback callback) {
         RetrofitAgent.create(GoodsService.class)
                 .getGoodsComment(currentPage, pageSize, commodityId, evaluateType)
-                .subscribe(new ToastNetObserver<GoodsCommentResBean>(){
+                .subscribe(new ToastNetObserver<GoodsCommentResBean>() {
                     @Override
                     public void onSuccess(GoodsCommentResBean data) {
                         goodsCommentLive.postValue(data);
                     }
+
+                    @Override
+                    public boolean onFail(NetResponse<GoodsCommentResBean> data) {
+                        super.onFail(data);
+                        if (callback != null) {
+                            callback.onFail(data);
+                        }
+                        return false;
+                    }
                 });
     }
 
-    public void getUserAddress(String userId){
+    public void getUserAddress(String userId) {
         UserAddressListReqBean reqBean = new UserAddressListReqBean();
-        reqBean.setUserId(userId);
+        reqBean.setUserid(userId);
         RetrofitAgent.create(AddressService.class)
                 .getUserAddressList(reqBean)
                 .subscribe(new ToastNetObserver<List<UserAddressBean>>() {
@@ -136,7 +149,7 @@ public class PublicViewModel extends NetWorkViewModel {
     public void joinIntoShoppingCart(JoinIntoShoppingCartReqBean reqBean) {
         RetrofitAgent.create(GoodsService.class)
                 .joinIntoShoppingCart(reqBean)
-                .subscribe(new ToastNetObserver<Object>(){
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
                     public void onSuccess(Object data) {
                         joinIntoShoppingCartResultLive.postValue(true);
@@ -147,6 +160,20 @@ public class PublicViewModel extends NetWorkViewModel {
                         super.onFail(data);
                         joinIntoShoppingCartResultLive.postValue(false);
                         return false;
+                    }
+                });
+    }
+
+    /**
+     * 获取省市县列表
+     */
+    public void getAreaList() {
+        RetrofitAgent.create(PublicService.class)
+                .getAreaList()
+                .subscribe(new ToastNetObserver<List<AreaListBean>>() {
+                    @Override
+                    public void onSuccess(List<AreaListBean> data) {
+                        areaListLive.postValue(data);
                     }
                 });
     }

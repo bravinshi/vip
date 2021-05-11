@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.goldensky.vip.model.ChangeNickModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,8 +40,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:paddingLeft="15dp"
-                android:text="13963687986"
-                android:textColor="@color/color_9"
+                android:text="@={model.nick}"
+                android:hint="@string/hint_input_new_nick"
+                android:textColorHint="@color/color_9"
+                android:textColor="@color/color_333333"
                 android:background="@color/white"
                 android:paddingTop="27dp"
                 android:paddingBottom="27dp"

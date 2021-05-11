@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityPersonalDetailsBinding;
+import com.goldensky.vip.enumerate.DefaultUrlEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, PublicViewModel> implements View.OnClickListener {
@@ -22,6 +26,16 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
             }
         });
         mBinding.setListener(this);
+        if(AccountHelper.getUserNick()!=null){
+            mBinding.tvNickPersonalDetail.setText(AccountHelper.getUserNick());
+        }else {
+            mBinding.tvNickPersonalDetail.setText(AccountHelper.getUserMobile());
+        }
+        if(AccountHelper.getUserPic()!=null&&!AccountHelper.getUserPic().equals("")){
+            Glide.with(this).load(AccountHelper.getUserPic()).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadPersonalDetail);
+        }else {
+            Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadPersonalDetail);
+        }
     }
 
     @Override

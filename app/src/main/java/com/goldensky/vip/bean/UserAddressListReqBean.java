@@ -8,13 +8,13 @@ package com.goldensky.vip.bean;
  * 类说明：
  */
 public class UserAddressListReqBean {
-    private String userId;
+    private String userid;
 
     public String getUserId() {
-        return userId;
+        return userid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

@@ -57,9 +57,7 @@ public class SetPasswordActivity extends BaseActivity<ActivitySetPasswordBinding
 
         UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
         reqBean.setUserId(AccountHelper.getUserId());
-        UpdateVipUserReqBean.VipUser vipUser = new UpdateVipUserReqBean.VipUser();
-        vipUser.setUserPassword(model.getPassword());
-        reqBean.setVipUser(vipUser);
+        reqBean.setUserPassword(model.getPassword());
 
         mViewModel.updateVipUser(reqBean);
     }
