@@ -54,4 +54,5 @@ dependencies {//
     implementation  'com.github.addappcn:android-pickers:2.0.0'
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'io.github.lucksiege:pictureselector:v2.7.0-rc02'
 }

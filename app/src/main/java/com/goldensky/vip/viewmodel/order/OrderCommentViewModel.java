@@ -2,20 +2,18 @@ package com.goldensky.vip.viewmodel.order;
 
 import com.goldensky.vip.R;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderCommentViewModel extends PublicViewModel {
     public List<Integer> stars = new ArrayList<>();
-    public List<Integer> images = new ArrayList<>();
 
     public void initImages() {
         for (int i = 0; i < 5; i ++) {
             stars.add(R.mipmap.pingjia_icon_star_line);
         }
-
-        images.add(R.mipmap.icon_upload_pic);
     }
 
     public void updateStars(int level) {
