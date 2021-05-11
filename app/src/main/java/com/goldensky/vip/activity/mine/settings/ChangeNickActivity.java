@@ -11,8 +11,9 @@ import com.goldensky.vip.databinding.ActivityChangeNickBinding;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.model.ChangeNickModel;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
-public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, PublicViewModel> {
+public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, AccountViewModel> {
     private ChangeNickModel changeNickModel=new ChangeNickModel();
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
