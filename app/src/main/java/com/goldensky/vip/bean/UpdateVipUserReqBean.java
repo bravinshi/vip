@@ -12,8 +12,6 @@ import java.util.Date;
  * 类说明：
  */
 public class UpdateVipUserReqBean {
-    private String userId;
-    private VipUser vipUser;
 
     public String getUserId() {
         return userId;
@@ -23,15 +21,7 @@ public class UpdateVipUserReqBean {
         this.userId = userId;
     }
 
-    public VipUser getVipUser() {
-        return vipUser;
-    }
 
-    public void setVipUser(VipUser vipUser) {
-        this.vipUser = vipUser;
-    }
-
-    public static class VipUser {
         @SerializedName("infotips")
         private Integer infoTips;
         @SerializedName("userban")
@@ -128,13 +118,6 @@ public class UpdateVipUserReqBean {
             this.superVipId = superVipId;
         }
 
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
 
         public String getUserMobile() {
             return userMobile;
@@ -199,5 +182,5 @@ public class UpdateVipUserReqBean {
         public void setUserPassword(String userPassword) {
             this.userPassword = userPassword;
         }
-    }
+
 }

@@ -2,7 +2,7 @@ package com.goldensky.vip.bean;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * @author bravin
@@ -11,20 +11,37 @@ import java.util.Date;
  * 包名： com.goldensky.together.bean
  * 类说明：
  */
-public class LoginResponseBean implements Cloneable {
-
-    private long expiresIn;
+public class LoginResponseBean implements Cloneable, Serializable {
+    @SerializedName("expiresIn")
+    private Integer expiresIn;
+    @SerializedName("map")
+    private Map map;
+    @SerializedName("refreshToken")
     private String refreshToken;
+    @SerializedName("token")
     private String token;
+    @SerializedName("tokenHead")
     private String tokenHead;
+    @SerializedName("userid")
+    private Integer userid;
+    @SerializedName("vipUser")
     private VipUser vipUser;
 
-    public long getExpiresIn() {
+
+    public Integer getExpiresIn() {
         return expiresIn;
     }
 
-    public void setExpiresIn(long expiresIn) {
+    public void setExpiresIn(Integer expiresIn) {
         this.expiresIn = expiresIn;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public String getRefreshToken() {
@@ -51,6 +68,14 @@ public class LoginResponseBean implements Cloneable {
         this.tokenHead = tokenHead;
     }
 
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
     public VipUser getVipUser() {
         return vipUser;
     }
@@ -59,90 +84,130 @@ public class LoginResponseBean implements Cloneable {
         this.vipUser = vipUser;
     }
 
-    public static class VipUser {
-        @SerializedName("infotips")
-        private Integer infoTips;
-        @SerializedName("userban")
-        private Integer userBan;
-        @SerializedName("userdel")
-        private Integer userDel;
-        @SerializedName("usersuperiorid")
-        private Integer userSuperiorId;
-        private String isNew;
-        @SerializedName("supervipid")
-        private String superVipId;
-        @SerializedName("userid")
-        private String userId;
-        @SerializedName("usermobile")
-        private String userMobile;
-        @SerializedName("limitaccount")
-        private Double limitAccount;
-        @SerializedName("presettlementaccount")
-        private Double preSettlementAccount;
-        @SerializedName("settlementaccount")
-        private Double settlementAccount;
-        @SerializedName("unlimitedaccount")
-        private Double unlimitedAccount;
-        @SerializedName("usersurplusintegral")
-        private Double userSurplusIntegral;
-        @SerializedName("userregisttime")
-        private Date userRegisterTime;
+    public static class Map implements Serializable {
+    }
 
+    public static class VipUser implements Serializable {
+
+        @SerializedName("developmenttype")
+        private Integer developmenttype;
+        @SerializedName("infotips")
+        private Integer infotips;
+        @SerializedName("invitationcode")
+        private String invitationcode;
+        @SerializedName("invitecode")
+        private String invitecode;
+        @SerializedName("isNew")
+        private String isNew;
+        @SerializedName("limitaccount")
+        private Integer limitaccount;
+        @SerializedName("newPwd")
+        private String newPwd;
+        @SerializedName("openid")
+        private String openid;
+        @SerializedName("phoneCode")
+        private String phoneCode;
+        @SerializedName("presettlementaccount")
+        private Integer presettlementaccount;
+        @SerializedName("securepassword")
+        private String securepassword;
+        @SerializedName("settlementaccount")
+        private Integer settlementaccount;
+        @SerializedName("supervipid")
+        private String supervipid;
+        @SerializedName("totalconsumption")
+        private Integer totalconsumption;
+        @SerializedName("unlimitedaccount")
+        private Integer unlimitedaccount;
+        @SerializedName("userban")
+        private Integer userban;
+        @SerializedName("userdel")
+        private Integer userdel;
+        @SerializedName("userid")
+        private String userid;
+        @SerializedName("usermobile")
+        private String usermobile;
+        @SerializedName("usernick")
+        private String usernick;
+        @SerializedName("userpassword")
+        private String userpassword;
+        @SerializedName("userpic")
+        private String userpic;
+        @SerializedName("userregisttime")
+        private String userregisttime;
+        @SerializedName("usersex")
+        private Integer usersex;
+        @SerializedName("usersuperiorid")
+        private Integer usersuperiorid;
+        @SerializedName("usersurplusintegral")
+        private Integer usersurplusintegral;
+        @SerializedName("viplevel")
+        private String viplevel;
         public VipUser copy() {
             VipUser vipUser = new VipUser();
 
-            vipUser.setInfoTips(infoTips);
-            vipUser.setUserBan(userBan);
-            vipUser.setUserDel(userDel);
-            vipUser.setUserSuperiorId(userSuperiorId);
+            vipUser.setDevelopmenttype(developmenttype);
+            vipUser.setInfotips(infotips);
+            vipUser.setInvitationcode(invitationcode);
+            vipUser.setInvitecode(invitecode);
             vipUser.setIsNew(isNew);
-            vipUser.setSuperVipId(superVipId);
-            vipUser.setUserId(userId);
-            vipUser.setUserMobile(userMobile);
-            vipUser.setLimitAccount(limitAccount);
-            vipUser.setPreSettlementAccount(preSettlementAccount);
-            vipUser.setSettlementAccount(settlementAccount);
-            vipUser.setUnlimitedAccount(unlimitedAccount);
-            vipUser.setUserSurplusIntegral(userSurplusIntegral);
-            vipUser.setUserRegisterTime(userRegisterTime);
-
+            vipUser.setLimitaccount(limitaccount);
+            vipUser.setNewPwd(newPwd);
+            vipUser.setOpenid(openid);
+            vipUser.setPhoneCode(phoneCode);
+            vipUser.setPresettlementaccount(presettlementaccount);
+            vipUser.setSecurepassword(securepassword);
+            vipUser.setSettlementaccount(settlementaccount);
+            vipUser.setSupervipid(supervipid);
+            vipUser.setTotalconsumption(totalconsumption);
+            vipUser.setUnlimitedaccount(unlimitedaccount);
+            vipUser.setUserban(userban);
+            vipUser.setUserdel(userdel);
+            vipUser.setUserid(userid);
+            vipUser.setUsermobile(usermobile);
+            vipUser.setUsernick(usernick);
+            vipUser.setUserpassword(userpassword);
+            vipUser.setUserpic(userpic);
+            vipUser.setUserregisttime(userregisttime);
+            vipUser.setUsersex(usersex);
+            vipUser.setUsersuperiorid(usersuperiorid);
+            vipUser.setUsersurplusintegral(usersurplusintegral);
+            vipUser.setViplevel(viplevel);
             return vipUser;
         }
-
         public Boolean isNewUser() {
             return "0".equals(isNew);
         }
-
-        public Integer getInfoTips() {
-            return infoTips;
+        public Integer getDevelopmenttype() {
+            return developmenttype;
         }
 
-        public void setInfoTips(Integer infoTips) {
-            this.infoTips = infoTips;
+        public void setDevelopmenttype(Integer developmenttype) {
+            this.developmenttype = developmenttype;
         }
 
-        public Integer getUserBan() {
-            return userBan;
+        public Integer getInfotips() {
+            return infotips;
         }
 
-        public void setUserBan(Integer userBan) {
-            this.userBan = userBan;
+        public void setInfotips(Integer infotips) {
+            this.infotips = infotips;
         }
 
-        public Integer getUserDel() {
-            return userDel;
+        public String getInvitationcode() {
+            return invitationcode;
         }
 
-        public void setUserDel(Integer userDel) {
-            this.userDel = userDel;
+        public void setInvitationcode(String invitationcode) {
+            this.invitationcode = invitationcode;
         }
 
-        public Integer getUserSuperiorId() {
-            return userSuperiorId;
+        public String getInvitecode() {
+            return invitecode;
         }
 
-        public void setUserSuperiorId(Integer userSuperiorId) {
-            this.userSuperiorId = userSuperiorId;
+        public void setInvitecode(String invitecode) {
+            this.invitecode = invitecode;
         }
 
         public String getIsNew() {
@@ -153,77 +218,183 @@ public class LoginResponseBean implements Cloneable {
             this.isNew = isNew;
         }
 
-        public String getSuperVipId() {
-            return superVipId;
+        public Integer getLimitaccount() {
+            return limitaccount;
         }
 
-        public void setSuperVipId(String superVipId) {
-            this.superVipId = superVipId;
+        public void setLimitaccount(Integer limitaccount) {
+            this.limitaccount = limitaccount;
         }
 
-        public String getUserId() {
-            return userId;
+        public String getNewPwd() {
+            return newPwd;
         }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
+        public void setNewPwd(String newPwd) {
+            this.newPwd = newPwd;
         }
 
-        public String getUserMobile() {
-            return userMobile;
+        public String getOpenid() {
+            return openid;
         }
 
-        public void setUserMobile(String userMobile) {
-            this.userMobile = userMobile;
+        public void setOpenid(String openid) {
+            this.openid = openid;
         }
 
-        public Double getLimitAccount() {
-            return limitAccount;
+        public String getPhoneCode() {
+            return phoneCode;
         }
 
-        public void setLimitAccount(Double limitAccount) {
-            this.limitAccount = limitAccount;
+        public void setPhoneCode(String phoneCode) {
+            this.phoneCode = phoneCode;
         }
 
-        public Double getPreSettlementAccount() {
-            return preSettlementAccount;
+        public Integer getPresettlementaccount() {
+            return presettlementaccount;
         }
 
-        public void setPreSettlementAccount(Double preSettlementAccount) {
-            this.preSettlementAccount = preSettlementAccount;
+        public void setPresettlementaccount(Integer presettlementaccount) {
+            this.presettlementaccount = presettlementaccount;
         }
 
-        public Double getSettlementAccount() {
-            return settlementAccount;
+        public String getSecurepassword() {
+            return securepassword;
         }
 
-        public void setSettlementAccount(Double settlementAccount) {
-            this.settlementAccount = settlementAccount;
+        public void setSecurepassword(String securepassword) {
+            this.securepassword = securepassword;
         }
 
-        public Double getUnlimitedAccount() {
-            return unlimitedAccount;
+        public Integer getSettlementaccount() {
+            return settlementaccount;
         }
 
-        public void setUnlimitedAccount(Double unlimitedAccount) {
-            this.unlimitedAccount = unlimitedAccount;
+        public void setSettlementaccount(Integer settlementaccount) {
+            this.settlementaccount = settlementaccount;
         }
 
-        public Double getUserSurplusIntegral() {
-            return userSurplusIntegral;
+        public String getSupervipid() {
+            return supervipid;
         }
 
-        public void setUserSurplusIntegral(Double userSurplusIntegral) {
-            this.userSurplusIntegral = userSurplusIntegral;
+        public void setSupervipid(String supervipid) {
+            this.supervipid = supervipid;
         }
 
-        public Date getUserRegisterTime() {
-            return userRegisterTime;
+        public Integer getTotalconsumption() {
+            return totalconsumption;
         }
 
-        public void setUserRegisterTime(Date userRegisterTime) {
-            this.userRegisterTime = userRegisterTime;
+        public void setTotalconsumption(Integer totalconsumption) {
+            this.totalconsumption = totalconsumption;
+        }
+
+        public Integer getUnlimitedaccount() {
+            return unlimitedaccount;
+        }
+
+        public void setUnlimitedaccount(Integer unlimitedaccount) {
+            this.unlimitedaccount = unlimitedaccount;
+        }
+
+        public Integer getUserban() {
+            return userban;
+        }
+
+        public void setUserban(Integer userban) {
+            this.userban = userban;
+        }
+
+        public Integer getUserdel() {
+            return userdel;
+        }
+
+        public void setUserdel(Integer userdel) {
+            this.userdel = userdel;
+        }
+
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
+
+        public String getUsermobile() {
+            return usermobile;
+        }
+
+        public void setUsermobile(String usermobile) {
+            this.usermobile = usermobile;
+        }
+
+        public String getUsernick() {
+            return usernick;
+        }
+
+        public void setUsernick(String usernick) {
+            this.usernick = usernick;
+        }
+
+        public String getUserpassword() {
+            return userpassword;
+        }
+
+        public void setUserpassword(String userpassword) {
+            this.userpassword = userpassword;
+        }
+
+        public String getUserpic() {
+            return userpic;
+        }
+
+        public void setUserpic(String userpic) {
+            this.userpic = userpic;
+        }
+
+        public String getUserregisttime() {
+            return userregisttime;
+        }
+
+        public void setUserregisttime(String userregisttime) {
+            this.userregisttime = userregisttime;
+        }
+
+        public Integer getUsersex() {
+            return usersex;
+        }
+
+        public void setUsersex(Integer usersex) {
+            this.usersex = usersex;
+        }
+
+        public Integer getUsersuperiorid() {
+            return usersuperiorid;
+        }
+
+        public void setUsersuperiorid(Integer usersuperiorid) {
+            this.usersuperiorid = usersuperiorid;
+        }
+
+        public Integer getUsersurplusintegral() {
+            return usersurplusintegral;
+        }
+
+        public void setUsersurplusintegral(Integer usersurplusintegral) {
+            this.usersurplusintegral = usersurplusintegral;
+        }
+
+        public String getViplevel() {
+            return viplevel;
+        }
+
+        public void setViplevel(String viplevel) {
+            this.viplevel = viplevel;
         }
     }
+
+
 
 }

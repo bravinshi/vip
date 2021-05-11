@@ -31,7 +31,22 @@ public class AccountHelper {
 
     public static String getUserId() {
         if (loginResponse.getVipUser() != null)
-            return loginResponse.getVipUser().getUserId();
+            return loginResponse.getVipUser().getUserid();
+        return "";
+    }
+    public static String getUserNick() {
+        if (loginResponse.getVipUser() != null)
+            return loginResponse.getVipUser().getUsernick();
+        return "";
+    }
+    public static String getUserPic() {
+        if (loginResponse.getVipUser() != null)
+            return loginResponse.getVipUser().getUserpic();
+        return "";
+    }
+    public static String getUserMobile() {
+        if (loginResponse.getVipUser() != null)
+            return loginResponse.getVipUser().getUsermobile();
         return "";
     }
 

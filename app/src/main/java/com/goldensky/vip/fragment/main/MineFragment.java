@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.vip.R;
@@ -14,6 +16,8 @@ import com.goldensky.vip.adapter.MineToolAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.bean.MineToolBean;
 import com.goldensky.vip.databinding.FragmentMineBinding;
+import com.goldensky.vip.enumerate.DefaultUrlEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 import java.util.ArrayList;
@@ -127,6 +131,16 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        if(AccountHelper.getUserNick()!=null){
+            mBinding.tvNickMine.setText(AccountHelper.getUserNick());
+        }else {
+            mBinding.tvNickMine.setText(AccountHelper.getUserMobile());
+        }
+        if(AccountHelper.getUserPic()!=null&&!AccountHelper.getUserPic().equals("")){
+            Glide.with(getContext()).load(AccountHelper.getUserPic()).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadMine);
+        }else {
+            Glide.with(getContext()).load(DefaultUrlEnum.DEFAULTHEADPIC.value).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadMine);
+        }
 
     }
 

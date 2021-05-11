@@ -3,50 +3,34 @@ package com.goldensky.vip.bean;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class UserAddressBean implements Serializable {
+public class AddUserAddressReqBean implements Serializable {
+    @SerializedName("area")
     private String area;
+    @SerializedName("areaid")
     private Integer areaid;
+    @SerializedName("city")
     private String city;
+    @SerializedName("cityid")
     private Integer cityid;
+    @SerializedName("isdel")
     private Integer isdel;
+    @SerializedName("province")
     private String province;
+    @SerializedName("provinceid")
     private Integer provinceid;
+    @SerializedName("useraddress")
     private String useraddress;
+    @SerializedName("useraddressdefault")
     private Integer useraddressdefault;
-    private String useraddressid;
+
+    @SerializedName("useraddressname")
     private String useraddressname;
+    @SerializedName("useraddressphone")
     private String useraddressphone;
-    private String useraddresstime;
+
+    @SerializedName("userid")
     private String userid;
-    private String location;
-
-    public UserAddressBean() {
-
-    }
-
-    public String getAddress() {
-        return province + city + area + useraddress;
-    }
-
-    public UserAddressBean(String area, Integer areaid, String city, Integer cityid, Integer isdel, String province, Integer provinceid, String useraddress, Integer useraddressdefault, String useraddressid, String useraddressname, String useraddressphone, String useraddresstime, String userid) {
-        this.area = area;
-        this.areaid = areaid;
-        this.city = city;
-        this.cityid = cityid;
-        this.isdel = isdel;
-        this.province = province;
-        this.provinceid = provinceid;
-        this.useraddress = useraddress;
-        this.useraddressdefault = useraddressdefault;
-        this.useraddressid = useraddressid;
-        this.useraddressname = useraddressname;
-        this.useraddressphone = useraddressphone;
-        this.useraddresstime = useraddresstime;
-        this.userid = userid;
-
-    }
 
     public String getArea() {
         return area;
@@ -120,13 +104,7 @@ public class UserAddressBean implements Serializable {
         this.useraddressdefault = useraddressdefault;
     }
 
-    public String getUseraddressid() {
-        return useraddressid;
-    }
 
-    public void setUseraddressid(String useraddressid) {
-        this.useraddressid = useraddressid;
-    }
 
     public String getUseraddressname() {
         return useraddressname;
@@ -144,13 +122,7 @@ public class UserAddressBean implements Serializable {
         this.useraddressphone = useraddressphone;
     }
 
-    public String getUseraddresstime() {
-        return useraddresstime;
-    }
 
-    public void setUseraddresstime(String useraddresstime) {
-        this.useraddresstime = useraddresstime;
-    }
 
     public String getUserid() {
         return userid;
@@ -160,9 +132,20 @@ public class UserAddressBean implements Serializable {
         this.userid = userid;
     }
 
-    public String getLocation() {
-        return province + city + area;
+    public AddUserAddressReqBean(String area, Integer areaid, String city, Integer cityid, Integer isdel, String province, Integer provinceid, String useraddress, Integer useraddressdefault,String useraddressname, String useraddressphone, String userid) {
+        this.area = area;
+        this.areaid = areaid;
+        this.city = city;
+        this.cityid = cityid;
+        this.isdel = isdel;
+        this.province = province;
+        this.provinceid = provinceid;
+        this.useraddress = useraddress;
+        this.useraddressdefault = useraddressdefault;
+
+        this.useraddressname = useraddressname;
+        this.useraddressphone = useraddressphone;
+
+        this.userid = userid;
     }
-
-
 }

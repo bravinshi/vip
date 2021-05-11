@@ -20,6 +20,7 @@ public class UserAddressAdapter extends BaseQuickAdapter<UserAddressBean, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, UserAddressBean item) {
+
         ItemMyAddressBinding bind = DataBindingUtil.<ItemMyAddressBinding>bind(helper.itemView);
         bind.setBean(item);
         if(item.getUseraddressdefault()==1){

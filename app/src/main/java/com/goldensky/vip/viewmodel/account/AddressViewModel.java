@@ -1,71 +1,69 @@
 package com.goldensky.vip.viewmodel.account;
 
-import android.view.View;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.account.AddressService;
-import com.goldensky.vip.bean.AreaListBean;
-import com.goldensky.vip.bean.EditAddressBean;
-import com.goldensky.vip.bean.UserAddressBean;
+import com.goldensky.vip.bean.AddUserAddressReqBean;
+import com.goldensky.vip.bean.ChangeUserAddressReqBean;
+import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
-import com.google.gson.JsonObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class AddressViewModel extends PublicViewModel {
 
-    public MutableLiveData<EditAddressBean> deleteAddressLive = new MutableLiveData<>();
-    public MutableLiveData<EditAddressBean> editAddressLive = new MutableLiveData<>();
-    public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
+    public MutableLiveData<Object> deleteAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Object> editAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Object> addAddressLive = new MutableLiveData<>();
 
-    public void deleteUserAddress(String userAddressId){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("useraddressid",userAddressId);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+
+
+
+
+    /**
+     * 删除收货地址
+     * @param body
+     */
+    public void deleteUserAddress(DeleteUserAddressReqBean body){
+
         RetrofitAgent.create(AddressService.class)
-                .deleteUserAddress(requestBody)
-                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                .deleteUserAddress(body)
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(EditAddressBean data) {
+                    public void onSuccess(Object data) {
                         deleteAddressLive.postValue(data);
                     }
                 });
     }
-    public void editUserAddress(HashMap<String,Object> map){
-        JsonObject jsonObject = new JsonObject();
-        Set<String> keys = map.keySet();
-        for (String key : keys) {
-            if(map.get(key)instanceof Integer){
-                jsonObject.addProperty(key, (Integer) map.get(key));
-            }else if(map.get(key) instanceof String){
-                jsonObject.addProperty(key, (String) map.get(key));
-            }
 
-        }
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+    /**
+     * 编辑收货地址
+     * @param body
+     */
+    public void editUserAddress(ChangeUserAddressReqBean body){
+
         RetrofitAgent.create(AddressService.class)
-                .changeUserAddress(requestBody)
-                .subscribe(new ToastNetObserver<EditAddressBean>() {
+                .changeUserAddress(body)
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(EditAddressBean data) {
+                    public void onSuccess(Object data) {
                         editAddressLive.postValue(data);
                     }
                 });
     }
-    public void getAreaList(){
+
+
+
+    /**
+     * 新建收货地址
+     * @param body
+     */
+    public void addUserAddress(AddUserAddressReqBean body){
         RetrofitAgent.create(AddressService.class)
-                .getAreaList()
-                .subscribe(new ToastNetObserver<List<AreaListBean>>() {
+                .addUserAddress(body)
+                .subscribe(new ToastNetObserver<Object>() {
                     @Override
-                    public void onSuccess(List<AreaListBean> data) {
-                        areaListLive.postValue(data);
+                    public void onSuccess(Object data) {
+                        addAddressLive.postValue(data);
                     }
                 });
     }

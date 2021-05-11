@@ -18,6 +18,16 @@ public class GoodsCommentResBean {
     @SerializedName("zhongCount")
     private Integer totalCount;
 
+    public Integer getIsPicCount() {
+        return isPicCount;
+    }
+
+    public void setIsPicCount(Integer isPicCount) {
+        this.isPicCount = isPicCount;
+    }
+
+    private Integer isPicCount;
+
     public List<GoodsCommentItemBean> getCommentList() {
         return commentList;
     }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.adapter.GoodsDetailAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -74,10 +75,18 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 //        if (goodsId == -1) {
 //            return;
 //        }
+        mBinding.tvCommentAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_GOODS_ID, goodsId);
+                Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
+            }
+        });
         // 获取商品详情
         mViewModel.getGoodsDetail(140);
         // 获取评论信息
-        mViewModel.getGoodsComment(1, 1, goodsId, null);
+        mViewModel.getGoodsComment(1, 1, goodsId, null, null);
         // 获取地址信息
         mViewModel.getUserAddress(AccountHelper.getUserId());
     }
