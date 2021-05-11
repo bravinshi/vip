@@ -10,6 +10,7 @@ import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.GoodsCommentResBean;
+import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.bean.UserAddressListReqBean;
 import com.google.gson.JsonObject;
@@ -38,6 +39,7 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<String> uploadPicLiveData = new MutableLiveData<>();
     public MutableLiveData<GoodsCommentResBean> goodsCommentLive = new MutableLiveData<>();
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
+    public MutableLiveData<Boolean> joinIntoShoppingCartResultLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -126,6 +128,25 @@ public class PublicViewModel extends NetWorkViewModel {
                     @Override
                     public void onSuccess(List<UserAddressBean> data) {
                         userAddressLive.postValue(data);
+                    }
+                });
+    }
+
+    // 加入购物车
+    public void joinIntoShoppingCart(JoinIntoShoppingCartReqBean reqBean) {
+        RetrofitAgent.create(GoodsService.class)
+                .joinIntoShoppingCart(reqBean)
+                .subscribe(new ToastNetObserver<Object>(){
+                    @Override
+                    public void onSuccess(Object data) {
+                        joinIntoShoppingCartResultLive.postValue(true);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<Object> data) {
+                        super.onFail(data);
+                        joinIntoShoppingCartResultLive.postValue(false);
+                        return false;
                     }
                 });
     }

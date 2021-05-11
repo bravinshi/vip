@@ -3,8 +3,11 @@ package com.goldensky.vip.activity.goods;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.lifecycle.Observer;
+
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -13,10 +16,12 @@ import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.bean.InventoryBean;
+import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.event.AddAddressEvent;
+import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
@@ -74,26 +79,26 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     protected void onResume() {
         super.onResume();
-        List<UserAddressBean> userAddresses = new ArrayList<>();
-        UserAddressBean userAddressBean1 = new UserAddressBean();
-        UserAddressBean userAddressBean2 = new UserAddressBean();
-        userAddressBean1.setArea("area1");
-        userAddressBean2.setArea("area2");
-        userAddressBean1.setCity("city1");
-        userAddressBean2.setCity("city2");
-        userAddressBean1.setProvince("province1");
-        userAddressBean2.setProvince("province2");
-        userAddressBean1.setUseraddress("setUseraddress1");
-        userAddressBean2.setUseraddress("setUseraddress2");
-        userAddressBean1.setUseraddressname("addressname1");
-        userAddressBean2.setUseraddressname("addressname2");
-        userAddressBean1.setUseraddressphone("13651862222");
-        userAddressBean2.setUseraddressphone("13651862223");
-        userAddressBean2.setUseraddressdefault(1);
-        userAddresses.add(userAddressBean1);
-        userAddresses.add(userAddressBean2);
-
-        handleAddress(userAddresses);
+//        List<UserAddressBean> userAddresses = new ArrayList<>();
+//        UserAddressBean userAddressBean1 = new UserAddressBean();
+//        UserAddressBean userAddressBean2 = new UserAddressBean();
+//        userAddressBean1.setArea("area1");
+//        userAddressBean2.setArea("area2");
+//        userAddressBean1.setCity("city1");
+//        userAddressBean2.setCity("city2");
+//        userAddressBean1.setProvince("province1");
+//        userAddressBean2.setProvince("province2");
+//        userAddressBean1.setUseraddress("setUseraddress1");
+//        userAddressBean2.setUseraddress("setUseraddress2");
+//        userAddressBean1.setUseraddressname("addressname1");
+//        userAddressBean2.setUseraddressname("addressname2");
+//        userAddressBean1.setUseraddressphone("13651862222");
+//        userAddressBean2.setUseraddressphone("13651862223");
+//        userAddressBean2.setUseraddressdefault(1);
+//        userAddresses.add(userAddressBean1);
+//        userAddresses.add(userAddressBean2);
+//
+//        handleAddress(userAddresses);
     }
 
     /**
@@ -106,6 +111,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void joinOrBuy(JoinOrBuyEvent joinOrBuyEvent) {
+        if (joinOrBuyEvent.getJoin()) {
+            if (mViewModel.goodsDetailLive.getValue() != null) {
+                // 发起加入购物车请求
+                CommodityBean commodityDetail = mViewModel.goodsDetailLive.getValue().getCommodity();
+                InventoryBean inventory = joinOrBuyEvent.getInventory();
+                JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean
+                        = JoinIntoShoppingCartReqBean.fromInventoryAndGoodsDetail(commodityDetail, inventory);
+                joinIntoShoppingCartReqBean.setPurchasenum(joinOrBuyEvent.getPurchaseNum());
+                mViewModel.joinIntoShoppingCart(joinIntoShoppingCartReqBean);
+            }
         }
     }
 
@@ -218,6 +238,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 
         mViewModel.userAddressLive.observe(this, this::handleAddress);
+
+        mViewModel.joinIntoShoppingCartResultLive.observe(this, aBoolean -> {
+            if (aBoolean) {
+                ToastUtils.showShort(R.string.text_join_shopping_cart_success);
+            }
+        });
     }
 
     @Override

@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -24,6 +22,7 @@ import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.databinding.DialogGoodSpecificationBinding;
 import com.goldensky.vip.databinding.ItemSpecificationBinding;
 import com.goldensky.vip.databinding.ItemSpecificationValueBinding;
+import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.model.PurchaseQuantityModel;
 import com.google.android.flexbox.FlexDirection;
@@ -91,14 +90,26 @@ public class GoodsSpecificationDialog extends BottomDialog {
     private void join(){
         // 检查规格和购买数量有效性
         if (check()) {
-            ToastUtils.showShort("加入购物车成功");
+            JoinOrBuyEvent joinOrBuyEvent = new JoinOrBuyEvent();
+
+            joinOrBuyEvent.setJoin(true);
+            joinOrBuyEvent.setPurchaseNum(purchaseQuantityModel.getPurchaseQuantityInt());
+            joinOrBuyEvent.setInventory(selectedInventory);
+
+            EventBus.getDefault().post(joinOrBuyEvent);
         }
     }
 
     private void buy(){
         // 检查规格和购买数量有效性
         if (check()) {
-            ToastUtils.showShort("购买成功");
+            JoinOrBuyEvent joinOrBuyEvent = new JoinOrBuyEvent();
+
+            joinOrBuyEvent.setJoin(false);
+            joinOrBuyEvent.setPurchaseNum(purchaseQuantityModel.getPurchaseQuantityInt());
+            joinOrBuyEvent.setInventory(selectedInventory);
+
+            EventBus.getDefault().post(joinOrBuyEvent);
         }
     }
 
