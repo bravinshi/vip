@@ -76,12 +76,12 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
                 showCityPicker();
                 break;
             case R.id.btn_save_new_address:
-                saveAddress();
+                saveAddress(v);
                 break;
         }
     }
 
-    private void saveAddress() {
+    private void saveAddress(View v) {
         if(isNotNull(newAddressModel.getConsigneeName())){
             if(isNotNull(newAddressModel.getConsigneePhone())&&!notPhoneNumber(newAddressModel.getConsigneePhone())){
                 if(isNotNull(newAddressModel.getLocation())){
@@ -90,9 +90,9 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
                         isDefaultCode=1;
                     }
                     bean = new AddUserAddressReqBean(selectAreaName, selectAreaId, selectCityName, selectCityId,0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), AccountHelper.getUserId());
-                    mViewModel.addUserAddress(bean);
+                    mViewModel.addUserAddress(bean,v);
                 }else {
-                    toast(getResources().getString(R.string.hint_input_consignee_area_nonull));
+                    toast(getResources().getString(R.string.hint_input_consignee_area));
                 }
             }else {
                 toast(getResources().getString(R.string.hint_input_effective_phone));

@@ -4,7 +4,10 @@ import com.goldensky.framework.util.SPUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.bean.LoginResponseBean;
+import com.goldensky.vip.event.VipUserChangeEvent;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class AccountHelper {
 
@@ -29,6 +32,14 @@ public class AccountHelper {
         return responseBean;
     }
 
+    /**
+     * 退出登录
+     */
+    public static void loginOut() {
+        loginResponse.clear();
+        serialization();
+    }
+
     public static String getUserId() {
         if (loginResponse.getVipUser() != null)
             return loginResponse.getVipUser().getUserid();
@@ -36,7 +47,7 @@ public class AccountHelper {
     }
     public static String getUserNick() {
         if (loginResponse.getVipUser() != null)
-            return loginResponse.getVipUser().getUsernick();
+            return loginResponse.getVipUser().getUserNick();
         return "";
     }
     public static String getUserPic() {
@@ -58,7 +69,13 @@ public class AccountHelper {
 
         return loginResponse.getTokenHead() + loginResponse.getToken();
     }
-
+    public static void setNick(String nick){
+        loginResponse.getVipUser().setUserNick(nick);
+        onVipUserChanged();
+    }
+    private static void onVipUserChanged(){
+        EventBus.getDefault().post(new VipUserChangeEvent(true));
+    }
     public static void refresh(LoginResponseBean loginResponseBean) {
         loginResponse.setExpiresIn(loginResponseBean.getExpiresIn());
         loginResponse.setRefreshToken(loginResponseBean.getRefreshToken());

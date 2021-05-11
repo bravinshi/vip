@@ -38,6 +38,7 @@
     <string name="text_confirm">确定</string>
     <string name="hint_login_success">登录成功</string>
     <string name="hint_change_psd_success">修改密码成功,请重新登录</string>
+    <string name="hint_change_nick_success">昵称修改成功</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_main_products">主营商品</string>
@@ -95,16 +96,21 @@
     <string name="text_actual_payment">实付款</string>
     <string name="text_payment">付款</string>
     <string name="text_cancel_order">取消订单</string>
+    <string name="text_new_pwd">新密码</string>
+    <string name="text_new_pwd_confirm">确认新密码</string>
     <string name="hint_code_usage">长按识别或扫码进入</string>
     <string name="hint_input_consignee_name">请填写收货人姓名</string>
     <string name="hint_input_consignee_phone">请填写收货人手机号</string>
     <string name="hint_input_consignee_location">省市县区、乡镇等</string>
     <string name="hint_input_consignee_address">街道楼牌号等</string>
     <string name="hint_input_consignee_name_nonull">收货人不能为空</string>
-    <string name="hint_input_consignee_area_nonull">请选择收货地址</string>
+    <string name="hint_input_nick_nonull">昵称不能为空</string>
+    <string name="hint_input_code_nonull">验证码不能为空</string>
+    <string name="hint_input_consignee_area">请选择收货地址</string>
     <string name="hint_input_new_nick">请输入新昵称</string>
     <string name="hint_switch_default_address">每次下单会默认推荐使用该地址</string>
     <string name="hint_confirm_delete">确认删除?</string>
+    <string name="hint_logout">确认退出登录?</string>
 
 
 </resources>

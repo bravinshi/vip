@@ -2,7 +2,7 @@ package com.goldensky.vip.bean;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * @author bravin
@@ -11,176 +11,276 @@ import java.util.Date;
  * 包名： com.goldensky.vip.bean
  * 类说明：
  */
-public class UpdateVipUserReqBean {
+public class UpdateVipUserReqBean implements Serializable {
+
+    @SerializedName("developmenttype")
+    private Integer developmenttype;
+    @SerializedName("infotips")
+    private Integer infotips;
+    @SerializedName("invitationcode")
+    private String invitationcode;
+    @SerializedName("invitecode")
+    private String invitecode;
+    @SerializedName("isNew")
+    private String isNew;
+    @SerializedName("limitaccount")
+    private Integer limitaccount;
+    @SerializedName("newPwd")
+    private String newPwd;
+    @SerializedName("openid")
+    private String openid;
+    @SerializedName("phoneCode")
+    private String phoneCode;
+    @SerializedName("presettlementaccount")
+    private Integer presettlementaccount;
+    @SerializedName("securepassword")
+    private String securepassword;
+    @SerializedName("settlementaccount")
+    private Integer settlementaccount;
+    @SerializedName("supervipid")
+    private String supervipid;
+    @SerializedName("totalconsumption")
+    private Integer totalconsumption;
+    @SerializedName("unlimitedaccount")
+    private Integer unlimitedaccount;
+    @SerializedName("userban")
+    private Integer userban;
+    @SerializedName("userdel")
+    private Integer userdel;
+    @SerializedName("userid")
+    private String userid;
+    @SerializedName("usermobile")
+    private String usermobile;
+    @SerializedName("usernick")
+    private String usernick;
+    @SerializedName("userpassword")
+    private String userpassword;
+    @SerializedName("userpic")
+    private String userpic;
+    @SerializedName("userregisttime")
+    private String userregisttime;
+    @SerializedName("usersex")
+    private Integer usersex;
+    @SerializedName("usersuperiorid")
+    private Integer usersuperiorid;
+    @SerializedName("usersurplusintegral")
+    private Integer usersurplusintegral;
+    @SerializedName("viplevel")
+    private String viplevel;
+
+    public Integer getDevelopmenttype() {
+        return developmenttype;
+    }
+
+    public void setDevelopmenttype(Integer developmenttype) {
+        this.developmenttype = developmenttype;
+    }
+
+    public Integer getInfotips() {
+        return infotips;
+    }
+
+    public void setInfotips(Integer infotips) {
+        this.infotips = infotips;
+    }
+
+    public String getInvitationcode() {
+        return invitationcode;
+    }
+
+    public void setInvitationcode(String invitationcode) {
+        this.invitationcode = invitationcode;
+    }
+
+    public String getInvitecode() {
+        return invitecode;
+    }
+
+    public void setInvitecode(String invitecode) {
+        this.invitecode = invitecode;
+    }
+
+    public String getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(String isNew) {
+        this.isNew = isNew;
+    }
+
+    public Integer getLimitaccount() {
+        return limitaccount;
+    }
+
+    public void setLimitaccount(Integer limitaccount) {
+        this.limitaccount = limitaccount;
+    }
+
+    public String getNewPwd() {
+        return newPwd;
+    }
+
+    public void setNewPwd(String newPwd) {
+        this.newPwd = newPwd;
+    }
+
+    public String getOpenId() {
+        return openid;
+    }
+
+    public void setOpenId(String openid) {
+        this.openid = openid;
+    }
+
+    public String getPhoneCode() {
+        return phoneCode;
+    }
+
+    public void setPhoneCode(String phoneCode) {
+        this.phoneCode = phoneCode;
+    }
+
+    public Integer getPresettlementaccount() {
+        return presettlementaccount;
+    }
+
+    public void setPresettlementaccount(Integer presettlementaccount) {
+        this.presettlementaccount = presettlementaccount;
+    }
+
+    public String getSecurepassword() {
+        return securepassword;
+    }
+
+    public void setSecurepassword(String securepassword) {
+        this.securepassword = securepassword;
+    }
+
+    public Integer getSettlementaccount() {
+        return settlementaccount;
+    }
+
+    public void setSettlementaccount(Integer settlementaccount) {
+        this.settlementaccount = settlementaccount;
+    }
+
+    public String getSupervipid() {
+        return supervipid;
+    }
+
+    public void setSupervipid(String supervipid) {
+        this.supervipid = supervipid;
+    }
+
+    public Integer getTotalconsumption() {
+        return totalconsumption;
+    }
+
+    public void setTotalconsumption(Integer totalconsumption) {
+        this.totalconsumption = totalconsumption;
+    }
+
+    public Integer getUnlimitedaccount() {
+        return unlimitedaccount;
+    }
+
+    public void setUnlimitedaccount(Integer unlimitedaccount) {
+        this.unlimitedaccount = unlimitedaccount;
+    }
+
+    public Integer getUserban() {
+        return userban;
+    }
+
+    public void setUserban(Integer userban) {
+        this.userban = userban;
+    }
+
+    public Integer getUserdel() {
+        return userdel;
+    }
+
+    public void setUserdel(Integer userdel) {
+        this.userdel = userdel;
+    }
 
     public String getUserId() {
-        return userId;
+        return userid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userid) {
+        this.userid = userid;
     }
 
+    public String getUsermobile() {
+        return usermobile;
+    }
 
-        @SerializedName("infotips")
-        private Integer infoTips;
-        @SerializedName("userban")
-        private Integer userBan;
-        @SerializedName("userdel")
-        private Integer userDel;
-        @SerializedName("usersuperiorid")
-        private Integer userSuperiorId;
-        private String isNew;
-        @SerializedName("supervipid")
-        private String superVipId;
-        @SerializedName("userid")
-        private String userId;
-        @SerializedName("usermobile")
-        private String userMobile;
-        @SerializedName("limitaccount")
-        private Double limitAccount;
-        @SerializedName("presettlementaccount")
-        private Double preSettlementAccount;
-        @SerializedName("settlementaccount")
-        private Double settlementAccount;
-        @SerializedName("unlimitedaccount")
-        private Double unlimitedAccount;
-        @SerializedName("usersurplusintegral")
-        private Double userSurplusIntegral;
-        @SerializedName("userregisttime")
-        private Date userRegisterTime;
-        @SerializedName("userpassword")
-        private String userPassword;
-        private String phoneCode;
-        private String newPwd;
+    public void setUsermobile(String usermobile) {
+        this.usermobile = usermobile;
+    }
 
-        public String getNewPwd() {
-            return newPwd;
-        }
+    public String getUserNick() {
+        return usernick;
+    }
 
-        public void setNewPwd(String newPwd) {
-            this.newPwd = newPwd;
-        }
+    public void setUserNick(String usernick) {
+        this.usernick = usernick;
+    }
 
-        public String getPhoneCode() {
-            return phoneCode;
-        }
+    public String getUserPassword() {
+        return userpassword;
+    }
 
-        public void setPhoneCode(String phoneCode) {
-            this.phoneCode = phoneCode;
-        }
+    public void setUserPassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
 
-        public Integer getInfoTips() {
-            return infoTips;
-        }
+    public String getUserpic() {
+        return userpic;
+    }
 
-        public void setInfoTips(Integer infoTips) {
-            this.infoTips = infoTips;
-        }
+    public void setUserpic(String userpic) {
+        this.userpic = userpic;
+    }
 
-        public Integer getUserBan() {
-            return userBan;
-        }
+    public String getUserregisttime() {
+        return userregisttime;
+    }
 
-        public void setUserBan(Integer userBan) {
-            this.userBan = userBan;
-        }
+    public void setUserregisttime(String userregisttime) {
+        this.userregisttime = userregisttime;
+    }
 
-        public Integer getUserDel() {
-            return userDel;
-        }
+    public Integer getUsersex() {
+        return usersex;
+    }
 
-        public void setUserDel(Integer userDel) {
-            this.userDel = userDel;
-        }
+    public void setUsersex(Integer usersex) {
+        this.usersex = usersex;
+    }
 
-        public Integer getUserSuperiorId() {
-            return userSuperiorId;
-        }
+    public Integer getUsersuperiorid() {
+        return usersuperiorid;
+    }
 
-        public void setUserSuperiorId(Integer userSuperiorId) {
-            this.userSuperiorId = userSuperiorId;
-        }
+    public void setUsersuperiorid(Integer usersuperiorid) {
+        this.usersuperiorid = usersuperiorid;
+    }
 
-        public String getIsNew() {
-            return isNew;
-        }
+    public Integer getUsersurplusintegral() {
+        return usersurplusintegral;
+    }
 
-        public void setIsNew(String isNew) {
-            this.isNew = isNew;
-        }
+    public void setUsersurplusintegral(Integer usersurplusintegral) {
+        this.usersurplusintegral = usersurplusintegral;
+    }
 
-        public String getSuperVipId() {
-            return superVipId;
-        }
+    public String getViplevel() {
+        return viplevel;
+    }
 
-        public void setSuperVipId(String superVipId) {
-            this.superVipId = superVipId;
-        }
-
-
-        public String getUserMobile() {
-            return userMobile;
-        }
-
-        public void setUserMobile(String userMobile) {
-            this.userMobile = userMobile;
-        }
-
-        public Double getLimitAccount() {
-            return limitAccount;
-        }
-
-        public void setLimitAccount(Double limitAccount) {
-            this.limitAccount = limitAccount;
-        }
-
-        public Double getPreSettlementAccount() {
-            return preSettlementAccount;
-        }
-
-        public void setPreSettlementAccount(Double preSettlementAccount) {
-            this.preSettlementAccount = preSettlementAccount;
-        }
-
-        public Double getSettlementAccount() {
-            return settlementAccount;
-        }
-
-        public void setSettlementAccount(Double settlementAccount) {
-            this.settlementAccount = settlementAccount;
-        }
-
-        public Double getUnlimitedAccount() {
-            return unlimitedAccount;
-        }
-
-        public void setUnlimitedAccount(Double unlimitedAccount) {
-            this.unlimitedAccount = unlimitedAccount;
-        }
-
-        public Double getUserSurplusIntegral() {
-            return userSurplusIntegral;
-        }
-
-        public void setUserSurplusIntegral(Double userSurplusIntegral) {
-            this.userSurplusIntegral = userSurplusIntegral;
-        }
-
-        public Date getUserRegisterTime() {
-            return userRegisterTime;
-        }
-
-        public void setUserRegisterTime(Date userRegisterTime) {
-            this.userRegisterTime = userRegisterTime;
-        }
-
-        public String getUserPassword() {
-            return userPassword;
-        }
-
-        public void setUserPassword(String userPassword) {
-            this.userPassword = userPassword;
-        }
-
+    public void setViplevel(String viplevel) {
+        this.viplevel = viplevel;
+    }
 }
