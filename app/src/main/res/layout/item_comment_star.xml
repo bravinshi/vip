@@ -6,14 +6,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginRight="18dp">
         <ImageView
-            android:id="@+id/iv_comment"
+            android:id="@+id/iv_star"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY" />
+            android:layout_height="match_parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
