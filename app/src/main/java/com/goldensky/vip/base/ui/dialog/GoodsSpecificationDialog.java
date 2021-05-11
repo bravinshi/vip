@@ -75,16 +75,59 @@ public class GoodsSpecificationDialog extends BottomDialog {
 
     public void setSelectedInventory(InventoryBean inventory) {
         selectedInventory = inventory;
+        refresh();
     }
 
     public void refresh() {
-        if (selectedInventory != null) {
+        if (selectedInventory != null && mBinding != null) {
             // 图片
             ImageLoaderHelper.loadImage(mBinding.ivPic, selectedInventory.getInventoryPic());
             // 价格
             mBinding.tvPrice.setText(selectedInventory.getCommodityOldPrice() + "");
             mBinding.tvBuyFromNum.setText("最小购买数量:" + selectedInventory.getBuyFromNum());
         }
+    }
+
+    private void join(){
+        // 检查规格和购买数量有效性
+        if (check()) {
+            ToastUtils.showShort("加入购物车成功");
+        }
+    }
+
+    private void buy(){
+        // 检查规格和购买数量有效性
+        if (check()) {
+            ToastUtils.showShort("购买成功");
+        }
+    }
+
+    private boolean check() {
+        List<First> firsts = firstAdapter.getData();
+
+        int count = 0;
+        for (First first : firsts) {
+            for (Second second : first.seconds) {
+                if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        if (count != firsts.size()) {
+            // 未成功选择规格
+            ToastUtils.showShort("请选择规格");
+            return false;
+        }
+
+        // 检查购买数量
+        if (purchaseQuantityModel.getPurchaseQuantityInt() < selectedInventory.getBuyFromNum()) {
+            ToastUtils.showShort("购买数量不能低于最小购买数量");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -95,12 +138,14 @@ public class GoodsSpecificationDialog extends BottomDialog {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSecondClick(SpecificationItemClickEvent specificationItemClickEvent) {
         Second second = specificationItemClickEvent.getSecond();
-        int firstPosition = specificationItemClickEvent.getFirstPosition();
-        List<First> firsts = firstAdapter.getData();
+
         if (second.selectState.equals(SpecificationItemView.SELECT_STATE_NOT_AVAILABLE)) {
             // 不可点击的状态，忽略
             return;
         }
+
+        int firstPosition = specificationItemClickEvent.getFirstPosition();
+        List<First> firsts = firstAdapter.getData();
 
         if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
             // 取消选择
@@ -157,7 +202,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
         for (int i = 0; i < firsts.size(); i++) {
             // i 为待检验层的标识
             First first = firsts.get(i);
-            List<InventoryBean> intersection = new ArrayList<>();
+            Set<InventoryBean> intersection = new HashSet<>();// 去重
             Second removed = selectedSecondsMap.remove(i);
             // 拿到其它层包含的所有的规格
             Set<Second> remainder = new HashSet<>(selectedSecondsMap.values());
@@ -170,6 +215,10 @@ public class GoodsSpecificationDialog extends BottomDialog {
                     }
                 }
 
+                if (removed != null) {// 放回removed
+                    selectedSecondsMap.put(i, removed);
+                }
+
                 continue;
             }
             // 先求并集
@@ -180,7 +229,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
             for (Second second : remainder) {
                 intersection.retainAll(second.inventories);
             }
-            // 逻辑上来说intersection内必然有元素，选择的second不可能不在同一个规格内
+            // 逻辑上来说intersection内必然有元素，因为选择的second不可能不在同一个规格内
             // 检查i层的每个second状态
             for (Second second : first.seconds) {
                 if (second.selectState.equals(SpecificationItemView.SELECT_STATE_SELECTED)) {
@@ -201,6 +250,27 @@ public class GoodsSpecificationDialog extends BottomDialog {
 
             if (removed != null) {// 放回removed
                 selectedSecondsMap.put(i, removed);
+            }
+        }
+
+        // 处理被选中的规格
+        if (selectedSecondsMap.size() == firsts.size()) {
+            // 每一层都有second被选中，所以必定选中了一个规格
+            Set<InventoryBean> intersectionList = new HashSet<>();// 此处需要去重，因为下面会判断交集的size
+            Set<Second> remainderSet = new HashSet<>(selectedSecondsMap.values());
+            // 先求并集
+            for (Second second : remainderSet) {
+                intersectionList.addAll(second.inventories);
+            }
+            // 再求交集
+            for (Second second : remainderSet) {
+                intersectionList.retainAll(second.inventories);
+            }
+
+            if (intersectionList.size() != 1) {
+                Log.w(GoodsSpecificationDialog.class.getSimpleName(), "intersectionList.size() != 1");
+            } else {
+                setSelectedInventory((InventoryBean) intersectionList.toArray()[0]);
             }
         }
     }
@@ -294,7 +364,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
                     firstTempMap.put(key, tempFirst);// 创建的first存在map中
                 }
                 // 检查first中是否有对应的second信息，不同的规格可能会有相同的key信息，但不是所有的key都相同
-                // 如果存在second信息，则把这一规格信息保存到second中,
+                // 如果存在second信息，则把这一规格信息保存到second中
                 List<Second> seconds = tempFirst.seconds;
                 if (seconds == null) {
                     seconds = new ArrayList<>();
@@ -355,11 +425,11 @@ public class GoodsSpecificationDialog extends BottomDialog {
         mBinding.btnClose.setOnClickListener(v -> dismissAllowingStateLoss());
         // 加入购物车监听
         mBinding.tvJoinInfoShoppingCart.setOnClickListener(v -> {
-
+            join();
         });
         // 立即购买监听
-        mBinding.tvJoinInfoShoppingCart.setOnClickListener(v -> {
-
+        mBinding.tvBuyRightNow.setOnClickListener(v -> {
+            buy();
         });
 
         mBinding.btnDecrease.setOnClickListener(v -> purchaseQuantityModel.decrease());

@@ -37,6 +37,10 @@ public class PurchaseQuantityModel extends BaseObservable {
         return purchaseQuantity;
     }
 
+    public Integer getPurchaseQuantityInt() {
+        return Integer.valueOf(purchaseQuantity);
+    }
+
     public void setPurchaseQuantity(String purchaseQuantity) {
         this.purchaseQuantity = purchaseQuantity;
     }
