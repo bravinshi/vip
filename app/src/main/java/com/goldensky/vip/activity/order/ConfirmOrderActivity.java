@@ -101,8 +101,8 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     mBinding.priceIv.setImageResource(R.mipmap.my_pic_yusanjiage);
                     break;
                 case 20:
-                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_jiuyangxinxi);
-                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_jiuyangjiage);
+                    mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_jiuyangjiage);
+                    mBinding.priceIv.setImageResource(R.mipmap.my_pic_jiuyangxinxi);
                     break;
                 case 21:
                     mBinding.spinfoIv.setImageResource(R.mipmap.my_pic_xiangxunxinxi);
