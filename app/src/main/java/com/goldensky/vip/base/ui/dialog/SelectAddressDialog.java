@@ -1,4 +1,4 @@
-package com.goldensky.vip.ui.dialog;
+package com.goldensky.vip.base.ui.dialog;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.framework.ui.dialog.BottomDialog;
 import com.goldensky.vip.R;
@@ -34,7 +33,7 @@ import java.util.List;
  * 类说明：
  */
 public class SelectAddressDialog extends BottomDialog {
-    private SelectAddressAdapter addressAdapter = new SelectAddressAdapter(R.layout.item_select_address);
+    private final SelectAddressAdapter addressAdapter = new SelectAddressAdapter(R.layout.item_select_address);
 
     private DialogSelectAddressBinding mBinding;
 
@@ -64,12 +63,9 @@ public class SelectAddressDialog extends BottomDialog {
         super.onViewCreated(view, savedInstanceState);
         mBinding.btnClose.setOnClickListener(v -> dismissAllowingStateLoss());
 
-        mBinding.btnAddAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Starter.startNewAddressActivity(v.getContext(), null);
-                dismissAllowingStateLoss();
-            }
+        mBinding.btnAddAddress.setOnClickListener(v -> {
+            Starter.startNewAddressActivity(v.getContext(), null);
+            dismissAllowingStateLoss();
         });
 
         mBinding.recyclerView.setAdapter(addressAdapter);

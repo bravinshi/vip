@@ -3,9 +3,12 @@ package com.goldensky.vip.api.goods;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
+import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -25,4 +28,16 @@ public interface GoodsService {
                                                                 @Query("pageSize") Integer pageSize,
                                                                 @Query("commodityId") String commodityId,
                                                                 @Query("evaluateType") Integer evaluateType);// 评论类型 不传为全部 1:好 2:中 3:差 4:是否有图
+
+    /**
+     * 加入购物车
+     *
+     * @param reqBean body
+     *
+     * @return observable
+     */
+    @POST("/goldendays-order/vipShoppingCart/addVipShoppingCart")
+    Observable<NetResponse<Object>> joinIntoShoppingCart(@Body JoinIntoShoppingCartReqBean reqBean);
+
+
 }

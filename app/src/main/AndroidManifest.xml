@@ -83,7 +83,6 @@
 
         </activity>
         <activity android:name=".activity.goods.GoodsDetailActivity">
-
         </activity>
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
