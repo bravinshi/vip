@@ -17,6 +17,7 @@ import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
+import com.goldensky.vip.constant.ConfigConstant;
 import com.goldensky.vip.databinding.ActivityConfirmOrderBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.PurchaseNumChangeEvent;
@@ -25,6 +26,9 @@ import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.ConfirmOrderViewModel;
 import com.google.gson.reflect.TypeToken;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,7 +84,20 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         mViewModel.userAddressLive.observe(this, this::handleAddress);
         mViewModel.submitOrderLive.observe(this, o -> {
             // TODO 支付
-//            Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
+            IWXAPI api = WXAPIFactory.createWXAPI(ConfirmOrderActivity.this, ConfigConstant.WX_APP_ID);
+            api.registerApp(ConfigConstant.WX_APP_ID);
+
+            PayReq payReq = new PayReq();
+            payReq.appId = ConfigConstant.WX_APP_ID;
+//            payReq.partnerId =
+            payReq.prepayId = o.get("package").getAsString().substring(10);
+            payReq.packageValue = "Sign=WXPay";
+            payReq.nonceStr = o.get("nonceStr").getAsString();
+            payReq.timeStamp = o.get("timeStamp").getAsString();
+            payReq.sign = o.get("paySign").getAsString();
+            payReq.signType = o.get("signType").getAsString();
+
+            api.sendReq(payReq);
         });
     }
 

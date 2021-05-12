@@ -5,6 +5,7 @@ import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
+import com.google.gson.JsonObject;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -41,5 +42,5 @@ public interface GoodsService {
     Observable<NetResponse<Object>> joinIntoShoppingCart(@Body JoinIntoShoppingCartReqBean reqBean);
 
     @POST("/goldendays-order/vipOrder/addOrder")
-    Observable<NetResponse<Object>> addOrder(@Body AddOrderReqBean reqBean);
+    Observable<NetResponse<JsonObject>> addOrder(@Body AddOrderReqBean reqBean);
 }

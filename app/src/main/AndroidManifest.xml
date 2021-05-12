@@ -90,6 +90,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 微信支付回调页面 -->
+        <activity android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity" />
+        <activity android:name=".wxapi.WXPayEntryActivity" />
     </application>
 
 </manifest>

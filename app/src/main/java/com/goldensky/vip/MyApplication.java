@@ -82,6 +82,7 @@ public class MyApplication extends Application {
             builder.addHeader("app_version_code", AppUtils.getAppVersionCode() + "");// 101
             builder.addHeader("app_version", AppUtils.getAppVersionName());// 1.0.1
             builder.addHeader("app_client", "vip");
+            builder.addHeader("app_platform", "android");
             try {
                 Response mResponse = chain.proceed(builder.build());
                 return mResponse;

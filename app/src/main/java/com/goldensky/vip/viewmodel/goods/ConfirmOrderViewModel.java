@@ -7,6 +7,9 @@ import com.goldensky.vip.api.goods.GoodsService;
 import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 /**
  * @author bravin
@@ -17,14 +20,14 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
  */
 public class ConfirmOrderViewModel extends PublicViewModel {
 
-    public MutableLiveData<Object> submitOrderLive = new MutableLiveData<>();
+    public MutableLiveData<JsonObject> submitOrderLive = new MutableLiveData<>();
 
     public void addOrder(AddOrderReqBean addOrderReqBean) {
         RetrofitAgent.create(GoodsService.class)
                 .addOrder(addOrderReqBean)
-                .subscribe(new ToastNetObserver<Object>() {
+                .subscribe(new ToastNetObserver<JsonObject>() {
                     @Override
-                    public void onSuccess(Object data) {
+                    public void onSuccess(JsonObject data) {
                         submitOrderLive.postValue(data);
                     }
                 });
