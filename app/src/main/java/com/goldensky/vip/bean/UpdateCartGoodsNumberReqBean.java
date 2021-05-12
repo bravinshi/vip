@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class UpdateCartGoodsNumberResBean implements Serializable {
+public class UpdateCartGoodsNumberReqBean implements Serializable {
 
     @SerializedName("belongtype")
     private Integer belongtype;
@@ -21,7 +21,7 @@ public class UpdateCartGoodsNumberResBean implements Serializable {
     @SerializedName("userid")
     private String userid;
 
-    public UpdateCartGoodsNumberResBean(Integer belongtype, Integer commodityid, Integer commoditytype, Integer inventoryid, Integer purchasenum, String shoppingcartid, String userid) {
+    public UpdateCartGoodsNumberReqBean(Integer belongtype, Integer commodityid, Integer commoditytype, Integer inventoryid, Integer purchasenum, String shoppingcartid, String userid) {
         this.belongtype = belongtype;
         this.commodityid = commodityid;
         this.commoditytype = commoditytype;

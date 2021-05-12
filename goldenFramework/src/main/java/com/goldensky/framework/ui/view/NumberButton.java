@@ -83,8 +83,13 @@ public class NumberButton extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.length()==0){
+                    countNumberButton.setText("1");
+                    countNumberButton.setSelection(1) ;//光标移至尾部
+                }
                 if(s.length()>0){
                     String countString =s.toString().trim();
+
                     if (countString.startsWith("0")&&countString.length() >= 2) {
                         countString = countString.substring(1, countString.length());
                         countNumberButton.setText(countString);
@@ -100,7 +105,7 @@ public class NumberButton extends LinearLayout {
                        ToastUtils.showShort("购买量不能大于:"+maxCount);
                        count=maxCount;
                        changeCount(count);
-                       countNumberButton.setSelection(countString.length()) ;//光标移至尾部
+                       countNumberButton.setSelection(countString.length()-1) ;//光标移至尾部
                    }
                    if(count<minCount){
                        ToastUtils.showShort("购买数量不能小于:"+minCount);
@@ -111,7 +116,7 @@ public class NumberButton extends LinearLayout {
                 }
 
                 if (listener!=null){
-                    listener.onChange(count);
+                    listener.onChange(NumberButton.this);
                 }
             }
         });
@@ -119,11 +124,16 @@ public class NumberButton extends LinearLayout {
 
     public void changeCount(Integer number) {
         countNumberButton.setText(number+"");
+        countNumberButton.setSelection(countNumberButton.getEditableText().length()) ;//光标移至尾部
     }
 
     public void setCount(int count) {
         this.count = count;
         changeCount(this.count);
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public void setMinCount(int minCount) {
@@ -139,6 +149,6 @@ public class NumberButton extends LinearLayout {
     }
 
     public interface OnCountChangeListener{
-        void onChange(int count);
+        void onChange(NumberButton button);
     }
 }

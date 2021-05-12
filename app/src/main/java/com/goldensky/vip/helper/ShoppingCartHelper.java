@@ -19,7 +19,13 @@ public class ShoppingCartHelper {
         }
         return shoppingCartHelper;
     }
-
+    public void changeCartGoodsNumber(String shoppingcartId,int count){
+        for (ShoppingCartGoodsBean shoppingCartGoodsBean : goodsBeanList) {
+            if(shoppingCartGoodsBean.getShoppingcartid().equals(shoppingcartId)){
+                shoppingCartGoodsBean.setInventorynum(count);
+            }
+        }
+    }
     public boolean isShoppingCartLoad(){
         return goodsBeanList.size()>0;
     }

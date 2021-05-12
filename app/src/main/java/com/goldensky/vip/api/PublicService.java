@@ -44,18 +44,7 @@ public interface PublicService {
     Observable<NetResponse<Object>> checkVerifyCode(@Query("userMobile") String mobile,
                                                     @Query("userCode") String verifyCode);
 
-    /**
-     * 获取省市县列表
-     * @return
-     */
-    @GET("/goldendays-currency/sysArea/getAreaListAll")
-    Observable<NetResponse<List<AreaListBean>>> getAreaList();
 
-    /**
-     * 获取购物车列表
-     * @param body
-     * @return
-     */
-    @POST("/goldendays-order/vipShoppingCart/getVipShoppingCartListByUserId")
-    Observable<NetResponse<List<ShoppingCartGoodsBean>>> getVipShoppingCartList(@Body UserIdReqBean body);
+
+
 }

@@ -47,7 +47,8 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<Boolean> joinIntoShoppingCartResultLive = new MutableLiveData<>();
 
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
-    public MutableLiveData<List<ShoppingCartGoodsBean>> shoppingCartListLive=new MutableLiveData<>();
+    public MutableLiveData<List<ShoppingCartGoodsBean>> shoppingCartListLive = new MutableLiveData<>();
+
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
         RequestBody requestBody = RequestBody.create(MediaType.parse(URLConnection.guessContentTypeFromName(filePath)), file);
@@ -136,6 +137,11 @@ public class PublicViewModel extends NetWorkViewModel {
                 });
     }
 
+    /**
+     * 加载收货地址列表
+     *
+     * @param userId
+     */
     public void getUserAddress(String userId) {
         UserIdReqBean reqBean = new UserIdReqBean();
         reqBean.setUserid(userId);
@@ -172,7 +178,7 @@ public class PublicViewModel extends NetWorkViewModel {
      * 获取省市县列表
      */
     public void getAreaList() {
-        RetrofitAgent.create(PublicService.class)
+        RetrofitAgent.create(AddressService.class)
                 .getAreaList()
                 .subscribe(new ToastNetObserver<List<AreaListBean>>() {
                     @Override
@@ -185,9 +191,10 @@ public class PublicViewModel extends NetWorkViewModel {
 
     /**
      * 获取购物车列表
+     *
      * @param userId
      */
-    public void getShoppingCartList(String userId){
+    public void getShoppingCartList(String userId) {
         UserIdReqBean userIdReqBean = new UserIdReqBean();
         userIdReqBean.setUserid(userId);
         RetrofitAgent.create(ShoppingCartService.class)

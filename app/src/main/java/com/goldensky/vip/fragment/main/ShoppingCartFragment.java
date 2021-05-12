@@ -4,20 +4,24 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Html;
 import android.view.View;
 
+import com.goldensky.framework.ui.view.NumberButton;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.ShoppingCartListAdapter;
 import com.goldensky.vip.base.fragment.BaseFragment;
+import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.databinding.FragmentShoppingCartBinding;
 import com.goldensky.vip.event.ShoppingCartChangeEvent;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+import com.goldensky.vip.viewmodel.shoppingcart.ShoppingCartViewModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBinding, PublicViewModel> {
+public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartBinding, ShoppingCartViewModel> {
     private boolean isEdit = false;
     private ShoppingCartListAdapter adapter;
     private List<ShoppingCartGoodsBean> shoppingCartGoodsList = new ArrayList<>();
@@ -64,9 +68,22 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
         mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ShoppingCartListAdapter(shoppingCartGoodsList);
         mBinding.rvShoppingCart.setAdapter(adapter);
+        adapter.setListener(new NumberButton.OnCountChangeListener() {
+            @Override
+            public void onChange(NumberButton button) {
+                ShoppingCartGoodsBean shoppingCartGoodsBean = (ShoppingCartGoodsBean) button.getTag();
+                mViewModel.updateCartGoodsNumber(shoppingCartGoodsBean.getBelongtype(),shoppingCartGoodsBean.getCommodityid(),shoppingCartGoodsBean.getCommoditytype(),shoppingCartGoodsBean.getInventoryid(),button.getCount(),shoppingCartGoodsBean.getShoppingcartid(),shoppingCartGoodsBean.getUserid(),button);
+                ShoppingCartHelper.getInstance().changeCartGoodsNumber(shoppingCartGoodsBean.getShoppingcartid(),button.getCount());
+            }
+        });
+        mViewModel.updateCartGoodsNumberLive.observe(this, new Observer<Object>() {
+            @Override
+            public void onChanged(Object o) {
+
+            }
+        });
         setSumMoney("0.00");
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -86,5 +103,10 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
     }
     private void setSumMoney(String s) {
         mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥" + s + "</font>"));
+    }
+
+    @Override
+    public void onLazyLoad() {
+
     }
 }

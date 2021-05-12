@@ -9,16 +9,19 @@ import android.widget.ImageView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.Observer;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.goldensky.framework.ui.view.NumberButton;
 import com.goldensky.framework.util.ImageUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.databinding.ItemShoppingCartBinding;
 import com.goldensky.vip.transform.GlideRoundTransform;
+import com.goldensky.vip.viewmodel.shoppingcart.ShoppingCartViewModel;
 import com.google.android.material.shape.RoundedCornerTreatment;
 
 
@@ -29,21 +32,30 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsBean, BaseViewHolder> {
-
+    private NumberButton.OnCountChangeListener listener;
     public ShoppingCartListAdapter(@Nullable List<ShoppingCartGoodsBean> data) {
         super(R.layout.item_shopping_cart, data);
+    }
+
+    public void setListener(NumberButton.OnCountChangeListener listener) {
+        this.listener = listener;
     }
 
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, ShoppingCartGoodsBean shoppingCartGoodsBean) {
         ItemShoppingCartBinding binding = DataBindingUtil.bind(baseViewHolder.itemView);
+
         Glide.with(getContext()).load(shoppingCartGoodsBean.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),5))).into(binding.goodsimageItemShoppingCart);
         binding.setBean(shoppingCartGoodsBean);
         binding.numberItemShoppingCart.setCount(shoppingCartGoodsBean.getPurchasenum());
-        binding.numberItemShoppingCart.setMaxCount(shoppingCartGoodsBean.getInventorynum());
+        binding.numberItemShoppingCart.setMaxCount(Integer.parseInt(shoppingCartGoodsBean.getInventorynum()+""));
         binding.numberItemShoppingCart.setMinCount(1);
         String s = new DecimalFormat("#.00").format(shoppingCartGoodsBean.getCommodityoldprice());
         binding.priceItemShoppingCart.setText(changTvSize("¥"+s));
+        binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
+        binding.numberItemShoppingCart.setCountChageListener(listener);
+
+
     }
 
     private SpannableString changTvSize(String value) {
@@ -52,4 +64,5 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
         spannableString.setSpan(new RelativeSizeSpan(0.7f), value.indexOf(".")+1, value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
     }
+
 }
