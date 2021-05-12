@@ -25,6 +25,7 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CommentImageAdapter;
 import com.goldensky.vip.adapter.CommentStartAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -53,11 +54,14 @@ import static com.goldensky.vip.viewmodel.order.OrderCommentViewModel.RESULT_MSG
 
 public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBinding, OrderCommentViewModel> implements View.OnClickListener {
 
+    public static final String PRODUCT_URL_KEY = "PRODUCT_URL_KEY";
+    public static final String PRODUCT_SECOND_ORDERID_KEY = "PRODUCT_SECOND_ORDERID_KEY";
+
     private CommentStartAdapter mCommentStartAdapter;
     private CommentImageAdapter mCommentImageAdapter;
     private int currentStartIndex = -1;
-    private String imgUrl = "https://file.jtmsh.com/data/jintianhezong/file/img/2021-01-21/KI1611208227205.png"; //图片url
-    private String secondorderid = "38fd3f7a91504394a8a9326767180772";//secondorderid
+    private String imgUrl = ""; //图片url
+    private String secondorderid = "";//secondorderid
 
 
     public List<LocalMedia> selectList = new ArrayList<>();
@@ -67,6 +71,11 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            imgUrl = bundle.getString(PRODUCT_URL_KEY, "");
+            secondorderid = bundle.getString(PRODUCT_SECOND_ORDERID_KEY, "");
+        }
         mBinding.topBarOrder.setBackListener( v -> { finish(); });
         mBinding.etComment.setFilters(new InputFilter[]{new EmojiExcludeFilter()});
         mBinding.tvCommit.setOnClickListener(this);
@@ -142,7 +151,6 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
         mBinding.rvPics.setAdapter(mCommentImageAdapter);
 
         mViewModel.uploadPicLiveData.observe(this, url -> {
-            Log.d("uploadPicLiveData", "observe: " + url);
             selectUrlsList.add(url);
             if (lastMedia != null) {
                 selectList.add(lastMedia);
@@ -154,6 +162,8 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
         mViewModel.commitResult.observe(this, map -> {
             if (map.get(RESULT_CODE_KEY) == "1") {
                 //成功
+                Starter.startCommentSuccessActivity(this, null);
+                finish();
             } else {
                 Toast.makeText(this, map.get(RESULT_MSG_KEY), Toast.LENGTH_SHORT).show();
             }
@@ -258,7 +268,8 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
 
         String urls = stringBuilder.toString();
 
-        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, "365fc2e065164700a5b1b985e326a766", secondorderid);
+        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, AccountHelper.getUserId(), secondorderid);
+//        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, "365fc2e065164700a5b1b985e326a766", secondorderid);
     }
 
     @Override

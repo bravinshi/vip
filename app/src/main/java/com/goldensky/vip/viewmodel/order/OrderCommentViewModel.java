@@ -13,6 +13,7 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.api.order.OrderService;
 import com.goldensky.vip.base.net.NetParams;
+import com.goldensky.vip.bean.CommentProductBean;
 import com.goldensky.vip.bean.CommentReqBean;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
@@ -31,6 +32,21 @@ public class OrderCommentViewModel extends PublicViewModel {
     public static final String RESULT_MSG_KEY = "RESULT_MSG_KEY";
     public MutableLiveData<Map<String, String>> commitResult = new MutableLiveData<>();
 
+    public MutableLiveData<List<CommentProductBean>> commentProducts = new MutableLiveData<>();
+
+
+    public void getVipOrderDetail(String userId) {
+        RetrofitAgent.create(OrderService.class)
+                .getVipOrderDetail(userId)
+                .subscribe(new ToastNetObserver<List<CommentProductBean>>() {
+                    @Override
+                    public void onSuccess(List<CommentProductBean> data) {
+                        if (data != null && data.size() > 0) {
+                            commentProducts.postValue(data);
+                        }
+                    }
+                });
+    }
 
     public void orderComment(String evaluatescore, String evaluatecontent, String evaluatepic, String l_uid, String secondorderid) {
         CommentReqBean reqBean = new CommentReqBean(evaluatecontent, evaluatepic, evaluatescore, l_uid, secondorderid);

@@ -33,8 +33,11 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:theme"
         tools:targetApi="m">
-        <activity android:name=".activity.order.OrderCommentActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".activity.order.CommentSuccessActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.order.OrderCommentActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.mine.tools.adress.EditAddressActivity" />
         <activity android:name=".activity.order.OrderDetailActivity" />
         <activity android:name=".activity.mine.tools.adress.NewAddressActivity" />
