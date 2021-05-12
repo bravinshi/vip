@@ -86,38 +86,40 @@ public class NumberButton extends LinearLayout {
                 if(s.length()==0){
                     countNumberButton.setText("1");
                     countNumberButton.setSelection(1) ;//光标移至尾部
+                    if (listener!=null){
+                        listener.onChange(NumberButton.this);
+                    }
+                    return;
                 }
                 if(s.length()>0){
                     String countString =s.toString().trim();
 
                     if (countString.startsWith("0")&&countString.length() >= 2) {
-                        countString = countString.substring(1, countString.length());
+                        countString = countString.substring(1);
                         countNumberButton.setText(countString);
                         countNumberButton.setSelection(countString.length()) ;//光标移至尾部
-                    }
-                    if (countString.contains(".")) {
-                        countString.replace(".","");
-                        countNumberButton.setText(countString);
-                        countNumberButton.setSelection(countString.length()) ;//光标移至尾部
+                        if (listener!=null){
+                            listener.onChange(NumberButton.this);
+                        }
+                        return;
                     }
                     count = Integer.parseInt(countString);
                    if(count>maxCount){
                        ToastUtils.showShort("购买量不能大于:"+maxCount);
                        count=maxCount;
                        changeCount(count);
-                       countNumberButton.setSelection(countString.length()-1) ;//光标移至尾部
+
                    }
                    if(count<minCount){
                        ToastUtils.showShort("购买数量不能小于:"+minCount);
                        count=minCount;
                        changeCount(count);
-                       countNumberButton.setSelection(countString.length()) ;//光标移至尾部
                    }
                 }
-
                 if (listener!=null){
                     listener.onChange(NumberButton.this);
                 }
+
             }
         });
     }

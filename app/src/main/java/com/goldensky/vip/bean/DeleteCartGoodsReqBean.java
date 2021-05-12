@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class DeleteCartGoodsResBean implements Serializable {
+public class DeleteCartGoodsReqBean implements Serializable {
 
     @SerializedName("shoppingcartids")
     private String shoppingcartids;

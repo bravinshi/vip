@@ -16,6 +16,7 @@
             android:layout_height="0dp"
             android:text="@string/hint_logout"
             android:gravity="center"
+            android:textSize="20sp"
             android:layout_weight="5"
             />
         <View
