@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="bean"
-            type="com.goldensky.vip.bean.HomeBean.ProductBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,8 +23,7 @@
             app:layout_constraintTop_toBottomOf="@+id/product_iv"
             android:layout_marginTop="5dp"
             android:textColor="#666666"
-            android:textSize="14sp"
-            android:text="@{bean.productName}">
+            android:textSize="14sp">
         </TextView>
         <TextView
             android:id="@+id/unit_tv"
@@ -51,8 +47,7 @@
             android:ellipsize="end"
             android:textColor="#EA483F"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text='@{bean.productPrice}'>
+            android:textStyle="bold">
 
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>

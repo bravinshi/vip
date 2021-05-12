@@ -4,13 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.goldensky.vip.bean.UserBean"/>
-        <variable
-            name="userInfo"
-            type="UserBean" />
-<!--        <variable-->
-<!--            name="listener"-->
-<!--            type="android.view.View.OnClickListener" />-->
+
     </data>
 
     <LinearLayout
@@ -47,8 +41,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
                 android:textColor="#ffffffff"
-                android:textSize="14sp"
-                android:text="@{userInfo.nickName}">
+                android:textSize="14sp">
             </TextView>
 
             <TextView
@@ -61,8 +54,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="1dp"
                 android:textColor="#80ffffff"
-                android:textSize="11sp"
-                android:text="@{userInfo.shopName}">
+                android:textSize="11sp">
             </TextView>
 
 <!--            <LinearLayout-->
