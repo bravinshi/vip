@@ -27,6 +27,15 @@ public class LoginResponseBean implements Cloneable, Serializable {
     @SerializedName("vipUser")
     private VipUser vipUser;
 
+    public void clear() {
+        expiresIn = null;
+        map = null;
+        refreshToken = null;
+        token = null;
+        tokenHead = null;
+        userid = null;
+        vipUser = null;
+    }
 
     public Integer getExpiresIn() {
         return expiresIn;
@@ -165,7 +174,7 @@ public class LoginResponseBean implements Cloneable, Serializable {
             vipUser.setUserdel(userdel);
             vipUser.setUserid(userid);
             vipUser.setUsermobile(usermobile);
-            vipUser.setUsernick(usernick);
+            vipUser.setUserNick(usernick);
             vipUser.setUserpassword(userpassword);
             vipUser.setUserpic(userpic);
             vipUser.setUserregisttime(userregisttime);
@@ -330,11 +339,11 @@ public class LoginResponseBean implements Cloneable, Serializable {
             this.usermobile = usermobile;
         }
 
-        public String getUsernick() {
+        public String getUserNick() {
             return usernick;
         }
 
-        public void setUsernick(String usernick) {
+        public void setUserNick(String usernick) {
             this.usernick = usernick;
         }
 

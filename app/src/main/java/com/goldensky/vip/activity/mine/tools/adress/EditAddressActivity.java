@@ -95,12 +95,12 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
                 showCityPicker();
                 break;
             case R.id.btn_save_edit_address:
-                editAddress();
+                editAddress(v);
                 break;
         }
     }
 
-    private void editAddress() {
+    private void editAddress(View v) {
         if(isNotNull(editAddressModel.getConsigneeName())){
             if(isNotNull(editAddressModel.getConsigneePhone())&&!notPhoneNumber(editAddressModel.getConsigneePhone())){
                 if(isNotNull(editAddressModel.getLocation())){
@@ -109,9 +109,9 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
                         isDefaultCode=1;
                     }
                     bean = new ChangeUserAddressReqBean(selectAreaName, selectAreaId, selectCityName, selectCityId,0, selectProvinceName, selectProvinceId, editAddressModel.getLocation(), isDefaultCode,addressbean.getUseraddressid(), editAddressModel.getConsigneeName(), editAddressModel.getConsigneePhone(), AccountHelper.getUserId());
-                    mViewModel.editUserAddress(bean);
+                    mViewModel.editUserAddress(bean,v);
                 }else {
-                    toast(getResources().getString(R.string.hint_input_consignee_area_nonull));
+                    toast(getResources().getString(R.string.hint_input_consignee_area));
                 }
             }else {
                 toast(getResources().getString(R.string.hint_input_effective_phone));

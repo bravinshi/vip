@@ -12,13 +12,19 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityPersonalDetailsBinding;
 import com.goldensky.vip.enumerate.DefaultUrlEnum;
+import com.goldensky.vip.event.VipUserChangeEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, PublicViewModel> implements View.OnClickListener {
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         mBinding.topBarPersonDetail.setBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +32,10 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
             }
         });
         mBinding.setListener(this);
+        setMSG();
+    }
+
+    private void setMSG() {
         if(AccountHelper.getUserNick()!=null){
             mBinding.tvNickPersonalDetail.setText(AccountHelper.getUserNick());
         }else {
@@ -37,7 +47,17 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
             Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadPersonalDetail);
         }
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onVipUserChanged(VipUserChangeEvent event){
+        if(event.getSuccess()){
+            setMSG();
+        }
+    }
     @Override
     public void observe() {
 

@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.goldensky.vip.model.ChangePWDModel" />
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +27,7 @@
             app:showIvBack="true"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/send_code_change_pwd"
+            android:id="@+id/cl_send_code_change_pwd"
             app:layout_constraintTop_toBottomOf="@+id/top_bar_change_pwd"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
@@ -38,7 +43,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="40dp"
-                android:text="本次操作需要短信确认，短信验证码已发送至136****3697，请注意查收"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_constraintTop_toBottomOf="@+id/tv_prompt_change_pwd"
@@ -51,20 +55,27 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/btn_get_code_change_pwd"
                     android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:textSize="14sp"
                     android:hint="@string/hint_input_verification_code"
+                    android:layout_marginRight="100dp"
+                    android:text="@={model.verificationCode}"
                     />
-                <TextView
+                <com.goldensky.vip.base.ui.view.CountDownButton
+                    android:id="@+id/btn_get_code_change_pwd"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:textSize="16sp"
+                    android:onClick="@{listener}"
                     android:textColor="@color/color_6E788C"
-                    android:id="@+id/btn_get_code_change_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hint_get_verification_code"
@@ -72,7 +83,115 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/cl_confirm_pwd_change_pwd"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_change_pwd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_new_pwd_change_pwd"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
+                >
+                <TextView
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/text_new_pwd"
+                    />
+                <EditText
+                    android:id="@+id/et_pwd_change_pwd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="0dp"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintRight_toLeftOf="@+id/can_see_new_change_pwd"
+                    android:layout_marginLeft="105dp"
+                    android:layout_marginRight="15dp"
+                    android:inputType="textPassword"
+                    android:text="@={model.newPassword}"
+                    android:hint="@string/hint_input_new_password"
+                    android:textColorHint="@color/color_9"
+                    android:textColor="@color/color_333333"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+                <ImageView
+                    android:id="@+id/can_see_new_change_pwd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="25dp"
+                    android:onClick="@{listener}"
+                    android:layout_width="20dp"
+                    android:layout_height="10dp"
+                    android:src="@mipmap/bukejian"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:layout_constraintTop_toBottomOf="@+id/cl_new_pwd_change_pwd"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
+                android:layout_height="50dp"
+                >
+                <TextView
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/text_new_pwd_confirm"
+                    />
+                <EditText
+                    android:id="@+id/et_confirm_pwd_change_pwd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="0dp"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintRight_toLeftOf="@+id/can_see_confirm_change_pwd"
+                    android:layout_marginLeft="105dp"
+                    android:layout_marginRight="15dp"
+                    android:inputType="textPassword"
+                    android:text="@={model.newPasswordConfirm}"
+                    android:hint="@string/hint_input_new_password_confirm"
+                    android:textColorHint="@color/color_9"
+                    android:textColor="@color/color_333333"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+                <ImageView
+                    android:id="@+id/can_see_confirm_change_pwd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="10dp"
+                    android:onClick="@{listener}"
+                    android:src="@mipmap/bukejian"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/confirm_commit_change_pwd"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="30dp"
@@ -81,6 +200,7 @@
             android:textColor="@color/white"
             android:text="@string/text_confirm_submit"
             android:gravity="center"
+            android:onClick="@{listener}"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             />

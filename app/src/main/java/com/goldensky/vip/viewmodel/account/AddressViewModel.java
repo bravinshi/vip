@@ -1,5 +1,7 @@
 package com.goldensky.vip.viewmodel.account;
 
+import android.view.View;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.framework.net.RetrofitAgent;
@@ -39,7 +41,7 @@ public class AddressViewModel extends PublicViewModel {
      * 编辑收货地址
      * @param body
      */
-    public void editUserAddress(ChangeUserAddressReqBean body){
+    public void editUserAddress(ChangeUserAddressReqBean body, View view){
 
         RetrofitAgent.create(AddressService.class)
                 .changeUserAddress(body)
@@ -48,7 +50,7 @@ public class AddressViewModel extends PublicViewModel {
                     public void onSuccess(Object data) {
                         editAddressLive.postValue(data);
                     }
-                });
+                }.watchViewClickable(view));
     }
 
 
@@ -57,7 +59,7 @@ public class AddressViewModel extends PublicViewModel {
      * 新建收货地址
      * @param body
      */
-    public void addUserAddress(AddUserAddressReqBean body){
+    public void addUserAddress(AddUserAddressReqBean body,View view){
         RetrofitAgent.create(AddressService.class)
                 .addUserAddress(body)
                 .subscribe(new ToastNetObserver<Object>() {
@@ -65,6 +67,6 @@ public class AddressViewModel extends PublicViewModel {
                     public void onSuccess(Object data) {
                         addAddressLive.postValue(data);
                     }
-                });
+                }.watchViewClickable(view));
     }
 }
