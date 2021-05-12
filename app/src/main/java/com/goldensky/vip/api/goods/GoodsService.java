@@ -1,7 +1,7 @@
 package com.goldensky.vip.api.goods;
 
 import com.goldensky.framework.bean.NetResponse;
-import com.goldensky.vip.bean.CommodityResBean;
+import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 
@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 public interface GoodsService {
 
     @GET("/goldendays-goods/commodity/vip/detail")
-    Observable<NetResponse<CommodityResBean>> getGoodsDetail(@Query("commodityId") Integer goodsId);
+    Observable<NetResponse<CommodityBean>> getGoodsDetail(@Query("commodityId") Integer goodsId);
 
     @GET("/goldendays-goods/commodity/getCommodityComment")
     Observable<NetResponse<GoodsCommentResBean>> getGoodsComment(@Query("currentPage") Integer currentPage,

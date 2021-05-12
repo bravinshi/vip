@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.goods.GoodsService;
 import com.goldensky.vip.bean.CommodityBean;
-import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 /**
@@ -17,14 +16,14 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
  */
 public class GoodsDetailViewModel extends PublicViewModel {
 
-    public MutableLiveData<CommodityResBean> goodsDetailLive = new MutableLiveData<>();
+    public MutableLiveData<CommodityBean> goodsDetailLive = new MutableLiveData<>();
 
     public void getGoodsDetail(Integer goodsId) {
         RetrofitAgent.create(GoodsService.class)
                 .getGoodsDetail(goodsId)
-                .subscribe(new ToastNetObserver<CommodityResBean>(){
+                .subscribe(new ToastNetObserver<CommodityBean>(){
                     @Override
-                    public void onSuccess(CommodityResBean data) {
+                    public void onSuccess(CommodityBean data) {
                         goodsDetailLive.postValue(data);
                     }
                 });

@@ -67,6 +67,16 @@ public class CommodityBean {
     @SerializedName("commoditydesc")
     private String commodityDesc;
 
+    private List<InventoryBean> commodityInventoryList;
+
+    public List<InventoryBean> getCommodityInventoryList() {
+        return commodityInventoryList;
+    }
+
+    public void setCommodityInventoryList(List<InventoryBean> commodityInventoryList) {
+        this.commodityInventoryList = commodityInventoryList;
+    }
+
     // {
     //    "code": 0,
     //    "data": {

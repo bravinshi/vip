@@ -114,6 +114,7 @@
     <string name="hint_confirm_delete">确认删除?</string>
     <string name="hint_logout">确认退出登录?</string>
     <string name="text_join_shopping_cart_success">加入购物车成功</string>
+    <string name="text_confirm_order">确认订单</string>
 
 
 </resources>
