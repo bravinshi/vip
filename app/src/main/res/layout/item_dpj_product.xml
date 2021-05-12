@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bean"
+            type="com.goldensky.vip.bean.CommentProductBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@+id/iv_product"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="15dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            android:text="@{bean.commodityname}"/>
+
+        <TextView
+            android:id="@+id/tv_gg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintRight_toLeftOf="@+id/tv_comment"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="#ff888888"
+            android:textSize="11sp" />
+        
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="2dp"
+            android:textColor="#ffea483f"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/shape_go_comment"
+            android:text="去评价"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
