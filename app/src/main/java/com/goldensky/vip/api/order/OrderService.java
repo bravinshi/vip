@@ -5,7 +5,6 @@ import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.CommentProductBean;
 import com.goldensky.vip.bean.CommentReqBean;
-import com.goldensky.vip.bean.CommodityResBean;
 
 import java.util.List;
 
