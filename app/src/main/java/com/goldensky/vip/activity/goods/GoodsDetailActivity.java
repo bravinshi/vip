@@ -3,8 +3,6 @@ package com.goldensky.vip.activity.goods;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.lifecycle.Observer;
-
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
@@ -13,9 +11,9 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
+import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
-import com.goldensky.vip.bean.CommodityResBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -25,7 +23,6 @@ import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
-import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -123,18 +120,32 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
     }
 
+    /**
+     * 处理规格dialog的加入购物车和立即购买
+     *
+     * @param joinOrBuyEvent 加入购物车和立即购买事件
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void joinOrBuy(JoinOrBuyEvent joinOrBuyEvent) {
         if (joinOrBuyEvent.getJoin()) {
-            if (mViewModel.goodsDetailLive.getValue() != null) {
-                // 发起加入购物车请求
-                CommodityBean commodityDetail = mViewModel.goodsDetailLive.getValue().getCommodity();
-                InventoryBean inventory = joinOrBuyEvent.getInventory();
-                JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean
-                        = JoinIntoShoppingCartReqBean.fromInventoryAndGoodsDetail(commodityDetail, inventory);
-                joinIntoShoppingCartReqBean.setPurchasenum(joinOrBuyEvent.getPurchaseNum());
-                mViewModel.joinIntoShoppingCart(joinIntoShoppingCartReqBean);
-            }
+            join(joinOrBuyEvent.getInventory(), joinOrBuyEvent.getPurchaseNum());
+        } else {
+            buy(joinOrBuyEvent.getInventory(), joinOrBuyEvent.getPurchaseNum());
+        }
+    }
+
+    public void buy(InventoryBean inventory, Integer purchaseNum) {
+
+    }
+
+    public void join(InventoryBean inventory, Integer purchaseNum) {
+        if (mViewModel.goodsDetailLive.getValue() != null) {
+            // 发起加入购物车请求
+            CommodityBean commodityDetail = mViewModel.goodsDetailLive.getValue();
+            JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean
+                    = JoinIntoShoppingCartReqBean.fromInventoryAndGoodsDetail(commodityDetail, inventory);
+            joinIntoShoppingCartReqBean.setPurchasenum(purchaseNum);
+            mViewModel.joinIntoShoppingCart(joinIntoShoppingCartReqBean);
         }
     }
 
@@ -152,10 +163,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     /**
      * 展示商品详情信息
      *
-     * @param data 详情信息
+     * @param detail 详情信息
      */
-    public void showGoodsDetail(CommodityResBean data) {
-        CommodityBean detail = data.getCommodity();
+    public void showGoodsDetail(CommodityBean detail) {
         // 轮播图片
         Set<String> pics = new HashSet<>();
         if (!StringUtils.isTrimEmpty(detail.getCommodityIcon())) {
@@ -184,7 +194,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
 
-        handleInventory(data.getInventories());
+        handleInventory(detail.getCommodityInventoryList());
     }
 
     // 处理规格

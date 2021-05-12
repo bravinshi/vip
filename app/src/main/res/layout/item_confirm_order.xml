@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+
+            <ImageView
+                android:id="@+id/iv_pic"
+                android:layout_width="90dp"
+                android:layout_height="90dp"/>
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_toEndOf="@+id/iv_pic"
+                android:layout_toStartOf="@+id/tv_price"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="山东红富士高端礼盒顺丰包邮整箱3.7KG水果苹果脆甜"
+                android:textColor="@color/color_3"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2222222"
+                android:textColor="@color/color_3"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_specification"
+                android:layout_below="@+id/tv_desc"
+                android:layout_toEndOf="@+id/iv_pic"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:background="@color/color_f5"
+                android:layout_height="24dp"
+                android:text="3.75KG"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/color_888888"
+                android:textSize="12sp"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="18dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="数量"
+                android:textColor="@color/color_3"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/btn_decrease"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="30dp"
+                android:src="@mipmap/icon_reduce" />
+
+            <EditText
+                android:id="@+id/et_count"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="#EBEBEB"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="8"
+                android:minWidth="40dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:textColor="@color/color_3"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn_increase"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="30dp"
+                android:src="@mipmap/icon_plus" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
