@@ -19,6 +19,7 @@ import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
+import com.goldensky.vip.activity.mine.settings.AboutGoldenDaysActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
@@ -330,6 +331,14 @@ public class Starter {
     //订单发表评价
     public static void startOrderCommentActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderCommentActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    //关于今天合纵
+    public static void startAboutGoldenDaysActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, AboutGoldenDaysActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

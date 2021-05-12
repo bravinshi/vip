@@ -90,12 +90,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
             }
         });
         mBinding.rvMyAddress.setAdapter(adapter);
-        String userId = AccountHelper.getUserId();
-        if(UserAddressHelper.getInstance().isUserAddressLoad()){
-            refreshAddressList();
-        }else {
-            mViewModel.getUserAddress(userId);
-        }
+        refreshAddressList();
 
     }
 
@@ -111,7 +106,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         EventBus.getDefault().unregister(this);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refreshAddressList(AddAddressEvent addAddressEvent){
+    public void refreshAddress(AddAddressEvent addAddressEvent){
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             refreshAddressList();
@@ -120,13 +115,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
     }
     @Override
     public void observe() {
-        mViewModel.userAddressLive.observe(this, new Observer<List<UserAddressBean>>() {
-            @Override
-            public void onChanged(List<UserAddressBean> userAddressBeans) {
-                UserAddressHelper.getInstance().setUserAddressList(userAddressBeans);
-                refreshAddressList();
-            }
-        });
+
 
         mViewModel.deleteAddressLive.observe(this, new Observer<Object>() {
             @Override

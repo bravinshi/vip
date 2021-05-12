@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        tools:context=".activity.mine.settings.AboutGoldenDaysActivity">
+        <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/top_bar_about"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:centerText="@string/text_about_jthz"
+            app:centerTextColor="@color/color_333333"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="145dp"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/iv_logo_about"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/about"
+                />
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_logo_about"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For Andriod V1.0.4"
+                android:textSize="16sp"
+                android:textColor="@color/color_333333"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            app:layout_constraintBottom_toTopOf="@+id/tv_golden_days"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_888888"
+            android:text="苏ICP备19024018号"
+            />
+        <TextView
+            android:id="@+id/tv_golden_days"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="江苏金天名食汇商业管理有限公司版权所有"
+            android:textSize="14sp"
+            android:textColor="@color/color_888888"
+            android:layout_marginBottom="100dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

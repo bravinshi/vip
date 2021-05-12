@@ -48,7 +48,7 @@ public class MyApplication extends Application {
         //任晓阳
 //        apiConfiguration.setBaseUrl("http://172.25.0.84:9999/");
         // 马晓伟
-        apiConfiguration.setBaseUrl("http://172.25.0.118:9999/");
+        apiConfiguration.setBaseUrl("http://172.25.0.47:9999/");
         // 设置gson
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
         apiConfiguration.setGson(gsonBuilder.create());

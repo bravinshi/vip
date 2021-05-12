@@ -110,7 +110,9 @@ public class NumberButton extends LinearLayout {
                    }
                 }
 
-                listener.onChange(count);
+                if (listener!=null){
+                    listener.onChange(count);
+                }
             }
         });
     }
