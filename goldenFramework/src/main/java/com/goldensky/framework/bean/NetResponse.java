@@ -12,6 +12,7 @@ import com.goldensky.framework.constant.NetCodeConstant;
 public class NetResponse<T> {
     private String message;
     private int code;
+    private int status;
     private T data;
 
     /**
@@ -66,5 +67,13 @@ public class NetResponse<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

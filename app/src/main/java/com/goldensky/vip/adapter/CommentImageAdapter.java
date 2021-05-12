@@ -39,8 +39,8 @@ public class CommentImageAdapter extends BaseQuickAdapter<LocalMedia, BaseViewHo
             binding.ivDelete.setVisibility(View.INVISIBLE);
         } else {
             binding.ivDelete.setVisibility(View.VISIBLE);
-            String path;
             LocalMedia media = getData().get(position);
+            String path;
             if (media.isCompressed()) {
                 //压缩
                 path = media.getCompressPath();
