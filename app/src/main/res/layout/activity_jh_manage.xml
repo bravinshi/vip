@@ -66,7 +66,8 @@
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_f5">
+            android:background="@color/color_f5"
+            android:overScrollMode="never">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </layout>
