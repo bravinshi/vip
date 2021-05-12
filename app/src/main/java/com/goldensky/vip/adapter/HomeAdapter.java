@@ -5,6 +5,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.HomeBean;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHolder> {
@@ -25,19 +27,13 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
     public HomeAdapter(List<HomeBean> data) {
         super(data);
         addItemType(ITEM_TYPE_LB, R.layout.item_home_lb);
-        addItemType(ITEM_TYPE_MSG, R.layout.item_home_msg);
         addItemType(ITEM_TYPE_RMD, R.layout.item_home_product);
         addItemType(ITEM_TYPE_JRBK, R.layout.item_home_product);
         addItemType(ITEM_TYPE_JTYX, R.layout.item_home_jtyx);
-        addItemType(ITEM_TYPE_YHZQ, R.layout.item_home_yhzq);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, HomeBean item) {
-
-    }
-
-    private void startProdutDetailActivity(Integer productId) {
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, HomeBean homeBean) {
 
     }
 }
