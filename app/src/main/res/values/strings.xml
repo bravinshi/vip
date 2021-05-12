@@ -113,6 +113,7 @@
     <string name="hint_logout">确认退出登录?</string>
     <string name="text_join_shopping_cart_success">加入购物车成功</string>
     <string name="text_confirm_order">确认订单</string>
+    <string name="text_select_address">请选择地址</string>
 
 
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.goldensky.framework.util.CollectionUtils;
+import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
@@ -129,11 +130,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     public void buy(InventoryBean inventory, Integer purchaseNum) {
+        if (selectedAddress == null) {
+            ToastUtils.showShort(R.string.text_select_address);
+            return;
+        }
         ConfirmOrderItemBean confirmOrderItemBean = ConfirmOrderItemBean
                 .generateConfirmOrderItem(inventory, mViewModel.goodsDetailLive.getValue(), purchaseNum);
 
         List<ConfirmOrderItemBean> confirmOrderItemBeans = new ArrayList<>();
         confirmOrderItemBeans.add(confirmOrderItemBean);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(ConfirmOrderActivity.KEY_ADDRESS, GsonUtils.toJson(selectedAddress));
+        bundle.putString(ConfirmOrderActivity.KEY_GOODS, GsonUtils.toJson(confirmOrderItemBeans));
+        // 进入确认订单界面
+        Starter.startConfirmOrderActivity(GoodsDetailActivity.this, bundle);
     }
 
     public void join(InventoryBean inventory, Integer purchaseNum) {

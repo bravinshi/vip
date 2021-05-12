@@ -33,6 +33,19 @@ public class ConfirmOrderItemBean {
     private String specification;
     private Double price;
 
+    public AddOrderReqBean.Commodity generateCommodity() {
+        AddOrderReqBean.Commodity commodity = new AddOrderReqBean.Commodity();
+
+        commodity.setBelongId(belongId);
+        commodity.setBelongType(belongType);
+        commodity.setCommodityId(commodityId);
+        commodity.setCommodityName(commodityName);
+        commodity.setInventoryId(inventoryId);
+        commodity.setPurchaseNum(purchaseNum);
+
+        return commodity;
+    }
+
     public static ConfirmOrderItemBean generateConfirmOrderItem(InventoryBean inventory,
                                                                 CommodityBean commodityBean, Integer purchaseNum) {
         ConfirmOrderItemBean confirmOrderItemBean = new ConfirmOrderItemBean();

@@ -1,16 +1,19 @@
 package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.lifecycle.Observer;
 
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.MathUtils;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.ConfirmOrderAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
+import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
@@ -20,8 +23,7 @@ import com.goldensky.vip.event.PurchaseNumChangeEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
-import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
-import com.google.gson.Gson;
+import com.goldensky.vip.viewmodel.goods.ConfirmOrderViewModel;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,6 +33,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.crypto.Cipher;
+
 /**
  * @author bravin
  * @version 1.0
@@ -38,7 +42,7 @@ import java.util.List;
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBinding, GoodsDetailViewModel> {
+public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBinding, ConfirmOrderViewModel> {
 
     private final ConfirmOrderAdapter confirmOrderAdapter = new ConfirmOrderAdapter();
     private UserAddressBean selectedAddress = null;
@@ -74,6 +78,10 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
     @Override
     public void observe() {
         mViewModel.userAddressLive.observe(this, this::handleAddress);
+        mViewModel.submitOrderLive.observe(this, o -> {
+            // TODO 支付
+//            Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
+        });
     }
 
     private void retrieveAddress() {
@@ -143,6 +151,38 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         }
     }
 
+    // 提交订单
+    private void submit() {
+        AddOrderReqBean addOrderReqBean = new AddOrderReqBean();
+
+        if (selectedAddress == null) {
+            ToastUtils.showShort(R.string.text_select_address);
+            return;
+        }
+
+        addOrderReqBean.setArea(selectedAddress.getArea());
+        addOrderReqBean.setAreaId(selectedAddress.getAreaid());
+        addOrderReqBean.setProvince(selectedAddress.getProvince());
+        addOrderReqBean.setProvinceId(selectedAddress.getProvinceid());
+        addOrderReqBean.setCity(selectedAddress.getCity());
+        addOrderReqBean.setCityId(selectedAddress.getCityid());
+        addOrderReqBean.setUserAddress(selectedAddress.getUseraddress());
+        addOrderReqBean.setUserAddressName(selectedAddress.getUseraddressname());
+        addOrderReqBean.setUserAddressPhone(selectedAddress.getUseraddressphone());
+        addOrderReqBean.setUserId(AccountHelper.getUserId());
+
+        List<ConfirmOrderItemBean> confirmOrderItemBeans = confirmOrderAdapter.getData();
+        List<AddOrderReqBean.Commodity> commodities = new ArrayList<>();
+
+        for (ConfirmOrderItemBean confirmOrderItemBean : confirmOrderItemBeans) {
+            commodities.add(confirmOrderItemBean.generateCommodity());
+        }
+
+        addOrderReqBean.setCommodityList(commodities);
+
+        mViewModel.addOrder(addOrderReqBean);
+    }
+
     /**
      * 订阅添加地址处理结果
      *
@@ -186,6 +226,8 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                 selectAddressDialog.show(getSupportFragmentManager(), "selectAddressDialog");
             }
         });
+
+        mBinding.tvSubmit.setOnClickListener(v -> submit());
     }
 
     @Override
