@@ -14,6 +14,7 @@ import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
+import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -66,14 +67,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 //        if (goodsId == -1) {
 //            return;
 //        }
-        mBinding.tvCommentAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString(KEY_GOODS_ID, goodsId);
-                Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
-            }
-        });
+
         // 获取商品详情
         mViewModel.getGoodsDetail(347);
         // 获取评论信息
@@ -135,7 +129,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     public void buy(InventoryBean inventory, Integer purchaseNum) {
+        ConfirmOrderItemBean confirmOrderItemBean = ConfirmOrderItemBean
+                .generateConfirmOrderItem(inventory, mViewModel.goodsDetailLive.getValue(), purchaseNum);
 
+        List<ConfirmOrderItemBean> confirmOrderItemBeans = new ArrayList<>();
+        confirmOrderItemBeans.add(confirmOrderItemBean);
     }
 
     public void join(InventoryBean inventory, Integer purchaseNum) {
@@ -216,6 +214,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
      * @param userAddresses 地址列表
      */
     private void handleAddress(List<UserAddressBean> userAddresses) {
+        if (selectAddressDialog == null) {
+            selectAddressDialog = new SelectAddressDialog();
+        }
+
         if (CollectionUtils.nullOrEmpty(userAddresses)) {
             return;
         }
@@ -224,10 +226,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (!showDefaultAddress) {
             showDefaultAddress = true;
             showDefaultAddress(userAddresses);
-        }
-
-        if (selectAddressDialog == null) {
-            selectAddressDialog = new SelectAddressDialog();
         }
 
         selectAddressDialog.setData(userAddresses);
@@ -239,13 +237,19 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
      * @param userAddresses 地址列表
      */
     private void showDefaultAddress(List<UserAddressBean> userAddresses) {
+        if (CollectionUtils.nullOrEmpty(userAddresses)) {
+            return;
+        }
         for (UserAddressBean userAddressBean : userAddresses) {
             if (BusinessConstant.VALUE_DEFAULT_ADDRESS.equals(userAddressBean.getUseraddressdefault())) {
                 selectedAddress = userAddressBean;
                 mBinding.tvAddress.setText(selectedAddress.getAddress());
-                break;
+                return;
             }
         }
+
+        selectedAddress = userAddresses.get(0);
+        mBinding.tvAddress.setText(selectedAddress.getAddress());
     }
 
     @Override
@@ -294,6 +298,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 goodsSpecificationDialog.setBtnState(View.GONE, View.VISIBLE);
                 goodsSpecificationDialog.show(getSupportFragmentManager(), goodsSpecificationDialogTag);
             }
+        });
+
+        mBinding.tvCommentAll.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_GOODS_ID, goodsId);
+            Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
         });
     }
 

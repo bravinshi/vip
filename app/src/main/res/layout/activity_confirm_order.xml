@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <com.goldensky.framework.ui.view.TopActionBar
+            android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:centerText="@string/text_confirm_order" />
@@ -24,7 +25,7 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nsv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fillViewport="true"
                 android:overScrollMode="never">
@@ -38,6 +39,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/rl_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -75,6 +77,7 @@
                                     android:textSize="14sp" />
 
                                 <TextView
+                                    android:id="@+id/tv_phone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -87,6 +90,7 @@
                             </RelativeLayout>
 
                             <TextView
+                                android:id="@+id/tv_pro_city_cou"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
@@ -95,6 +99,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/tv_area"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
@@ -114,9 +119,12 @@
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:paddingTop="15dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:id="@+id/rv_goods"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/shape_top_corner_white_bg"
                         android:nestedScrollingEnabled="false"
                         android:orientation="vertical"
@@ -202,6 +210,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginBottom="66dp"
                         android:orientation="vertical"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"

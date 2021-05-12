@@ -2,6 +2,12 @@ package com.goldensky.vip.bean;
 
 import androidx.databinding.BaseObservable;
 
+import com.goldensky.framework.util.GsonUtils;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author bravin
  * @version 1.0
@@ -26,6 +32,35 @@ public class ConfirmOrderItemBean {
     private Integer purchaseNum;
     private String specification;
     private Double price;
+
+    public static ConfirmOrderItemBean generateConfirmOrderItem(InventoryBean inventory,
+                                                                CommodityBean commodityBean, Integer purchaseNum) {
+        ConfirmOrderItemBean confirmOrderItemBean = new ConfirmOrderItemBean();
+
+        confirmOrderItemBean.setPrice(inventory.getCommodityOldPrice());
+        // 展示用规格
+        JsonObject jsonObject = GsonUtils.fromJson(inventory.getInventory(), JsonObject.class);
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> keySet = new ArrayList<>(jsonObject.keySet());
+        int size = keySet.size();
+        for (int i = 0; i < size; i++) {
+            String key = keySet.get(i);
+            stringBuilder.append(jsonObject.get(key).getAsString());
+            if (i != size - 1) {
+                stringBuilder.append(";");
+            }
+        }
+        confirmOrderItemBean.setSpecification(stringBuilder.toString());
+        confirmOrderItemBean.setPic(inventory.getInventoryPic());
+        confirmOrderItemBean.setCommodityName(inventory.getCommodityName());
+        confirmOrderItemBean.setBelongId(commodityBean.getBelongId());
+        confirmOrderItemBean.setBelongType(commodityBean.getBelongType());
+        confirmOrderItemBean.setCommodityId(inventory.getCommodityId());
+        confirmOrderItemBean.setInventoryId(inventory.getInventoryId());
+        confirmOrderItemBean.setPurchaseNum(purchaseNum);
+
+        return confirmOrderItemBean;
+    }
 
     public String getPic() {
         return pic;

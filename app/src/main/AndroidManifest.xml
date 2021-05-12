@@ -52,11 +52,7 @@
         <activity android:name=".activity.mine.settings.SettingsActivity" />
         <activity android:name=".activity.account.SetPasswordActivity" />
         <activity android:name=".activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -87,7 +83,13 @@
         <activity android:name=".activity.goods.RecommendActivity" />
         <activity android:name=".activity.article.ArticleDetailActivity" />
         <activity android:name=".activity.goods.GoodsCommentActivity" />
-        <activity android:name=".activity.goods.ConfirmOrderActivity"/>
+        <activity android:name=".activity.goods.ConfirmOrderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

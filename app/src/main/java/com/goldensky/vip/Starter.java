@@ -9,6 +9,7 @@ import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.account.SetPasswordActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
@@ -25,9 +26,9 @@ import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
 import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
+import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
-import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
@@ -330,6 +331,14 @@ public class Starter {
     //订单发表评价
     public static void startOrderCommentActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderCommentActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    public static void startConfirmOrderActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ConfirmOrderActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
