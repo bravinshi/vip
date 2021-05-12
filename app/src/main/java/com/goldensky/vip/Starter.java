@@ -20,6 +20,7 @@ import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
+import com.goldensky.vip.activity.mine.settings.AboutGoldenDaysActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
@@ -30,6 +31,7 @@ import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
+import com.goldensky.vip.activity.order.CommentSuccessActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 
@@ -339,6 +341,23 @@ public class Starter {
 
     public static void startConfirmOrderActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ConfirmOrderActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //关于今天合纵
+    public static void startAboutGoldenDaysActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, AboutGoldenDaysActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    //订单评价成功
+    public static void startCommentSuccessActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, CommentSuccessActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

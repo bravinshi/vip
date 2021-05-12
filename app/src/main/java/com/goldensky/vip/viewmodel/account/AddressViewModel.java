@@ -9,15 +9,14 @@ import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.bean.AddUserAddressReqBean;
 import com.goldensky.vip.bean.ChangeUserAddressReqBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
+import com.goldensky.vip.bean.NewAddressResponseBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 public class AddressViewModel extends PublicViewModel {
 
     public MutableLiveData<Object> deleteAddressLive = new MutableLiveData<>();
     public MutableLiveData<Object> editAddressLive = new MutableLiveData<>();
-    public MutableLiveData<Object> addAddressLive = new MutableLiveData<>();
-
-
+    public MutableLiveData<NewAddressResponseBean> addAddressLive = new MutableLiveData<>();
 
 
 
@@ -62,9 +61,9 @@ public class AddressViewModel extends PublicViewModel {
     public void addUserAddress(AddUserAddressReqBean body,View view){
         RetrofitAgent.create(AddressService.class)
                 .addUserAddress(body)
-                .subscribe(new ToastNetObserver<Object>() {
+                .subscribe(new ToastNetObserver<NewAddressResponseBean>() {
                     @Override
-                    public void onSuccess(Object data) {
+                    public void onSuccess(NewAddressResponseBean data) {
                         addAddressLive.postValue(data);
                     }
                 }.watchViewClickable(view));

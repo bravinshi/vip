@@ -6,21 +6,32 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CommentImageAdapter;
 import com.goldensky.vip.adapter.CommentStartAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.databinding.ActivityOrderCommentBinding;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.GlideEngine;
 import com.goldensky.vip.viewmodel.order.OrderCommentViewModel;
 import com.google.android.flexbox.FlexDirection;
@@ -35,22 +46,39 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.goldensky.vip.viewmodel.order.OrderCommentViewModel.RESULT_CODE_KEY;
+import static com.goldensky.vip.viewmodel.order.OrderCommentViewModel.RESULT_MSG_KEY;
 
 public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBinding, OrderCommentViewModel> implements View.OnClickListener {
+
+    public static final String PRODUCT_URL_KEY = "PRODUCT_URL_KEY";
+    public static final String PRODUCT_SECOND_ORDERID_KEY = "PRODUCT_SECOND_ORDERID_KEY";
 
     private CommentStartAdapter mCommentStartAdapter;
     private CommentImageAdapter mCommentImageAdapter;
     private int currentStartIndex = -1;
     private String imgUrl = ""; //图片url
-    private String goodsId = "";//商品id
+    private String secondorderid = "";//secondorderid
+
 
     public List<LocalMedia> selectList = new ArrayList<>();
     public List<String> selectUrlsList = new ArrayList<>();
     private PopupWindow mPopupWindow;
+    private LocalMedia lastMedia;
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            imgUrl = bundle.getString(PRODUCT_URL_KEY, "");
+            secondorderid = bundle.getString(PRODUCT_SECOND_ORDERID_KEY, "");
+        }
         mBinding.topBarOrder.setBackListener( v -> { finish(); });
+        mBinding.etComment.setFilters(new InputFilter[]{new EmojiExcludeFilter()});
+        mBinding.tvCommit.setOnClickListener(this);
         Glide.with(this).load(imgUrl).into(mBinding.ivProduct);
     }
 
@@ -95,12 +123,15 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                         PictureSelector.create(OrderCommentActivity.this).externalPicturePreview(position, selectList, 0);
                     } else if (view.getId() == R.id.iv_delete) {
                         if (selectList.size() > position) {
+                            selectUrlsList.remove(position);
                             selectList.remove(position);
                             mCommentImageAdapter.notifyItemChanged(position);
                             mCommentImageAdapter.notifyItemRangeChanged(position, selectList.size());
                         }
                     }
                 }
+
+                hideKeyBoard();
             }
         });
         FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this) {
@@ -118,6 +149,25 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
         flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
         mBinding.rvPics.setLayoutManager(flexboxLayoutManager);
         mBinding.rvPics.setAdapter(mCommentImageAdapter);
+
+        mViewModel.uploadPicLiveData.observe(this, url -> {
+            selectUrlsList.add(url);
+            if (lastMedia != null) {
+                selectList.add(lastMedia);
+                mCommentImageAdapter.notifyDataSetChanged();
+                lastMedia = null;
+            }
+        });
+
+        mViewModel.commitResult.observe(this, map -> {
+            if (map.get(RESULT_CODE_KEY) == "1") {
+                //成功
+                Starter.startCommentSuccessActivity(this, null);
+                finish();
+            } else {
+                Toast.makeText(this, map.get(RESULT_MSG_KEY), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -166,6 +216,7 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_commit:
+                commitComment();
                 break;
             case R.id.tv_album:
                 //相册
@@ -193,6 +244,34 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
         }
     }
 
+
+    private void commitComment() {
+        if (currentStartIndex == -1) {
+            Toast.makeText(this, "请对商品星级进行评分", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String content = mBinding.etComment.getText().toString();
+        if(TextUtils.isEmpty(content)) {
+            Toast.makeText(this, "请输入评价内容", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < selectUrlsList.size(); i++) {
+            if (i == 0) {
+                stringBuilder.append(selectUrlsList.get(i));
+            } else {
+                stringBuilder.append(",").append(selectUrlsList.get(i));
+            }
+        }
+
+        String urls = stringBuilder.toString();
+
+        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, AccountHelper.getUserId(), secondorderid);
+//        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, "365fc2e065164700a5b1b985e326a766", secondorderid);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -200,11 +279,33 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
         if (resultCode == RESULT_OK) {
             if (requestCode == PictureConfig.CHOOSE_REQUEST) {
                 images = PictureSelector.obtainMultipleResult(data);
-                selectList.addAll(images);
-                mCommentImageAdapter.notifyDataSetChanged();
+                if (images.size() > 0) {
+                    LocalMedia media = images.get(0);
+                    lastMedia = media;
+                    String path;
+                    if (media.isCompressed()) {
+                        //压缩
+                        path = media.getCompressPath();
+                    } else {
+                        //原图
+                        path = media.getPath();
+                    }
+                    uploadImage(path);
+                }
             }
         }
     }
+
+    private void uploadImage(String path) {
+        mViewModel.uploadPic(path, new FailCallback() {
+            @Override
+            public void onFail(NetResponse netResponse) {
+                lastMedia = null;
+                Toast.makeText(OrderCommentActivity.this, "图片上传失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
@@ -214,5 +315,30 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
     @Override
     public int getLayoutId() {
         return R.layout.activity_order_comment;
+    }
+
+
+    private void hideKeyBoard() {
+        InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        if (manager != null && manager.isActive(mBinding.etComment)) {
+            mBinding.etComment.clearFocus();
+            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+
+    public static class EmojiExcludeFilter implements InputFilter {
+        private static final String TAG = "EmojiFilter";
+        private Pattern mEmojiPattern = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+//       private Pattern mEmojiPattern = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]|[\ud83e\udd00-\ud83e\uddff]|[\u2300-\u23ff]|[\u2500-\u25ff]|[\u2100-\u21ff]|[\u0000-\u00ff]|[\u2b00-\u2bff]|[\u2d06]|[\u3030]");
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Matcher emojiMatcher = mEmojiPattern.matcher (source) ;
+            if (emojiMatcher.find( )) {
+                return "";
+            }
+            return source;
+        }
+
     }
 }
