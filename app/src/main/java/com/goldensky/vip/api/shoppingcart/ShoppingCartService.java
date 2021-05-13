@@ -1,6 +1,7 @@
 package com.goldensky.vip.api.shoppingcart;
 
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.vip.bean.DeleteCartGoodsReqBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UpdateCartGoodsNumberReqBean;
 import com.goldensky.vip.bean.UserIdReqBean;
@@ -17,4 +18,7 @@ public interface ShoppingCartService {
 
     @POST("/goldendays-order/vipShoppingCart/updateShoppingCartCommodityNumber")//修改购物车商品数量
     Observable<NetResponse<Object>> updateCartGoodsNumber(@Body UpdateCartGoodsNumberReqBean body);
+
+    @POST("/goldendays-order/vipShoppingCart/deleteByShoppingCartIdList")
+    Observable<NetResponse<Object>> deleteCartGoods(@Body DeleteCartGoodsReqBean body);
 }

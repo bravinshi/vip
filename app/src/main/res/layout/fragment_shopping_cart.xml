@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -26,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全选"
+                android:onClick="@{listener}"
                 android:gravity="center"
                 android:button="@drawable/selector_checkbox_shopping_cart"
                 android:theme="@style/AppRedTheme"
@@ -41,6 +47,7 @@
                 android:textColor="@color/color_3"
                 android:layout_marginRight="10dp"
                 android:text="编辑"
+                android:onClick="@{listener}"
                 android:textSize="16sp"
                 />
         </RelativeLayout>
@@ -94,6 +101,7 @@
                 android:textSize="15sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="8dp"
+                android:onClick="@{listener}"
                 android:textStyle="bold"
                 android:background="@drawable/shape_btn_red"
                 android:layout_alignParentRight="true"
