@@ -9,6 +9,17 @@ package com.goldensky.vip.event;
  */
 public class PaymentReturnEvent {
     private Boolean success;
+    private Integer action;// 1 跳转到订单详情
+
+    public static final Integer KEY_ACTION_ORDER_DETAIL = 1;
+
+    public Integer getAction() {
+        return action;
+    }
+
+    public void setAction(Integer action) {
+        this.action = action;
+    }
 
     public Boolean getSuccess() {
         return success;

@@ -8,6 +8,7 @@ import com.goldensky.framework.util.MathUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.ConfirmOrderAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
@@ -173,8 +174,9 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPaymentFinish(PaymentReturnEvent paymentReturnEvent) {
-        if (!paymentReturnEvent.getSuccess()) {
-            //
+        if (paymentReturnEvent.getAction().equals(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL)) {
+            Starter.startOrderListActivity(ConfirmOrderActivity.this, null);
+            finish();
         }
     }
 

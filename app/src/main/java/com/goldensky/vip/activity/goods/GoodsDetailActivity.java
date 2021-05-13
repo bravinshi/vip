@@ -64,8 +64,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             return;
         }
 
-//        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
-        goodsId = 347;
+        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+//        goodsId = 347;
         if (goodsId == -1) {
             ToastUtils.showShort("未找到商品信息");
             return;
@@ -73,7 +73,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         // 获取商品详情
         mViewModel.getGoodsDetail(goodsId);
-//        mViewModel.getGoodsDetail(347);
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId.toString(), null, null);
         // 获取地址信息

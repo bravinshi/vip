@@ -1,10 +1,14 @@
 package com.goldensky.vip.activity.mine.tools.adress;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
@@ -34,7 +38,7 @@ import java.util.List;
 public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, AddressViewModel> implements View.OnClickListener {
     private List<UserAddressBean> list=new ArrayList<>();
     private UserAddressAdapter adapter;
-    private AlertDialog dialog;
+    private PopupWindow mPopupWindow;
     private DeleteUserAddressReqBean bean;
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -59,7 +63,6 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                         Starter.startEditAddressActivity(MyAddressActivity.this,bundle);
                         break;
                     case R.id.delete_item_myaddress:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MyAddressActivity.this);
 
                         View popView = LayoutInflater.from(MyAddressActivity.this).inflate(R.layout.pop_delete_user_address, null);
                         TextView confirm = popView.findViewById(R.id.btn_confirm_delete_address);
@@ -69,22 +72,36 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
                             public void onClick(View v) {
                                 bean = new DeleteUserAddressReqBean(list.get(position).getUseraddressid());
                                 mViewModel.deleteUserAddress(bean);
-                                dialog.dismiss();
+                                mPopupWindow.dismiss();
                             }
                         });
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                dialog.dismiss();
+                                mPopupWindow.dismiss();
                             }
                         });
-                        builder.setView(popView);
-                        dialog = builder.create();
-                        dialog.show();
-                        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-                        params.width=550;
-                        params.height=350;
-                        dialog.getWindow().setAttributes(params);
+
+                        mPopupWindow = new PopupWindow(popView, -1, -2);
+                        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        mPopupWindow.setOutsideTouchable(true);
+                        mPopupWindow.setFocusable(true);
+                        WindowManager.LayoutParams lp = getWindow().getAttributes();
+                        lp.alpha = 0.5f;
+                        getWindow().setAttributes(lp);
+                        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                                lp.alpha = 1f;
+                                getWindow().setAttributes(lp);
+                            }
+                        });
+                        mPopupWindow.setAnimationStyle(R.style.main_menu_photo_anim);
+                        mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+                        mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+                        mPopupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+
                         break;
                 }
             }

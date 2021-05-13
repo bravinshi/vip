@@ -68,6 +68,7 @@
     <string name="text_address">详细地址</string>
     <string name="text_my_tools">我的工具</string>
     <string name="text_go_close_account">去结算</string>
+    <string name="text_go_pay">去支付</string>
     <string name="text_share_to_friend">好友分享</string>
     <string name="text_settings">设置</string>
     <string name="text_now_version">当前版本</string>
@@ -84,6 +85,7 @@
     <string name="text_consignee">收货人</string>
     <string name="text_confirm_receipt">确认收货</string>
     <string name="text_check_logistics">查看物流</string>
+    <string name="text_delete_order">删除订单</string>
     <string name="text_order_detail">订单详情</string>
     <string name="text_order_message">订单信息</string>
     <string name="text_order_number">订单编号:</string>

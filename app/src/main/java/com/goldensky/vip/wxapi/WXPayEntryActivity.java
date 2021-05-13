@@ -39,18 +39,18 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
 
     @Override
     public void initListener() {
-        mBinding.tvMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Starter.startMainActivity(v.getContext(), null);
-                finish();
-            }
+        mBinding.tvMain.setOnClickListener(v -> {
+            Starter.startMainActivity(v.getContext(), null);
+            finish();
         });
 
-        mBinding.tvOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
+        mBinding.tvOrder.setOnClickListener(v -> {
+            // 跳转到订单列表
+            PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();
+            paymentReturnEvent.setSuccess(true);
+            paymentReturnEvent.setAction(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL);
+            EventBus.getDefault().post(paymentReturnEvent);
+            finish();
         });
     }
 
@@ -62,6 +62,7 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
             // 支付失败
             PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();
             paymentReturnEvent.setSuccess(false);
+            paymentReturnEvent.setAction(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL);
             EventBus.getDefault().post(paymentReturnEvent);
             finish();
         }

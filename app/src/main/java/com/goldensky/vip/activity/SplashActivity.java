@@ -68,7 +68,6 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
             Starter.startLoginActivity(SplashActivity.this, null);
         } else {
             Starter.startMainActivity(SplashActivity.this, null);
-//            Starter.startHotTodayActivity(SplashActivity.this, null);
         }
 
         finish();
