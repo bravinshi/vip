@@ -96,6 +96,7 @@
                 android:clickable="true"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/sw_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.scwang.smartrefresh.layout.header.ClassicsHeader

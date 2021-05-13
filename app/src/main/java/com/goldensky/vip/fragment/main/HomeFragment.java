@@ -18,6 +18,8 @@ import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.databinding.FragmentHomeBinding;
 import com.goldensky.vip.viewmodel.home.HomeViewModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +41,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         mBinding.gxtjIv.setOnClickListener(this);
+
         mHomeAdapter = new HomeAdapter(mHomeBeans);
         mHomeAdapter.addChildClickViewIds(new int[]{ R.id.more_iv});
         mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
@@ -60,6 +63,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 mHomeAdapter.notifyDataSetChanged();
             }
         });
+
+        mBinding.swRefresh.setEnableLoadMore(false);
+//        mBinding.swRefresh.autoRefresh();
+        mBinding.swRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
+                mBinding.swRefresh.finishRefresh();
+            }
+        });
+
+
+        mViewModel.initLbData();
     }
 
     @Override

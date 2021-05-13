@@ -49,40 +49,12 @@
         </TextView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view_top"
+            android:id="@+id/recycle_jtyx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/title_tv"
             android:layout_marginTop="15dp"
-            android:background="@drawable/shape_corner_white_bg"
-            android:paddingTop="18dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingBottom="12dp">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view_middle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/recycle_view_top"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_corner_white_bg"
-            android:paddingTop="18dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingBottom="12dp">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/recycle_view_middle"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_corner_white_bg"
-            android:paddingTop="18dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingBottom="12dp">
-
+            android:background="@color/white">
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
@@ -91,7 +63,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycle_view_bottom"
+            app:layout_constraintTop_toBottomOf="@id/recycle_jtyx"
             android:paddingTop="@dimen/dp_10"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
