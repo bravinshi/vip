@@ -49,7 +49,7 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
         Glide.with(getContext()).load(shoppingCartGoodsBean.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),5))).into(binding.goodsimageItemShoppingCart);
         binding.setBean(shoppingCartGoodsBean);
         binding.numberItemShoppingCart.setCount(shoppingCartGoodsBean.getPurchasenum());
-        binding.numberItemShoppingCart.setMaxCount(shoppingCartGoodsBean.getInventorynum());
+        binding.numberItemShoppingCart.setMaxCount(shoppingCartGoodsBean.getInventorynum() == null ? Integer.MAX_VALUE : shoppingCartGoodsBean.getInventorynum());
         binding.numberItemShoppingCart.setMinCount(1);
         String s = new DecimalFormat("#.00").format(shoppingCartGoodsBean.getCommodityoldprice());
         binding.priceItemShoppingCart.setText(changTvSize("¥"+s));

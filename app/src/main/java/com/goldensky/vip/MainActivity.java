@@ -12,16 +12,13 @@ import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityMainBinding;
-import com.goldensky.vip.fragment.main.CircleFragment;
 import com.goldensky.vip.fragment.main.HomeFragment;
-import com.goldensky.vip.fragment.main.MessageFragment;
 import com.goldensky.vip.fragment.main.MineFragment;
 import com.goldensky.vip.fragment.main.ShoppingCartFragment;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
-import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;

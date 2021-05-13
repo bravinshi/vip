@@ -64,7 +64,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             return;
         }
 
-        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+//        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+        goodsId = 347;
         if (goodsId == -1) {
             ToastUtils.showShort("未找到商品信息");
             return;
@@ -197,7 +198,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             mBinding.vpImage.setVisibility(View.GONE);
         }
         // 价格
-        mBinding.tvPrice.setText("￥" + detail.getCommodityOldPrice());
+        if (!CollectionUtils.nullOrEmpty(detail.getCommodityInventoryList())) {
+            mBinding.tvPrice.setText("￥" + detail.getCommodityInventoryList().get(0).getCommodityOldPrice());
+        }
         // 标题
         mBinding.tvTitle.setText(detail.getCommodityName());
         // 详情
@@ -267,9 +270,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void observe() {
-        mViewModel.goodsCommentLive.observe(this, goodsCommentResBean -> {
-            mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")");
-        });
+        mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
+                mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 

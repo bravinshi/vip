@@ -5,6 +5,8 @@ import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.CommentProductBean;
 import com.goldensky.vip.bean.CommentReqBean;
+import com.goldensky.vip.bean.PaymentOrderReqBean;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -22,4 +24,6 @@ public interface OrderService {
     @GET("/goldendays-order/vipOrder/getVipOrderDetail")
     Observable<NetResponse<List<CommentProductBean>>> getVipOrderDetail(@Query("userId") String userId);
 
+    @POST("/goldendays-order/order/weChatPay/getOrder")
+    Observable<NetResponse<JsonObject>> getPaymentOrder(@Body PaymentOrderReqBean reqBean);
 }
