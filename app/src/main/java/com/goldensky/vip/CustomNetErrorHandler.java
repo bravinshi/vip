@@ -38,12 +38,12 @@ public class CustomNetErrorHandler implements NetErrorHandler {
         }
 
         // token过期  账号冻结 多设备登录 都跳转到登录页
-//        if (error.isAccountFrozen()
-//        || error.isMultiDeviceLogin()
-//        || error.isTokenExpired()) {
-//            Starter.startLoginActivity(ActivityUtils.getTopActivity(), null);
-//            return true;
-//        }
+        if (error.isAccountFrozen()
+        || error.isMultiDeviceLogin()
+        || error.isTokenExpired()) {
+            Starter.startLoginActivity(ActivityUtils.getTopActivity(), null);
+            return true;
+        }
 
         return false;
     }

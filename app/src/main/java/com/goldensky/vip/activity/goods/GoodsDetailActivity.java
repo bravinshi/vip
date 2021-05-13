@@ -48,11 +48,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         GoodsDetailViewModel> {
 
     public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
-    private String goodsId = "";
+    private Integer goodsId;
     private SelectAddressDialog selectAddressDialog;
     private GoodsSpecificationDialog goodsSpecificationDialog;
-    private String selectAddressDialogTag = "selectAddressDialog";
-    private String goodsSpecificationDialogTag = "goodsSpecificationDialog";
+    private final String selectAddressDialogTag = "selectAddressDialog";
+    private final String goodsSpecificationDialogTag = "goodsSpecificationDialog";
     private UserAddressBean selectedAddress = null;// 选择的地址
     private boolean showDefaultAddress = false;// 是否展示过默认地址
 
@@ -64,8 +64,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             return;
         }
 
-        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
         if (goodsId == -1) {
+            ToastUtils.showShort("未找到商品信息");
             return;
         }
 
@@ -314,7 +315,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         mBinding.tvCommentAll.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString(KEY_GOODS_ID, goodsId);
+            bundle.putString(KEY_GOODS_ID, goodsId + "");
             Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
         });
     }
