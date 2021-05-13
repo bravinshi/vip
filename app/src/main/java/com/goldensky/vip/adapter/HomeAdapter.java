@@ -1,5 +1,7 @@
 package com.goldensky.vip.adapter;
 
+import android.view.View;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -7,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
+import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.databinding.ItemHomeJtyxBinding;
 import com.goldensky.vip.databinding.ItemHomeLbBinding;
@@ -20,6 +23,7 @@ import com.youth.banner.util.BannerUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHolder> {
@@ -34,8 +38,16 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
     private BannerImageAdapter mBannerImageAdapter;
     private HomeRmdAdapter mHomeRmdAdapter;
     private HomeJrbkAdapter mHomeJrbkAdapter;
-    private HomeJtyxAdapter mHomeJtyxAdapter;
-    private FlexboxLayoutManager mFlexboxLayoutManager;
+
+    private HomeJtyxAdapter mTopJtyxAdapter;
+    private HomeJtyxAdapter mMiddleJtyxAdapter;
+    private HomeJtyxAdapter mBottomJtyxAdapter;
+
+    private LinearLayoutManager mTopLineLayoutManager;
+    private LinearLayoutManager mMiddleLineLayoutManager;
+    private LinearLayoutManager mBottomLineLayoutManager;
+
+
 
     public HomeAdapter(List<HomeBean> data) {
         super(data);
@@ -103,20 +115,105 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                 ItemHomeJtyxBinding jtyxBing = DataBindingUtil.bind(baseViewHolder.itemView);
                 jtyxBing.titleTv.setText(homeBean.getItemTitle());
 
-                if (mFlexboxLayoutManager == null) {
-                    mFlexboxLayoutManager = new FlexboxLayoutManager(getContext());
-                    mFlexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
-                    mFlexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
-                    jtyxBing.recycleJtyx.setLayoutManager(mFlexboxLayoutManager);
+                if (mTopLineLayoutManager == null) {
+                    mTopLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    jtyxBing.rvTop.setLayoutManager(mTopLineLayoutManager);
                 }
 
-                if (mHomeJtyxAdapter == null) {
-                    mHomeJtyxAdapter = new HomeJtyxAdapter(homeBean.getCommodityBeanList());
-                    jtyxBing.recycleJtyx.setAdapter(mHomeJtyxAdapter);
-                } else {
-                    mHomeJtyxAdapter.setNewInstance(homeBean.getCommodityBeanList());
-                    mHomeJtyxAdapter.notifyDataSetChanged();
+                if (mMiddleLineLayoutManager == null) {
+                    mMiddleLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    jtyxBing.rvMiddle.setLayoutManager(mMiddleLineLayoutManager);
                 }
+
+                if (mBottomLineLayoutManager == null) {
+                    mBottomLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    jtyxBing.rvBottom.setLayoutManager(mBottomLineLayoutManager);
+                }
+
+
+//                List<CommodityBean> commodityBeans = homeBean.getCommodityBeanList();
+                List<CommodityBean> tempBeans = new ArrayList<>();
+                tempBeans.addAll(homeBean.getCommodityBeanList());
+                List<CommodityBean> topBeans = new ArrayList<>();
+                List<CommodityBean> middleBeans = new ArrayList<>();
+                List<CommodityBean> bottomBeans = new ArrayList<>();
+                if (tempBeans.size() <= 3) {
+                    jtyxBing.rvMiddle.setVisibility(View.INVISIBLE);
+                    jtyxBing.rvBottom.setVisibility(View.INVISIBLE);
+                    topBeans.addAll(homeBean.getCommodityBeanList());
+                    if (topBeans.size() == 1) {
+                        topBeans.add(null);
+                        topBeans.add(null);
+                    } else if (topBeans.size() == 2) {
+                        topBeans.add(null);
+                    }
+                } else if (tempBeans.size() <= 6) {
+                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
+                    jtyxBing.rvBottom.setVisibility(View.INVISIBLE);
+
+                    for (int i = 0; i < 3; i++) {
+                        CommodityBean bean = tempBeans.get(0);
+                        topBeans.add(bean);
+                        tempBeans.remove(bean);
+                    }
+
+                    middleBeans.addAll(tempBeans);
+                    if (middleBeans.size() == 1) {
+                        middleBeans.add(null);
+                        middleBeans.add(null);
+                    } else if (topBeans.size() == 2) {
+                        middleBeans.add(null);
+                    }
+
+                } else {
+                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
+                    jtyxBing.rvBottom.setVisibility(View.VISIBLE);
+
+                    for (int i = 0; i < 3; i++) {
+                        CommodityBean bean = tempBeans.get(0);
+                        topBeans.add(bean);
+                        tempBeans.remove(bean);
+                    }
+
+                    for (int i = 0; i < 3; i++) {
+                        CommodityBean bean = tempBeans.get(0);
+                        middleBeans.add(bean);
+                        tempBeans.remove(bean);
+                    }
+
+                    bottomBeans.addAll(tempBeans);
+                    if (bottomBeans.size() == 1) {
+                        bottomBeans.add(null);
+                        bottomBeans.add(null);
+                    } else if (topBeans.size() == 2) {
+                        bottomBeans.add(null);
+                    }
+                }
+
+                if (mTopJtyxAdapter == null) {
+                    mTopJtyxAdapter = new HomeJtyxAdapter(topBeans);
+                    jtyxBing.rvTop.setAdapter(mTopJtyxAdapter);
+                } else {
+                    mTopJtyxAdapter.setNewInstance(topBeans);
+                    mTopJtyxAdapter.notifyDataSetChanged();
+                }
+
+                if (mMiddleJtyxAdapter == null) {
+                    mMiddleJtyxAdapter = new HomeJtyxAdapter(middleBeans);
+                    jtyxBing.rvMiddle.setAdapter(mMiddleJtyxAdapter);
+                } else {
+                    mMiddleJtyxAdapter.setNewInstance(middleBeans);
+                    mMiddleJtyxAdapter.notifyDataSetChanged();
+                }
+
+                if (mBottomJtyxAdapter == null) {
+                    mBottomJtyxAdapter = new HomeJtyxAdapter(bottomBeans);
+                    jtyxBing.rvBottom.setAdapter(mBottomJtyxAdapter);
+                } else {
+                    mBottomJtyxAdapter.setNewInstance(bottomBeans);
+                    mBottomJtyxAdapter.notifyDataSetChanged();
+                }
+
                 break;
         }
 

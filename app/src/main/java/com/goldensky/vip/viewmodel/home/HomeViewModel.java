@@ -25,14 +25,14 @@ public class HomeViewModel extends PublicViewModel {
     public List<HomeBean> homeBeans = new ArrayList<>();
     //轮播
     public void initLbData() {
-        lbBean = new HomeBean(ITEM_TYPE_LB);
-        List<String> lbList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            lbList.add("testurl");
-        }
-        lbBean.setLbList(lbList);
-        homeBeans.add(lbBean);
-        loadResult.postValue(true);
+//        lbBean = new HomeBean(ITEM_TYPE_LB);
+//        List<String> lbList = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            lbList.add("testurl");
+//        }
+//        lbBean.setLbList(lbList);
+//        homeBeans.add(lbBean);
+//        loadResult.postValue(true);
     }
 
 
