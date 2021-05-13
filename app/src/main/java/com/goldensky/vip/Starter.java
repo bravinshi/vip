@@ -33,6 +33,7 @@ import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.CommentSuccessActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
+import com.goldensky.vip.activity.order.OrderDetailActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 
 
@@ -358,6 +359,15 @@ public class Starter {
     //订单评价成功
     public static void startCommentSuccessActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CommentSuccessActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //订单详情
+    public static void startOrderDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OrderDetailActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

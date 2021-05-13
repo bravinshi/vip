@@ -1,0 +1,53 @@
+package com.goldensky.vip.adapter;
+
+import androidx.databinding.ViewDataBinding;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder;
+import com.goldensky.framework.util.GsonUtils;
+import com.goldensky.vip.R;
+import com.goldensky.vip.bean.OrderListBean;
+import com.goldensky.vip.databinding.ItemOrderDetailBinding;
+import com.goldensky.vip.databinding.ItemOrderListBinding;
+import com.goldensky.vip.utils.GlideRoundTransform;
+import com.google.gson.JsonObject;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrderDetailAdapter extends BaseQuickAdapter<OrderListBean.OrderDetailList, BaseDataBindingHolder> {
+    public OrderDetailAdapter(@Nullable List<OrderListBean.OrderDetailList> data) {
+        super(R.layout.item_order_detail, data);
+    }
+
+    @Override
+    protected void convert(@NotNull BaseDataBindingHolder baseDataBindingHolder, OrderListBean.OrderDetailList orderDetailList) {
+        ItemOrderDetailBinding dataBinding = (ItemOrderDetailBinding) baseDataBindingHolder.getDataBinding();
+        dataBinding.countItemOrderDetail.setText("共"+orderDetailList.getPurchasenum()+"件");
+        dataBinding.moneyItemOrderDetail.setText("￥"+orderDetailList.getCommodityoldprice());
+        dataBinding.sizeItemOrderDetail.setText(getInventory(orderDetailList.getInventory()));
+        dataBinding.nameItemOrderDetail.setText(orderDetailList.getCommodityname());
+        Glide.with(getContext()).load(orderDetailList.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),8))).into(dataBinding.ivItemOrderDetail);
+    }
+
+    protected String getInventory(String inventory){
+        // 展示用规格
+        JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> keySet = new ArrayList<>(jsonObject.keySet());
+        int size = keySet.size();
+        for (int i = 0; i < size; i++) {
+            String key = keySet.get(i);
+            stringBuilder.append(jsonObject.get(key).getAsString());
+            if (i != size - 1) {
+                stringBuilder.append(";");
+            }
+        }
+        return stringBuilder.toString();
+    }
+}

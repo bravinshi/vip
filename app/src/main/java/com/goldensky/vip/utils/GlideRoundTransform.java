@@ -1,4 +1,4 @@
-package com.goldensky.vip.transform;
+package com.goldensky.vip.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
