@@ -10,7 +10,7 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.NormalGoodsAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.CommodityBean;
-import com.goldensky.vip.databinding.ActivityHotTodayBinding;
+import com.goldensky.vip.databinding.ActivityOptimizationBinding;
 import com.goldensky.vip.entity.NormalGoodsEntity;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
@@ -21,11 +21,11 @@ import java.util.List;
 /**
  * @author bravin
  * @version 1.0
- * 创建日期：2021/4/21 16:33
+ * 创建日期：2021/5/13 10:07
  * 包名： com.goldensky.vip.activity.goods
  * 类说明：
  */
-public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, PublicViewModel> {
+public class OptimizationActivity extends BaseActivity<ActivityOptimizationBinding, PublicViewModel> {
     private final NormalGoodsAdapter normalGoodsAdapter = new NormalGoodsAdapter();
     private Integer currentPage = 1;
     private final Integer pageSize = 10;
@@ -36,7 +36,7 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Publ
     public void onFinishInit(Bundle savedInstanceState) {
         mBinding.rv.setAdapter(normalGoodsAdapter);
         normalGoodsAdapter.setNewInstance(goodsList);
-        mBinding.rv.setLayoutManager(new GridLayoutManager(HotTodayActivity.this, 2));
+        mBinding.rv.setLayoutManager(new GridLayoutManager(OptimizationActivity.this, 2));
         getData();
     }
 
@@ -57,14 +57,14 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Publ
             Bundle bundle = new Bundle();
             Integer goodsId = ((NormalGoodsEntity)adapter.getItem(position)).getGoodsId();
             bundle.putInt(GoodsDetailActivity.KEY_GOODS_ID, goodsId);
-            Starter.startGoodsDetailActivity(HotTodayActivity.this, bundle);
+            Starter.startGoodsDetailActivity(OptimizationActivity.this, bundle);
         });
 
-        mBinding.tabBar.setBackListener(v -> HotTodayActivity.this.finish());
+        mBinding.tabBar.setBackListener(v -> OptimizationActivity.this.finish());
     }
 
     private void getData() {
-        mViewModel.hotGoodsToady(currentPage, pageSize, AccountHelper.getUserId(), netResponse -> {
+        mViewModel.optimization(currentPage, pageSize, AccountHelper.getUserId(), netResponse -> {
             mBinding.smartRefresh.finishLoadMore();
             mBinding.smartRefresh.finishRefresh();
             if (!isRefresh) {
@@ -96,6 +96,6 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Publ
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_hot_today;
+        return R.layout.activity_optimization;
     }
 }

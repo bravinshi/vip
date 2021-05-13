@@ -89,6 +89,7 @@
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
+        <activity android:name=".activity.goods.OptimizationActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />
         <activity android:name=".activity.article.ArticleDetailActivity" />
         <activity android:name=".activity.goods.GoodsCommentActivity" />

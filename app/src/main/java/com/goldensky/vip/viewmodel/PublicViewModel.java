@@ -13,6 +13,7 @@ import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.AreaListBean;
+import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
@@ -45,6 +46,7 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<GoodsCommentResBean> goodsCommentLive = new MutableLiveData<>();
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
     public MutableLiveData<Boolean> joinIntoShoppingCartResultLive = new MutableLiveData<>();
+    public MutableLiveData<List<CommodityBean>> normalGoodsLive = new MutableLiveData<>();
 
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
     public MutableLiveData<List<ShoppingCartGoodsBean>> shoppingCartListLive = new MutableLiveData<>();
@@ -206,5 +208,68 @@ public class PublicViewModel extends NetWorkViewModel {
                     }
                 });
 
+    }
+
+    // 今日爆款
+    public void hotGoodsToady(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .hotGoodsToady(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                         failCallback.onFail(data);
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    // 今日优选
+    public void optimization(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .optimization(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                            failCallback.onFail(data);
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    // 为你推荐
+    public void recommend(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .recommend(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                            failCallback.onFail(data);
+                        }
+                        return true;
+                    }
+                });
     }
 }

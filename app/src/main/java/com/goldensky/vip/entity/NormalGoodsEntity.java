@@ -1,5 +1,7 @@
 package com.goldensky.vip.entity;
 
+import com.goldensky.vip.bean.CommodityBean;
+
 /**
  * @author bravin
  * @version 1.0
@@ -8,10 +10,21 @@ package com.goldensky.vip.entity;
  * 类说明：
  */
 public class NormalGoodsEntity {
-    private String goodsId;
+    private Integer goodsId;
     private String image;
     private String title;
     private Double price;
+
+    public static NormalGoodsEntity fromCommodity(CommodityBean commodityBean) {
+        NormalGoodsEntity normalGoodsEntity = new NormalGoodsEntity();
+
+        normalGoodsEntity.setGoodsId(commodityBean.getCommodityId());
+        normalGoodsEntity.setImage(commodityBean.getCommodityIcon());
+        normalGoodsEntity.setTitle(commodityBean.getCommodityName());
+        normalGoodsEntity.setPrice(commodityBean.getCommodityOldPrice());
+
+        return normalGoodsEntity;
+    }
 
     public String getTitle() {
         return title;
@@ -21,11 +34,11 @@ public class NormalGoodsEntity {
         this.title = title;
     }
 
-    public String getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(String goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 
