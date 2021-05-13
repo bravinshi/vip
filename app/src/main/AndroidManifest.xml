@@ -31,8 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
-        tools:replace="android:theme"
         tools:targetApi="m">
+
+        <activity android:name=".activity.mine.settings.AboutGoldenDaysActivity"></activity>
         <activity android:name=".activity.order.CommentSuccessActivity"
             android:launchMode="singleTask"></activity>
         <activity
@@ -56,11 +57,7 @@
         <activity android:name=".activity.mine.settings.SettingsActivity" />
         <activity android:name=".activity.account.SetPasswordActivity" />
         <activity android:name=".activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -84,14 +81,25 @@
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />
+        <activity android:name=".activity.goods.OptimizationActivity" />
         <activity android:name=".activity.goods.RecommendActivity" />
         <activity android:name=".activity.article.ArticleDetailActivity" />
         <activity android:name=".activity.goods.GoodsCommentActivity" />
-        <activity android:name=".activity.goods.ConfirmOrderActivity"/>
+        <activity android:name=".activity.goods.ConfirmOrderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信支付回调页面 -->
+        <activity android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity" />
+        <activity android:name=".wxapi.WXPayEntryActivity" />
     </application>
 
 </manifest>

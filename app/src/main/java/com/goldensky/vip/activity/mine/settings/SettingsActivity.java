@@ -111,6 +111,10 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
                 params.height=350;
                 dialog.getWindow().setAttributes(params);
                 break;
+            case R.id.cl_current_version_settings:
+                Starter.startAboutGoldenDaysActivity(this,null);
+                break;
+
         }
     }
 }

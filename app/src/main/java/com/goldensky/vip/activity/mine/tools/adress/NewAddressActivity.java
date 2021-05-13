@@ -16,6 +16,7 @@ import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.AddUserAddressReqBean;
+import com.goldensky.vip.bean.NewAddressResponseBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityNewAddressBinding;
 import com.goldensky.vip.helper.AccountHelper;
@@ -49,10 +50,10 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
     @Override
     public void observe() {
 
-        mViewModel.addAddressLive.observe(this, new Observer<Object>() {
+        mViewModel.addAddressLive.observe(this, new Observer<NewAddressResponseBean>() {
             @Override
-            public void onChanged(Object editAddressBean) {
-                    UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, "", newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), "", AccountHelper.getUserId());
+            public void onChanged(NewAddressResponseBean editAddressBean) {
+                    UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, editAddressBean.getUseraddressid(), newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), editAddressBean.getUseraddresstime(), AccountHelper.getUserId());
                     UserAddressHelper.getInstance().addUserAddress(bean);
                     toast(UserAddressHelper.getInstance().getUserAddressList().size()+"");
                     toast("添加成功");
@@ -145,15 +146,14 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
                 .setTitleColor(Color.BLACK)//标题文字颜色
                 .setSubmitColor(Color.BLACK)//确定按钮文字颜色
                 .setCancelColor(Color.BLACK)//取消按钮文字颜色
-                .setTitleBgColor(R.color.colorWhite)//标题背景颜色 Night mode
-                .setBgColor(R.color.colorWhite)//滚轮背景颜色 Night mode
-                .setTitleBgColor(R.color.colorWhite)
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setTitleBgColor(Color.WHITE)
                 .setContentTextSize(18)//滚轮文字大小
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .setCyclic(false, false, false)//循环与否
                 .setSelectOptions(0, 0, 0)  //设置默认选中项
                 .setOutSideCancelable(true)//点击外部dismiss default true
-                .isDialog(true)//是否显示为对话框样式
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isAlphaGradient(true)
                 .build();

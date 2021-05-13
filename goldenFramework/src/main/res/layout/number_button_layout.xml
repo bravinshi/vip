@@ -14,6 +14,7 @@
             android:layout_height="25dp"
             android:textStyle="bold"
             android:text="－"
+            android:textColor="@color/colorGray"
             android:background="@color/color_e"
             android:gravity="center"
             android:textSize="20sp" />
@@ -24,6 +25,7 @@
             android:layout_height="25dp"
             android:textStyle="bold"
             android:text="1"
+            android:textColor="@color/colorGray"
             android:inputType="number"
             android:background="@color/color_f5"
             android:gravity="center"
@@ -35,6 +37,7 @@
             android:layout_height="25dp"
             android:textStyle="bold"
             android:text="＋"
+            android:textColor="@color/colorGray"
             android:background="@color/color_e"
             android:gravity="center"
             android:textSize="20sp" />

@@ -13,14 +13,15 @@ import java.util.List;
 
 public class UserAddressHelper {
     private List<UserAddressBean> userAddressList;
-    private List<AreaPickerBean> provinceList=new ArrayList<>();
-    private List<String> provinceNameList=new ArrayList<>();
-    private List<List<AreaPickerBean>> cityList=new ArrayList<>();
-    private List<List<String>> cityNameList=new ArrayList<>();
-    private List<List<List<AreaPickerBean>>> areaList=new ArrayList<>();
-    private List<List<List<String>>> areaNameList=new ArrayList<>();
+    private List<AreaPickerBean> provinceList = new ArrayList<>();
+    private List<String> provinceNameList = new ArrayList<>();
+    private List<List<AreaPickerBean>> cityList = new ArrayList<>();
+    private List<List<String>> cityNameList = new ArrayList<>();
+    private List<List<List<AreaPickerBean>>> areaList = new ArrayList<>();
+    private List<List<List<String>>> areaNameList = new ArrayList<>();
     private static UserAddressHelper userAddressHelper;
-    private UserAddressHelper(){
+
+    private UserAddressHelper() {
     }
 
     public List<AreaPickerBean> getProvinceList() {
@@ -48,88 +49,109 @@ public class UserAddressHelper {
     }
 
 
-    public static UserAddressHelper getInstance(){
-        if(userAddressHelper==null){
-            userAddressHelper=new UserAddressHelper();
+    public static UserAddressHelper getInstance() {
+        if (userAddressHelper == null) {
+            userAddressHelper = new UserAddressHelper();
         }
         return userAddressHelper;
     }
+
     public void setUserAddressList(List<UserAddressBean> list) {
-        userAddressList=new ArrayList<>();
+        userAddressList = new ArrayList<>();
         userAddressList.addAll(list);
+        onChangeAddressList();
     }
-    public Boolean isUserAddressLoad(){
-        return userAddressList!=null;
+
+    public Boolean isUserAddressLoad() {
+        return userAddressList != null;
     }
-    public Boolean isAreaLoad(){
-        return provinceList.size()!=0;
+
+    public Boolean isAreaLoad() {
+        return provinceList.size() != 0;
     }
+
     public List<UserAddressBean> getUserAddressList() {
         return userAddressList;
     }
+
     public void editUserAddress(UserAddressBean bean) {
-        int editPosition=0;
+        int editPosition = 0;
         for (UserAddressBean userAddressBean : userAddressList) {
-            if(userAddressBean.getUseraddressid()==bean.getUseraddressid()){
-                editPosition=userAddressList.indexOf(userAddressBean);
+            if (userAddressBean.getUseraddressid() == bean.getUseraddressid()) {
+                editPosition = userAddressList.indexOf(userAddressBean);
             }
         }
         userAddressList.remove(editPosition);
-        userAddressList.add(editPosition,bean);
-        changeAddressList();
+        userAddressList.add(editPosition, bean);
+        onChangeAddressList();
     }
+
+    /**
+     * 添加
+     *
+     * @param bean
+     */
     public void addUserAddress(UserAddressBean bean) {
-        if(bean.getUseraddressdefault()==1){
+        if (bean.getUseraddressdefault() == 1) {
             for (UserAddressBean userAddressBean : userAddressList) {
-                if(userAddressBean.getUseraddressdefault()==1){
-                  userAddressBean.setUseraddressdefault(0);
+                if (userAddressBean.getUseraddressdefault() == 1) {
+                    userAddressBean.setUseraddressdefault(0);
                 }
             }
-            userAddressList.add(0,bean);
-        }else {
-            if(userAddressList.size()==0){
-                bean.setUseraddressdefault(1);
-                userAddressList.add(0,bean);
-            }else {
-                userAddressList.add(1,bean);
-            }
-
+            userAddressList.add(0, bean);
+        } else {
+            userAddressList.add(bean);
         }
-        changeAddressList();
+        onChangeAddressList();
     }
+
+    /**
+     * 删除收货地址
+     *
+     * @param bean
+     */
     public void deleteUserAddress(DeleteUserAddressReqBean bean) {
-        int deletePosition=0;
+        int deletePosition = 0;
         for (UserAddressBean userAddressBean : userAddressList) {
-            if(userAddressBean.getUseraddressid().equals(bean.getUseraddressid())){
-                deletePosition=userAddressList.indexOf(userAddressBean);
+            if (userAddressBean.getUseraddressid().equals(bean.getUseraddressid())) {
+                deletePosition = userAddressList.indexOf(userAddressBean);
             }
         }
         userAddressList.remove(deletePosition);
-        changeAddressList();
+        onChangeAddressList();
     }
-    private void changeAddressList(){
+
+    /**
+     * 收货地址列表改变响应
+     */
+    private void onChangeAddressList() {
         EventBus.getDefault().post(new AddAddressEvent(true));
     }
 
+    /**
+     * 缓存省市县列表
+     *
+     * @param areaListBean
+     */
     public void loadAddressList(List<AreaListBean> areaListBean) {
         for (AreaListBean listBean : areaListBean) {
-            AreaPickerBean provincebean = new AreaPickerBean(listBean.getAreaid(),listBean.getAreaname());
+            AreaPickerBean provincebean = new AreaPickerBean(listBean.getAreaid(), listBean.getAreaname());
             provinceList.add(provincebean);
             provinceNameList.add(provincebean.getName());
             List<AreaListBean.ChildrenDTOX> childrenCitys = listBean.getChildren();
-            List<AreaPickerBean> citys=new ArrayList<>();
-            List<String> cityNames=new ArrayList<>();
-            List<List<AreaPickerBean>> areaLists=new ArrayList<>();
-            List<List<String>> areaNameLists=new ArrayList<>();
+            List<AreaPickerBean> citys = new ArrayList<>();
+            List<String> cityNames = new ArrayList<>();
+            List<List<AreaPickerBean>> areaLists = new ArrayList<>();
+            List<List<String>> areaNameLists = new ArrayList<>();
             for (AreaListBean.ChildrenDTOX city : childrenCitys) {
-                AreaPickerBean cityBean = new AreaPickerBean(city.getAreaid(),city.getAreaname());
+                AreaPickerBean cityBean = new AreaPickerBean(city.getAreaid(), city.getAreaname());
                 citys.add(cityBean);
                 cityNames.add(city.getAreaname());
-                List<AreaPickerBean> areas=new ArrayList<>();
-                List<String> areaNames=new ArrayList<>();
+                List<AreaPickerBean> areas = new ArrayList<>();
+                List<String> areaNames = new ArrayList<>();
                 List<AreaListBean.ChildrenDTOX.ChildrenDTO> childrenAreas = city.getChildren();
                 for (AreaListBean.ChildrenDTOX.ChildrenDTO area : childrenAreas) {
-                    AreaPickerBean areaBean = new AreaPickerBean(area.getAreaid(),area.getAreaname());
+                    AreaPickerBean areaBean = new AreaPickerBean(area.getAreaid(), area.getAreaname());
                     areas.add(areaBean);
                     areaNames.add(area.getAreaname());
                 }

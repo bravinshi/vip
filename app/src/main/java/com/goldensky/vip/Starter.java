@@ -9,6 +9,7 @@ import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.account.SetPasswordActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.customer.CustomerServiceActivity;
+import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
@@ -19,15 +20,16 @@ import com.goldensky.vip.activity.goods.SpecialPriceAreaActivity;
 import com.goldensky.vip.activity.mine.focus.CircleFocusActivity;
 import com.goldensky.vip.activity.mine.focus.GoodsFocusActivity;
 import com.goldensky.vip.activity.mine.focus.RecentBrowseActivity;
+import com.goldensky.vip.activity.mine.settings.AboutGoldenDaysActivity;
 import com.goldensky.vip.activity.mine.settings.ChangeNickActivity;
 import com.goldensky.vip.activity.mine.settings.ChangePWDActivity;
 import com.goldensky.vip.activity.mine.settings.PersonalDetailsActivity;
 import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.activity.mine.tools.CouponActivity;
 import com.goldensky.vip.activity.mine.tools.InviteCompanyActivity;
+import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
-import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.CommentSuccessActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
@@ -337,6 +339,22 @@ public class Starter {
         context.startActivity(intent);
     }
 
+    public static void startConfirmOrderActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ConfirmOrderActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //关于今天合纵
+    public static void startAboutGoldenDaysActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, AboutGoldenDaysActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
     //订单评价成功
     public static void startCommentSuccessActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CommentSuccessActivity.class);

@@ -1,6 +1,12 @@
 package com.goldensky.vip.bean;
 
+import com.goldensky.framework.util.GsonUtils;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author bravin

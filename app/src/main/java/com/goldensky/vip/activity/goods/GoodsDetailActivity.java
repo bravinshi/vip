@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.goldensky.framework.util.CollectionUtils;
+import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
@@ -14,6 +15,7 @@ import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
+import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -57,27 +59,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle == null) {
-//            return;
-//        }
-//
-//        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
-//        if (goodsId == -1) {
-//            return;
-//        }
-        mBinding.tvCommentAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString(KEY_GOODS_ID, goodsId);
-                Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
-            }
-        });
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+
+        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+        if (goodsId == -1) {
+            return;
+        }
+
         // 获取商品详情
-        mViewModel.getGoodsDetail(347);
+        mViewModel.getGoodsDetail(goodsId);
+//        mViewModel.getGoodsDetail(347);
         // 获取评论信息
-        mViewModel.getGoodsComment(1, 1, goodsId, null, null);
+        mViewModel.getGoodsComment(1, 1, goodsId.toString(), null, null);
         // 获取地址信息
         mViewModel.getUserAddress(AccountHelper.getUserId());
     }
@@ -135,7 +131,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     public void buy(InventoryBean inventory, Integer purchaseNum) {
+        if (selectedAddress == null) {
+            ToastUtils.showShort(R.string.text_select_address);
+            return;
+        }
+        ConfirmOrderItemBean confirmOrderItemBean = ConfirmOrderItemBean
+                .generateConfirmOrderItem(inventory, mViewModel.goodsDetailLive.getValue(), purchaseNum);
 
+        List<ConfirmOrderItemBean> confirmOrderItemBeans = new ArrayList<>();
+        confirmOrderItemBeans.add(confirmOrderItemBean);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(ConfirmOrderActivity.KEY_ADDRESS, GsonUtils.toJson(selectedAddress));
+        bundle.putString(ConfirmOrderActivity.KEY_GOODS, GsonUtils.toJson(confirmOrderItemBeans));
+        // 进入确认订单界面
+        Starter.startConfirmOrderActivity(GoodsDetailActivity.this, bundle);
     }
 
     public void join(InventoryBean inventory, Integer purchaseNum) {
@@ -216,6 +226,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
      * @param userAddresses 地址列表
      */
     private void handleAddress(List<UserAddressBean> userAddresses) {
+        if (selectAddressDialog == null) {
+            selectAddressDialog = new SelectAddressDialog();
+        }
+
         if (CollectionUtils.nullOrEmpty(userAddresses)) {
             return;
         }
@@ -224,10 +238,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (!showDefaultAddress) {
             showDefaultAddress = true;
             showDefaultAddress(userAddresses);
-        }
-
-        if (selectAddressDialog == null) {
-            selectAddressDialog = new SelectAddressDialog();
         }
 
         selectAddressDialog.setData(userAddresses);
@@ -239,13 +249,19 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
      * @param userAddresses 地址列表
      */
     private void showDefaultAddress(List<UserAddressBean> userAddresses) {
+        if (CollectionUtils.nullOrEmpty(userAddresses)) {
+            return;
+        }
         for (UserAddressBean userAddressBean : userAddresses) {
             if (BusinessConstant.VALUE_DEFAULT_ADDRESS.equals(userAddressBean.getUseraddressdefault())) {
                 selectedAddress = userAddressBean;
                 mBinding.tvAddress.setText(selectedAddress.getAddress());
-                break;
+                return;
             }
         }
+
+        selectedAddress = userAddresses.get(0);
+        mBinding.tvAddress.setText(selectedAddress.getAddress());
     }
 
     @Override
@@ -294,6 +310,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 goodsSpecificationDialog.setBtnState(View.GONE, View.VISIBLE);
                 goodsSpecificationDialog.show(getSupportFragmentManager(), goodsSpecificationDialogTag);
             }
+        });
+
+        mBinding.tvCommentAll.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_GOODS_ID, goodsId);
+            Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
         });
     }
 

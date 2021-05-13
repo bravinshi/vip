@@ -7,15 +7,18 @@ import androidx.lifecycle.MutableLiveData;
 import com.goldensky.vip.api.PublicService;
 import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.api.goods.GoodsService;
+import com.goldensky.vip.api.shoppingcart.ShoppingCartService;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.AreaListBean;
+import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
+import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UserAddressBean;
-import com.goldensky.vip.bean.UserAddressListReqBean;
+import com.goldensky.vip.bean.UserIdReqBean;
 import com.google.gson.JsonObject;
 
 import java.io.File;
@@ -43,8 +46,10 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<GoodsCommentResBean> goodsCommentLive = new MutableLiveData<>();
     public MutableLiveData<List<UserAddressBean>> userAddressLive = new MutableLiveData<>();
     public MutableLiveData<Boolean> joinIntoShoppingCartResultLive = new MutableLiveData<>();
+    public MutableLiveData<List<CommodityBean>> normalGoodsLive = new MutableLiveData<>();
 
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
+    public MutableLiveData<List<ShoppingCartGoodsBean>> shoppingCartListLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -134,8 +139,13 @@ public class PublicViewModel extends NetWorkViewModel {
                 });
     }
 
+    /**
+     * 加载收货地址列表
+     *
+     * @param userId
+     */
     public void getUserAddress(String userId) {
-        UserAddressListReqBean reqBean = new UserAddressListReqBean();
+        UserIdReqBean reqBean = new UserIdReqBean();
         reqBean.setUserid(userId);
         RetrofitAgent.create(AddressService.class)
                 .getUserAddressList(reqBean)
@@ -170,12 +180,95 @@ public class PublicViewModel extends NetWorkViewModel {
      * 获取省市县列表
      */
     public void getAreaList() {
-        RetrofitAgent.create(PublicService.class)
+        RetrofitAgent.create(AddressService.class)
                 .getAreaList()
                 .subscribe(new ToastNetObserver<List<AreaListBean>>() {
                     @Override
                     public void onSuccess(List<AreaListBean> data) {
                         areaListLive.postValue(data);
+                    }
+                });
+    }
+
+
+    /**
+     * 获取购物车列表
+     *
+     * @param userId
+     */
+    public void getShoppingCartList(String userId) {
+        UserIdReqBean userIdReqBean = new UserIdReqBean();
+        userIdReqBean.setUserid(userId);
+        RetrofitAgent.create(ShoppingCartService.class)
+                .getVipShoppingCartList(userIdReqBean)
+                .subscribe(new ToastNetObserver<List<ShoppingCartGoodsBean>>() {
+                    @Override
+                    public void onSuccess(List<ShoppingCartGoodsBean> data) {
+                        shoppingCartListLive.postValue(data);
+                    }
+                });
+
+    }
+
+    // 今日爆款
+    public void hotGoodsToady(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .hotGoodsToady(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                         failCallback.onFail(data);
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    // 今日优选
+    public void optimization(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .optimization(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                            failCallback.onFail(data);
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    // 为你推荐
+    public void recommend(Integer currentPage, Integer pageSize, String userId, FailCallback failCallback) {
+        RetrofitAgent.create(GoodsService.class)
+                .recommend(currentPage, pageSize, userId)
+                .subscribe(new ToastNetObserver<List<CommodityBean>>(){
+                    @Override
+                    public void onSuccess(List<CommodityBean> data) {
+                        normalGoodsLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<List<CommodityBean>> data) {
+                        super.onFail(data);
+                        if (failCallback != null) {
+                            failCallback.onFail(data);
+                        }
+                        return true;
                     }
                 });
     }

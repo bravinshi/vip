@@ -7,7 +7,7 @@ package com.goldensky.vip.bean;
  * 包名： com.goldensky.vip.bean
  * 类说明：
  */
-public class UserAddressListReqBean {
+public class UserIdReqBean {
     private String userid;
 
     public String getUserId() {

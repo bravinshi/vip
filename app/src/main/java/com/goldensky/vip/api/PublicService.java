@@ -2,11 +2,14 @@ package com.goldensky.vip.api;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.bean.AreaListBean;
+import com.goldensky.vip.bean.ShoppingCartGoodsBean;
+import com.goldensky.vip.bean.UserIdReqBean;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -41,10 +44,7 @@ public interface PublicService {
     Observable<NetResponse<Object>> checkVerifyCode(@Query("userMobile") String mobile,
                                                     @Query("userCode") String verifyCode);
 
-    /**
-     * 获取省市县列表
-     * @return
-     */
-    @GET("/goldendays-currency/sysArea/getAreaListAll")
-    Observable<NetResponse<List<AreaListBean>>> getAreaList();
+
+
+
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import com.goldensky.framework.net.ApiConfiguration;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.framework.util.AppUtils;
+import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.Utils;
 import com.goldensky.vip.helper.AccountHelper;
@@ -42,16 +43,19 @@ public class MyApplication extends Application {
 
         ApiConfiguration apiConfiguration = new ApiConfiguration();
         // 财哥
-//        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
+        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
         //王珂
-//        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
+        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
         //任晓阳
 //        apiConfiguration.setBaseUrl("http://172.25.0.84:9999/");
         // 马晓伟
-        apiConfiguration.setBaseUrl("http://172.25.0.118:9999/");
+//        apiConfiguration.setBaseUrl("http://172.25.0.47:9999/");
+
         // 设置gson
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
-        apiConfiguration.setGson(gsonBuilder.create());
+        Gson gson = gsonBuilder.create();
+        apiConfiguration.setGson(gson);
+        GsonUtils.init(gson);
         // 设置拦截器
         apiConfiguration.setInterceptors(new ArrayList<Interceptor>(){{
             add(createHeaderInterceptor());
@@ -79,6 +83,7 @@ public class MyApplication extends Application {
             builder.addHeader("app_version_code", AppUtils.getAppVersionCode() + "");// 101
             builder.addHeader("app_version", AppUtils.getAppVersionName());// 1.0.1
             builder.addHeader("app_client", "vip");
+            builder.addHeader("app_platform", "android");
             try {
                 Response mResponse = chain.proceed(builder.build());
                 return mResponse;

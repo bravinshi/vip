@@ -73,6 +73,10 @@ public class AccountHelper {
         loginResponse.getVipUser().setUserNick(nick);
         onVipUserChanged();
     }
+    public static void setUserPic(String path){
+        loginResponse.getVipUser().setUserpic(path);
+        onVipUserChanged();
+    }
     private static void onVipUserChanged(){
         EventBus.getDefault().post(new VipUserChangeEvent(true));
     }
