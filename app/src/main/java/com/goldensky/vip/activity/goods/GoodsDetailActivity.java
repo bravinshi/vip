@@ -59,20 +59,21 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle == null) {
-//            return;
-//        }
-//
-//        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
-//        if (goodsId == -1) {
-//            return;
-//        }
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+
+        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+        if (goodsId == -1) {
+            return;
+        }
 
         // 获取商品详情
-        mViewModel.getGoodsDetail(347);
+        mViewModel.getGoodsDetail(goodsId);
+//        mViewModel.getGoodsDetail(347);
         // 获取评论信息
-        mViewModel.getGoodsComment(1, 1, goodsId, null, null);
+        mViewModel.getGoodsComment(1, 1, goodsId.toString(), null, null);
         // 获取地址信息
         mViewModel.getUserAddress(AccountHelper.getUserId());
     }
