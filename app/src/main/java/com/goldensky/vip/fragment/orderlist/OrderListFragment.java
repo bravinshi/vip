@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
@@ -84,8 +85,32 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("order",orderDetailLists.get(position));
+                bundle.putString("orderNumber",orderDetailLists.get(position).getOrdernumber());
+                bundle.putInt("orderType",orderDetailLists.get(position).getOrderstatus());
                 Starter.startOrderDetailActivity(getContext(),bundle);
+            }
+        });
+        adapter.addChildClickViewIds(new int[]{R.id.btn_red_item_orderlist,R.id.btn_gray_item_orderlist});
+        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                if(view.getId()==R.id.btn_red_item_orderlist){
+                    switch (orderDetailLists.get(position).getOrderstatus()){
+                        case 0:
+
+                            break;
+                        case 1:
+                        case 2:
+                            mViewModel.updateOrder(orderDetailLists.get(position).getOrdernumber(),3);
+                            break;
+                    }
+                }
+            }
+        });
+        mViewModel.updateOrderLive.observe(this, new Observer<Object>() {
+            @Override
+            public void onChanged(Object o) {
+                mViewModel.getOrderList(AccountHelper.getUserId(),orderListType);
             }
         });
         mBinding.rvOrderList.setAdapter(adapter);

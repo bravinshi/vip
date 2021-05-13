@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="orderBean"
-            type="com.goldensky.vip.bean.OrderListBean" />
+            name="listener"
+            type="android.view.View.OnClickListener" />
         <variable
             name="detailBean"
             type="com.goldensky.vip.bean.OrderDetailBean" />
@@ -244,7 +244,7 @@
                         android:id="@+id/order_number_orderdetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{orderBean.ordernumber}"
+                        android:text="@{detailBean.ordernumber}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="57dp"
@@ -429,6 +429,7 @@
                 android:background="@drawable/shape_btn_red"
                 android:text="@string/text_payment"
                 android:gravity="center"
+                android:onClick="@{listener}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_marginRight="15dp"
@@ -445,6 +446,7 @@
                 android:gravity="center"
                 android:textColor="@color/EA483F"
                 android:textSize="14sp"
+                android:onClick="@{listener}"
                 android:layout_marginRight="15dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

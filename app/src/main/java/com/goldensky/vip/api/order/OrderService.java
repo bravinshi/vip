@@ -9,6 +9,7 @@ import com.goldensky.vip.bean.GetOrderListReqBean;
 import com.goldensky.vip.bean.OrderDetailBean;
 import com.goldensky.vip.bean.OrderDetailReqBean;
 import com.goldensky.vip.bean.OrderListBean;
+import com.goldensky.vip.bean.UpdateOrderReqBean;
 
 import java.util.List;
 
@@ -31,5 +32,8 @@ public interface OrderService {
 
     @POST("/goldendays-order/vipOrder/getOrderDetail")
     Observable<NetResponse<OrderDetailBean>> getOrderDetail(@Body OrderDetailReqBean body);
+
+    @POST("/goldendays-order/vipOrder/updateOrder")
+    Observable<NetResponse<Object>> updateOrder(@Body UpdateOrderReqBean body);
 
 }

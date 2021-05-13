@@ -1,13 +1,21 @@
 package com.goldensky.vip.bean;
 
+import androidx.databinding.BaseObservable;
+
+import com.goldensky.framework.util.TimeUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class OrderDetailBean implements Serializable {
+public class OrderDetailBean extends BaseObservable implements Serializable {
 
     @SerializedName("area")
     private String area;
@@ -36,21 +44,23 @@ public class OrderDetailBean implements Serializable {
     private String loc;
     private String sumMoney;
 
-//    public  setOrderDetailBean() {
-//        city="";
-//        createtime="";
-//        ordernumber="";
-//        orderprice=0.00;
-//        pickuptype=0;
-//        postage=0.00;
-//        province="";
-//        useraddress="";
-//        useraddressname="";
-//        useraddressphone="";
-//        orderDetailList=new ArrayList<>();
-//        area="";
-//
-//    }
+    public OrderDetailBean() {
+    }
+
+    public OrderDetailBean(int i) {
+        city="";
+        createtime="";
+        ordernumber="";
+        orderprice=0.00;
+        pickuptype=0;
+        postage=0.00;
+        province="";
+        useraddress="";
+        useraddressname="";
+        useraddressphone="";
+        orderDetailList=new ArrayList<>();
+        area="";
+    }
 
     public String getSumMoney() {
         return  getDoubleMoney(orderprice+postage);
@@ -88,9 +98,26 @@ public class OrderDetailBean implements Serializable {
     }
 
     public String getCreatetime() {
-        return createtime;
+       if(createtime.equals("")){
+          return "";
+       }else {
+           String dateFormat = dealDateFormat(createtime);
+           return dateFormat;
+       }
     }
+    public static String dealDateFormat(String oldDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
+        Date date = new Date();
+        try {
+            date = sdf.parse(oldDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf2=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        String sDate=sdf2.format(date);
 
+        return sDate;
+    }
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
@@ -106,19 +133,26 @@ public class OrderDetailBean implements Serializable {
     public String getOrderprice() {
         return getDoubleMoney(orderprice);
     }
-
+    public Double getOrderpriceD() {
+        return orderprice;
+    }
     public void setOrderprice(Double orderprice) {
         this.orderprice = orderprice;
     }
 
     public String getPickuptype() {
-        if(pickuptype==0){
-            return "普通快递";
-        }else {
-            return "到店自提";
+        if(pickuptype!=null){
+            if(pickuptype==0){
+                return "普通快递";
+            }else {
+                return "到店自提";
+            }
         }
+        return "普通快递";
     }
-
+    public Integer getPickuptypeI(){
+        return pickuptype;
+    }
     public void setPickuptype(Integer pickuptype) {
         this.pickuptype = pickuptype;
     }
@@ -126,7 +160,9 @@ public class OrderDetailBean implements Serializable {
     public String getPostage() {
         return getDoubleMoney(postage);
     }
-
+    public Double getPostageD() {
+        return postage;
+    }
     public void setPostage(Double postage) {
         this.postage = postage;
     }

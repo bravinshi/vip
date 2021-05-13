@@ -42,6 +42,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
                 dataBinding.btnRedItemOrderlist.setVisibility(View.VISIBLE);
                 dataBinding.btnRedItemOrderlist.setText(getContext().getResources().getText(R.string.text_go_pay));
                 break;
+            case 1:
             case 2:
                 dataBinding.btnGrayItemOrderlist.setVisibility(View.VISIBLE);
                 dataBinding.btnRedItemOrderlist.setVisibility(View.VISIBLE);
