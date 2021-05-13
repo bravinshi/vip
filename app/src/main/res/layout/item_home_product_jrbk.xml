@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="bean"
+            type="com.goldensky.vip.bean.CommodityBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +16,7 @@
             android:id="@+id/product_iv"
             android:layout_width="match_parent"
             android:layout_height="102dp"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/name_tv"
@@ -23,7 +27,8 @@
             app:layout_constraintTop_toBottomOf="@+id/product_iv"
             android:layout_marginTop="5dp"
             android:textColor="#666666"
-            android:textSize="14sp">
+            android:textSize="14sp"
+            android:text="@{bean.commodityName}">
         </TextView>
         <TextView
             android:id="@+id/unit_tv"
@@ -43,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/name_tv"
             app:layout_constraintLeft_toRightOf="@+id/unit_tv"
             app:layout_constraintBottom_toBottomOf="@id/unit_tv"
-            android:lines="1"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textColor="#EA483F"
             android:textSize="16sp"

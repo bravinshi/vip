@@ -66,7 +66,5 @@ public interface GoodsService {
 
     // vipApp首页 为你推荐列表 今日爆款列表 金天优选
     @POST("/goldendays-goods/commodity/index")
-    Observable<NetResponse<MainPageGoodsResBean>> index(@Query("currentPage") Integer currentPage,
-                                                        @Query("pageSize") Integer pageSize,
-                                                        @Query("userid") String userId);
+    Observable<NetResponse<MainPageGoodsResBean>> index(@Query("userid") String userId);
 }

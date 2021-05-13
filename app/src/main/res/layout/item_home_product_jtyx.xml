@@ -3,17 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="bean"
+            type="com.goldensky.vip.bean.CommodityBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top"
         android:layout_width="99dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp">
+        android:layout_marginBottom="@dimen/dp_10">
         <ImageView
             android:id="@+id/product_iv"
             android:layout_width="match_parent"
             android:layout_height="103dp"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/name_tv"
@@ -24,7 +28,8 @@
             app:layout_constraintTop_toBottomOf="@+id/product_iv"
             android:layout_marginTop="5dp"
             android:textColor="#666666"
-            android:textSize="14sp">
+            android:textSize="14sp"
+            android:text="@{bean.commodityName}">
         </TextView>
         <TextView
             android:id="@+id/unit_tv"
@@ -44,8 +49,7 @@
             app:layout_constraintTop_toBottomOf="@+id/name_tv"
             app:layout_constraintLeft_toRightOf="@+id/unit_tv"
             app:layout_constraintBottom_toBottomOf="@id/unit_tv"
-            android:lines="1"
-            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="#EA483F"
             android:textSize="14sp"
             android:textStyle="bold">
@@ -59,7 +63,7 @@
             app:layout_constraintTop_toTopOf="@+id/price_tv"
             app:layout_constraintBottom_toBottomOf="@+id/price_tv"
             android:layout_marginLeft="5dp"
-            android:lines="1"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textColor="#ff999999"
             android:textSize="10sp">

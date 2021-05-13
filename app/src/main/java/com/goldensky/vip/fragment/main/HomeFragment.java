@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.HomeAdapter;
+import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.databinding.FragmentHomeBinding;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.home.HomeViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -30,8 +33,6 @@ import java.util.List;
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> implements View.OnClickListener {
 
     private HomeAdapter mHomeAdapter;
-    private List<HomeBean> mHomeBeans = new ArrayList<>();
-
 
     @Override
     protected int getLayoutRes() {
@@ -42,7 +43,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     protected void initView(@Nullable Bundle savedInstanceState) {
         mBinding.gxtjIv.setOnClickListener(this);
 
-        mHomeAdapter = new HomeAdapter(mHomeBeans);
+        mHomeAdapter = new HomeAdapter(mViewModel.homeBeans);
         mHomeAdapter.addChildClickViewIds(new int[]{ R.id.more_iv});
         mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
@@ -54,27 +55,31 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mBinding.recycleView.setLayoutManager(linearLayoutManager);
         mBinding.recycleView.setAdapter(mHomeAdapter);
 
-
-        mViewModel.homeBeans.observe(this, new Observer<List<HomeBean>>() {
-            @Override
-            public void onChanged(List<HomeBean> homeBeans) {
-                mHomeBeans.clear();
-                mHomeBeans.addAll(homeBeans);
-                mHomeAdapter.notifyDataSetChanged();
-            }
+        mViewModel.loadResult.observe(this, result -> {
+            mBinding.swRefresh.finishRefresh();
+            mHomeAdapter.notifyDataSetChanged();
         });
 
         mBinding.swRefresh.setEnableLoadMore(false);
-//        mBinding.swRefresh.autoRefresh();
         mBinding.swRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
-                mBinding.swRefresh.finishRefresh();
+                getHomeData();
             }
         });
 
-
         mViewModel.initLbData();
+        getHomeData();
+    }
+
+
+    private void getHomeData() {
+        mViewModel.getCommodityIndex(AccountHelper.getUserId(), new FailCallback() {
+            @Override
+            public void onFail(NetResponse netResponse) {
+                mBinding.swRefresh.finishRefresh();
+            }
+        });
     }
 
     @Override
