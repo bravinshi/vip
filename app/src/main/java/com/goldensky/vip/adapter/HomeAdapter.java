@@ -1,14 +1,19 @@
 package com.goldensky.vip.adapter;
 
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.databinding.ItemHomeJtyxBinding;
@@ -25,6 +30,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.goldensky.vip.activity.goods.GoodsDetailActivity.KEY_GOODS_ID;
 
 public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHolder> {
 
@@ -90,6 +97,12 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                 rmdBing.titleTv.setText(homeBean.getItemTitle());
                 if (mHomeRmdAdapter == null) {
                     mHomeRmdAdapter = new HomeRmdAdapter(homeBean.getCommodityBeanList());
+                    mHomeRmdAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+                        }
+                    });
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                     rmdBing.recycleView.setLayoutManager(layoutManager);
                     rmdBing.recycleView.setAdapter(mHomeRmdAdapter);
@@ -103,6 +116,12 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                 jrbkBing.titleTv.setText(homeBean.getItemTitle());
                 if (mHomeJrbkAdapter == null) {
                     mHomeJrbkAdapter = new HomeJrbkAdapter(homeBean.getCommodityBeanList());
+                    mHomeJrbkAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+                        }
+                    });
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                     jrbkBing.recycleView.setLayoutManager(layoutManager);
                     jrbkBing.recycleView.setAdapter(mHomeJrbkAdapter);
@@ -192,6 +211,12 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
 
                 if (mTopJtyxAdapter == null) {
                     mTopJtyxAdapter = new HomeJtyxAdapter(topBeans);
+                    mTopJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+                        }
+                    });
                     jtyxBing.rvTop.setAdapter(mTopJtyxAdapter);
                 } else {
                     mTopJtyxAdapter.setNewInstance(topBeans);
@@ -200,6 +225,12 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
 
                 if (mMiddleJtyxAdapter == null) {
                     mMiddleJtyxAdapter = new HomeJtyxAdapter(middleBeans);
+                    mMiddleJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+                        }
+                    });
                     jtyxBing.rvMiddle.setAdapter(mMiddleJtyxAdapter);
                 } else {
                     mMiddleJtyxAdapter.setNewInstance(middleBeans);
@@ -208,14 +239,31 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
 
                 if (mBottomJtyxAdapter == null) {
                     mBottomJtyxAdapter = new HomeJtyxAdapter(bottomBeans);
+                    mBottomJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+                        }
+                    });
                     jtyxBing.rvBottom.setAdapter(mBottomJtyxAdapter);
                 } else {
                     mBottomJtyxAdapter.setNewInstance(bottomBeans);
                     mBottomJtyxAdapter.notifyDataSetChanged();
                 }
-
                 break;
         }
-
     }
+
+
+    private void startGoodsDetail(List<CommodityBean> beans, int position) {
+        if (beans != null && beans.size() > position) {
+            CommodityBean bean = beans.get(position);
+            if (bean != null) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY_GOODS_ID, bean.getCommodityId());
+                Starter.startGoodsDetailActivity(getContext(), bundle);
+            }
+        }
+    }
+
 }

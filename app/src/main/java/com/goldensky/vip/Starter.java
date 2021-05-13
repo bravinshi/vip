@@ -13,6 +13,7 @@ import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
+import com.goldensky.vip.activity.goods.OptimizationActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
@@ -358,6 +359,15 @@ public class Starter {
     //订单评价成功
     public static void startCommentSuccessActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CommentSuccessActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //金天优选
+    public static void startOptimizationActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OptimizationActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

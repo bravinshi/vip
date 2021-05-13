@@ -314,7 +314,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
         mBinding.tvCommentAll.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString(KEY_GOODS_ID, goodsId);
+            bundle.putString(KEY_GOODS_ID, goodsId + "");
             Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
         });
     }

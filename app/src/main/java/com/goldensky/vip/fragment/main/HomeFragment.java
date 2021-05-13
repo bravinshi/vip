@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.HomeAdapter;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.fragment.BaseFragment;
@@ -44,11 +45,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mBinding.gxtjIv.setOnClickListener(this);
 
         mHomeAdapter = new HomeAdapter(mViewModel.homeBeans);
-        mHomeAdapter.addChildClickViewIds(new int[]{ R.id.more_iv});
+        mHomeAdapter.addChildClickViewIds(new int[]{ R.id.more_iv, R.id.more_tv});
         mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
-
+                HomeBean homeBean = mHomeAdapter.getItem(position);
+                if (homeBean.getItemType() == HomeAdapter.ITEM_TYPE_RMD && view.getId() == R.id.more_iv) {
+                    Starter.startRecommendActivity(getContext(), null);
+                } else if (homeBean.getItemType() == HomeAdapter.ITEM_TYPE_JRBK && view.getId() == R.id.more_iv) {
+                    Starter.startHotTodayActivity(getContext(), null);
+                } else if (homeBean.getItemType() == HomeAdapter.ITEM_TYPE_JTYX && view.getId() == R.id.more_tv) {
+                    Starter.startOptimizationActivity(getContext(), null);
+                }
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
