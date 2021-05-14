@@ -128,6 +128,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 orderDetail.notifyChange();
                 switch (orderType){
                     case 0:
+                        mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.btnMethedRight.setText(getResources().getText(R.string.text_go_pay));
                         mBinding.btnMethedLeft.setText(getResources().getText(R.string.text_cancel_order));
