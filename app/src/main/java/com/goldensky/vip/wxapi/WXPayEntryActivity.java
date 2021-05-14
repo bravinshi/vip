@@ -45,10 +45,11 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
 
         mBinding.tvOrder.setOnClickListener(v -> {
             // 跳转到订单列表
-            PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();
-            paymentReturnEvent.setSuccess(true);
-            paymentReturnEvent.setAction(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL);
-            EventBus.getDefault().post(paymentReturnEvent);
+            Starter.startOrderListActivity(v.getContext(), null);
+//            PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();
+//            paymentReturnEvent.setSuccess(true);
+//            paymentReturnEvent.setAction(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL);
+//            EventBus.getDefault().post(paymentReturnEvent);
             finish();
         });
     }
