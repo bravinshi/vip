@@ -29,6 +29,7 @@
     <string name="hint_verification_code_is_wrong">验证码错误</string>
     <string name="hint_login_now">登录中</string>
     <string name="hint_input_nick">4-20个字符，可由中英文、数字、“_”、”-“组成</string>
+    <string name="hint_change_nick">请输入正确格式</string>
     <string name="text_company_regitser">企业注册</string>
     <string name="text_company_info">企业信息</string>
     <string name="text_representative_info">代表信息</string>
@@ -63,6 +64,7 @@
     <string name="text_confirm_submit">确认提交</string>
     <string name="text_change_nick">修改昵称</string>
     <string name="text_save">保存</string>
+    <string name="text_save_pic">保存图片</string>
     <string name="text_phone">手机号码</string>
     <string name="text_location">所在地区</string>
     <string name="text_address">详细地址</string>
@@ -104,7 +106,7 @@
     <string name="text_cancel_order">取消订单</string>
     <string name="text_new_pwd">新密码</string>
     <string name="text_new_pwd_confirm">确认新密码</string>
-    <string name="hint_code_usage">长按识别或扫码进入</string>
+    <string name="hint_code_usage">扫码进入</string>
     <string name="hint_input_consignee_name">请填写收货人姓名</string>
     <string name="hint_input_consignee_phone">请填写收货人手机号</string>
     <string name="hint_input_consignee_location">省市县区、乡镇等</string>
@@ -117,6 +119,7 @@
     <string name="hint_switch_default_address">每次下单会默认推荐使用该地址</string>
     <string name="hint_confirm_delete">确认删除?</string>
     <string name="hint_logout">确认退出登录?</string>
+    <string name="hint_empty_shopping_cart">还没有商品，赶紧去添加吧～</string>
     <string name="hint_delete_success">删除成功</string>
     <string name="text_join_shopping_cart_success">加入购物车成功</string>
     <string name="text_confirm_order">确认订单</string>

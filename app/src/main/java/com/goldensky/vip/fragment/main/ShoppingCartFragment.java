@@ -92,7 +92,9 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
             @Override
             public void onChanged(Object o) {
                 ShoppingCartHelper.getInstance().deleteCartGoods();
-                toast(getResources().getString(R.string.hint_delete_success));
+                if(isEdit){
+                    toast(getResources().getString(R.string.hint_delete_success));
+                }
             }
         });
         setSumMoney();
@@ -120,10 +122,14 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
      * 刷新列表并计算
      */
     private void refreshShoppingCartList() {
+
         shoppingCartGoodsList.clear();
         shoppingCartGoodsList.addAll(ShoppingCartHelper.getInstance().getGoodsBeanList());
         adapter.notifyDataSetChanged();
         setSumMoney();
+        if(shoppingCartGoodsList.size()==0){
+
+        }
     }
 
     private void setSumMoney() {
@@ -206,6 +212,7 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                     String json = GsonUtils.toJson(confirmOrderList);
                     bundle.putString("KEY_GOODS",json);
                     Starter.startConfirmOrderActivity(getContext(),bundle);
+                    mViewModel.deleteCartGoods(ShoppingCartHelper.getInstance().getShoppingCartIds());
                 }
                 break;
             case R.id.checkbox_select_all:

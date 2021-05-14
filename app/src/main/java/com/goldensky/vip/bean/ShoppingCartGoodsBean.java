@@ -43,6 +43,27 @@ public class ShoppingCartGoodsBean implements Serializable {
     @SerializedName("userid")
     private String userid;
 
+    public ShoppingCartGoodsBean(Integer abandon, Integer belongid, Integer belongtype, String commodityicon, Integer commodityid, String commodityname, Double commodityoldprice, Double commodityprice, Integer commoditytype, Integer companytype, String createtime, String inventory, Integer inventoryid, Integer inventorynum, String inventorypic, Integer purchasenum, String shoppingcartid, String userid) {
+        this.abandon = abandon;
+        this.belongid = belongid;
+        this.belongtype = belongtype;
+        this.commodityicon = commodityicon;
+        this.commodityid = commodityid;
+        this.commodityname = commodityname;
+        this.commodityoldprice = commodityoldprice;
+        this.commodityprice = commodityprice;
+        this.commoditytype = commoditytype;
+        this.companytype = companytype;
+        this.createtime = createtime;
+        this.inventory = inventory;
+        this.inventoryid = inventoryid;
+        this.inventorynum = inventorynum;
+        this.inventorypic = inventorypic;
+        this.purchasenum = purchasenum;
+        this.shoppingcartid = shoppingcartid;
+        this.userid = userid;
+    }
+
     public Integer getAbandon() {
         return abandon;
     }

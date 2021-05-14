@@ -82,6 +82,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_phone_edit_address"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="90dp"
+                android:inputType="number"
                 android:layout_marginRight="15dp"
                 android:hint="@string/hint_input_consignee_phone"
                 android:text="@={editAddressModel.consigneePhone}"

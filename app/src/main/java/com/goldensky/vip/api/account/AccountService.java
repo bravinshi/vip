@@ -12,6 +12,8 @@ import com.goldensky.vip.bean.UserIdReqBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -28,7 +30,8 @@ public interface AccountService {
     @POST("/goldendays-user/merchantUser/getUserAndMerchant")
     Observable<NetResponse<SuperStBean>> getUserAndMerchant(@Body UserIdReqBean reqBean);
 
-    @POST("/goldendays-currency/wxApplet/getWxAppletCode")
-    Observable<NetResponse<Object>> getWxAppletCode(@Query("userid") String userid,
-                                                    @Query("scene") String scene);
+    @POST("https://openapi.jtmsh.com//goldendays-currency/wxApplet/getWxAppletCode")
+//    @POST("/goldendays-currency/wxApplet/getWxAppletCode")
+    Observable<ResponseBody> getWxAppletCode(@Query("userid") String userid,
+                                                          @Query("scene") String scene);
 }

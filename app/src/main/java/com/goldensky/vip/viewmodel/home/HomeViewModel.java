@@ -24,7 +24,6 @@ import static com.goldensky.vip.adapter.HomeAdapter.ITEM_TYPE_RMD;
 
 public class HomeViewModel extends PublicViewModel {
     public MutableLiveData<Boolean> loadResult = new MutableLiveData();
-    public MutableLiveData<SuperStBean> mSuperStBean = new MutableLiveData<>();
     private HomeBean lbBean;
     public List<HomeBean> homeBeans = new ArrayList<>();
     //轮播
@@ -82,16 +81,5 @@ public class HomeViewModel extends PublicViewModel {
         });
     }
 
-    public void getSuperSt(String userId) {
-        UserIdReqBean bean = new UserIdReqBean();
-        bean.setUserid(userId);
-        RetrofitAgent.create(AccountService.class)
-                .getUserAndMerchant(bean)
-                .subscribe(new ToastNetObserver<SuperStBean>(){
-                    @Override
-                    public void onSuccess(SuperStBean data) {
-                     mSuperStBean.postValue(data);
-                    }
-                });
-    }
+
 }

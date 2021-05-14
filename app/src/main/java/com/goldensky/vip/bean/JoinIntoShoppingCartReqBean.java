@@ -42,7 +42,7 @@ public class JoinIntoShoppingCartReqBean {
         joinIntoShoppingCartReqBean.setInventorypic(inventory.getInventoryPic());
         joinIntoShoppingCartReqBean.setUserid(AccountHelper.getUserId());
         joinIntoShoppingCartReqBean.setInventory(inventory.getInventory());
-        joinIntoShoppingCartReqBean.setCommodityname(inventory.getCommodityName());
+        joinIntoShoppingCartReqBean.setCommodityname(commodityDetail.getCommodityName());
         joinIntoShoppingCartReqBean.setCommodityicon(inventory.getInventoryPic());
 
         return joinIntoShoppingCartReqBean;
