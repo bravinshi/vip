@@ -63,6 +63,7 @@ public class Starter {
      */
     public static void startMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
@@ -156,6 +157,7 @@ public class Starter {
      */
     public static void startOrderListActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
