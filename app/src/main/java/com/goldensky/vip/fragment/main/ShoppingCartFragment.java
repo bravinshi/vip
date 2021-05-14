@@ -1,6 +1,8 @@
 package com.goldensky.vip.fragment.main;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,20 +12,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.goldensky.framework.ui.view.NumberButton;
+import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
+import com.goldensky.vip.activity.mine.settings.SettingsActivity;
 import com.goldensky.vip.adapter.ShoppingCartListAdapter;
 import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
+import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.databinding.FragmentShoppingCartBinding;
 import com.goldensky.vip.event.ShoppingCartChangeEvent;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
@@ -43,7 +55,7 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     private boolean isEdit = false;
     private ShoppingCartListAdapter adapter;
     private List<ShoppingCartGoodsBean> shoppingCartGoodsList = new ArrayList<>();
-
+    private PopupWindow mPopupWindow;
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_shopping_cart;
@@ -76,12 +88,6 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 }
             }
         });
-//        mViewModel.updateCartGoodsNumberLive.observe(this, new Observer<Object>() {
-//            @Override
-//            public void onChanged(Object o) {
-//                setSumMoney();
-//            }
-//        });
         mViewModel.deleteCartGoodsLive.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object o) {
@@ -158,9 +164,48 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 break;
             case R.id.tv_close_account:
                 if(isEdit){
-                    mViewModel.deleteCartGoods(ShoppingCartHelper.getInstance().getShoppingCartIds());
-                }else {
+                    View popView = LayoutInflater.from(getContext()).inflate(R.layout.pop_delete_shopping_cart, null);
+                    TextView confirm = popView.findViewById(R.id.btn_confirm_delete);
+                    TextView cancel = popView.findViewById(R.id.btn_cancel_delete);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mViewModel.deleteCartGoods(ShoppingCartHelper.getInstance().getShoppingCartIds());
+                            mPopupWindow.dismiss();
+                        }
+                    });
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mPopupWindow.dismiss();
+                        }
+                    });
+                    mPopupWindow = new PopupWindow(popView, -1, -2);
+                    mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    mPopupWindow.setOutsideTouchable(true);
+                    mPopupWindow.setFocusable(true);
+                    WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                    lp.alpha = 0.5f;
+                    getActivity().getWindow().setAttributes(lp);
+                    mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                            lp.alpha = 1f;
+                            getActivity().getWindow().setAttributes(lp);
+                        }
+                    });
+                    mPopupWindow.setAnimationStyle(R.style.main_menu_photo_anim);
+                    mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+                    mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+                    mPopupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
 
+                }else {
+                    Bundle bundle = new Bundle();
+                    List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
+                    String json = GsonUtils.toJson(confirmOrderList);
+                    bundle.putString("KEY_GOODS",json);
+                    Starter.startConfirmOrderActivity(getContext(),bundle);
                 }
                 break;
             case R.id.checkbox_select_all:

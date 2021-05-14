@@ -82,7 +82,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                             startOrderList(2);
                             break;
                         case 2:
-                            startOrderList(4);
+                            startOrderList(3);
                             break;
                         case 3:
 ////                            startOrderList(4);

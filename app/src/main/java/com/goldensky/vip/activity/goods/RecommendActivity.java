@@ -35,6 +35,7 @@ public class RecommendActivity extends BaseActivity<ActivityRecommendBinding, Pu
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        mBinding.tabBar.setCenterHint("为你推荐");
         mBinding.rv.setAdapter(normalGoodsAdapter);
         normalGoodsAdapter.setNewInstance(goodsList);
         mBinding.rv.setLayoutManager(new GridLayoutManager(RecommendActivity.this, 2));

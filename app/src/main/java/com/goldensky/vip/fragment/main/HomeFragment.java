@@ -10,15 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.HomeAdapter;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.fragment.BaseFragment;
 import com.goldensky.vip.bean.HomeBean;
+import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.databinding.FragmentHomeBinding;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.home.HomeViewModel;
@@ -34,6 +37,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> implements View.OnClickListener {
 
     private HomeAdapter mHomeAdapter;
+    private SuperStBean mSuperStBean;
 
     @Override
     protected int getLayoutRes() {
@@ -75,11 +79,34 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 getHomeData();
             }
         });
+        mBinding.swHeader.setEnableLastTime(false);
+
+        mViewModel.mSuperStBean.observe(this, stBean -> {
+            if (stBean != null) {
+                if (!StringUtils.isEmpty(stBean.getStorename())) {
+                    mSuperStBean.setStorename(stBean.getStorename());
+                }
+                if (!StringUtils.isEmpty(stBean.getUserpic())) {
+                    mSuperStBean.setUserpic(stBean.getUserpic());
+                }
+
+                if (!StringUtils.isEmpty(stBean.getEnterprisename())) {
+                    mSuperStBean.setEnterprisename(stBean.getEnterprisename());
+                }
+                updateStInfo();
+            }
+        });
 
         mViewModel.initLbData();
+        mSuperStBean = new SuperStBean("https://file.jtmsh.com/data/jintianhezong/mini-program/jthzLogo/jthzLogo.png","名食汇金天合纵商城","");
+        updateStInfo();
         getHomeData();
     }
 
+    private void updateStInfo() {
+        mBinding.nicknameTv.setText(mSuperStBean.getStorename());
+        Glide.with(getContext()).load(mSuperStBean.getUserpic()).into(mBinding.portaritIv);
+    }
 
     private void getHomeData() {
         mViewModel.getCommodityIndex(AccountHelper.getUserId(), new FailCallback() {
@@ -88,6 +115,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 mBinding.swRefresh.finishRefresh();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mViewModel.getSuperSt(AccountHelper.getUserSuperiorId());
     }
 
     @Override

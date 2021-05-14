@@ -28,25 +28,21 @@ public class HomeJtyxAdapter extends BaseQuickAdapter<CommodityBean, BaseViewHol
     protected void convert(@NotNull BaseViewHolder baseViewHolder, CommodityBean commodityBean) {
         ItemHomeProductJtyxBinding binding = DataBindingUtil.bind(baseViewHolder.itemView);
         if (commodityBean != null) {
-            binding.productIv.setVisibility(View.VISIBLE);
-            binding.priceTv.setVisibility(View.VISIBLE);
-            binding.opriceTv.setVisibility(View.VISIBLE);
-            binding.productIv.setVisibility(View.VISIBLE);
-            binding.unitTv.setVisibility(View.VISIBLE);
 //            Glide.with(getContext()).load(commodityBean.getCommodityIcon()).into(binding.productIv);
+            binding.nameTv.setText(commodityBean.getCommodityName());
+            binding.unitTv.setText("￥");
             Glide.with(getContext()).load("http://49.234.85.95/data/jintianhezong/file/img/2021-05-12/DO1620782539367_big.jpg").into(binding.productIv);
             binding.priceTv.setText(MathUtils.bigDecimalString(commodityBean.getCommodityPrice(), 2));
             binding.opriceTv.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
             if (commodityBean.getCommodityOldPrice() != null) {
                 binding.opriceTv.setText(MathUtils.bigDecimalString(commodityBean.getCommodityOldPrice(), 2));
             }
-            binding.setBean(commodityBean);
         } else {
-            binding.productIv.setVisibility(View.INVISIBLE);
-            binding.priceTv.setVisibility(View.INVISIBLE);
-            binding.opriceTv.setVisibility(View.INVISIBLE);
-            binding.productIv.setVisibility(View.INVISIBLE);
-            binding.unitTv.setVisibility(View.INVISIBLE);
+            binding.productIv.setImageDrawable(null);
+            binding.nameTv.setText("");
+            binding.unitTv.setText("");
+            binding.priceTv.setText("");
+            binding.opriceTv.setText("");
         }
 
     }

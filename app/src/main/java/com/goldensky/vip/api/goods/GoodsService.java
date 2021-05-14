@@ -44,7 +44,7 @@ public interface GoodsService {
     Observable<NetResponse<Object>> joinIntoShoppingCart(@Body JoinIntoShoppingCartReqBean reqBean);
 
     @POST("/goldendays-order/vipOrder/addOrder")
-    Observable<NetResponse<JsonObject>> addOrder(@Body AddOrderReqBean reqBean);
+    Observable<NetResponse<List<String>>> addOrder(@Body AddOrderReqBean reqBean);
 
     // 今日爆款
     @POST("/goldendays-goods/commodity/hotMoney")

@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="orderBean"
+            type="com.goldensky.vip.bean.OrderListBean" />
+        <variable
+            name="detailBean"
+            type="com.goldensky.vip.bean.OrderDetailBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,28 +53,38 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         />
-                    <TextView
-                        android:id="@+id/tv_statu_orderdetail"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginLeft="15dp"
                         app:layout_constraintLeft_toRightOf="@+id/iv_statu_orderdetail"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="28dp"
-                        android:layout_marginLeft="15dp"
-                        android:text="@string/text_obligation"/>
-                    <TextView
-                        android:id="@+id/count_down_orderdetail"
-                        app:layout_constraintStart_toStartOf="@+id/tv_statu_orderdetail"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_statu_orderdetail"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="剩23小时59分自动关闭"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        />
+                        android:layout_height="50dp"
+                        >
+                        <TextView
+                            android:id="@+id/tv_statu_orderdetail"
+                            app:layout_constraintBottom_toTopOf="@+id/count_down_orderdetail"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            app:layout_goneMarginBottom="15dp"
+                            android:textColor="@color/white"
+                            android:text="@string/text_obligation"/>
+                        <TextView
+                            android:id="@+id/count_down_orderdetail"
+                            app:layout_constraintStart_toStartOf="@+id/tv_statu_orderdetail"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="剩23小时59分自动关闭"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="5dp"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     app:layout_constraintTop_toBottomOf="@+id/cl_statu_orderdetail"
@@ -148,7 +163,7 @@
                         app:layout_constraintLeft_toRightOf="@+id/iv_address_orderdetail"
                         android:id="@+id/receive_name_orderdetail"
                         android:layout_width="wrap_content"
-                        android:text="张婷婷"
+                        android:text="@{detailBean.useraddressname}"
                         android:textColor="@color/color_333333"
                         android:textSize="12sp"
                         android:layout_marginLeft="7dp"
@@ -164,7 +179,7 @@
                         android:textSize="12sp"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/color_888888"
-                        android:text="18369998745"
+                        android:text="@{detailBean.useraddressphone}"
                         />
                     <TextView
                         app:layout_constraintTop_toBottomOf="@+id/receive_name_orderdetail"
@@ -175,7 +190,7 @@
                         android:textSize="12sp"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/color_333333"
-                        android:text="江苏省宿迁市宿城区"
+                        android:text="@{detailBean.loc}"
                         />
                     <TextView
                         app:layout_constraintTop_toTopOf="@+id/receive_location_orderdetail"
@@ -186,7 +201,7 @@
                         android:textSize="12sp"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/color_333333"
-                        android:text="骆马湖蓝波湾金天名食养客房中心"
+                        android:text="@{detailBean.useraddress}"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -229,7 +244,7 @@
                         android:id="@+id/order_number_orderdetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ZYDD4334354545345"
+                        android:text="@{orderBean.ordernumber}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="57dp"
@@ -252,7 +267,7 @@
                         android:id="@+id/order_time_orderdetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2020-12-28  10:04:16"
+                        android:text="@{detailBean.createtime}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="90dp"
@@ -298,7 +313,7 @@
                         android:id="@+id/distribution_mode__orderdetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="普通快递"
+                        android:text="@{detailBean.pickuptype}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="154dp"
@@ -357,7 +372,7 @@
                         android:textColor="@color/color_333333"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥150.00"
+                        android:text="@{detailBean.orderprice}"
                         />
                     <TextView
                         android:id="@+id/carriage_orderdetail"
@@ -368,7 +383,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥0.00"
+                        android:text="@{detailBean.postage}"
                         android:textSize="12sp"
                         />
                     <TextView
@@ -379,7 +394,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¥25.30"
+                        android:text="@{detailBean.sumMoney}"
                         android:textSize="18sp"
                         android:textColor="@color/EA483F"
                         />

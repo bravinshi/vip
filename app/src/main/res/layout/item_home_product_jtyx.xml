@@ -30,8 +30,7 @@
             app:layout_constraintTop_toBottomOf="@+id/product_iv"
             android:layout_marginTop="5dp"
             android:textColor="#666666"
-            android:textSize="14sp"
-            android:text="@{bean.commodityName}">
+            android:textSize="14sp">
         </TextView>
         <TextView
             android:id="@+id/unit_tv"
@@ -43,7 +42,7 @@
             android:textColor="#EA483F"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:text="￥"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/price_tv"
             android:layout_width="wrap_content"

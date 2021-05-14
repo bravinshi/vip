@@ -41,7 +41,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
                 android:textColor="#ffffffff"
-                android:textSize="14sp">
+                android:textSize="14sp"
+                android:text="名食汇金天合纵商城">
             </TextView>
 
             <TextView
@@ -54,7 +55,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="1dp"
                 android:textColor="#80ffffff"
-                android:textSize="11sp">
+                android:textSize="11sp"
+                android:text="金天合纵商城">
             </TextView>
 
 <!--            <LinearLayout-->

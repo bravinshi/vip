@@ -1,5 +1,6 @@
 package com.goldensky.vip.helper;
 
+import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.event.ShoppingCartChangeEvent;
 
@@ -47,7 +48,28 @@ public class ShoppingCartHelper {
 
         noRefreshEvent();
     }
-
+    public List<ConfirmOrderItemBean> getConfirmOrderList(){
+        if(shoppingcartIds.size()>0){
+            List<ConfirmOrderItemBean> confirmOrderItemBeans = new ArrayList<>();
+            for (ShoppingCartGoodsBean shoppingCartGoodsBean : goodsBeanList) {
+                if(shoppingcartIds.contains(shoppingCartGoodsBean.getShoppingcartid())){
+                    ConfirmOrderItemBean bean = new ConfirmOrderItemBean();
+                    bean.setBelongId(shoppingCartGoodsBean.getBelongid());
+                    bean.setBelongType(shoppingCartGoodsBean.getBelongtype());
+                    bean.setCommodityId(shoppingCartGoodsBean.getCommodityid());
+                    bean.setCommodityName(shoppingCartGoodsBean.getCommodityname());
+                    bean.setInventoryId(shoppingCartGoodsBean.getInventoryid());
+                    bean.setPic(shoppingCartGoodsBean.getInventorypic());
+                    bean.setPrice(shoppingCartGoodsBean.getCommodityoldprice());
+                    bean.setPurchaseNum(shoppingCartGoodsBean.getPurchasenum());
+                    bean.setSpecification(shoppingCartGoodsBean.getInventory());
+                    confirmOrderItemBeans.add(bean);
+                }
+            }
+            return confirmOrderItemBeans;
+        }
+        return null;
+    }
     public void changeSelectAllGoods(boolean isSelectAll) {
         shoppingcartIds.clear();
         if (isSelectAll) {

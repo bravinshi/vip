@@ -48,11 +48,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         GoodsDetailViewModel> {
 
     public static final String KEY_GOODS_ID = "KEY_GOODS_ID";
-    private String goodsId = "";
+    private Integer goodsId;
     private SelectAddressDialog selectAddressDialog;
     private GoodsSpecificationDialog goodsSpecificationDialog;
-    private String selectAddressDialogTag = "selectAddressDialog";
-    private String goodsSpecificationDialogTag = "goodsSpecificationDialog";
+    private final String selectAddressDialogTag = "selectAddressDialog";
+    private final String goodsSpecificationDialogTag = "goodsSpecificationDialog";
     private UserAddressBean selectedAddress = null;// 选择的地址
     private boolean showDefaultAddress = false;// 是否展示过默认地址
 
@@ -64,14 +64,15 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             return;
         }
 
-        Integer goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+        goodsId = bundle.getInt(KEY_GOODS_ID, -1);
+//        goodsId = 347;
         if (goodsId == -1) {
+            ToastUtils.showShort("未找到商品信息");
             return;
         }
 
         // 获取商品详情
         mViewModel.getGoodsDetail(goodsId);
-//        mViewModel.getGoodsDetail(347);
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId.toString(), null, null);
         // 获取地址信息
@@ -196,7 +197,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             mBinding.vpImage.setVisibility(View.GONE);
         }
         // 价格
-        mBinding.tvPrice.setText("￥" + detail.getCommodityOldPrice());
+        if (!CollectionUtils.nullOrEmpty(detail.getCommodityInventoryList())) {
+            mBinding.tvPrice.setText("￥" + detail.getCommodityInventoryList().get(0).getCommodityOldPrice());
+        }
         // 标题
         mBinding.tvTitle.setText(detail.getCommodityName());
         // 详情
@@ -266,9 +269,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
 
     @Override
     public void observe() {
-        mViewModel.goodsCommentLive.observe(this, goodsCommentResBean -> {
-            mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")");
-        });
+        mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
+                mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 

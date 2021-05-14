@@ -34,6 +34,7 @@ import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.CommentSuccessActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
+import com.goldensky.vip.activity.order.OrderDetailActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
 
 
@@ -365,9 +366,19 @@ public class Starter {
         context.startActivity(intent);
     }
 
+
     //金天优选
     public static void startOptimizationActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OptimizationActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //订单详情
+    public static void startOrderDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OrderDetailActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

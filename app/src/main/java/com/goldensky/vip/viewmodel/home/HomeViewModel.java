@@ -4,11 +4,14 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
+import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.api.goods.GoodsService;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.HomeBean;
 import com.goldensky.vip.bean.MainPageGoodsResBean;
+import com.goldensky.vip.bean.SuperStBean;
+import com.goldensky.vip.bean.UserIdReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import static com.goldensky.vip.adapter.HomeAdapter.ITEM_TYPE_RMD;
 
 public class HomeViewModel extends PublicViewModel {
     public MutableLiveData<Boolean> loadResult = new MutableLiveData();
+    public MutableLiveData<SuperStBean> mSuperStBean = new MutableLiveData<>();
     private HomeBean lbBean;
     public List<HomeBean> homeBeans = new ArrayList<>();
     //轮播
@@ -60,12 +64,6 @@ public class HomeViewModel extends PublicViewModel {
 
                     List<CommodityBean> jtyxBeans = data.getOptimization();
                     if (jtyxBeans != null && jtyxBeans.size() > 0) {
-                        if (jtyxBeans.size() % 3 == 2) {
-                            jtyxBeans.add(null);
-                        } else if (jtyxBeans.size() % 3 == 1) {
-                            jtyxBeans.add(null);
-                            jtyxBeans.add(null);
-                        }
                         HomeBean bean = new HomeBean(ITEM_TYPE_JTYX, jtyxBeans, "金天优选");
                         homeBeans.add(bean);
                     }
@@ -82,5 +80,18 @@ public class HomeViewModel extends PublicViewModel {
                 return true;
             }
         });
+    }
+
+    public void getSuperSt(String userId) {
+        UserIdReqBean bean = new UserIdReqBean();
+        bean.setUserid(userId);
+        RetrofitAgent.create(AccountService.class)
+                .getUserAndMerchant(bean)
+                .subscribe(new ToastNetObserver<SuperStBean>(){
+                    @Override
+                    public void onSuccess(SuperStBean data) {
+                     mSuperStBean.postValue(data);
+                    }
+                });
     }
 }
