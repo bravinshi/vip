@@ -145,7 +145,7 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
                 bean.setTo(expressBean.getProvince()+expressBean.getCity()+expressBean.getArea());
                 bean.setCom(expressBean.getExpresscode());
                 bean.setNum(expressBean.getExpressnumber());
-                bean.setPhone("");
+                bean.setPhone(expressBean.getUseraddressphone());
                 bean.setOrder("desc");
                 bean.setResultv2("1");
                 bean.setShow("0");

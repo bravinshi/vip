@@ -7,7 +7,7 @@
             type="com.goldensky.vip.bean.LogisticsBean.DataDTO" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

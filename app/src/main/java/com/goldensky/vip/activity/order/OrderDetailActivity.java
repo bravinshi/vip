@@ -64,14 +64,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         mBinding.setDetailBean(orderDetail);
         mBinding.rvOrderdetail.setLayoutManager(new NoScrollStaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         adapter=new OrderDetailListAdapter(list,orderType);
-        mBinding.rvOrderdetail.setAdapter(adapter);
-        mBinding.setListener(this);
-        initListener();
-
-
-    }
-
-    public void initListener() {
         mBinding.topBarOrderdetail.setBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +81,15 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                     Starter.startOrderCommentActivity(OrderDetailActivity.this,bundle);
                 }
             }
-        });
+        });;
+        mBinding.rvOrderdetail.setAdapter(adapter);
+        mBinding.setListener(this);
+
+
+    }
+
+    public void initListener() {
+
     }
 
     @Override
@@ -202,10 +202,10 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
             public void onChanged(ExpressBean expressBean) {
                 express=expressBean;
                 LogisticsReqBean bean = new LogisticsReqBean();
-                bean.setTo(orderDetail.getLoc());
+                bean.setTo(expressBean.getProvince()+expressBean.getCity()+expressBean.getArea());
                 bean.setCom(expressBean.getExpresscode());
                 bean.setNum(expressBean.getExpressnumber());
-                bean.setPhone(orderDetail.getUseraddressphone());
+                bean.setPhone(expressBean.getUseraddressphone());
                 bean.setOrder("desc");
                 bean.setResultv2("1");
                 bean.setShow("0");

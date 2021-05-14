@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class ExpressBean implements Serializable {
 
+
     @SerializedName("area")
     private String area;
     @SerializedName("city")
@@ -18,6 +19,10 @@ public class ExpressBean implements Serializable {
     private String expressnumber;
     @SerializedName("province")
     private String province;
+    @SerializedName("useraddressname")
+    private String useraddressname;
+    @SerializedName("useraddressphone")
+    private String useraddressphone;
 
     public String getArea() {
         return area;
@@ -65,5 +70,21 @@ public class ExpressBean implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public String getUseraddressname() {
+        return useraddressname;
+    }
+
+    public void setUseraddressname(String useraddressname) {
+        this.useraddressname = useraddressname;
+    }
+
+    public String getUseraddressphone() {
+        return useraddressphone;
+    }
+
+    public void setUseraddressphone(String useraddressphone) {
+        this.useraddressphone = useraddressphone;
     }
 }
