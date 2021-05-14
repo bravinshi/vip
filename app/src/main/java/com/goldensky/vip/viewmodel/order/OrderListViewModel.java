@@ -11,7 +11,7 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
 
 import java.util.List;
 
-public class OrderListViewModel extends PublicViewModel {
+public class OrderListViewModel extends OrderDetailViewModel {
     public MutableLiveData<List<OrderListBean>> getOrderListLive = new MutableLiveData<>();
     public MutableLiveData<Object> updateOrderLive=new MutableLiveData<>();
 

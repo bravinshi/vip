@@ -138,6 +138,7 @@
                         android:gravity="center"
                         android:textColor="@color/color_888888"
                         android:textSize="14sp"
+                        android:onClick="@{listener}"
                         android:layout_marginRight="15dp"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>

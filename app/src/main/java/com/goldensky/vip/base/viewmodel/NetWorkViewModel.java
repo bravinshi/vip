@@ -148,9 +148,7 @@ public class NetWorkViewModel extends BaseViewModel {
     public abstract class ToastNetObserver<T> extends BaseNetObserver<T> {
         @Override
         public boolean onFail(NetResponse<T> data) {
-            if (BuildConfig.DEBUG || data.getCode() != NetCodeConstant.CODE_EXCEPTION_DEFAULT) {
-                ToastUtils.showShort(data.getMessage());
-            }
+            ToastUtils.showShort(data.getMessage());
 
             return false;
         }

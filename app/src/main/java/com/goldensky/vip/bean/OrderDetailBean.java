@@ -71,6 +71,9 @@ public class OrderDetailBean extends BaseObservable implements Serializable {
     public String getSumMoney() {
         return  getDoubleMoney(orderprice+postage);
     }
+    public Double getSum() {
+        return orderprice+postage;
+    }
     private String getDoubleMoney(Double price){
         String priceStr = new DecimalFormat("#.00").format(price);
         return "￥"+priceStr;

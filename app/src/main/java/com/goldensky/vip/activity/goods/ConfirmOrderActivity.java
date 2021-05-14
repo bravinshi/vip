@@ -2,24 +2,28 @@ package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
 
-import androidx.lifecycle.Observer;
-
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.MathUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.ConfirmOrderAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.base.error.FailCallback;
+import com.goldensky.vip.base.ui.dialog.LoadingDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
+import com.goldensky.vip.bean.PaymentOrderReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.constant.ConfigConstant;
 import com.goldensky.vip.databinding.ActivityConfirmOrderBinding;
 import com.goldensky.vip.event.AddAddressEvent;
+import com.goldensky.vip.event.PaymentReturnEvent;
 import com.goldensky.vip.event.PurchaseNumChangeEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
@@ -37,8 +41,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.Cipher;
-
 /**
  * @author bravin
  * @version 1.0
@@ -52,6 +54,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
     private UserAddressBean selectedAddress = null;
     private SelectAddressDialog selectAddressDialog;
     private boolean showDefaultAddress = false;
+    private LoadingDialog loadingDialog = new LoadingDialog();
 
     public static final String KEY_ADDRESS = "KEY_ADDRESS";
     public static final String KEY_GOODS = "KEY_GOODS";
@@ -74,6 +77,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             List<ConfirmOrderItemBean> confirmOrderItemBeans = GsonUtils.fromJson(goodsJson,
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
+            mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
         retrieveAddress();
@@ -83,21 +87,33 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
     public void observe() {
         mViewModel.userAddressLive.observe(this, this::handleAddress);
         mViewModel.submitOrderLive.observe(this, o -> {
-            // TODO 支付
-            IWXAPI api = WXAPIFactory.createWXAPI(ConfirmOrderActivity.this, ConfigConstant.WX_APP_ID);
+            // 生成预支付订单
+            PaymentOrderReqBean paymentOrderReqBean = new PaymentOrderReqBean();
+
+            paymentOrderReqBean.setOrderNumberList(o);
+            paymentOrderReqBean.setPayType(0);
+            paymentOrderReqBean.setRechargeMoney(getTotalMoney());
+
+            mViewModel.getPaymentOrder(paymentOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
+        });
+
+        mViewModel.paymentOrderLive.observe(this, o -> {
+            IWXAPI api = WXAPIFactory.createWXAPI(ConfirmOrderActivity.this, ConfigConstant.WX_APP_ID, false);
             api.registerApp(ConfigConstant.WX_APP_ID);
 
             PayReq payReq = new PayReq();
             payReq.appId = ConfigConstant.WX_APP_ID;
-//            payReq.partnerId =
-            payReq.prepayId = o.get("package").getAsString().substring(10);
+            payReq.partnerId = ConfigConstant.WX_MCH_ID;
+            payReq.prepayId = o.get("prepayid").getAsString();
             payReq.packageValue = "Sign=WXPay";
-            payReq.nonceStr = o.get("nonceStr").getAsString();
-            payReq.timeStamp = o.get("timeStamp").getAsString();
+            payReq.nonceStr = o.get("noncestr").getAsString();
+            payReq.timeStamp = o.get("timestamp").getAsString();
             payReq.sign = o.get("paySign").getAsString();
-            payReq.signType = o.get("signType").getAsString();
+            payReq.signType = "MD5";
 
             api.sendReq(payReq);
+            loadingDialog.dismissAllowingStateLoss();
+            ToastUtils.showShort("正在发起支付请求");
         });
     }
 
@@ -155,17 +171,27 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPurchaseNumChanged(PurchaseNumChangeEvent purchaseNumChangeEvent) {
+        mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+        if (purchaseNumChangeEvent.getNotify()) {
+            confirmOrderAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPaymentFinish(PaymentReturnEvent paymentReturnEvent) {
+        if (paymentReturnEvent.getAction().equals(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL)) {
+            Starter.startOrderListActivity(ConfirmOrderActivity.this, null);
+            finish();
+        }
+    }
+
+    private double getTotalMoney() {
         List<ConfirmOrderItemBean> confirmOrderItemBeanList = confirmOrderAdapter.getData();
-        // 计算总金额
         double total = 0D;
         for (ConfirmOrderItemBean confirmOrderItemBean : confirmOrderItemBeanList) {
             total = total + confirmOrderItemBean.getPurchaseNum() * confirmOrderItemBean.getPrice();
         }
-
-        mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(total, 2));
-        if (purchaseNumChangeEvent.getNotify()) {
-            confirmOrderAdapter.notifyDataSetChanged();
-        }
+        return total;
     }
 
     // 提交订单
@@ -176,6 +202,8 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             ToastUtils.showShort(R.string.text_select_address);
             return;
         }
+
+        loadingDialog.show(getSupportFragmentManager(), "loadingDialog");
 
         addOrderReqBean.setArea(selectedAddress.getArea());
         addOrderReqBean.setAreaId(selectedAddress.getAreaid());
@@ -197,7 +225,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
         addOrderReqBean.setCommodityList(commodities);
 
-        mViewModel.addOrder(addOrderReqBean);
+        mViewModel.addOrder(addOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
     }
 
     /**

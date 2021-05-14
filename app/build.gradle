@@ -39,6 +39,7 @@ dependencies {//
 //        exclude group: 'com.google.code.gson'
 //    })
     implementation project(path: ':goldenFramework')
+    implementation project(path: ':library')
     implementation rootProject.ext.baseDependencies.glide
     implementation rootProject.ext.baseDependencies.glideCompiler
     implementation rootProject.ext.baseDependencies.qmui

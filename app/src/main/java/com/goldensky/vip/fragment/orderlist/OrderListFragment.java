@@ -19,6 +19,9 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.OrderListAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
+import com.goldensky.vip.bean.ExpressBean;
+import com.goldensky.vip.bean.LogisticsBean;
+import com.goldensky.vip.bean.LogisticsReqBean;
 import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.databinding.FragmentOrderListBinding;
 import com.goldensky.vip.event.ChangeOrderStatusEvent;
@@ -43,11 +46,13 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
     private final Integer FINISHED = 3;
     private Integer fragmentType = 0;
     private Integer orderListType = null;
+    private ExpressBean express;
     private List<OrderListBean> orderDetailLists=new ArrayList<>();
     public OrderListFragment(Integer fragmentType) {
         this.fragmentType = fragmentType;
     }
     private OrderListAdapter adapter;
+    private int checkPosition=0;
     @Override
     public void onLazyLoad() {
 
@@ -104,11 +109,22 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
                 if(view.getId()==R.id.btn_red_item_orderlist){
                     switch (orderDetailLists.get(position).getOrderstatus()){
                         case 0:
-
+                            Bundle bundle = new Bundle();
+                            bundle.putString("orderNumber",orderDetailLists.get(position).getOrdernumber());
+                            bundle.putInt("orderType",orderDetailLists.get(position).getOrderstatus());
+                            Starter.startOrderDetailActivity(getContext(),bundle);
                             break;
                         case 1:
                         case 2:
                             mViewModel.updateOrder(orderDetailLists.get(position).getOrdernumber(),3);
+                            break;
+                    }
+                }else {
+                    switch (orderDetailLists.get(position).getOrderstatus()){
+                        case 1:
+                        case 2:
+                            mViewModel.getExpress(orderDetailLists.get(position).getOrdernumber());
+                            checkPosition=position;
                             break;
                     }
                 }
@@ -121,6 +137,31 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
             }
         });
         mBinding.rvOrderList.setAdapter(adapter);
+        mViewModel.expressLive.observe(this, new Observer<ExpressBean>() {
+            @Override
+            public void onChanged(ExpressBean expressBean) {
+                express=expressBean;
+                LogisticsReqBean bean = new LogisticsReqBean();
+                bean.setTo(expressBean.getProvince()+expressBean.getCity()+expressBean.getArea());
+                bean.setCom(expressBean.getExpresscode());
+                bean.setNum(expressBean.getExpressnumber());
+                bean.setPhone("");
+                bean.setOrder("desc");
+                bean.setResultv2("1");
+                bean.setShow("0");
+                bean.setFrom("");
+                mViewModel.getLogistics(bean);
+            }
+        });
+        mViewModel.getLogisticsLive.observe(this, new Observer<LogisticsBean>() {
+            @Override
+            public void onChanged(LogisticsBean logisticsBean) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("logistics",logisticsBean);
+                bundle.putString("pic",orderDetailLists.get(0).getOrderDetailList().get(0).getInventorypic());
+                Starter.startLogisticsActivity(getContext(),bundle);
+            }
+        });
 
     }
     @Subscribe(threadMode = ThreadMode.MAIN)

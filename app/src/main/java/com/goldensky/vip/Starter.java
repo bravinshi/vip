@@ -32,6 +32,7 @@ import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.CommentSuccessActivity;
+import com.goldensky.vip.activity.order.LogisticsActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
 import com.goldensky.vip.activity.order.OrderDetailActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
@@ -368,6 +369,14 @@ public class Starter {
     //订单详情
     public static void startOrderDetailActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+    //物流详情
+    public static void startLogisticsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, LogisticsActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

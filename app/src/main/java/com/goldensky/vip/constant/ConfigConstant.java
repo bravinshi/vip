@@ -12,4 +12,6 @@ public class ConfigConstant {
     public static final String WX_APP_ID = "wx2666cf07e3cabf35";
     // 微信app secret
     public static final String WX_APP_SECRET = "211037a5236e3332fc90e1ad18f9cd2a";
+
+    public static final String WX_MCH_ID = "1607864467";
 }

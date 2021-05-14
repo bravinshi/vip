@@ -86,6 +86,7 @@
     <string name="text_consignee">收货人</string>
     <string name="text_confirm_receipt">确认收货</string>
     <string name="text_check_logistics">查看物流</string>
+    <string name="text_logistics">物流信息</string>
     <string name="text_delete_order">删除订单</string>
     <string name="text_order_detail">订单详情</string>
     <string name="text_order_message">订单信息</string>
