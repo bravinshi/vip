@@ -13,6 +13,7 @@ import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
+import com.goldensky.vip.activity.goods.OptimizationActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
@@ -64,6 +65,7 @@ public class Starter {
      */
     public static void startMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
@@ -157,6 +159,7 @@ public class Starter {
      */
     public static void startOrderListActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
@@ -360,6 +363,16 @@ public class Starter {
     //订单评价成功
     public static void startCommentSuccessActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CommentSuccessActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+
+    //金天优选
+    public static void startOptimizationActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OptimizationActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

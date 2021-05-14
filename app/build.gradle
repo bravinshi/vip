@@ -63,6 +63,7 @@ dependencies {//
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
     implementation 'io.github.lucksiege:pictureselector:v2.7.0-rc02'
+    implementation 'com.youth.banner:banner:2.1.0'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
 }

@@ -1,5 +1,6 @@
 package com.goldensky.vip.helper;
 
+import com.goldensky.framework.util.MathUtils;
 import com.goldensky.framework.util.SPUtils;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.framework.util.ToastUtils;
@@ -69,6 +70,21 @@ public class AccountHelper {
 
         return loginResponse.getTokenHead() + loginResponse.getToken();
     }
+
+    public static String getUserSuperiorId() {
+        if (loginResponse.getVipUser() != null && loginResponse.getVipUser().getUsersuperiorid() != null) {
+            return loginResponse.getVipUser().getUsersuperiorid().toString();
+        }
+        return "";
+    }
+
+    public static String getInvitationCode() {
+        if (loginResponse.getVipUser() != null && !StringUtils.isEmpty(loginResponse.getVipUser().getInvitationcode())) {
+            return loginResponse.getVipUser().getInvitationcode();
+        }
+        return "";
+    }
+
     public static void setNick(String nick){
         loginResponse.getVipUser().setUserNick(nick);
         onVipUserChanged();
