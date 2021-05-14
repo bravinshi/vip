@@ -21,11 +21,16 @@ import com.goldensky.vip.adapter.OrderListAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.databinding.FragmentOrderListBinding;
+import com.goldensky.vip.event.ChangeOrderStatusEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.goldensky.vip.viewmodel.order.OrderListViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +58,10 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
         return R.layout.fragment_order_list;
     }
 
+
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
 //        0:未付款 1:待发货  2:待收货 3:已完成 4:关闭 5:已取消',
         if (fragmentType == ALL) {
             orderListType = null;
@@ -114,6 +121,19 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
             }
         });
         mBinding.rvOrderList.setAdapter(adapter);
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void orderStatusChange(ChangeOrderStatusEvent event){
+        if(event.getSuccess()){
+            mViewModel.getOrderList(AccountHelper.getUserId(), orderListType);
+        }
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void setOrderList(List<OrderListBean> list) {

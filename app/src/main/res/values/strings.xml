@@ -69,6 +69,7 @@
     <string name="text_my_tools">我的工具</string>
     <string name="text_go_close_account">去结算</string>
     <string name="text_go_pay">去支付</string>
+    <string name="text_go_evaluated">去评价</string>
     <string name="text_share_to_friend">好友分享</string>
     <string name="text_settings">设置</string>
     <string name="text_now_version">当前版本</string>

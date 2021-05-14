@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder;
 import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.OrderListBean;
+import com.goldensky.vip.databinding.ItemDetailOrderListBinding;
 import com.goldensky.vip.databinding.ItemOrderDetailBinding;
 import com.goldensky.vip.databinding.ItemOrderListBinding;
 import com.goldensky.vip.utils.GlideRoundTransform;
@@ -22,17 +23,17 @@ import java.util.List;
 
 public class OrderDetailAdapter extends BaseQuickAdapter<OrderListBean.OrderDetailList, BaseDataBindingHolder> {
     public OrderDetailAdapter(@Nullable List<OrderListBean.OrderDetailList> data) {
-        super(R.layout.item_order_detail, data);
+        super(R.layout.item_detail_order_list, data);
     }
 
     @Override
     protected void convert(@NotNull BaseDataBindingHolder baseDataBindingHolder, OrderListBean.OrderDetailList orderDetailList) {
-        ItemOrderDetailBinding dataBinding = (ItemOrderDetailBinding) baseDataBindingHolder.getDataBinding();
-        dataBinding.countItemOrderDetail.setText("共"+orderDetailList.getPurchasenum()+"件");
-        dataBinding.moneyItemOrderDetail.setText("￥"+orderDetailList.getCommodityoldprice());
-        dataBinding.sizeItemOrderDetail.setText(getInventory(orderDetailList.getInventory()));
-        dataBinding.nameItemOrderDetail.setText(orderDetailList.getCommodityname());
-        Glide.with(getContext()).load(orderDetailList.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),8))).into(dataBinding.ivItemOrderDetail);
+        ItemDetailOrderListBinding dataBinding = (ItemDetailOrderListBinding) baseDataBindingHolder.getDataBinding();
+        dataBinding.countItemDetailOrderlist.setText("共"+orderDetailList.getPurchasenum()+"件");
+        dataBinding.moneyItemDetailOrderlist.setText("￥"+orderDetailList.getCommodityoldprice());
+        dataBinding.sizeItemDetailOrderlist.setText(getInventory(orderDetailList.getInventory()));
+        dataBinding.nameItemDetailOrderlist.setText(orderDetailList.getCommodityname());
+        Glide.with(getContext()).load(orderDetailList.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),8))).into(dataBinding.ivItemDetailOrderlist);
     }
 
     protected String getInventory(String inventory){

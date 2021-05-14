@@ -1,8 +1,14 @@
 package com.goldensky.vip.bean;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
+
 import androidx.databinding.BaseObservable;
 
+import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.TimeUtils;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -213,7 +219,7 @@ public class OrderDetailBean extends BaseObservable implements Serializable {
         @SerializedName("commodityname")
         private String commodityname;
         @SerializedName("commodityoldprice")
-        private Integer commodityoldprice;
+        private Double commodityoldprice;
         @SerializedName("inventory")
         private String inventory;
         @SerializedName("inventorypic")
@@ -241,18 +247,34 @@ public class OrderDetailBean extends BaseObservable implements Serializable {
             this.commodityname = commodityname;
         }
 
-        public Integer getCommodityoldprice() {
-            return commodityoldprice;
+        public SpannableString getCommodityoldprice() {
+            return changTvSize(commodityoldprice);
         }
 
-        public void setCommodityoldprice(Integer commodityoldprice) {
+        public void setCommodityoldprice(Double commodityoldprice) {
             this.commodityoldprice = commodityoldprice;
         }
 
         public String getInventory() {
-            return inventory;
+            JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+            StringBuilder stringBuilder = new StringBuilder();
+            List<String> keySet = new ArrayList<>(jsonObject.keySet());
+            int size = keySet.size();
+            for (int i = 0; i < size; i++) {
+                String key = keySet.get(i);
+                stringBuilder.append(jsonObject.get(key).getAsString());
+                if (i != size - 1) {
+                    stringBuilder.append(";");
+                }
+            }
+            return stringBuilder.toString();
         }
-
+        private SpannableString changTvSize(Double value) {
+            String s = "¥"+new DecimalFormat("#.00").format(value);
+            SpannableString spannableString = new SpannableString(s);
+            spannableString.setSpan(new RelativeSizeSpan(0.7f), s.indexOf("¥"), 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
+        }
         public void setInventory(String inventory) {
             this.inventory = inventory;
         }
@@ -273,8 +295,8 @@ public class OrderDetailBean extends BaseObservable implements Serializable {
             this.isevaluate = isevaluate;
         }
 
-        public Integer getPurchasenum() {
-            return purchasenum;
+        public String getPurchasenum() {
+            return "×"+purchasenum;
         }
 
         public void setPurchasenum(Integer purchasenum) {
