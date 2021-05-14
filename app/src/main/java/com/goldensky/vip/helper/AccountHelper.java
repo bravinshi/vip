@@ -78,6 +78,13 @@ public class AccountHelper {
         return "";
     }
 
+    public static String getInvitationCode() {
+        if (loginResponse.getVipUser() != null && !StringUtils.isEmpty(loginResponse.getVipUser().getInvitationcode())) {
+            return loginResponse.getVipUser().getInvitationcode();
+        }
+        return "";
+    }
+
     public static void setNick(String nick){
         loginResponse.getVipUser().setUserNick(nick);
         onVipUserChanged();

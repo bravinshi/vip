@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.LoginResponseBean;
@@ -61,6 +62,18 @@ public class AccountViewModel extends PublicViewModel {
                     @Override
                     public void onSuccess(Object data) {
                         userLive.postValue(1);
+                    }
+                });
+    }
+
+    public void getWxAppletCode(String userid, String invitationcode) {
+        String invstr = "invitationcode=" + invitationcode;
+        RetrofitAgent.create(AccountService.class)
+                .getWxAppletCode(userid, invstr)
+                .subscribe(new ToastNetObserver<Object>(){
+                    @Override
+                    public void onSuccess(Object data) {
+
                     }
                 });
     }

@@ -26,5 +26,9 @@ public interface AccountService {
     Observable<NetResponse<Object>> updateVipUser(@Body UpdateVipUserReqBean reqBean);
 
     @POST("/goldendays-user/merchantUser/getUserAndMerchant")
-    Observable<NetResponse<SuperStBean>>getUserAndMerchant(@Body UserIdReqBean reqBean);
+    Observable<NetResponse<SuperStBean>> getUserAndMerchant(@Body UserIdReqBean reqBean);
+
+    @POST("/goldendays-currency/wxApplet/getWxAppletCode")
+    Observable<NetResponse<Object>> getWxAppletCode(@Query("userid") String userid,
+                                                    @Query("scene") String scene);
 }
