@@ -93,8 +93,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 Starter.startSearchActivity(getContext(), null);
                 break;
             case R.id.gxtj_iv:
-//                Starter.startCustomActivity(getContext(), null);
-                Starter.startHotTodayActivity(getContext(), null);
+                Starter.startCustomActivity(getContext(), null);
                 break;
         }
     }
