@@ -2,6 +2,7 @@ package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
 
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.MathUtils;
@@ -11,6 +12,8 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.ConfirmOrderAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.base.error.FailCallback;
+import com.goldensky.vip.base.ui.dialog.LoadingDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.AddOrderReqBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
@@ -51,6 +54,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
     private UserAddressBean selectedAddress = null;
     private SelectAddressDialog selectAddressDialog;
     private boolean showDefaultAddress = false;
+    private LoadingDialog loadingDialog = new LoadingDialog();
 
     public static final String KEY_ADDRESS = "KEY_ADDRESS";
     public static final String KEY_GOODS = "KEY_GOODS";
@@ -90,7 +94,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             paymentOrderReqBean.setPayType(0);
             paymentOrderReqBean.setRechargeMoney(getTotalMoney());
 
-            mViewModel.getPaymentOrder(paymentOrderReqBean, null);
+            mViewModel.getPaymentOrder(paymentOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
         });
 
         mViewModel.paymentOrderLive.observe(this, o -> {
@@ -108,6 +112,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             payReq.signType = "MD5";
 
             api.sendReq(payReq);
+            loadingDialog.dismissAllowingStateLoss();
             ToastUtils.showShort("正在发起支付请求");
         });
     }
@@ -198,6 +203,8 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             return;
         }
 
+        loadingDialog.show(getSupportFragmentManager(), "loadingDialog");
+
         addOrderReqBean.setArea(selectedAddress.getArea());
         addOrderReqBean.setAreaId(selectedAddress.getAreaid());
         addOrderReqBean.setProvince(selectedAddress.getProvince());
@@ -218,7 +225,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
         addOrderReqBean.setCommodityList(commodities);
 
-        mViewModel.addOrder(addOrderReqBean, null);
+        mViewModel.addOrder(addOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
     }
 
     /**
