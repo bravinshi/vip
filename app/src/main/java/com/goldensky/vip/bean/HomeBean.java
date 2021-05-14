@@ -5,159 +5,48 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import java.util.List;
 
 public class HomeBean implements MultiItemEntity {
-     private int hItemType; //1-轮播 2-消息 3-为你推荐 4-今日爆款 5-优惠专区 6-金天优选
-     private String itemTitle;
-     private String singleUrl;
-     private String message;
-     private List<ProductBean> productList;
-     private List bannerUrls;
-     private Integer singleImgId;
 
-     private List<List<ProductBean>> jtyxProductList;//金天优选
+    private int homeItemType;
+    private String itemTitle;
+    private List<String> lbList;
+    private List<CommodityBean> mCommodityBeanList;
 
-     public HomeBean(int hItemType) {
-         this.hItemType = hItemType;
-     }
-
-    public int gethItemType() {
-        return hItemType;
+    public HomeBean(int homeItemType) {
+        this.homeItemType = homeItemType;
     }
 
-    public void sethItemType(int hItemType) {
-        this.hItemType = hItemType;
+    public HomeBean(int homeItemType, List<CommodityBean> commodityBeanList, String itemTitle) {
+        this.homeItemType = homeItemType;
+        mCommodityBeanList = commodityBeanList;
+        this.itemTitle = itemTitle;
     }
 
     public String getItemTitle() {
-         return itemTitle;
-     }
-
-     public void setItemTitle(String itemTitle) {
-         this.itemTitle = itemTitle;
-     }
-
-     public String getSingleUrl() {
-         return singleUrl;
-     }
-
-     public void setSingleUrl(String singleUrl) {
-         this.singleUrl = singleUrl;
-     }
-
-     public String getMessage() {
-         return message;
-     }
-
-     public void setMessage(String message) {
-         this.message = message;
-     }
-
-    public Integer getSingleImgId() {
-        return singleImgId;
+        return itemTitle;
     }
 
-    public void setSingleImgId(Integer singleImgId) {
-        this.singleImgId = singleImgId;
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
     }
 
-    public List<ProductBean> getProductList() {
-        return productList;
+    public List<String> getLbList() {
+        return lbList;
     }
 
-    public void setProductList(List<ProductBean> productList) {
-        this.productList = productList;
+    public void setLbList(List<String> lbList) {
+        this.lbList = lbList;
     }
 
-    public List<List<ProductBean>> getJtyxProductList() {
-        return jtyxProductList;
+    public List<CommodityBean> getCommodityBeanList() {
+        return mCommodityBeanList;
     }
 
-    public void setJtyxProductList(List<List<ProductBean>> jtyxProductList) {
-        this.jtyxProductList = jtyxProductList;
+    public void setCommodityBeanList(List<CommodityBean> commodityBeanList) {
+        mCommodityBeanList = commodityBeanList;
     }
 
     @Override
     public int getItemType() {
-        return hItemType;
+        return homeItemType;
     }
-
-    public static  class  ProductBean implements MultiItemEntity {
-         private String imgUrl;
-         private String productName;
-         private String productPrice;
-         private Integer productType; //1-推荐  2-爆款 3-金天优选
-        private String originPrice;
-        private Integer productId;
-
-         private Integer imgId;
-
-         public ProductBean(Integer productType, Integer imgId, String productName, String productPrice, Integer productId) {
-             this.productType = productType;
-             this.imgId = imgId;
-             this.productName = productName;
-             this.productPrice = productPrice;
-             this.productId = productId;
-         }
-
-        public Integer getProductType() {
-            return productType;
-        }
-
-        public void setProductType(Integer productType) {
-            this.productType = productType;
-        }
-
-        public String getImgUrl() {
-             return imgUrl;
-         }
-
-         public void setImgUrl(String imgUrl) {
-             this.imgUrl = imgUrl;
-         }
-
-         public String getProductName() {
-             return productName;
-         }
-
-         public void setProductName(String productName) {
-             this.productName = productName;
-         }
-
-         public String getProductPrice() {
-             return productPrice;
-         }
-
-         public void setProductPrice(String productPrice) {
-             this.productPrice = productPrice;
-         }
-
-         public Integer getImgId() {
-             return imgId;
-         }
-
-         public void setImgId(Integer imgId) {
-             this.imgId = imgId;
-         }
-
-        public String getOriginPrice() {
-            return originPrice;
-        }
-
-        public void setOriginPrice(String originPrice) {
-            this.originPrice = originPrice;
-        }
-
-        public Integer getProductId() {
-            return productId;
-        }
-
-        public void setProductId(Integer productId) {
-            this.productId = productId;
-        }
-
-        @Override
-        public int getItemType() {
-            return productType;
-        }
-    }
-
 }

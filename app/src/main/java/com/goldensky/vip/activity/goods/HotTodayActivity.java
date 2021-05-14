@@ -34,6 +34,7 @@ public class HotTodayActivity extends BaseActivity<ActivityHotTodayBinding, Publ
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        mBinding.tabBar.setCenterHint("今日爆款");
         mBinding.rv.setAdapter(normalGoodsAdapter);
         normalGoodsAdapter.setNewInstance(goodsList);
         mBinding.rv.setLayoutManager(new GridLayoutManager(HotTodayActivity.this, 2));

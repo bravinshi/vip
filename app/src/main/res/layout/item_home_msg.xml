@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="bean"
-            type="com.goldensky.vip.bean.HomeBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +34,6 @@
             android:ellipsize="end"
             android:textSize="13sp"
             android:textColor="#333333"
-            android:text="@{bean.message}"
             >
 
         </TextView>
