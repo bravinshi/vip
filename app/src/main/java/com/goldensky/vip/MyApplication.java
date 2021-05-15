@@ -49,7 +49,7 @@ public class MyApplication extends Application {
         //任晓阳
 //        apiConfiguration.setBaseUrl("http://172.25.0.84:9999/");
         // 马晓伟
-//        apiConfiguration.setBaseUrl("http://172.25.0.47:9999/");
+//        apiConfiguration.setBaseUrl("http://172.25.0.37:9999/");
         //正式
 //        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
 
