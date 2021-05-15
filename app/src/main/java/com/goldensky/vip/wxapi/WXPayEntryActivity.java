@@ -58,8 +58,10 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
     public void onResp(BaseResp baseResp) {
         if (baseResp.errCode == 0) {
             mBinding.rlContent.setVisibility(View.VISIBLE);
+            ToastUtils.showShort("支付成功");
         } else {
             // 支付失败
+            ToastUtils.showShort("支付失败");
             PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();
             paymentReturnEvent.setSuccess(false);
             paymentReturnEvent.setAction(PaymentReturnEvent.KEY_ACTION_ORDER_DETAIL);
@@ -75,7 +77,6 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
-        ToastUtils.showShort("1");
         api = WXAPIFactory.createWXAPI(this, ConfigConstant.WX_APP_ID);
         api.handleIntent(getIntent(), this);
 
