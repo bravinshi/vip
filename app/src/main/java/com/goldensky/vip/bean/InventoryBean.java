@@ -1,6 +1,7 @@
 package com.goldensky.vip.bean;
 
 import com.goldensky.framework.util.GsonUtils;
+import com.goldensky.framework.util.StringUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
@@ -50,6 +51,26 @@ public class InventoryBean {
     private Double profitProportion;
     @SerializedName("secondaryagentprice")
     private Double secondaryAgentPrice;
+
+    public String getSpecificationForShow() {
+        // 展示用规格
+        if (!StringUtils.isTrimEmpty(inventory)) {
+            JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+            StringBuilder stringBuilder = new StringBuilder();
+            List<String> keySet = new ArrayList<>(jsonObject.keySet());
+            int size = keySet.size();
+            for (int i = 0; i < size; i++) {
+                String key = keySet.get(i);
+                stringBuilder.append(jsonObject.get(key).getAsString());
+                if (i != size - 1) {
+                    stringBuilder.append(";");
+                }
+            }
+
+            return stringBuilder.toString();
+        }
+        return "";
+    }
 
     public Integer getBuyFromNum() {
         return buyFromNum;
