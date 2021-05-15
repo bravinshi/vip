@@ -143,6 +143,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         // 检查是否有验证码
         if (StringUtils.isTrimEmpty(loginInputModel.getPasswordOrVerificationCode())) {
             toast(R.string.hint_input_verification_code);
+            return;
         }
 
         // 登录
