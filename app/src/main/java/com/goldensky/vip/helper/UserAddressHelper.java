@@ -74,6 +74,10 @@ public class UserAddressHelper {
         return userAddressList;
     }
 
+    public void clear() {
+        userAddressList.clear();
+    }
+
     public void editUserAddress(UserAddressBean bean) {
         int editPosition = 0;
         for (UserAddressBean userAddressBean : userAddressList) {

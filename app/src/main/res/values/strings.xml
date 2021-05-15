@@ -123,7 +123,7 @@
     <string name="hint_empty_address">暂无收货地址</string>
     <string name="hint_empty_order">暂无订单</string>
     <string name="hint_delete_success">删除成功</string>
-    <string name="text_join_shopping_cart_success">加入购物车成功</string>
+    <string name="text_join_shopping_cart_success">添加成功，在购物车等您哦~</string>
     <string name="text_confirm_order">确认订单</string>
     <string name="text_select_address">请选择地址</string>
 

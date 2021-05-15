@@ -72,7 +72,7 @@
                                     android:id="@+id/tv_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="张婷婷"
+                                    android:text=""
                                     android:textColor="@color/color_3"
                                     android:textSize="14sp" />
 
@@ -83,7 +83,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginStart="10dp"
                                     android:layout_toEndOf="@+id/tv_name"
-                                    android:text="13651862222"
+                                    android:text=""
                                     android:textColor="@color/color_888888"
                                     android:textSize="12sp" />
 
@@ -94,7 +94,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="江苏省宿迁市宿城区"
+                                android:text=""
                                 android:textColor="@color/color_3"
                                 android:textSize="12sp" />
 
@@ -103,10 +103,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="骆马湖蓝波湾金天名马湖蓝养客房中心房中心"
+                                android:text=""
                                 android:textColor="@color/color_3"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_hint"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="75dp"
+                            android:text="请选择收货地址"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -176,6 +185,7 @@
                                 android:textSize="14dp" />
 
                             <TextView
+                                android:id="@+id/tv_price_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"

@@ -1,5 +1,7 @@
 package com.goldensky.vip.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import retrofit2.http.Query;
 
 /**
@@ -10,8 +12,10 @@ import retrofit2.http.Query;
  * 类说明：
  */
 public class ForgetPasswordReqBean {
+    @SerializedName("usermobile")
     private String userMobile;
-    private String userCode;
+    private String phoneCode;
+    @SerializedName("userpassword")
     private String password;
 
     public String getUserMobile() {
@@ -22,12 +26,12 @@ public class ForgetPasswordReqBean {
         this.userMobile = userMobile;
     }
 
-    public String getUserCode() {
-        return userCode;
+    public String getPhoneCode() {
+        return phoneCode;
     }
 
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
+    public void setPhoneCode(String phoneCode) {
+        this.phoneCode = phoneCode;
     }
 
     public String getPassword() {

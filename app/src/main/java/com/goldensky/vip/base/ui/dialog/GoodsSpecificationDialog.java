@@ -137,10 +137,10 @@ public class GoodsSpecificationDialog extends BottomDialog {
         }
 
         // 检查购买数量
-        if (purchaseQuantityModel.getPurchaseQuantityInt() < selectedInventory.getBuyFromNum()) {
-            ToastUtils.showShort("购买数量不能低于最小购买数量");
-            return false;
-        }
+//        if (purchaseQuantityModel.getPurchaseQuantityInt() < selectedInventory.getBuyFromNum()) {
+//            ToastUtils.showShort("购买数量不能低于最小购买数量");
+//            return false;
+//        }
 
         return true;
     }

@@ -95,7 +95,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
 
         forgetPasswordReqBean.setUserMobile(inputModel.getPhone().trim());
         forgetPasswordReqBean.setPassword(inputModel.getNewPassword().trim());
-        forgetPasswordReqBean.setUserCode(inputModel.getVerificationCode().trim());
+        forgetPasswordReqBean.setPhoneCode(inputModel.getVerificationCode().trim());
 
         mViewModel.forgetPwd(forgetPasswordReqBean);
     }

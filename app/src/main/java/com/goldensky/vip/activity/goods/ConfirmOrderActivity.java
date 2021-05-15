@@ -1,6 +1,7 @@
 package com.goldensky.vip.activity.goods;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.CollectionUtils;
@@ -69,8 +70,9 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             String addressJson = bundle.getString(KEY_ADDRESS);
             if (!StringUtils.isTrimEmpty(addressJson)) {
                 selectedAddress = GsonUtils.fromJson(addressJson, UserAddressBean.class);
-                drawAddress();
             }
+
+            drawAddress();
 
             // 获取商品列表
             String goodsJson = bundle.getString(KEY_GOODS);
@@ -78,6 +80,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
             mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+            mBinding.tvPrice1.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
         retrieveAddress();
@@ -254,11 +257,14 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
     private void drawAddress() {
         if (selectedAddress != null) {
+            mBinding.tvHint.setVisibility(View.GONE);
             mBinding.tvName.setText(selectedAddress.getUseraddressname());
             mBinding.tvPhone.setText(selectedAddress.getUseraddressphone());
             mBinding.tvArea.setText(selectedAddress.getUseraddress());
             mBinding.tvProCityCou.setText(new StringBuilder().append(selectedAddress.getProvince())
                     .append(selectedAddress.getCity()).append(selectedAddress.getArea()).toString());
+        } else {
+            mBinding.tvHint.setVisibility(View.VISIBLE);
         }
     }
 
