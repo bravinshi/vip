@@ -7,7 +7,9 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.LinkMovementMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
+import com.goldensky.vip.activity.WebViewActivity;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.databinding.ActivityLoginBinding;
@@ -180,6 +183,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
                 // inputType
                 mBinding.etPasswordOrVerificationCode.setInputType(InputType
                         .TYPE_NUMBER_VARIATION_PASSWORD | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mBinding.etPasswordOrVerificationCode.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 break;
             case LOGIN_TYPE_VERIFICATION_CODE:
                 // text
@@ -191,8 +195,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
                 mBinding.btnGetVerificationCode.setVisibility(View.VISIBLE);
                 mBinding.tvUnableLogin.setVisibility(View.GONE);
                 // inputType
+                // inputType
                 mBinding.etPasswordOrVerificationCode.setInputType(InputType
                         .TYPE_CLASS_NUMBER);
+                mBinding.etPasswordOrVerificationCode.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 break;
         }
     }
@@ -208,10 +214,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         spannableString.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString(WebViewActivity.CENTER_TEXT, "隐私政策");
-//                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/privacy.htm");
-//                Starter.startWebViewActivity(widget.getContext(), bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString(WebViewActivity.CENTER_TEXT, "隐私政策");
+                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/privacy.htm");
+                Starter.startWebViewActivity(widget.getContext(), bundle);
             }
 
             @Override
@@ -227,10 +233,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         spannableString.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString(WebViewActivity.CENTER_TEXT, "用户协议");
-//                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/register.htm");
-//                Starter.startWebViewActivity(widget.getContext(), bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString(WebViewActivity.CENTER_TEXT, "用户协议");
+                bundle.putString(WebViewActivity.WEBVIEW_URL, "file:android_asset/register.htm");
+                Starter.startWebViewActivity(widget.getContext(), bundle);
             }
 
             @Override
