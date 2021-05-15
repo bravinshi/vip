@@ -2,6 +2,8 @@ package com.goldensky.vip.model;
 
 import androidx.databinding.BaseObservable;
 
+import com.goldensky.framework.util.StringUtils;
+
 /**
  * @author bravin
  * @version 1.0
@@ -38,6 +40,9 @@ public class PurchaseQuantityModel extends BaseObservable {
     }
 
     public Integer getPurchaseQuantityInt() {
+        if (StringUtils.isTrimEmpty(purchaseQuantity)) {
+            return 0;
+        }
         return Integer.valueOf(purchaseQuantity);
     }
 
