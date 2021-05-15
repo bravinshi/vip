@@ -25,6 +25,7 @@ import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
+import com.goldensky.vip.event.ShoppingCartRefreshEvent;
 import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
@@ -262,7 +263,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mViewModel.joinIntoShoppingCartResultLive.observe(this, aBoolean -> {
             if (aBoolean) {
                 ToastUtils.showShort(R.string.text_join_shopping_cart_success);
-                ShoppingCartHelper.getInstance().addGoods(joinIntoShoppingCartReqBean);
+                EventBus.getDefault().post(new ShoppingCartRefreshEvent());
 
             }
         });

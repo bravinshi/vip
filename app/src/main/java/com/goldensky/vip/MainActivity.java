@@ -72,12 +72,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
         if (!UserAddressHelper.getInstance().isAreaLoad()) {
             mViewModel.getAreaList();
         }
-        if(!ShoppingCartHelper.getInstance().isShoppingCartLoad()){
-            mViewModel.getShoppingCartList(AccountHelper.getUserId());
-        }
-        if(!UserAddressHelper.getInstance().isUserAddressLoad()){
-            mViewModel.getUserAddress(AccountHelper.getUserId());
-        }
+        mViewModel.getUserAddress(AccountHelper.getUserId());
+
     }
 
     @Override
@@ -94,12 +90,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
                 UserAddressHelper.getInstance().setUserAddressList(userAddressBeans);
             }
         });
-        mViewModel.shoppingCartListLive.observe(this, new Observer<List<ShoppingCartGoodsBean>>() {
-            @Override
-            public void onChanged(List<ShoppingCartGoodsBean> shoppingCartGoodsBeans) {
-                ShoppingCartHelper.getInstance().setShoppingCartGoodsBeanList(shoppingCartGoodsBeans);
-            }
-        });
+
     }
 
     @Override

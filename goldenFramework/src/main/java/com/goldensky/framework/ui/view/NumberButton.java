@@ -24,6 +24,7 @@ public class NumberButton extends LinearLayout {
     public int count=1;
     private int minCount=1;
     private int maxCount=Integer.MAX_VALUE;
+    private boolean isUser=false;
     public NumberButton(Context context) {
         super(context);
     }
@@ -54,6 +55,7 @@ public class NumberButton extends LinearLayout {
                 }else {
                     count--;
                 }
+                isUser=true;
                 changeCount(count);
             }
 
@@ -67,6 +69,7 @@ public class NumberButton extends LinearLayout {
                 }else {
                     count++;
                 }
+                isUser=true;
                 changeCount(count);
             }
         });
@@ -116,8 +119,10 @@ public class NumberButton extends LinearLayout {
                        changeCount(count);
                    }
                 }
-                if (listener!=null){
-                    listener.onChange(NumberButton.this);
+                if(isUser){
+                    if (listener!=null){
+                        listener.onChange(NumberButton.this);
+                    }
                 }
 
             }
@@ -125,15 +130,15 @@ public class NumberButton extends LinearLayout {
     }
 
     public void changeCount(Integer number) {
-        countNumberButton.setText(number+"");
-        countNumberButton.setSelection(countNumberButton.getEditableText().length()) ;//光标移至尾部
+           countNumberButton.setText(number+"");
+           countNumberButton.setSelection(countNumberButton.getEditableText().length()) ;//光标移至尾部
     }
 
     public void setCount(int count) {
+        isUser=false;
         this.count = count;
         changeCount(this.count);
     }
-
     public int getCount() {
         return count;
     }

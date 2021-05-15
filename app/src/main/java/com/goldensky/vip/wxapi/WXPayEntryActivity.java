@@ -11,6 +11,7 @@ import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.constant.ConfigConstant;
 import com.goldensky.vip.databinding.ActivityWxPaymentBinding;
 import com.goldensky.vip.event.PaymentReturnEvent;
+import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -58,6 +59,7 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
     public void onResp(BaseResp baseResp) {
         if (baseResp.errCode == 0) {
             mBinding.rlContent.setVisibility(View.VISIBLE);
+            ShoppingCartHelper.getInstance().clearSelect();
         } else {
             // 支付失败
             PaymentReturnEvent paymentReturnEvent = new PaymentReturnEvent();

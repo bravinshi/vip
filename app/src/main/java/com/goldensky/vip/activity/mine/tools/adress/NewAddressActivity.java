@@ -16,6 +16,7 @@ import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.AddUserAddressReqBean;
+import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.NewAddressResponseBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityNewAddressBinding;
@@ -23,6 +24,8 @@ import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.model.EditAddressModel;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
+
+import java.util.List;
 
 
 public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, AddressViewModel> implements View.OnClickListener {
@@ -45,6 +48,9 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
         });
         mBinding.setNewAdressModel(newAddressModel);
         mBinding.setListener(this);
+        if (!UserAddressHelper.getInstance().isAreaLoad()) {
+            mViewModel.getAreaList();
+        }
     }
 
     @Override
@@ -54,10 +60,15 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
             @Override
             public void onChanged(NewAddressResponseBean editAddressBean) {
                     UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, editAddressBean.getUseraddressid(), newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), editAddressBean.getUseraddresstime(), AccountHelper.getUserId());
-                    UserAddressHelper.getInstance().addUserAddress(bean);
-                    toast(UserAddressHelper.getInstance().getUserAddressList().size()+"");
+                    UserAddressHelper.getInstance().refreshAddressList();
                     toast("添加成功");
                     finish();
+            }
+        });
+        mViewModel.areaListLive.observe(this, new Observer<List<AreaListBean>>() {
+            @Override
+            public void onChanged(List<AreaListBean> areaListBean) {
+                UserAddressHelper.getInstance().loadAddressList(areaListBean);
             }
         });
     }
@@ -85,7 +96,7 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
     private void saveAddress(View v) {
         if(isNotNull(newAddressModel.getConsigneeName())){
             if(isNotNull(newAddressModel.getConsigneePhone())&&!notPhoneNumber(newAddressModel.getConsigneePhone())){
-                if(isNotNull(newAddressModel.getLocation())){
+                if(isNotNull(newAddressModel.getLocation())&&isNotNull(mBinding.etRegionNewAddress.getText().toString())){
                     newAddressModel.setDefault(mBinding.isDefaultNewAddress.isChecked());
                     if(newAddressModel.isDefault()){
                         isDefaultCode=1;
@@ -104,62 +115,64 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
     }
 
     private boolean isNotNull(String str) {
-        return !str.equals("")&&str!=null;
+        return str!=null&&!str.equals("");
     }
     private boolean notPhoneNumber(String paddingTestText) {
         return StringUtils.isTrimEmpty(paddingTestText)
                 || paddingTestText.trim().length() != 11;
     }
     private void showCityPicker() {
-        UserAddressHelper instance = UserAddressHelper.getInstance();
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3 , View v) {
-                //返回的分别是三个级别的选中位置
-               if(instance.getProvinceNameList().get(options1).equals("北京")||instance.getProvinceNameList().get(options1).equals("重庆")||instance.getProvinceNameList().get(options1).equals("天津")||instance.getProvinceNameList().get(options1).equals("上海")){
-                   mBinding.etRegionNewAddress.setText(instance.getProvinceNameList().get(options1)+"市"
-                           + instance.getAreaNameList().get(options1).get(option2).get(options3));
-               }else {
-                   mBinding.etRegionNewAddress.setText(instance.getProvinceNameList().get(options1)+"省"
-                           + instance.getCityNameList().get(options1).get(option2)+"市"
-                           +instance.getAreaNameList().get(options1).get(option2).get(options3));
-               }
-                selectProvinceId=instance.getProvinceList().get(options1).getId();
-                selectCityId=instance.getCityList().get(options1).get(option2).getId();
-                selectAreaId=instance.getAreaList().get(options1).get(option2).get(options3).getId();
-                selectProvinceName=instance.getProvinceList().get(options1).getName();
-                selectCityName=instance.getCityList().get(options1).get(option2).getName();
-                selectAreaName=instance.getAreaList().get(options1).get(option2).get(options3).getName();
-            }
-        }) .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
-            @Override
-            public void onOptionsSelectChanged(int options1, int options2, int options3) {
-                String str = "options1: " + options1 + "\noptions2: " + options2 + "\noptions3: " + options3;
+        if(UserAddressHelper.getInstance().isAreaLoad()){
+            UserAddressHelper instance = UserAddressHelper.getInstance();
+            OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int option2, int options3 , View v) {
+                    //返回的分别是三个级别的选中位置
+                    if(instance.getProvinceNameList().get(options1).equals("北京")||instance.getProvinceNameList().get(options1).equals("重庆")||instance.getProvinceNameList().get(options1).equals("天津")||instance.getProvinceNameList().get(options1).equals("上海")){
+                        mBinding.etRegionNewAddress.setText(instance.getProvinceNameList().get(options1)+"市"
+                                + instance.getAreaNameList().get(options1).get(option2).get(options3));
+                    }else {
+                        mBinding.etRegionNewAddress.setText(instance.getProvinceNameList().get(options1)+"省"
+                                + instance.getCityNameList().get(options1).get(option2)+"市"
+                                +instance.getAreaNameList().get(options1).get(option2).get(options3));
+                    }
+                    selectProvinceId=instance.getProvinceList().get(options1).getId();
+                    selectCityId=instance.getCityList().get(options1).get(option2).getId();
+                    selectAreaId=instance.getAreaList().get(options1).get(option2).get(options3).getId();
+                    selectProvinceName=instance.getProvinceList().get(options1).getName();
+                    selectCityName=instance.getCityList().get(options1).get(option2).getName();
+                    selectAreaName=instance.getAreaList().get(options1).get(option2).get(options3).getName();
+                }
+            }) .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
+                @Override
+                public void onOptionsSelectChanged(int options1, int options2, int options3) {
+                    String str = "options1: " + options1 + "\noptions2: " + options2 + "\noptions3: " + options3;
 
-            }
-        })
-                .setSubmitText(getResources().getString(R.string.text_confirm))//确定按钮文字
-                .setCancelText(getResources().getString(R.string.text_cancel))//取消按钮文字
-                .setTitleText(getResources().getString(R.string.text_city_select))//标题
-                .setSubCalSize(18)//确定和取消文字大小
-                .setTitleSize(20)//标题文字大小
-                .setTitleColor(Color.BLACK)//标题文字颜色
-                .setSubmitColor(Color.BLACK)//确定按钮文字颜色
-                .setCancelColor(Color.BLACK)//取消按钮文字颜色
-                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
-                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
-                .setTitleBgColor(Color.WHITE)
-                .setContentTextSize(18)//滚轮文字大小
-                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setCyclic(false, false, false)//循环与否
-                .setSelectOptions(0, 0, 0)  //设置默认选中项
-                .setOutSideCancelable(true)//点击外部dismiss default true
-                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
-                .isAlphaGradient(true)
-                .build();
+                }
+            })
+                    .setSubmitText(getResources().getString(R.string.text_confirm))//确定按钮文字
+                    .setCancelText(getResources().getString(R.string.text_cancel))//取消按钮文字
+                    .setTitleText(getResources().getString(R.string.text_city_select))//标题
+                    .setSubCalSize(18)//确定和取消文字大小
+                    .setTitleSize(20)//标题文字大小
+                    .setTitleColor(Color.BLACK)//标题文字颜色
+                    .setSubmitColor(Color.BLACK)//确定按钮文字颜色
+                    .setCancelColor(Color.BLACK)//取消按钮文字颜色
+                    .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                    .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                    .setTitleBgColor(Color.WHITE)
+                    .setContentTextSize(18)//滚轮文字大小
+                    .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                    .setCyclic(false, false, false)//循环与否
+                    .setSelectOptions(0, 0, 0)  //设置默认选中项
+                    .setOutSideCancelable(true)//点击外部dismiss default true
+                    .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+                    .isAlphaGradient(true)
+                    .build();
 
-        pvOptions.setPicker(instance.getProvinceNameList(),instance.getCityNameList(),instance.getAreaNameList());//添加数据源
-        pvOptions.show(true);
+            pvOptions.setPicker(instance.getProvinceNameList(),instance.getCityNameList(),instance.getAreaNameList());//添加数据源
+            pvOptions.show(true);
+        }
     }
 
 }

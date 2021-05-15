@@ -29,7 +29,7 @@
     <string name="hint_verification_code_is_wrong">验证码错误</string>
     <string name="hint_login_now">登录中</string>
     <string name="hint_input_nick">4-20个字符，可由中英文、数字、“_”、”-“组成</string>
-    <string name="hint_change_nick">请输入正确格式</string>
+    <string name="hint_change_nick">昵称不能超过20个字符</string>
     <string name="hint_change_nick_repeat">昵称不可重复</string>
     <string name="text_company_regitser">企业注册</string>
     <string name="text_company_info">企业信息</string>
@@ -59,7 +59,7 @@
     <string name="text_hint_protocol_policy">登录即同意并接受用户协议和隐私政策</string>
     <string name="text_hint_twice_input_not_same">两次输入不一致</string>
     <string name="text_hot_today">今日爆款</string>
-    <string name="text_cancel_delete">在考虑下</string>
+    <string name="text_cancel_delete">再考虑下</string>
     <string name="text_confirm_delete">删除</string>
     <string name="text_change_psd">修改密码</string>
     <string name="text_confirm_submit">确认提交</string>

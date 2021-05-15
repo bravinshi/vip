@@ -67,26 +67,36 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
     }
 
     private void confirm() {
-        if (StringUtils.isTrimEmpty(changePWDModel.getNewPassword())) {
-            toast(R.string.hint_input_password);
-            return;
-        }
+            if (StringUtils.isTrimEmpty(changePWDModel.getNewPassword())) {
+                toast(R.string.hint_input_new_password);
+                return;
+            }
 
-        if (StringUtils.isTrimEmpty(changePWDModel.getNewPasswordConfirm())) {
-            toast(R.string.hint_confirm_password);
-            return;
-        }
+            if (changePWDModel.getNewPassword().trim().length() < 6
+                    || changePWDModel.getNewPassword().trim().length() > 16) {
+                toast(R.string.hint_new_password_length_is_wrong);
+                return;
+            }
 
-        if (!changePWDModel.getNewPasswordConfirm().equals(changePWDModel.getNewPassword())) {
-            toast(getString(R.string.text_hint_twice_input_not_same));
-            return;
-        }
+            if (StringUtils.isTrimEmpty(changePWDModel.getNewPasswordConfirm())) {
+                toast(R.string.hint_input_new_password_confirm);
+                return;
+            }
 
-        UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
-        reqBean.setUserId(AccountHelper.getUserId());
-        reqBean.setUserPassword(changePWDModel.getNewPassword());
+            if (!changePWDModel.getNewPassword().trim().equals(changePWDModel.getNewPasswordConfirm().trim())) {
+                toast(R.string.hint_password_not_equal);
+                return;
+            }
 
-        mViewModel.updateVipUser(reqBean);
+            // 修改密码
+            UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
+
+            userInfo.setPhoneCode(changePWDModel.getVerificationCode().trim());
+            userInfo.setUserPassword(changePWDModel.getNewPasswordConfirm().trim());
+            userInfo.setNewPwd(changePWDModel.getNewPassword().trim());
+            userInfo.setUserId(AccountHelper.getUserId());
+            mViewModel.updateVipUser(userInfo);
+
     }
 
     @Override
