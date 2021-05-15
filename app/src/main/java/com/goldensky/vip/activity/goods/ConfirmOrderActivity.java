@@ -223,6 +223,11 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         List<AddOrderReqBean.Commodity> commodities = new ArrayList<>();
 
         for (ConfirmOrderItemBean confirmOrderItemBean : confirmOrderItemBeans) {
+            if (confirmOrderItemBean.getPurchaseNum() == null ||
+                    confirmOrderItemBean.getPurchaseNum() == 0) {
+                ToastUtils.showShort("购买数量不能为0");
+                return;
+            }
             commodities.add(confirmOrderItemBean.generateCommodity());
         }
 
