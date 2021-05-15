@@ -1,12 +1,17 @@
 package com.goldensky.vip.activity.mine.tools;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -82,7 +87,18 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
 
     @Override
     public void onClick(View v) {
-        Bitmap bitmap = PictrueSaveUtils.testViewSnapshot(mBinding.clShareToFriend);
-        PictrueSaveUtils.saveBitmap(this,bitmap);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)==
+                PackageManager.PERMISSION_DENIED&&ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)==
+                PackageManager.PERMISSION_DENIED){
+            //判断为没有权限，换起权限申请询问
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }else {
+            //判断已经获取权限后的操作
+            Bitmap bitmap = PictrueSaveUtils.testViewSnapshot(mBinding.clShareToFriend);
+            PictrueSaveUtils.saveBitmap(this,bitmap);
+        }
+
     }
 }

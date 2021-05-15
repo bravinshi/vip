@@ -98,6 +98,7 @@
             android:layout_width="match_parent"
             android:onClick="@{listener}"
             android:gravity="center"
+            android:textColor="@color/white"
             android:text="@string/text_save_pic"
             android:layout_height="50dp"
             android:background="@drawable/shape_invite_friend"
