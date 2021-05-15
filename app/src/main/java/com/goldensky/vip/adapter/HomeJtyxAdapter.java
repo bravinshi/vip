@@ -28,10 +28,10 @@ public class HomeJtyxAdapter extends BaseQuickAdapter<CommodityBean, BaseViewHol
     protected void convert(@NotNull BaseViewHolder baseViewHolder, CommodityBean commodityBean) {
         ItemHomeProductJtyxBinding binding = DataBindingUtil.bind(baseViewHolder.itemView);
         if (commodityBean != null) {
-//            Glide.with(getContext()).load(commodityBean.getCommodityIcon()).into(binding.productIv);
+            Glide.with(getContext()).load(commodityBean.getCommodityIcon()).into(binding.productIv);
             binding.nameTv.setText(commodityBean.getCommodityName());
             binding.unitTv.setText("￥");
-            Glide.with(getContext()).load("http://49.234.85.95/data/jintianhezong/file/img/2021-05-12/DO1620782539367_big.jpg").into(binding.productIv);
+//            Glide.with(getContext()).load("http://49.234.85.95/data/jintianhezong/file/img/2021-05-12/DO1620782539367_big.jpg").into(binding.productIv);
             binding.priceTv.setText(MathUtils.bigDecimalString(commodityBean.getCommodityPrice(), 2));
             binding.opriceTv.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
             if (commodityBean.getCommodityOldPrice() != null) {

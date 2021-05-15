@@ -157,8 +157,8 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                 List<CommodityBean> middleBeans = new ArrayList<>();
                 List<CommodityBean> bottomBeans = new ArrayList<>();
                 if (tempBeans.size() <= 3) {
-                    jtyxBing.rvMiddle.setVisibility(View.INVISIBLE);
-                    jtyxBing.rvBottom.setVisibility(View.INVISIBLE);
+                    jtyxBing.rvMiddle.setVisibility(View.GONE);
+                    jtyxBing.rvBottom.setVisibility(View.GONE);
                     topBeans.addAll(homeBean.getCommodityBeanList());
                     if (topBeans.size() == 1) {
                         topBeans.add(null);
@@ -168,7 +168,7 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                     }
                 } else if (tempBeans.size() <= 6) {
                     jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
-                    jtyxBing.rvBottom.setVisibility(View.INVISIBLE);
+                    jtyxBing.rvBottom.setVisibility(View.GONE);
 
                     for (int i = 0; i < 3; i++) {
                         CommodityBean bean = tempBeans.get(0);

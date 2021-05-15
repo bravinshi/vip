@@ -58,13 +58,14 @@
 
         <TextView
             android:id="@+id/oprice_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/price_tv"
             app:layout_constraintTop_toTopOf="@+id/price_tv"
             app:layout_constraintBottom_toBottomOf="@+id/price_tv"
-            android:layout_marginLeft="5dp"
-            android:lines="1"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="3dp"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textColor="#ff999999"
             android:textSize="10sp">
