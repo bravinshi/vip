@@ -125,13 +125,13 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 orderDetail.notifyChange();
                 switch (orderType){
                     case 0:
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.VISIBLE);
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.btnMethedRight.setText(getResources().getText(R.string.text_go_pay));
                         mBinding.btnMethedLeft.setText(getResources().getText(R.string.text_cancel_order));
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_dfk);
                         break;
-                    case 1:
                     case 2:
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.btnMethedLeft.setVisibility(View.GONE);
