@@ -65,8 +65,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/my_pic_pinglun" />
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
