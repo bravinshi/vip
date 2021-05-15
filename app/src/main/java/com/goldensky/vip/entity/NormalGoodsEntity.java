@@ -21,7 +21,7 @@ public class NormalGoodsEntity {
         normalGoodsEntity.setGoodsId(commodityBean.getCommodityId());
         normalGoodsEntity.setImage(commodityBean.getCommodityIcon());
         normalGoodsEntity.setTitle(commodityBean.getCommodityName());
-        normalGoodsEntity.setPrice(commodityBean.getCommodityOldPrice());
+        normalGoodsEntity.setPrice(commodityBean.getCommodityPrice());
 
         return normalGoodsEntity;
     }

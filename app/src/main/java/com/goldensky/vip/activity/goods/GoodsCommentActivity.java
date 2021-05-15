@@ -144,10 +144,10 @@ public class GoodsCommentActivity extends BaseActivity<ActivityGoodsCommentBindi
                 if (goodsCommentResBean.getDifferenceCount() != null) {
                     count += goodsCommentResBean.getDifferenceCount();
                 }
-
-                if (goodsCommentResBean.getIsPicCount() != null) {
-                    count += goodsCommentResBean.getIsPicCount();
-                }
+//
+//                if (goodsCommentResBean.getIsPicCount() != null) {
+//                    count += goodsCommentResBean.getIsPicCount();
+//                }
 
                 filterBean.setCount(count);
             } else if (i == 1) {
