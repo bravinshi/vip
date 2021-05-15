@@ -188,17 +188,17 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
 
-        handleInventory(detail.getCommodityInventoryList());
+        handleInventory(detail.getBelongType(), detail.getCommodityInventoryList());
     }
 
     // 处理规格
-    private void handleInventory(List<InventoryBean> inventoryBeans) {
+    private void handleInventory(Integer belongType, List<InventoryBean> inventoryBeans) {
         if (CollectionUtils.nullOrEmpty(inventoryBeans)) {
             return;
         }
 
         if (goodsSpecificationDialog == null) {
-            goodsSpecificationDialog = new GoodsSpecificationDialog();
+            goodsSpecificationDialog = new GoodsSpecificationDialog(belongType);
         }
 
         goodsSpecificationDialog.setData(inventoryBeans);

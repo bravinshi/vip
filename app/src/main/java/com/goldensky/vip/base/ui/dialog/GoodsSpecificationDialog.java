@@ -60,6 +60,11 @@ public class GoodsSpecificationDialog extends BottomDialog {
 
     private InventoryBean selectedInventory;// 选择的规格
     private final PurchaseQuantityModel purchaseQuantityModel = new PurchaseQuantityModel("1");
+    private Integer belongType;
+
+    public GoodsSpecificationDialog(Integer belongType){
+        this.belongType = belongType;
+    }
 
     public void setData(List<InventoryBean> inventoryBeans) {
         if (CollectionUtils.nullOrEmpty(inventoryBeans)) {
@@ -141,6 +146,12 @@ public class GoodsSpecificationDialog extends BottomDialog {
 //            ToastUtils.showShort("购买数量不能低于最小购买数量");
 //            return false;
 //        }
+
+        if (belongType != null && belongType == 0
+                && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
+            ToastUtils.showShort("库存不足");
+            return false;
+        }
 
         return true;
     }

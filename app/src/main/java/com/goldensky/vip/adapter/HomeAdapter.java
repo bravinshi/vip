@@ -47,13 +47,12 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
     private HomeJrbkAdapter mHomeJrbkAdapter;
 
     private HomeJtyxAdapter mTopJtyxAdapter;
-    private HomeJtyxAdapter mMiddleJtyxAdapter;
-    private HomeJtyxAdapter mBottomJtyxAdapter;
+//    private HomeJtyxAdapter mMiddleJtyxAdapter;
+//    private HomeJtyxAdapter mBottomJtyxAdapter;
 
     private LinearLayoutManager mTopLineLayoutManager;
-    private LinearLayoutManager mMiddleLineLayoutManager;
-    private LinearLayoutManager mBottomLineLayoutManager;
-
+//    private LinearLayoutManager mMiddleLineLayoutManager;
+//    private LinearLayoutManager mBottomLineLayoutManager;
 
 
     public HomeAdapter(List<HomeBean> data) {
@@ -139,75 +138,89 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                     jtyxBing.rvTop.setLayoutManager(mTopLineLayoutManager);
                 }
 
-                if (mMiddleLineLayoutManager == null) {
-                    mMiddleLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    jtyxBing.rvMiddle.setLayoutManager(mMiddleLineLayoutManager);
-                }
+//                if (mMiddleLineLayoutManager == null) {
+//                    mMiddleLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//                    jtyxBing.rvMiddle.setLayoutManager(mMiddleLineLayoutManager);
+//                }
+//
+//                if (mBottomLineLayoutManager == null) {
+//                    mBottomLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//                    jtyxBing.rvBottom.setLayoutManager(mBottomLineLayoutManager);
+//                }
 
-                if (mBottomLineLayoutManager == null) {
-                    mBottomLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    jtyxBing.rvBottom.setLayoutManager(mBottomLineLayoutManager);
-                }
 
-
-//                List<CommodityBean> commodityBeans = homeBean.getCommodityBeanList();
-                List<CommodityBean> tempBeans = new ArrayList<>();
-                tempBeans.addAll(homeBean.getCommodityBeanList());
+                List<CommodityBean> tempBeans = homeBean.getCommodityBeanList();
                 List<CommodityBean> topBeans = new ArrayList<>();
-                List<CommodityBean> middleBeans = new ArrayList<>();
-                List<CommodityBean> bottomBeans = new ArrayList<>();
+//                List<CommodityBean> middleBeans = new ArrayList<>();
+//                List<CommodityBean> bottomBeans = new ArrayList<>();
                 if (tempBeans.size() <= 3) {
-                    jtyxBing.rvMiddle.setVisibility(View.GONE);
-                    jtyxBing.rvBottom.setVisibility(View.GONE);
-                    topBeans.addAll(homeBean.getCommodityBeanList());
+                    topBeans.addAll(tempBeans);
                     if (topBeans.size() == 1) {
                         topBeans.add(null);
                         topBeans.add(null);
                     } else if (topBeans.size() == 2) {
                         topBeans.add(null);
                     }
-                } else if (tempBeans.size() <= 6) {
-                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
-                    jtyxBing.rvBottom.setVisibility(View.GONE);
-
-                    for (int i = 0; i < 3; i++) {
-                        CommodityBean bean = tempBeans.get(0);
-                        topBeans.add(bean);
-                        tempBeans.remove(bean);
-                    }
-
-                    middleBeans.addAll(tempBeans);
-                    if (middleBeans.size() == 1) {
-                        middleBeans.add(null);
-                        middleBeans.add(null);
-                    } else if (topBeans.size() == 2) {
-                        middleBeans.add(null);
-                    }
-
                 } else {
-                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
-                    jtyxBing.rvBottom.setVisibility(View.VISIBLE);
-
                     for (int i = 0; i < 3; i++) {
                         CommodityBean bean = tempBeans.get(0);
                         topBeans.add(bean);
                         tempBeans.remove(bean);
-                    }
-
-                    for (int i = 0; i < 3; i++) {
-                        CommodityBean bean = tempBeans.get(0);
-                        middleBeans.add(bean);
-                        tempBeans.remove(bean);
-                    }
-
-                    bottomBeans.addAll(tempBeans);
-                    if (bottomBeans.size() == 1) {
-                        bottomBeans.add(null);
-                        bottomBeans.add(null);
-                    } else if (topBeans.size() == 2) {
-                        bottomBeans.add(null);
                     }
                 }
+
+//                if (tempBeans.size() <= 3) {
+////                    jtyxBing.rvMiddle.setVisibility(View.GONE);
+////                    jtyxBing.rvBottom.setVisibility(View.GONE);
+//                    topBeans.addAll(homeBean.getCommodityBeanList());
+//                    if (topBeans.size() == 1) {
+//                        topBeans.add(null);
+//                        topBeans.add(null);
+//                    } else if (topBeans.size() == 2) {
+//                        topBeans.add(null);
+//                    }
+//                } else if (tempBeans.size() <= 6) {
+//                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
+//                    jtyxBing.rvBottom.setVisibility(View.GONE);
+//
+//                    for (int i = 0; i < 3; i++) {
+//                        CommodityBean bean = tempBeans.get(0);
+//                        topBeans.add(bean);
+//                        tempBeans.remove(bean);
+//                    }
+//
+//                    middleBeans.addAll(tempBeans);
+//                    if (middleBeans.size() == 1) {
+//                        middleBeans.add(null);
+//                        middleBeans.add(null);
+//                    } else if (topBeans.size() == 2) {
+//                        middleBeans.add(null);
+//                    }
+//
+//                } else {
+//                    jtyxBing.rvMiddle.setVisibility(View.VISIBLE);
+//                    jtyxBing.rvBottom.setVisibility(View.VISIBLE);
+//
+//                    for (int i = 0; i < 3; i++) {
+//                        CommodityBean bean = tempBeans.get(0);
+//                        topBeans.add(bean);
+//                        tempBeans.remove(bean);
+//                    }
+//
+//                    for (int i = 0; i < 3; i++) {
+//                        CommodityBean bean = tempBeans.get(0);
+//                        middleBeans.add(bean);
+//                        tempBeans.remove(bean);
+//                    }
+//
+//                    bottomBeans.addAll(tempBeans);
+//                    if (bottomBeans.size() == 1) {
+//                        bottomBeans.add(null);
+//                        bottomBeans.add(null);
+//                    } else if (topBeans.size() == 2) {
+//                        bottomBeans.add(null);
+//                    }
+//                }
 
                 if (mTopJtyxAdapter == null) {
                     mTopJtyxAdapter = new HomeJtyxAdapter(topBeans);
@@ -223,33 +236,33 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
                     mTopJtyxAdapter.notifyDataSetChanged();
                 }
 
-                if (mMiddleJtyxAdapter == null) {
-                    mMiddleJtyxAdapter = new HomeJtyxAdapter(middleBeans);
-                    mMiddleJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
-                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
-                        }
-                    });
-                    jtyxBing.rvMiddle.setAdapter(mMiddleJtyxAdapter);
-                } else {
-                    mMiddleJtyxAdapter.setNewInstance(middleBeans);
-                    mMiddleJtyxAdapter.notifyDataSetChanged();
-                }
-
-                if (mBottomJtyxAdapter == null) {
-                    mBottomJtyxAdapter = new HomeJtyxAdapter(bottomBeans);
-                    mBottomJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
-                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
-                        }
-                    });
-                    jtyxBing.rvBottom.setAdapter(mBottomJtyxAdapter);
-                } else {
-                    mBottomJtyxAdapter.setNewInstance(bottomBeans);
-                    mBottomJtyxAdapter.notifyDataSetChanged();
-                }
+//                if (mMiddleJtyxAdapter == null) {
+//                    mMiddleJtyxAdapter = new HomeJtyxAdapter(middleBeans);
+//                    mMiddleJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+//                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+//                        }
+//                    });
+//                    jtyxBing.rvMiddle.setAdapter(mMiddleJtyxAdapter);
+//                } else {
+//                    mMiddleJtyxAdapter.setNewInstance(middleBeans);
+//                    mMiddleJtyxAdapter.notifyDataSetChanged();
+//                }
+//
+//                if (mBottomJtyxAdapter == null) {
+//                    mBottomJtyxAdapter = new HomeJtyxAdapter(bottomBeans);
+//                    mBottomJtyxAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+//                            startGoodsDetail((List<CommodityBean>) adapter.getData(), position);
+//                        }
+//                    });
+//                    jtyxBing.rvBottom.setAdapter(mBottomJtyxAdapter);
+//                } else {
+//                    mBottomJtyxAdapter.setNewInstance(bottomBeans);
+//                    mBottomJtyxAdapter.notifyDataSetChanged();
+//                }
                 break;
         }
     }
