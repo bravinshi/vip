@@ -1,13 +1,27 @@
 package com.goldensky.vip.bean;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
+
+import androidx.databinding.BaseObservable;
+
+import com.goldensky.framework.util.GsonUtils;
+import com.goldensky.framework.util.TimeUtils;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class OrderDetailBean implements Serializable {
+public class OrderDetailBean extends BaseObservable implements Serializable {
 
     @SerializedName("area")
     private String area;
@@ -36,24 +50,29 @@ public class OrderDetailBean implements Serializable {
     private String loc;
     private String sumMoney;
 
-//    public  setOrderDetailBean() {
-//        city="";
-//        createtime="";
-//        ordernumber="";
-//        orderprice=0.00;
-//        pickuptype=0;
-//        postage=0.00;
-//        province="";
-//        useraddress="";
-//        useraddressname="";
-//        useraddressphone="";
-//        orderDetailList=new ArrayList<>();
-//        area="";
-//
-//    }
+    public OrderDetailBean() {
+    }
+
+    public OrderDetailBean(int i) {
+        city="";
+        createtime="";
+        ordernumber="";
+        orderprice=0.00;
+        pickuptype=0;
+        postage=0.00;
+        province="";
+        useraddress="";
+        useraddressname="";
+        useraddressphone="";
+        orderDetailList=new ArrayList<>();
+        area="";
+    }
 
     public String getSumMoney() {
         return  getDoubleMoney(orderprice+postage);
+    }
+    public Double getSum() {
+        return orderprice+postage;
     }
     private String getDoubleMoney(Double price){
         String priceStr = new DecimalFormat("#.00").format(price);
@@ -88,9 +107,26 @@ public class OrderDetailBean implements Serializable {
     }
 
     public String getCreatetime() {
-        return createtime;
+       if(createtime.equals("")){
+          return "";
+       }else {
+           String dateFormat = dealDateFormat(createtime);
+           return dateFormat;
+       }
     }
+    public static String dealDateFormat(String oldDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
+        Date date = new Date();
+        try {
+            date = sdf.parse(oldDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf2=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        String sDate=sdf2.format(date);
 
+        return sDate;
+    }
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
@@ -106,19 +142,26 @@ public class OrderDetailBean implements Serializable {
     public String getOrderprice() {
         return getDoubleMoney(orderprice);
     }
-
+    public Double getOrderpriceD() {
+        return orderprice;
+    }
     public void setOrderprice(Double orderprice) {
         this.orderprice = orderprice;
     }
 
     public String getPickuptype() {
-        if(pickuptype==0){
-            return "普通快递";
-        }else {
-            return "到店自提";
+        if(pickuptype!=null){
+            if(pickuptype==0){
+                return "普通快递";
+            }else {
+                return "到店自提";
+            }
         }
+        return "普通快递";
     }
-
+    public Integer getPickuptypeI(){
+        return pickuptype;
+    }
     public void setPickuptype(Integer pickuptype) {
         this.pickuptype = pickuptype;
     }
@@ -126,7 +169,9 @@ public class OrderDetailBean implements Serializable {
     public String getPostage() {
         return getDoubleMoney(postage);
     }
-
+    public Double getPostageD() {
+        return postage;
+    }
     public void setPostage(Double postage) {
         this.postage = postage;
     }
@@ -177,7 +222,7 @@ public class OrderDetailBean implements Serializable {
         @SerializedName("commodityname")
         private String commodityname;
         @SerializedName("commodityoldprice")
-        private Integer commodityoldprice;
+        private Double commodityoldprice;
         @SerializedName("inventory")
         private String inventory;
         @SerializedName("inventorypic")
@@ -205,18 +250,34 @@ public class OrderDetailBean implements Serializable {
             this.commodityname = commodityname;
         }
 
-        public Integer getCommodityoldprice() {
-            return commodityoldprice;
+        public SpannableString getCommodityoldprice() {
+            return changTvSize(commodityoldprice);
         }
 
-        public void setCommodityoldprice(Integer commodityoldprice) {
+        public void setCommodityoldprice(Double commodityoldprice) {
             this.commodityoldprice = commodityoldprice;
         }
 
         public String getInventory() {
-            return inventory;
+            JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+            StringBuilder stringBuilder = new StringBuilder();
+            List<String> keySet = new ArrayList<>(jsonObject.keySet());
+            int size = keySet.size();
+            for (int i = 0; i < size; i++) {
+                String key = keySet.get(i);
+                stringBuilder.append(jsonObject.get(key).getAsString());
+                if (i != size - 1) {
+                    stringBuilder.append(";");
+                }
+            }
+            return stringBuilder.toString();
         }
-
+        private SpannableString changTvSize(Double value) {
+            String s = "¥"+new DecimalFormat("#.00").format(value);
+            SpannableString spannableString = new SpannableString(s);
+            spannableString.setSpan(new RelativeSizeSpan(0.7f), s.indexOf("¥"), 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
+        }
         public void setInventory(String inventory) {
             this.inventory = inventory;
         }
@@ -237,8 +298,8 @@ public class OrderDetailBean implements Serializable {
             this.isevaluate = isevaluate;
         }
 
-        public Integer getPurchasenum() {
-            return purchasenum;
+        public String getPurchasenum() {
+            return "×"+purchasenum;
         }
 
         public void setPurchasenum(Integer purchasenum) {

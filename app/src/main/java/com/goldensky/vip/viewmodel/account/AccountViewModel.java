@@ -4,12 +4,17 @@ import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import okhttp3.ResponseBody;
 
 
 /**
@@ -23,6 +28,7 @@ public class AccountViewModel extends PublicViewModel {
 
     public MutableLiveData<LoginResponseBean> loginResponseLive = new MutableLiveData<>();
     public MutableLiveData<Integer> userLive = new MutableLiveData<>();
+    public MutableLiveData<ResponseBody> codeLive = new MutableLiveData<>();
 
     /**
      * 登录
@@ -61,6 +67,33 @@ public class AccountViewModel extends PublicViewModel {
                     @Override
                     public void onSuccess(Object data) {
                         userLive.postValue(1);
+                    }
+                });
+    }
+
+    public void getWxAppletCode(String userid, String invitationcode) {
+        String invstr = "invitationcode=" + invitationcode;
+        RetrofitAgent.create(AccountService.class)
+                .getWxAppletCode(userid, invstr)
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        codeLive.postValue(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.goldensky.vip.api.PublicService;
+import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.api.goods.GoodsService;
 import com.goldensky.vip.api.shoppingcart.ShoppingCartService;
@@ -17,6 +18,7 @@ import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
+import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.bean.UserIdReqBean;
 import com.google.gson.JsonObject;
@@ -50,6 +52,7 @@ public class PublicViewModel extends NetWorkViewModel {
 
     public MutableLiveData<List<AreaListBean>> areaListLive = new MutableLiveData<>();
     public MutableLiveData<List<ShoppingCartGoodsBean>> shoppingCartListLive = new MutableLiveData<>();
+    public MutableLiveData<SuperStBean> mSuperStBean = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -269,6 +272,19 @@ public class PublicViewModel extends NetWorkViewModel {
                             failCallback.onFail(data);
                         }
                         return true;
+                    }
+                });
+    }
+
+    public void getSuperSt(String userId) {
+        UserIdReqBean bean = new UserIdReqBean();
+        bean.setUserid(userId);
+        RetrofitAgent.create(AccountService.class)
+                .getUserAndMerchant(bean)
+                .subscribe(new ToastNetObserver<SuperStBean>(){
+                    @Override
+                    public void onSuccess(SuperStBean data) {
+                        mSuperStBean.postValue(data);
                     }
                 });
     }

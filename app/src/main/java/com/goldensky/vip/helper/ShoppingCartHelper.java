@@ -1,6 +1,7 @@
 package com.goldensky.vip.helper;
 
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
+import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.event.ShoppingCartChangeEvent;
 
@@ -34,7 +35,11 @@ public class ShoppingCartHelper {
         }
         noRefreshEvent();
     }
-
+    public void addGoods(JoinIntoShoppingCartReqBean bean){
+        ShoppingCartGoodsBean goodsBean = new ShoppingCartGoodsBean(0, bean.getBelongid(), bean.getBelongtype(), bean.getCommodityicon(), bean.getCommodityid(), bean.getCommodityname(), bean.getCommodityoldprice(), bean.getCommodityprice(), bean.getCommoditytype(), bean.getCompanytype(), "", bean.getInventory(), bean.getInventoryid(), bean.getInventorynum(), bean.getInventorypic(), bean.getPurchasenum(), "", bean.getUserid());
+        goodsBeanList.add(goodsBean);
+        onShopingCartListChange();
+    }
     public boolean isGoodsChecked(String shoppingcartId) {
         return shoppingcartIds.contains(shoppingcartId);
     }

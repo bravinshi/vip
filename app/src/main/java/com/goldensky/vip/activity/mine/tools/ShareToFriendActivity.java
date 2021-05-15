@@ -1,9 +1,11 @@
 package com.goldensky.vip.activity.mine.tools;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,12 +18,23 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.goldensky.framework.util.ImageUtils;
+import com.goldensky.framework.util.PictrueSaveUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.databinding.ActivityShareToFriendBinding;
+import com.goldensky.vip.enumerate.DefaultUrlEnum;
+import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
+import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
-public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBinding, PublicViewModel> implements View.OnClickListener {
+import java.io.InputStream;
+
+import okhttp3.ResponseBody;
+
+public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBinding, AccountViewModel> implements View.OnClickListener {
 
 
     @Override
@@ -33,11 +46,33 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
             }
         });
         mBinding.setListener(this);
+        mViewModel.getWxAppletCode(AccountHelper.getUserId(),AccountHelper.getInvitationCode());
+        if(AccountHelper.getUserPic()!=null&&!AccountHelper.getUserPic().equals("")){
+            Glide.with(this).load(AccountHelper.getUserPic()).into(mBinding.ivHeadShareToFriend);
+        }else {
+            Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).into(mBinding.ivHeadShareToFriend);
+        }
+        mViewModel.getSuperSt(AccountHelper.getUserSuperiorId());
     }
 
     @Override
     public void observe() {
-
+        mViewModel.codeLive.observe(this, new Observer<ResponseBody>() {
+            @Override
+            public void onChanged(ResponseBody body) {
+                InputStream inputStream = body.byteStream();
+                Bitmap bitmap = ImageUtils.getBitmap(inputStream);
+                Glide.with(ShareToFriendActivity.this).load(bitmap).into(mBinding.ivCodeShareToFriend);
+            }
+        });
+        mViewModel.mSuperStBean.observe(this, new Observer<SuperStBean>() {
+            @Override
+            public void onChanged(SuperStBean superStBean) {
+               if(superStBean!=null){
+                   mBinding.nameShareToFirend.setText(superStBean.getEnterprisename());
+               }
+            }
+        });
     }
 
     @Override
@@ -47,31 +82,7 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
 
     @Override
     public void onClick(View v) {
-        View inflate = LayoutInflater.from(this).inflate(R.layout.pop_share,null);
-        ImageView ivShare = inflate.findViewById(R.id.iv_share);
-        Glide.with(this).load(R.mipmap.my_pic_fenxiang).into(ivShare);
-        PopupWindow popupWindow = new PopupWindow(inflate,LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
-        ivShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
-        Window window = getWindow();
-        WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.alpha=0.1f;
-        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        window.setAttributes(attributes);
-        window.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setTouchable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                attributes.alpha=1.0f;
-                window.setAttributes(attributes);
-            }
-        });
-        popupWindow.showAtLocation(mBinding.bottomView,Gravity.TOP, 0,0);
+        Bitmap bitmap = PictrueSaveUtils.testViewSnapshot(mBinding.clShareToFriend);
+        PictrueSaveUtils.saveBitmap(this,bitmap);
     }
 }

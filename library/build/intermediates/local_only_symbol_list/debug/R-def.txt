@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+attr? indicatorColor
+attr? indicatorName
+attr? maxHeight
+attr? maxWidth
+attr? minHeight
+attr? minWidth
+string app_name
+style AVLoadingIndicatorView
+style AVLoadingIndicatorView.Large
+style AVLoadingIndicatorView.Small
+styleable AVLoadingIndicatorView minWidth maxWidth minHeight maxHeight indicatorName indicatorColor

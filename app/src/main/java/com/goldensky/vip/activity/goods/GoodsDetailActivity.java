@@ -18,6 +18,7 @@ import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
+import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
@@ -25,6 +26,7 @@ import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
+import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -55,7 +57,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private final String goodsSpecificationDialogTag = "goodsSpecificationDialog";
     private UserAddressBean selectedAddress = null;// 选择的地址
     private boolean showDefaultAddress = false;// 是否展示过默认地址
-
+    private JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean;
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -153,7 +155,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (mViewModel.goodsDetailLive.getValue() != null) {
             // 发起加入购物车请求
             CommodityBean commodityDetail = mViewModel.goodsDetailLive.getValue();
-            JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean
+            joinIntoShoppingCartReqBean
                     = JoinIntoShoppingCartReqBean.fromInventoryAndGoodsDetail(commodityDetail, inventory);
             joinIntoShoppingCartReqBean.setPurchasenum(purchaseNum);
             mViewModel.joinIntoShoppingCart(joinIntoShoppingCartReqBean);
@@ -279,6 +281,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mViewModel.joinIntoShoppingCartResultLive.observe(this, aBoolean -> {
             if (aBoolean) {
                 ToastUtils.showShort(R.string.text_join_shopping_cart_success);
+                ShoppingCartHelper.getInstance().addGoods(joinIntoShoppingCartReqBean);
+
             }
         });
     }

@@ -25,11 +25,17 @@ public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, 
                 if(changeNickModel.getNick()==null&&changeNickModel.getNick().equals("")){
                     toast(getResources().getString(R.string.hint_input_nick_nonull));
                 }else {
-                    UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
-                    reqBean.setUserId(AccountHelper.getUserId());
-                    reqBean.setUserNick(changeNickModel.getNick());
-                    mViewModel.updateVipUser(reqBean);
+                    if(changeNickModel.getNick().length()<4||changeNickModel.getNick().length()>20){
+                        toast(getResources().getString(R.string.hint_change_nick));
+                    }else {
+                        UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
+                        reqBean.setUserId(AccountHelper.getUserId());
+                        reqBean.setUserNick(changeNickModel.getNick());
+                        mViewModel.updateVipUser(reqBean);
+                    }
+
                 }
+
             }
         });
         mBinding.topBarNick.setLeftListener(new View.OnClickListener() {

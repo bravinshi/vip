@@ -14,6 +14,7 @@ import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.activity.goods.GoodsCommentActivity;
 import com.goldensky.vip.activity.goods.GoodsDetailActivity;
 import com.goldensky.vip.activity.goods.HotTodayActivity;
+import com.goldensky.vip.activity.goods.OptimizationActivity;
 import com.goldensky.vip.activity.goods.PackageCustomizationActivity;
 import com.goldensky.vip.activity.goods.RecommendActivity;
 import com.goldensky.vip.activity.goods.SearchActivity;
@@ -33,6 +34,7 @@ import com.goldensky.vip.activity.mine.tools.adress.EditAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.MyAddressActivity;
 import com.goldensky.vip.activity.mine.tools.adress.NewAddressActivity;
 import com.goldensky.vip.activity.order.CommentSuccessActivity;
+import com.goldensky.vip.activity.order.LogisticsActivity;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
 import com.goldensky.vip.activity.order.OrderDetailActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
@@ -368,6 +370,16 @@ public class Starter {
         context.startActivity(intent);
     }
 
+
+    //金天优选
+    public static void startOptimizationActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, OptimizationActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
     //订单详情
     public static void startOrderDetailActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
@@ -382,6 +394,15 @@ public class Starter {
      */
     public static void startWebViewActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, WebViewActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
+    //物流详情
+    public static void startLogisticsActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, LogisticsActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

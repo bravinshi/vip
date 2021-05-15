@@ -33,10 +33,11 @@
         android:theme="@style/Theme.VIP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
-        <activity android:name=".activity.mine.settings.AboutGoldenDaysActivity"></activity>
-        <activity android:name=".activity.order.CommentSuccessActivity"
-            android:launchMode="singleTask"></activity>
+        <activity android:name=".activity.order.LogisticsActivity"></activity>
+        <activity android:name=".activity.mine.settings.AboutGoldenDaysActivity" />
+        <activity
+            android:name=".activity.order.CommentSuccessActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.order.OrderCommentActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -99,7 +100,6 @@
         </activity>
 
         <!-- 微信支付回调页面 -->
-
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"

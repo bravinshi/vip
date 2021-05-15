@@ -4,13 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.goldensky.vip.bean.UserBean"/>
-        <variable
-            name="userInfo"
-            type="UserBean" />
-<!--        <variable-->
-<!--            name="listener"-->
-<!--            type="android.view.View.OnClickListener" />-->
+
     </data>
 
     <LinearLayout
@@ -48,7 +42,7 @@
                 android:layout_marginTop="2dp"
                 android:textColor="#ffffffff"
                 android:textSize="14sp"
-                android:text="@{userInfo.nickName}">
+                android:text="名食汇金天合纵商城">
             </TextView>
 
             <TextView
@@ -62,33 +56,34 @@
                 android:layout_marginBottom="1dp"
                 android:textColor="#80ffffff"
                 android:textSize="11sp"
-                android:text="@{userInfo.shopName}">
+                android:text="金天合纵商城">
             </TextView>
 
-            <LinearLayout
-                android:id="@+id/search_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/portarit_iv"
-                android:paddingRight="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true">
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginBottom="2dp"
-                    android:src="@mipmap/home_search_icon"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="搜索"
-                    android:textColor="#ffffffff"
-                    android:textSize="11sp">
-                </TextView>
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:id="@+id/search_layout"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/portarit_iv"-->
+<!--                android:paddingRight="@dimen/dp_10"-->
+<!--                android:paddingTop="@dimen/dp_10"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center"-->
+<!--                android:clickable="true"-->
+<!--                android:visibility="gone">-->
+<!--                <ImageView-->
+<!--                    android:layout_width="16dp"-->
+<!--                    android:layout_height="16dp"-->
+<!--                    android:layout_marginBottom="2dp"-->
+<!--                    android:src="@mipmap/home_search_icon"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="搜索"-->
+<!--                    android:textColor="#ffffffff"-->
+<!--                    android:textSize="11sp">-->
+<!--                </TextView>-->
+<!--            </LinearLayout>-->
 
             <ImageView
                 android:id="@+id/gxtj_iv"
@@ -102,11 +97,21 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/sw_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:id="@+id/sw_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
 </layout>

@@ -115,6 +115,13 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         list.clear();
         list .addAll(UserAddressHelper.getInstance().getUserAddressList());
         adapter.notifyDataSetChanged();
+        if(list.size()==0){
+            mBinding.rvMyAddress.setVisibility(View.GONE);
+            mBinding.includeAddress.clEmptyAddress.setVisibility(View.VISIBLE);
+        }else {
+            mBinding.rvMyAddress.setVisibility(View.VISIBLE);
+            mBinding.includeAddress.clEmptyAddress.setVisibility(View.GONE);
+        }
     }
 
     @Override

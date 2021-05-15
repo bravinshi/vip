@@ -3,12 +3,17 @@ package com.goldensky.vip.api.order;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.bean.CommentProductBean;
 import com.goldensky.vip.bean.CommentReqBean;
+import com.goldensky.vip.bean.ExpressBean;
 import com.goldensky.vip.bean.GetOrderListReqBean;
+import com.goldensky.vip.bean.LogisticsBean;
+import com.goldensky.vip.bean.LogisticsReqBean;
 import com.goldensky.vip.bean.OrderDetailBean;
-import com.goldensky.vip.bean.OrderDetailReqBean;
 import com.goldensky.vip.bean.OrderListBean;
+import com.goldensky.vip.bean.OrderNumberReqBean;
+import com.goldensky.vip.bean.UpdateOrderReqBean;
 import com.goldensky.vip.bean.PaymentOrderReqBean;
 import com.google.gson.JsonObject;
+
 
 import java.util.List;
 
@@ -32,5 +37,15 @@ public interface OrderService {
     Observable<NetResponse<List<OrderListBean>>> getOrderList(@Body GetOrderListReqBean body);
 
     @POST("/goldendays-order/vipOrder/getOrderDetail")
-    Observable<NetResponse<OrderDetailBean>> getOrderDetail(@Body OrderDetailReqBean body);
+    Observable<NetResponse<OrderDetailBean>> getOrderDetail(@Body OrderNumberReqBean body);
+
+    @POST("/goldendays-order/vipOrder/updateOrder")
+    Observable<NetResponse<Object>> updateOrder(@Body UpdateOrderReqBean body);
+
+    @POST("/goldendays-order/vipOrder/getExpressNumber")
+    Observable<NetResponse<ExpressBean>> getExpressNumber(@Body OrderNumberReqBean body);
+
+    @POST("/goldendays-currency/currency/queryTrackMap")
+    Observable<NetResponse<LogisticsBean>> querTrackMap(@Body LogisticsReqBean body);
+
 }

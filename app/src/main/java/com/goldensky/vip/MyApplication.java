@@ -50,6 +50,8 @@ public class MyApplication extends Application {
 //        apiConfiguration.setBaseUrl("http://172.25.0.84:9999/");
         // 马晓伟
 //        apiConfiguration.setBaseUrl("http://172.25.0.47:9999/");
+        //正式
+//        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
 
         // 设置gson
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="bean"
-            type="com.goldensky.vip.bean.HomeBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,8 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="#ff333333"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="@{bean.itemTitle}">
+            android:textStyle="bold">
         </TextView>
 
         <ImageView
@@ -45,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/title_tv"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:overScrollMode="never">
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>

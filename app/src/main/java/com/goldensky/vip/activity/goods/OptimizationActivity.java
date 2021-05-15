@@ -34,6 +34,7 @@ public class OptimizationActivity extends BaseActivity<ActivityOptimizationBindi
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        mBinding.tabBar.setCenterHint("金天优选");
         mBinding.rv.setAdapter(normalGoodsAdapter);
         normalGoodsAdapter.setNewInstance(goodsList);
         mBinding.rv.setLayoutManager(new GridLayoutManager(OptimizationActivity.this, 2));

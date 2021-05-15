@@ -12,6 +12,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.X509TrustManager;
+
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -58,6 +60,8 @@ public class RetrofitAgent {
 
         // 创建
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), (X509TrustManager)(SSLSocketClient.getTrustManager()[0]))
+                .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .addInterceptor(loggingInterceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
