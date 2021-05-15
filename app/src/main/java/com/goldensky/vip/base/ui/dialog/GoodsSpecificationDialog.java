@@ -23,6 +23,7 @@ import com.goldensky.vip.databinding.DialogGoodSpecificationBinding;
 import com.goldensky.vip.databinding.ItemSpecificationBinding;
 import com.goldensky.vip.databinding.ItemSpecificationValueBinding;
 import com.goldensky.vip.event.JoinOrBuyEvent;
+import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.ImageLoaderHelper;
 import com.goldensky.vip.model.PurchaseQuantityModel;
 import com.google.android.flexbox.FlexDirection;
@@ -74,6 +75,9 @@ public class GoodsSpecificationDialog extends BottomDialog {
 
     public void setSelectedInventory(InventoryBean inventory) {
         selectedInventory = inventory;
+        ShowSpecificationEvent showSpecificationEvent = new ShowSpecificationEvent();
+        showSpecificationEvent.setSpecification(selectedInventory.getSpecificationForShow());
+        EventBus.getDefault().post(showSpecificationEvent);
         refresh();
     }
 

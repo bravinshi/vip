@@ -25,6 +25,7 @@ import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
 import com.goldensky.vip.event.AddAddressEvent;
 import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
+import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
@@ -81,31 +82,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mViewModel.getUserAddress(AccountHelper.getUserId());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        List<UserAddressBean> userAddresses = new ArrayList<>();
-//        UserAddressBean userAddressBean1 = new UserAddressBean();
-//        UserAddressBean userAddressBean2 = new UserAddressBean();
-//        userAddressBean1.setArea("area1");
-//        userAddressBean2.setArea("area2");
-//        userAddressBean1.setCity("city1");
-//        userAddressBean2.setCity("city2");
-//        userAddressBean1.setProvince("province1");
-//        userAddressBean2.setProvince("province2");
-//        userAddressBean1.setUseraddress("setUseraddress1");
-//        userAddressBean2.setUseraddress("setUseraddress2");
-//        userAddressBean1.setUseraddressname("addressname1");
-//        userAddressBean2.setUseraddressname("addressname2");
-//        userAddressBean1.setUseraddressphone("13651862222");
-//        userAddressBean2.setUseraddressphone("13651862223");
-//        userAddressBean2.setUseraddressdefault(1);
-//        userAddresses.add(userAddressBean1);
-//        userAddresses.add(userAddressBean2);
-//
-//        handleAddress(userAddresses);
-    }
-
     /**
      * 订阅添加地址处理结果
      *
@@ -117,6 +93,11 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleAddAddress(ShowSpecificationEvent showSpecificationEvent) {
+        mBinding.tvSpecification.setText(showSpecificationEvent.getSpecification());
     }
 
     /**
