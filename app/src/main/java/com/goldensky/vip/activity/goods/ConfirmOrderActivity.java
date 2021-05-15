@@ -206,8 +206,6 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             return;
         }
 
-        loadingDialog.show(getSupportFragmentManager(), "loadingDialog");
-
         addOrderReqBean.setArea(selectedAddress.getArea());
         addOrderReqBean.setAreaId(selectedAddress.getAreaid());
         addOrderReqBean.setProvince(selectedAddress.getProvince());
@@ -232,6 +230,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         }
 
         addOrderReqBean.setCommodityList(commodities);
+        loadingDialog.show(getSupportFragmentManager(), "loadingDialog");
 
         mViewModel.addOrder(addOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
     }
