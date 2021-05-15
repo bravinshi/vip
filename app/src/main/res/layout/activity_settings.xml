@@ -51,6 +51,7 @@
                 app:layout_constraintHorizontal_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_user_name_settings"
+                android:singleLine="true"
                 android:text="18888888888"
                 android:textSize="15sp"
                 android:textColor="@color/color_3"

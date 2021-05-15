@@ -88,9 +88,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
 
     }
 
-    public void initListener() {
-
-    }
 
     @Override
     protected void onResume() {
