@@ -95,7 +95,11 @@
         <activity android:name=".activity.goods.RecommendActivity" />
         <activity android:name=".activity.article.ArticleDetailActivity" />
         <activity android:name=".activity.goods.GoodsCommentActivity" />
-        <activity android:name=".activity.goods.ConfirmOrderActivity"></activity> <!-- 微信支付回调页面 -->
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.goods.ConfirmOrderActivity">
+        </activity>
+
+        <!-- 微信支付回调页面 -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"

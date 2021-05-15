@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.goldensky.vip.activity.WebViewActivity;
 import com.goldensky.vip.activity.account.ForgetPasswordActivity;
 import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.account.SetPasswordActivity;
@@ -387,6 +388,18 @@ public class Starter {
         }
         context.startActivity(intent);
     }
+
+    /**
+     * 启动协议浏览页
+     */
+    public static void startWebViewActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, WebViewActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+    }
+
     //物流详情
     public static void startLogisticsActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, LogisticsActivity.class);
