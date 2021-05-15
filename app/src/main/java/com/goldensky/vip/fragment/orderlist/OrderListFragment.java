@@ -83,6 +83,7 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
             public void onChanged(List<OrderListBean> orderListBean) {
                 setOrderList(orderListBean);
                 mBinding.smartOrderList.finishRefresh();
+
             }
         });
         mBinding.smartOrderList.setOnRefreshListener(new OnRefreshListener() {
@@ -181,5 +182,12 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
         orderDetailLists.clear();
         orderDetailLists.addAll(list);
         adapter.notifyDataSetChanged();
+        if(orderDetailLists.size()==0){
+            mBinding.rvOrderList.setVisibility(View.GONE);
+            mBinding.includeOrder.clEmptyOrder.setVisibility(View.VISIBLE);
+        }else {
+            mBinding.rvOrderList.setVisibility(View.VISIBLE);
+            mBinding.includeOrder.clEmptyOrder.setVisibility(View.GONE);
+        }
     }
 }

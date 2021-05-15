@@ -19,11 +19,17 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                />
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/rv_order_list"
+           <RelativeLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               />
+               >
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/rv_order_list"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   />
+               <include layout="@layout/include_empty_order" android:id="@+id/include_order"/>
+           </RelativeLayout>
        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -128,7 +128,11 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
         adapter.notifyDataSetChanged();
         setSumMoney();
         if(shoppingCartGoodsList.size()==0){
-
+            mBinding.llShoppingCart.setVisibility(View.GONE);
+            mBinding.includeShoppingCart.clShoppingCart.setVisibility(View.VISIBLE);
+        }else {
+            mBinding.llShoppingCart.setVisibility(View.VISIBLE);
+            mBinding.includeShoppingCart.clShoppingCart.setVisibility(View.GONE);
         }
     }
 
