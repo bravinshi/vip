@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.bean.ForgetPasswordReqBean;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.databinding.ActivityForgetPasswordBinding;
 import com.goldensky.vip.helper.AccountHelper;
@@ -58,7 +60,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
         }
 
         if (inputModel.getNewPassword().trim().length() < 6
-                || inputModel.getNewPassword().trim().length() > 16) {
+                || inputModel.getNewPassword().trim().length() > 8) {
             toast(R.string.hint_new_password_length_is_wrong);
             return;
         }
@@ -73,14 +75,29 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
             return;
         }
 
-        // 修改密码
-        UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
+        // 检查密码格式
+        String psd = inputModel.getNewPassword().trim();
+        if (psd.length() < 6 || psd.length() > 8) {
+            ToastUtils.showShort("请输入6到8位密码");
+            return;
+        }
 
-        userInfo.setPhoneCode(inputModel.getVerificationCode().trim());
-        userInfo.setUserPassword(inputModel.getNewPasswordConfirm().trim());
-        userInfo.setNewPwd(inputModel.getNewPassword().trim());
-        userInfo.setUserId(AccountHelper.getUserId());
-        mViewModel.updateVipUser(userInfo);
+        try {
+            Integer temp = Integer.valueOf(psd);
+            ToastUtils.showShort("密码不能为纯数字");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 修改密码
+        ForgetPasswordReqBean forgetPasswordReqBean = new ForgetPasswordReqBean();
+
+        forgetPasswordReqBean.setUserMobile(inputModel.getPhone().trim());
+        forgetPasswordReqBean.setPassword(inputModel.getNewPassword().trim());
+        forgetPasswordReqBean.setPhoneCode(inputModel.getVerificationCode().trim());
+
+        mViewModel.forgetPwd(forgetPasswordReqBean);
     }
 
     /**
@@ -129,7 +146,7 @@ public class ForgetPasswordActivity extends BaseActivity<ActivityForgetPasswordB
             mBinding.btnGetVerificationCode.startCountDown();
         });
 
-        mViewModel.userLive.observe(this, o -> {
+        mViewModel.forgetPasswordLive.observe(this, o -> {
             toast(getString(R.string.hint_password_set_success));
             Starter.startLoginActivity(ForgetPasswordActivity.this, null);
             finish();

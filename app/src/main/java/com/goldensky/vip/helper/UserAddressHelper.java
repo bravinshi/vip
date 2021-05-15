@@ -74,6 +74,12 @@ public class UserAddressHelper {
     }
 
 
+    public void clear() {
+        userAddressList.clear();
+    }
+
+
+
 
     /**
      * 收货地址列表改变响应

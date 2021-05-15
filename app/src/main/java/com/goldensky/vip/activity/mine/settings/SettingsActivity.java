@@ -25,6 +25,7 @@ import com.goldensky.vip.databinding.ActivitySettingsBinding;
 import com.goldensky.vip.enumerate.DefaultUrlEnum;
 import com.goldensky.vip.event.VipUserChangeEvent;
 import com.goldensky.vip.helper.AccountHelper;
+import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -126,7 +127,7 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
                 mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
                 mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
                 mPopupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
-
+                UserAddressHelper.getInstance().clear();
                 break;
             case R.id.cl_current_version_settings:
                 Starter.startAboutGoldenDaysActivity(this,null);

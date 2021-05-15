@@ -116,10 +116,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     }
 
     public void buy(InventoryBean inventory, Integer purchaseNum) {
-        if (selectedAddress == null) {
-            ToastUtils.showShort(R.string.text_select_address);
-            return;
-        }
         ConfirmOrderItemBean confirmOrderItemBean = ConfirmOrderItemBean
                 .generateConfirmOrderItem(inventory, mViewModel.goodsDetailLive.getValue(), purchaseNum);
 
@@ -127,7 +123,9 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         confirmOrderItemBeans.add(confirmOrderItemBean);
 
         Bundle bundle = new Bundle();
-        bundle.putString(ConfirmOrderActivity.KEY_ADDRESS, GsonUtils.toJson(selectedAddress));
+        if (selectedAddress != null) {
+            bundle.putString(ConfirmOrderActivity.KEY_ADDRESS, GsonUtils.toJson(selectedAddress));
+        }
         bundle.putString(ConfirmOrderActivity.KEY_GOODS, GsonUtils.toJson(confirmOrderItemBeans));
         // 进入确认订单界面
         Starter.startConfirmOrderActivity(GoodsDetailActivity.this, bundle);
@@ -191,17 +189,17 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
 
-        handleInventory(detail.getCommodityInventoryList());
+        handleInventory(detail.getBelongType(), detail.getCommodityInventoryList());
     }
 
     // 处理规格
-    private void handleInventory(List<InventoryBean> inventoryBeans) {
+    private void handleInventory(Integer belongType, List<InventoryBean> inventoryBeans) {
         if (CollectionUtils.nullOrEmpty(inventoryBeans)) {
             return;
         }
 
         if (goodsSpecificationDialog == null) {
-            goodsSpecificationDialog = new GoodsSpecificationDialog();
+            goodsSpecificationDialog = new GoodsSpecificationDialog(belongType);
         }
 
         goodsSpecificationDialog.setData(inventoryBeans);
@@ -264,6 +262,8 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             if (aBoolean) {
                 ToastUtils.showShort(R.string.text_join_shopping_cart_success);
                 EventBus.getDefault().post(new ShoppingCartRefreshEvent());
+                goodsSpecificationDialog.dismissAllowingStateLoss();
+
 
             }
         });
