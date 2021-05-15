@@ -94,6 +94,7 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
             userInfo.setPhoneCode(changePWDModel.getVerificationCode().trim());
             userInfo.setUserPassword(changePWDModel.getNewPasswordConfirm().trim());
             userInfo.setNewPwd(changePWDModel.getNewPassword().trim());
+            userInfo.setUsermobile(AccountHelper.getUserMobile());
             userInfo.setUserId(AccountHelper.getUserId());
             mViewModel.updateVipUser(userInfo);
 

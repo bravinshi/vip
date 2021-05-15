@@ -145,10 +145,10 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     private void setSumMoney() {
         Double sumMoney = ShoppingCartHelper.getInstance().getSumMoney();
        if(sumMoney==0.00){
-           mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥0.00</font>"));
+           mBinding.tvSum.setText(Html.fromHtml("合计：<font color=\"#EA483F\">¥0.00</font>"));
        }else {
            String format = new DecimalFormat("#.00").format(sumMoney);
-           mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥" + format + "</font>"));
+           mBinding.tvSum.setText(Html.fromHtml("合计：<font color=\"#EA483F\">¥" + format + "</font>"));
        }
     }
 

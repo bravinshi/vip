@@ -88,6 +88,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/cl_statu_orderdetail"
                     android:id="@+id/cl_logistics_orderdetail"
                     android:layout_width="match_parent"
@@ -415,6 +416,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/cancel_or_payment_orderdetail"
             android:layout_width="match_parent"

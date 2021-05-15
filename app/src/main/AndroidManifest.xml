@@ -60,7 +60,7 @@
         <activity android:name=".activity.account.SetPasswordActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

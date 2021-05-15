@@ -75,7 +75,12 @@ public class OrderDetailBean extends BaseObservable implements Serializable {
         return orderprice+postage;
     }
     private String getDoubleMoney(Double price){
-        String priceStr = new DecimalFormat("#.00").format(price);
+        String priceStr;
+        if (price==0){
+            priceStr ="0"+new DecimalFormat("#.00").format(price);
+        }else {
+            priceStr = new DecimalFormat("#.00").format(price);
+        }
         return "￥"+priceStr;
     }
     public void setSumMoney(String sumMoney) {
