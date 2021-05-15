@@ -24,6 +24,7 @@ import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.databinding.ActivityMyAddressBinding;
 import com.goldensky.vip.event.AddAddressEvent;
+import com.goldensky.vip.event.RefreshAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.account.AddressViewModel;
@@ -107,6 +108,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
             }
         });
         mBinding.rvMyAddress.setAdapter(adapter);
+
         refreshAddressList();
 
     }
@@ -130,21 +132,31 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
         EventBus.getDefault().unregister(this);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refreshAddress(AddAddressEvent addAddressEvent){
+    public void onChangeAddress(AddAddressEvent addAddressEvent){
         if (addAddressEvent.getSuccess()) {
-            // 刷新地址信息
             refreshAddressList();
+        }
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshAddress(RefreshAddressEvent refreshAddressEvent){
+        if (refreshAddressEvent.getSuccess()) {
+            mViewModel.getUserAddress(AccountHelper.getUserId());
         }
 
     }
     @Override
     public void observe() {
-
-
         mViewModel.deleteAddressLive.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object editAddressBean) {
-                    UserAddressHelper.getInstance().deleteUserAddress(bean);
+                mViewModel.getUserAddress(AccountHelper.getUserId());
+            }
+        });
+        mViewModel.userAddressLive.observe(this, new Observer<List<UserAddressBean>>() {
+            @Override
+            public void onChanged(List<UserAddressBean> list) {
+                UserAddressHelper.getInstance().setUserAddressList(list);
             }
         });
     }

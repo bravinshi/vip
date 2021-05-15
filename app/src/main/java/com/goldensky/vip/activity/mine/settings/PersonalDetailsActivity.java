@@ -42,6 +42,7 @@ import java.util.List;
 
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, AccountViewModel> implements View.OnClickListener {
     private PopupWindow mPopupWindow;
+    private LocalMedia lastMedia;
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -179,12 +180,27 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
         if (resultCode == RESULT_OK) {
             if (requestCode == PictureConfig.CHOOSE_REQUEST) {
                 images = PictureSelector.obtainMultipleResult(data);
-                mViewModel.uploadPic(images.get(0).getPath(), new FailCallback() {
-                    @Override
-                    public void onFail(NetResponse netResponse) {
-                        toast(netResponse.getMessage());
+                if (images.size() > 0) {
+                    LocalMedia media = images.get(0);
+                    lastMedia = media;
+                    String path;
+                    if (media.isCompressed()) {
+                        //压缩
+                        path = media.getCompressPath();
+                    } else {
+                        //原图
+                        path = media.getPath();
                     }
-                });
+                    if(path!=null&&!path.equals("")){
+                        mViewModel.uploadPic(path, new FailCallback() {
+                            @Override
+                            public void onFail(NetResponse netResponse) {
+                                toast(netResponse.getMessage());
+                            }
+                        });
+                    }
+                }
+
             }
         }
     }

@@ -1,28 +1,17 @@
 package com.goldensky.vip.event;
 
-
 public class ShoppingCartChangeEvent {
-    private Boolean success;
-    private boolean refresh;
+    private boolean isRefresh;
+
+    public ShoppingCartChangeEvent(boolean isRefresh) {
+        this.isRefresh = isRefresh;
+    }
 
     public boolean isRefresh() {
-        return refresh;
+        return isRefresh;
     }
 
     public void setRefresh(boolean refresh) {
-        this.refresh = refresh;
-    }
-
-    public ShoppingCartChangeEvent(Boolean success, boolean refresh) {
-        this.success = success;
-        this.refresh = refresh;
-    }
-
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
+        isRefresh = refresh;
     }
 }

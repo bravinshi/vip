@@ -13,7 +13,7 @@ public class OrderListBean implements Serializable {
     @SerializedName("ordernumber")
     private String ordernumber;
     @SerializedName("orderprice")
-    private Integer orderprice;
+    private Double orderprice;
     @SerializedName("orderstatus")
     private Integer orderstatus;
     @SerializedName("orderDetailList")
@@ -35,11 +35,11 @@ public class OrderListBean implements Serializable {
         this.ordernumber = ordernumber;
     }
 
-    public Integer getOrderprice() {
+    public Double getOrderprice() {
         return orderprice;
     }
 
-    public void setOrderprice(Integer orderprice) {
+    public void setOrderprice(Double orderprice) {
         this.orderprice = orderprice;
     }
 
@@ -65,7 +65,7 @@ public class OrderListBean implements Serializable {
         @SerializedName("commodityname")
         private String commodityname;
         @SerializedName("commodityoldprice")
-        private Integer commodityoldprice;
+        private Double commodityoldprice;
         @SerializedName("inventory")
         private String inventory;
         @SerializedName("inventorypic")
@@ -89,11 +89,11 @@ public class OrderListBean implements Serializable {
             this.commodityname = commodityname;
         }
 
-        public Integer getCommodityoldprice() {
+        public Double getCommodityoldprice() {
             return commodityoldprice;
         }
 
-        public void setCommodityoldprice(Integer commodityoldprice) {
+        public void setCommodityoldprice(Double commodityoldprice) {
             this.commodityoldprice = commodityoldprice;
         }
 

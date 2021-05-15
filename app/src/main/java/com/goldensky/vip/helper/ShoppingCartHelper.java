@@ -1,14 +1,12 @@
 package com.goldensky.vip.helper;
 
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
-import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.event.ShoppingCartChangeEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ShoppingCartHelper {
@@ -26,19 +24,12 @@ public class ShoppingCartHelper {
         }
         return shoppingCartHelper;
     }
-
-    public void changeCartGoodsNumber(String shoppingcartId, int count) {
-        for (ShoppingCartGoodsBean shoppingCartGoodsBean : goodsBeanList) {
-            if (shoppingCartGoodsBean.getShoppingcartid().equals(shoppingcartId)) {
-                shoppingCartGoodsBean.setPurchasenum(count);
-            }
-        }
-        noRefreshEvent();
+    public boolean hasSelect(){
+        return shoppingcartIds.size()!=0;
     }
-    public void addGoods(JoinIntoShoppingCartReqBean bean){
-        ShoppingCartGoodsBean goodsBean = new ShoppingCartGoodsBean(0, bean.getBelongid(), bean.getBelongtype(), bean.getCommodityicon(), bean.getCommodityid(), bean.getCommodityname(), bean.getCommodityoldprice(), bean.getCommodityprice(), bean.getCommoditytype(), bean.getCompanytype(), "", bean.getInventory(), bean.getInventoryid(), bean.getInventorynum(), bean.getInventorypic(), bean.getPurchasenum(), "", bean.getUserid());
-        goodsBeanList.add(goodsBean);
-        onShopingCartListChange();
+    public void clearSelect(){
+        shoppingcartIds.clear();
+        noRefreshChange();
     }
     public boolean isGoodsChecked(String shoppingcartId) {
         return shoppingcartIds.contains(shoppingcartId);
@@ -51,7 +42,7 @@ public class ShoppingCartHelper {
             shoppingcartIds.remove(shoppingcartId);
         }
 
-        noRefreshEvent();
+        noRefreshChange();
     }
     public List<ConfirmOrderItemBean> getConfirmOrderList(){
         if(shoppingcartIds.size()>0){
@@ -88,17 +79,7 @@ public class ShoppingCartHelper {
         return shoppingcartIds.size() == goodsBeanList.size();
     }
 
-    public void deleteCartGoods() {
-        Iterator<ShoppingCartGoodsBean> iterator = goodsBeanList.iterator();
-        while (iterator.hasNext()) {
-            ShoppingCartGoodsBean next = iterator.next();
-            if (shoppingcartIds.contains(next.getShoppingcartid())) {
-                iterator.remove();
-            }
-        }
-        shoppingcartIds.clear();
-        onShopingCartListChange();
-    }
+
 
     public Double getSumMoney() {
         sumMoney = 0.00;
@@ -110,13 +91,11 @@ public class ShoppingCartHelper {
         return sumMoney;
     }
 
-    public boolean isShoppingCartLoad() {
-        return goodsBeanList.size() > 0;
-    }
-
     public void setShoppingCartGoodsBeanList(List<ShoppingCartGoodsBean> list) {
         goodsBeanList.clear();
-        goodsBeanList.addAll(list);
+       if(list!=null){
+           goodsBeanList.addAll(list);
+       }
         onShopingCartListChange();
     }
 
@@ -133,11 +112,10 @@ public class ShoppingCartHelper {
     }
 
     public void onShopingCartListChange() {
-        EventBus.getDefault().post(new ShoppingCartChangeEvent(true, true));
+        EventBus.getDefault().post(new ShoppingCartChangeEvent(true));
     }
-
-    public void noRefreshEvent() {
-        EventBus.getDefault().post(new ShoppingCartChangeEvent(true, false));
+    public void noRefreshChange() {
+        EventBus.getDefault().post(new ShoppingCartChangeEvent(false));
     }
 
     public List<ShoppingCartGoodsBean> getGoodsBeanList() {

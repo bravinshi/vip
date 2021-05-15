@@ -46,7 +46,7 @@ import java.util.List;
 public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding, OrderDetailViewModel> implements View.OnClickListener {
     private String orderNumber;
     private ExpressBean express;
-    private String[] orderStatus = {"未付款","待发货","待收货","已完成","已关闭","已取消"};
+    private String[] orderStatus = {"待付款","待发货","待收货","已完成","已关闭","已取消"};
     private int orderType;
     private OrderDetailBean orderDetail=new OrderDetailBean(1);
     private OrderDetailListAdapter adapter;

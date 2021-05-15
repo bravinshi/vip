@@ -5,6 +5,7 @@ import com.goldensky.vip.bean.AreaPickerBean;
 import com.goldensky.vip.bean.DeleteUserAddressReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.event.AddAddressEvent;
+import com.goldensky.vip.event.RefreshAddressEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAddressHelper {
-    private List<UserAddressBean> userAddressList;
+    private List<UserAddressBean> userAddressList = new ArrayList<>();;
     private List<AreaPickerBean> provinceList = new ArrayList<>();
     private List<String> provinceNameList = new ArrayList<>();
     private List<List<AreaPickerBean>> cityList = new ArrayList<>();
@@ -57,14 +58,12 @@ public class UserAddressHelper {
     }
 
     public void setUserAddressList(List<UserAddressBean> list) {
-        userAddressList = new ArrayList<>();
+        userAddressList.clear();
         userAddressList.addAll(list);
         onChangeAddressList();
     }
 
-    public Boolean isUserAddressLoad() {
-        return userAddressList != null;
-    }
+
 
     public Boolean isAreaLoad() {
         return provinceList.size() != 0;
@@ -74,64 +73,26 @@ public class UserAddressHelper {
         return userAddressList;
     }
 
+
     public void clear() {
         userAddressList.clear();
     }
 
-    public void editUserAddress(UserAddressBean bean) {
-        int editPosition = 0;
-        for (UserAddressBean userAddressBean : userAddressList) {
-            if (userAddressBean.getUseraddressid() == bean.getUseraddressid()) {
-                editPosition = userAddressList.indexOf(userAddressBean);
-            }
-        }
-        userAddressList.remove(editPosition);
-        userAddressList.add(editPosition, bean);
-        onChangeAddressList();
-    }
 
-    /**
-     * 添加
-     *
-     * @param bean
-     */
-    public void addUserAddress(UserAddressBean bean) {
-        if (bean.getUseraddressdefault() == 1) {
-            for (UserAddressBean userAddressBean : userAddressList) {
-                if (userAddressBean.getUseraddressdefault() == 1) {
-                    userAddressBean.setUseraddressdefault(0);
-                }
-            }
-            userAddressList.add(0, bean);
-        } else {
-            userAddressList.add(bean);
-        }
-        onChangeAddressList();
-    }
 
-    /**
-     * 删除收货地址
-     *
-     * @param bean
-     */
-    public void deleteUserAddress(DeleteUserAddressReqBean bean) {
-        int deletePosition = 0;
-        for (UserAddressBean userAddressBean : userAddressList) {
-            if (userAddressBean.getUseraddressid().equals(bean.getUseraddressid())) {
-                deletePosition = userAddressList.indexOf(userAddressBean);
-            }
-        }
-        userAddressList.remove(deletePosition);
-        onChangeAddressList();
-    }
 
     /**
      * 收货地址列表改变响应
      */
-    private void onChangeAddressList() {
+    public void onChangeAddressList() {
         EventBus.getDefault().post(new AddAddressEvent(true));
     }
-
+    /**
+     * 收货地址列表改变响应
+     */
+    public void refreshAddressList() {
+        EventBus.getDefault().post(new RefreshAddressEvent(true));
+    }
     /**
      * 缓存省市县列表
      *

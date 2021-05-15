@@ -30,7 +30,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
     protected void convert(@NotNull BaseDataBindingHolder baseDataBindingHolder, OrderListBean orderListBean) {
         ItemOrderListBinding dataBinding = (ItemOrderListBinding) baseDataBindingHolder.getDataBinding();
 //        0:未付款 1:待发货  2:待收货 3:已完成 4:已关闭 5:已取消'
-        String[] orderStatus = {"未付款","待发货","待收货","已完成","已关闭","已取消"};
+        String[] orderStatus = {"待付款","待发货","待收货","已完成","已关闭","已取消"};
         dataBinding.statuItemOrderlist.setText(orderStatus[orderListBean.getOrderstatus()]);
         dataBinding.numberItemOrderlist.setText("订单编号:"+orderListBean.getOrdernumber());
         dataBinding.countItemOrderlist.setText("共"+orderListBean.getOrderDetailList().size()+"件");
