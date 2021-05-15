@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.base.net.NetParams;
+import com.goldensky.vip.bean.ForgetPasswordReqBean;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
@@ -28,6 +29,7 @@ public class AccountViewModel extends PublicViewModel {
 
     public MutableLiveData<LoginResponseBean> loginResponseLive = new MutableLiveData<>();
     public MutableLiveData<Integer> userLive = new MutableLiveData<>();
+    public MutableLiveData<Integer> forgetPasswordLive = new MutableLiveData<>();
     public MutableLiveData<ResponseBody> codeLive = new MutableLiveData<>();
 
     /**
@@ -67,6 +69,17 @@ public class AccountViewModel extends PublicViewModel {
                     @Override
                     public void onSuccess(Object data) {
                         userLive.postValue(1);
+                    }
+                });
+    }
+
+    public void forgetPwd(ForgetPasswordReqBean reqBean) {
+        RetrofitAgent.create(AccountService.class)
+                .forgetPwd(reqBean)
+                .subscribe(new ToastNetObserver<Object>(){
+                    @Override
+                    public void onSuccess(Object data) {
+                        forgetPasswordLive.postValue(1);
                     }
                 });
     }

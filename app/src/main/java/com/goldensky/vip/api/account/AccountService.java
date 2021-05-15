@@ -1,18 +1,15 @@
 package com.goldensky.vip.api.account;
 
 
-import com.goldensky.vip.base.net.NetParams;
-import com.goldensky.vip.bean.CommentProductBean;
-import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.vip.base.net.NetParams;
+import com.goldensky.vip.bean.ForgetPasswordReqBean;
+import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
 import com.goldensky.vip.bean.UserIdReqBean;
 
-import java.util.List;
-
 import io.reactivex.Observable;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -34,4 +31,7 @@ public interface AccountService {
 //    @POST("/goldendays-currency/wxApplet/getWxAppletCode")
     Observable<ResponseBody> getWxAppletCode(@Query("userid") String userid,
                                                           @Query("scene") String scene);
+
+    @POST("/goldendays-user/applet/user/forgetPwd")
+    Observable<NetResponse<Object>> forgetPwd(@Body ForgetPasswordReqBean forgetPasswordReqBean);
 }

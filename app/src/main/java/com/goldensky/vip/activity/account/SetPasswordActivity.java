@@ -3,6 +3,7 @@ package com.goldensky.vip.activity.account;
 import android.os.Bundle;
 
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.base.activity.BaseActivity;
@@ -54,6 +55,22 @@ public class SetPasswordActivity extends BaseActivity<ActivitySetPasswordBinding
             toast(getString(R.string.text_hint_twice_input_not_same));
             return;
         }
+
+        // 检查密码格式
+        String psd = model.getPassword();
+        if (psd.length() < 6 || psd.length() > 8) {
+            ToastUtils.showShort("请输入6到8位密码");
+            return;
+        }
+
+        try {
+            Integer temp = Integer.valueOf(psd);
+            ToastUtils.showShort("密码不能为纯数字");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
         reqBean.setUserId(AccountHelper.getUserId());

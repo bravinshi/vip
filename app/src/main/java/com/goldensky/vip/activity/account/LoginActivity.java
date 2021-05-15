@@ -93,6 +93,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         } else {
             Starter.startMainActivity(this, null);
         }
+
+        finish();
     }
 
     /**
