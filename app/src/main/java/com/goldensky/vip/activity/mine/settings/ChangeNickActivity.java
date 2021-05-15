@@ -28,10 +28,14 @@ public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, 
                     if(changeNickModel.getNick().length()<4||changeNickModel.getNick().length()>20){
                         toast(getResources().getString(R.string.hint_change_nick));
                     }else {
-                        UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
-                        reqBean.setUserId(AccountHelper.getUserId());
-                        reqBean.setUserNick(changeNickModel.getNick());
-                        mViewModel.updateVipUser(reqBean);
+                        if(changeNickModel.getNick().equals(AccountHelper.getUserNick())){
+                            toast(getResources().getString(R.string.hint_change_nick_repeat));
+                        }else {
+                            UpdateVipUserReqBean reqBean = new UpdateVipUserReqBean();
+                            reqBean.setUserId(AccountHelper.getUserId());
+                            reqBean.setUserNick(changeNickModel.getNick());
+                            mViewModel.updateVipUser(reqBean);
+                        }
                     }
 
                 }

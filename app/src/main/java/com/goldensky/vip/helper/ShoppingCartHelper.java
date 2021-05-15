@@ -116,7 +116,9 @@ public class ShoppingCartHelper {
 
     public void setShoppingCartGoodsBeanList(List<ShoppingCartGoodsBean> list) {
         goodsBeanList.clear();
-        goodsBeanList.addAll(list);
+       if(list!=null){
+           goodsBeanList.addAll(list);
+       }
         onShopingCartListChange();
     }
 

@@ -30,6 +30,7 @@
     <string name="hint_login_now">登录中</string>
     <string name="hint_input_nick">4-20个字符，可由中英文、数字、“_”、”-“组成</string>
     <string name="hint_change_nick">请输入正确格式</string>
+    <string name="hint_change_nick_repeat">昵称不可重复</string>
     <string name="text_company_regitser">企业注册</string>
     <string name="text_company_info">企业信息</string>
     <string name="text_representative_info">代表信息</string>

@@ -164,15 +164,14 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
                 .setTitleColor(Color.BLACK)//标题文字颜色
                 .setSubmitColor(Color.BLACK)//确定按钮文字颜色
                 .setCancelColor(Color.BLACK)//取消按钮文字颜色
-                .setTitleBgColor(R.color.colorWhite)//标题背景颜色 Night mode
-                .setBgColor(R.color.colorWhite)//滚轮背景颜色 Night mode
-                .setTitleBgColor(R.color.colorWhite)
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setTitleBgColor(Color.WHITE)
                 .setContentTextSize(18)//滚轮文字大小
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .setCyclic(false, false, false)//循环与否
                 .setSelectOptions(0, 0, 0)  //设置默认选中项
                 .setOutSideCancelable(true)//点击外部dismiss default true
-                .isDialog(true)//是否显示为对话框样式
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isAlphaGradient(true)
                 .build();
