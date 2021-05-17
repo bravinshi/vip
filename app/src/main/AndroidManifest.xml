@@ -60,7 +60,7 @@
         <activity android:name=".activity.account.SetPasswordActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" android:windowSoftInputMode="adjustResize|stateHidden"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -87,7 +87,7 @@
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />

@@ -94,7 +94,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         super.onResume();
         mViewModel.getOrderDetail(orderNumber);
        switch (orderType){
-           case 1:
            case 2:
            case 3:
                mViewModel.getExpress(orderNumber);
@@ -123,8 +122,10 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 orderDetail.setOrderDetailList(orderDetailBean.getOrderDetailList());
                 orderDetail.setArea( orderDetailBean.getArea());
                 orderDetail.notifyChange();
+                mBinding.orderTimeOrderdetail.setText(orderDetailBean.getCreatetime());
                 switch (orderType){
                     case 0:
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_obligation));
                         mBinding.cancelOrPaymentOrderdetail.setVisibility(View.VISIBLE);
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
@@ -132,7 +133,17 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         mBinding.btnMethedLeft.setText(getResources().getText(R.string.text_cancel_order));
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_dfk);
                         break;
+                    case 1:
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_actual_payment));
+                        mBinding.countDownOrderdetail.setVisibility(View.GONE);
+                        mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
+                        break;
                     case 2:
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.VISIBLE);
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.VISIBLE);
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_actual_payment));
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.btnMethedLeft.setVisibility(View.GONE);
                         mBinding.btnMethedRight.setText(getResources().getText(R.string.text_confirm_receipt));
@@ -140,7 +151,15 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         break;
                     case 3:
                     case 4:
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_actual_payment));
+                        mBinding.countDownOrderdetail.setVisibility(View.GONE);
+                        mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.VISIBLE);
+                        break;
                     case 5:
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_obligation));
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
@@ -161,7 +180,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
                         break;
-                    case 1:
                     case 2:
                         orderType=3;
                         mBinding.tvStatuOrderdetail.setText(orderStatus[orderType]);
@@ -239,7 +257,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         switch (v.getId()){
             case R.id.btn_methed_right:
                 switch (orderType){
-                    case 0:
+                    case 0://去支付
                         loadingDialog.show(getSupportFragmentManager(),"loadingDialog");
                         PaymentOrderReqBean reqBean = new PaymentOrderReqBean();
                         List<String> orderNumberList = new ArrayList<>();
@@ -254,16 +272,15 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                             }
                         });
                         break;
-                    case 2:
-                    case 3:
+                    case 2://确认收货
                         mViewModel.updateOrder(orderDetail.getOrdernumber(),3);
                         break;
                 }
                 break;
-            case R.id.btn_methed_left:
+            case R.id.btn_methed_left://取消订单
                 mViewModel.updateOrder(orderDetail.getOrdernumber(),5);
                 break;
-            case R.id.check_logistics_orderdetail:
+            case R.id.check_logistics_orderdetail://查看物流信息
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("logistics",logistics);
                 bundle.putString("pic",orderDetail.getOrderDetailList().get(0).getInventorypic());

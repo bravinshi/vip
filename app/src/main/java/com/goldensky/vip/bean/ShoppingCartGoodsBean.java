@@ -1,8 +1,12 @@
 package com.goldensky.vip.bean;
 
+import com.goldensky.framework.util.GsonUtils;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCartGoodsBean implements Serializable {
 
@@ -153,7 +157,18 @@ public class ShoppingCartGoodsBean implements Serializable {
     }
 
     public String getInventory() {
-        return inventory;
+        JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> keySet = new ArrayList<>(jsonObject.keySet());
+        int size = keySet.size();
+        for (int i = 0; i < size; i++) {
+            String key = keySet.get(i);
+            stringBuilder.append(jsonObject.get(key).getAsString());
+            if (i != size - 1) {
+                stringBuilder.append(";");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public void setInventory(String inventory) {

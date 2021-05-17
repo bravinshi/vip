@@ -189,6 +189,15 @@
                     android:onClick="@{listener}"
                     android:src="@mipmap/bukejian"
                     />
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@+id/can_see_confirm_change_pwd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_new_password"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView

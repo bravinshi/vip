@@ -53,6 +53,12 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
 //            EventBus.getDefault().post(paymentReturnEvent);
             finish();
         });
+        mBinding.topBarWx.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

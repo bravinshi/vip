@@ -80,7 +80,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
             mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
-            mBinding.tvPrice1.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+            mBinding.tvPrice1.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
         retrieveAddress();
@@ -245,6 +245,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
+            showDefaultAddress=false;
         }
     }
 

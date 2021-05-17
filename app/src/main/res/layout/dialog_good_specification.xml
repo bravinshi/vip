@@ -131,16 +131,7 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/tv_buy_from_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginBottom="20dp"
-                        android:text="最小购买数量:"
-                        android:textColor="@color/EA483F"
-                        android:textSize="14sp" />
+
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

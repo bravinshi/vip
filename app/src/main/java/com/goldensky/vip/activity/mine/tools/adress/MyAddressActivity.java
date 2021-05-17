@@ -108,7 +108,7 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
             }
         });
         mBinding.rvMyAddress.setAdapter(adapter);
-
+        mViewModel.getUserAddress(AccountHelper.getUserId());
         refreshAddressList();
 
     }
@@ -135,7 +135,6 @@ public class MyAddressActivity extends BaseActivity<ActivityMyAddressBinding, Ad
     public void onChangeAddress(AddAddressEvent addAddressEvent){
         if (addAddressEvent.getSuccess()) {
             mViewModel.getUserAddress(AccountHelper.getUserId());
-
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN)

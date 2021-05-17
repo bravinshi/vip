@@ -35,7 +35,7 @@ public class ConfirmOrderAdapter extends BaseQuickAdapter<ConfirmOrderItemBean, 
         ImageLoaderHelper.loadImage(mBinding.ivPic, confirmOrderItemBean.getPic());
         //
         mBinding.tvDesc.setText(confirmOrderItemBean.getCommodityName());
-        mBinding.tvPrice.setText(String.valueOf(confirmOrderItemBean.getPrice()));
+        mBinding.tvPrice.setText("¥"+String.valueOf(confirmOrderItemBean.getPrice()));
         mBinding.tvSpecification.setText(confirmOrderItemBean.getSpecification());
         mBinding.etCount.setTag(confirmOrderItemBean);
         mBinding.etCount.setText(String.valueOf(confirmOrderItemBean.getPurchaseNum()));

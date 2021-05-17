@@ -1,5 +1,7 @@
 package com.goldensky.vip.adapter;
 
+import android.graphics.Color;
+
 import androidx.databinding.ViewDataBinding;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

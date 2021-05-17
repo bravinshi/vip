@@ -43,6 +43,7 @@ import java.util.List;
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, AccountViewModel> implements View.OnClickListener {
     private PopupWindow mPopupWindow;
     private LocalMedia lastMedia;
+    private String modifyPic="";
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -85,16 +86,16 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
             @Override
             public void onChanged(String s) {
                 UpdateVipUserReqBean bean = new UpdateVipUserReqBean();
+                modifyPic=s;
                 bean.setUserId(AccountHelper.getUserId());
                 bean.setUserpic(s);
                 mViewModel.updateVipUser(bean);
             }
         });
-        mViewModel.uploadPicLiveData.observe(this, new Observer<String>() {
+        mViewModel.userLive.observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(String s) {
-                AccountHelper.setUserPic(s);
-                toast("");
+            public void onChanged(Integer s) {
+                AccountHelper.setUserPic(modifyPic);
             }
         });
     }
