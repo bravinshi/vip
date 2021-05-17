@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
@@ -129,6 +130,7 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
                 //拍照
                 PictureSelector.create(this)
                         .openCamera(PictureMimeType.ofImage())
+                        .isCompress(true)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 closePopupWindow();
                 break;
@@ -187,8 +189,10 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
                     if (media.isCompressed()) {
                         //压缩
                         path = media.getCompressPath();
-                    } else {
+                    } else if (!StringUtils.isEmpty(media.getRealPath())){
                         //原图
+                        path = media.getRealPath();
+                    } else {
                         path = media.getPath();
                     }
                     if(path!=null&&!path.equals("")){

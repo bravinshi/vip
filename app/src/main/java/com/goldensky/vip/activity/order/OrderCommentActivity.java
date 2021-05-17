@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CommentImageAdapter;
@@ -234,6 +235,7 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                 //拍照
                 PictureSelector.create(OrderCommentActivity.this)
                         .openCamera(PictureMimeType.ofImage())
+                        .isCompress(true)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 closePopupWindow();
                 break;
@@ -286,8 +288,10 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                     if (media.isCompressed()) {
                         //压缩
                         path = media.getCompressPath();
-                    } else {
+                    } else if (!StringUtils.isEmpty(media.getRealPath())){
                         //原图
+                        path = media.getRealPath();
+                    } else {
                         path = media.getPath();
                     }
                     uploadImage(path);
@@ -321,8 +325,8 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
     private void hideKeyBoard() {
         InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         if (manager != null && manager.isActive(mBinding.etComment)) {
+            manager.hideSoftInputFromWindow(mBinding.etComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             mBinding.etComment.clearFocus();
-            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
