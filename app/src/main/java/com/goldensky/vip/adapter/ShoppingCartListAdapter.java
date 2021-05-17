@@ -3,6 +3,7 @@ package com.goldensky.vip.adapter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
+import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -47,7 +48,16 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
         binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
         binding.numberItemShoppingCart.setCountChageListener(listener);
         binding.selectItemShoppingCart.setChecked(ShoppingCartHelper.getInstance().isGoodsChecked(shoppingCartGoodsBean.getShoppingcartid()));
-
+        binding.iscloseItemShoppingCart.setVisibility(View.GONE);
+        if(shoppingCartGoodsBean.getOnshelfstatus()==1||shoppingCartGoodsBean.getAbandon()==1||shoppingCartGoodsBean.getCommodityisdel()==1){
+            binding.iscloseItemShoppingCart.setVisibility(View.VISIBLE);
+            binding.priceItemShoppingCart.setVisibility(View.GONE);
+            binding.numberItemShoppingCart.setVisibility(View.GONE);
+        }else {
+            binding.iscloseItemShoppingCart.setVisibility(View.GONE);
+            binding.priceItemShoppingCart.setVisibility(View.VISIBLE);
+            binding.numberItemShoppingCart.setVisibility(View.VISIBLE);
+        }
 
     }
 

@@ -66,6 +66,16 @@ public class ShoppingCartHelper {
         }
         return null;
     }
+    public boolean hasNotOnshelf(){
+        for (ShoppingCartGoodsBean shoppingCartGoodsBean : goodsBeanList) {
+            if(shoppingCartGoodsBean.getCommodityisdel()==1||shoppingCartGoodsBean.getOnshelfstatus()==1||shoppingCartGoodsBean.getAbandon()==1){
+                if(shoppingcartIds.contains(shoppingCartGoodsBean.getShoppingcartid())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public void changeSelectAllGoods(boolean isSelectAll) {
         shoppingcartIds.clear();
         if (isSelectAll) {

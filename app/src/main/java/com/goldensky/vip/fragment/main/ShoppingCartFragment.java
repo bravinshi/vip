@@ -34,6 +34,8 @@ import com.goldensky.vip.event.ShoppingCartRefreshEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.viewmodel.shoppingcart.ShoppingCartViewModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -90,10 +92,17 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
             }
         });
         setSumMoney();
+        mBinding.smartShoppingCart.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mViewModel.getShoppingCartList(AccountHelper.getUserId());
+            }
+        });
         mViewModel.shoppingCartListLive.observe(this, new Observer<List<ShoppingCartGoodsBean>>() {
             @Override
             public void onChanged(List<ShoppingCartGoodsBean> shoppingCartGoodsBeans) {
                 ShoppingCartHelper.getInstance().setShoppingCartGoodsBeanList(shoppingCartGoodsBeans);
+                mBinding.smartShoppingCart.finishRefresh();
             }
         });
         mViewModel.updateCartGoodsNumberLive.observe(this, new Observer<Object>() {
@@ -102,6 +111,13 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 mViewModel.getShoppingCartList(AccountHelper.getUserId());
             }
         });
+        mViewModel.getShoppingCartList(AccountHelper.getUserId());
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mViewModel.getShoppingCartList(AccountHelper.getUserId());
     }
 
@@ -222,11 +238,16 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
 
                 }else {
                    if(ShoppingCartHelper.getInstance().hasSelect()){
-                       Bundle bundle = new Bundle();
-                       List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
-                       String json = GsonUtils.toJson(confirmOrderList);
-                       bundle.putString("KEY_GOODS",json);
-                       Starter.startConfirmOrderActivity(getContext(),bundle);
+                       if(!ShoppingCartHelper.getInstance().hasNotOnshelf()){
+                           Bundle bundle = new Bundle();
+                           List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
+                           String json = GsonUtils.toJson(confirmOrderList);
+                           bundle.putString("KEY_GOODS",json);
+                           Starter.startConfirmOrderActivity(getContext(),bundle);
+                       }else {
+                           toast(getResources().getString(R.string.hint_goods_colse_shooping_cart));
+                       }
+
                    }else {
                        toast("请选择要结算的商品!");
                    }

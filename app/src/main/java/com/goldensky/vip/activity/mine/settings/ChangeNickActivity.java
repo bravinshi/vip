@@ -19,6 +19,7 @@ public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, 
     private ChangeNickModel changeNickModel=new ChangeNickModel();
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        changeNickModel.setNick(AccountHelper.getUserNick());
         mBinding.topBarNick.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

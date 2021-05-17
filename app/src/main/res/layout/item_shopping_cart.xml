@@ -78,7 +78,17 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/goodsimage_item_shopping_cart"
             app:layout_constraintStart_toStartOf="@+id/goodsname_item_shopping_cart" />
-
+        <TextView
+            android:id="@+id/isclose_item_shopping_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="@string/hint_goods_colse"
+            android:textColor="@color/EA483F"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/goodsimage_item_shopping_cart"
+            app:layout_constraintStart_toStartOf="@+id/goodsname_item_shopping_cart" />
         <com.goldensky.framework.ui.view.NumberButton
             android:id="@+id/number_item_shopping_cart"
             android:layout_width="90dp"

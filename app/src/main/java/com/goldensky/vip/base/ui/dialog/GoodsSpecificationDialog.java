@@ -153,11 +153,11 @@ public class GoodsSpecificationDialog extends BottomDialog {
 //        }
 
 
-        if (belongType != null && belongType == 0
-                && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
-            ToastUtils.showShort("库存不足");
-            return false;
-        }
+            if (belongType != null && belongType == 1
+                    && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
+                ToastUtils.showShort("库存不足");
+                return false;
+            }
 
         return true;
     }

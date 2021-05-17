@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -156,8 +158,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
-                        mBinding.clLogisticsOrderdetail.setVisibility(View.VISIBLE);
-                        break;
                     case 5:
                         mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_obligation));
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
@@ -242,7 +242,11 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                     status=8;
                 }
                 mBinding.logisticsStatuOrderdetail.setText(logisticStatus[status]);
-                mBinding.logisticsAddressOrderdetail.setText(logisticsBean.getData().get(0).getContext());
+                if(logisticsBean.getData().size()!=0){
+                    mBinding.logisticsAddressOrderdetail.setText(logisticsBean.getData().get(0).getContext());
+                }else {
+                    mBinding.logisticsAddressOrderdetail.setText("暂无物流信息");
+                }
             }
         });
     }
@@ -285,6 +289,11 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 bundle.putSerializable("logistics",logistics);
                 bundle.putString("pic",orderDetail.getOrderDetailList().get(0).getInventorypic());
                 Starter.startLogisticsActivity(this,bundle);
+                break;
+            case R.id.tv_copy_orderdetail:
+                ClipboardManager cmb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                cmb.setText(orderNumber);
+                toast("复制成功");
                 break;
         }
     }

@@ -39,7 +39,9 @@ public class LogisticsActivity extends BaseActivity<ActivityLogisticsBinding, Pu
             }
         });
         mBinding.rvLogistics.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new LogisticsAdapter(logistics.getData());
+        if(logistics.getData()!=null){
+            adapter=new LogisticsAdapter(logistics.getData());
+        }
         mBinding.rvLogistics.setAdapter(adapter);
         View logisticsHeader = LayoutInflater.from(this).inflate(R.layout.header_logistics_layout,null);
         TextView number = logisticsHeader.findViewById(R.id.tv_number_logistics_header);

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
@@ -59,9 +60,9 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
         }
         dataBinding.rvItemOrderlist.setLayoutManager(new NoScrollStaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         OrderDetailAdapter adapter = new OrderDetailAdapter(orderListBean.getOrderDetailList());
-        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemChildClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString("orderNumber", orderListBean.getOrdernumber());
                 bundle.putInt("orderType", orderListBean.getOrderstatus());
