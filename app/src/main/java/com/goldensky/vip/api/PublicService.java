@@ -2,6 +2,7 @@ package com.goldensky.vip.api;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.bean.AreaListBean;
+import com.goldensky.vip.bean.CheckVersionResBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UserIdReqBean;
 
@@ -44,7 +45,8 @@ public interface PublicService {
     Observable<NetResponse<Object>> checkVerifyCode(@Query("userMobile") String mobile,
                                                     @Query("userCode") String verifyCode);
 
-
-
-
+    //App 版本更新
+    @GET("/goldendays-currency/AutoUpdate/getVipVersion")
+    Observable<NetResponse<CheckVersionResBean>> checkVision(@Query("appType") Integer appType,
+                                                             @Query("version") Integer version);
 }
