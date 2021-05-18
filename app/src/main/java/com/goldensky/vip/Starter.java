@@ -2,6 +2,7 @@ package com.goldensky.vip;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.goldensky.vip.activity.WebViewActivity;
@@ -406,6 +407,15 @@ public class Starter {
         if (bundle != null) {
             intent.putExtras(bundle);
         }
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动浏览器
+     */
+    public static void startBrowser(Context context, String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         context.startActivity(intent);
     }
 }

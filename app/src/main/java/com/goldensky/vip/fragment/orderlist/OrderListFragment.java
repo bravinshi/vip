@@ -117,14 +117,12 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
                             bundle.putInt("orderType", orderDetailLists.get(position).getOrderstatus());
                             Starter.startOrderDetailActivity(getContext(), bundle);
                             break;
-                        case 1:
                         case 2:
                             mViewModel.updateOrder(orderDetailLists.get(position).getOrdernumber(), 3);
                             break;
                     }
-                } else {
+                } else if(view.getId() == R.id.btn_gray_item_orderlist) {
                     switch (orderDetailLists.get(position).getOrderstatus()) {
-                        case 1:
                         case 2:
                             mViewModel.getExpress(orderDetailLists.get(position).getOrdernumber());
                             checkPosition = position;

@@ -14,6 +14,7 @@
             android:layout_height="25dp"
             android:textStyle="bold"
             android:text="－"
+            android:layout_gravity="center"
             android:textColor="@color/colorGray"
             android:background="@color/color_e"
             android:gravity="center"
@@ -29,7 +30,7 @@
             android:inputType="number"
             android:background="@color/color_f5"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/plus_number_button"
@@ -37,9 +38,10 @@
             android:layout_height="25dp"
             android:textStyle="bold"
             android:text="＋"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/colorGray"
             android:background="@color/color_e"
-            android:gravity="center"
             android:textSize="20sp" />
     </LinearLayout>
 </layout>

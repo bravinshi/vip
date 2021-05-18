@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.databinding.ItemCommentImageBinding;
 import com.goldensky.vip.databinding.ItemCommentStarBinding;
@@ -44,8 +45,10 @@ public class CommentImageAdapter extends BaseQuickAdapter<LocalMedia, BaseViewHo
             if (media.isCompressed()) {
                 //压缩
                 path = media.getCompressPath();
-            } else {
+            }  else if (!StringUtils.isEmpty(media.getRealPath())){
                 //原图
+                path = media.getRealPath();
+            } else {
                 path = media.getPath();
             }
             Glide.with(getContext()).load(path).into(binding.ivPic);

@@ -1,10 +1,15 @@
 package com.goldensky.vip.bean;
 
+import com.goldensky.framework.util.GsonUtils;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCartGoodsBean implements Serializable {
+
 
     @SerializedName("abandon")
     private Integer abandon;
@@ -16,6 +21,8 @@ public class ShoppingCartGoodsBean implements Serializable {
     private String commodityicon;
     @SerializedName("commodityid")
     private Integer commodityid;
+    @SerializedName("commodityisdel")
+    private Integer commodityisdel;
     @SerializedName("commodityname")
     private String commodityname;
     @SerializedName("commodityoldprice")
@@ -28,6 +35,8 @@ public class ShoppingCartGoodsBean implements Serializable {
     private Integer companytype;
     @SerializedName("createtime")
     private String createtime;
+    @SerializedName("entrance")
+    private Integer entrance;
     @SerializedName("inventory")
     private String inventory;
     @SerializedName("inventoryid")
@@ -36,33 +45,14 @@ public class ShoppingCartGoodsBean implements Serializable {
     private Integer inventorynum;
     @SerializedName("inventorypic")
     private String inventorypic;
+    @SerializedName("onshelfstatus")
+    private Integer onshelfstatus;
     @SerializedName("purchasenum")
     private Integer purchasenum;
     @SerializedName("shoppingcartid")
     private String shoppingcartid;
     @SerializedName("userid")
     private String userid;
-
-    public ShoppingCartGoodsBean(Integer abandon, Integer belongid, Integer belongtype, String commodityicon, Integer commodityid, String commodityname, Double commodityoldprice, Double commodityprice, Integer commoditytype, Integer companytype, String createtime, String inventory, Integer inventoryid, Integer inventorynum, String inventorypic, Integer purchasenum, String shoppingcartid, String userid) {
-        this.abandon = abandon;
-        this.belongid = belongid;
-        this.belongtype = belongtype;
-        this.commodityicon = commodityicon;
-        this.commodityid = commodityid;
-        this.commodityname = commodityname;
-        this.commodityoldprice = commodityoldprice;
-        this.commodityprice = commodityprice;
-        this.commoditytype = commoditytype;
-        this.companytype = companytype;
-        this.createtime = createtime;
-        this.inventory = inventory;
-        this.inventoryid = inventoryid;
-        this.inventorynum = inventorynum;
-        this.inventorypic = inventorypic;
-        this.purchasenum = purchasenum;
-        this.shoppingcartid = shoppingcartid;
-        this.userid = userid;
-    }
 
     public Integer getAbandon() {
         return abandon;
@@ -102,6 +92,14 @@ public class ShoppingCartGoodsBean implements Serializable {
 
     public void setCommodityid(Integer commodityid) {
         this.commodityid = commodityid;
+    }
+
+    public Integer getCommodityisdel() {
+        return commodityisdel;
+    }
+
+    public void setCommodityisdel(Integer commodityisdel) {
+        this.commodityisdel = commodityisdel;
     }
 
     public String getCommodityname() {
@@ -152,8 +150,27 @@ public class ShoppingCartGoodsBean implements Serializable {
         this.createtime = createtime;
     }
 
+    public Integer getEntrance() {
+        return entrance;
+    }
+
+    public void setEntrance(Integer entrance) {
+        this.entrance = entrance;
+    }
+
     public String getInventory() {
-        return inventory;
+        JsonObject jsonObject = GsonUtils.fromJson(inventory, JsonObject.class);
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> keySet = new ArrayList<>(jsonObject.keySet());
+        int size = keySet.size();
+        for (int i = 0; i < size; i++) {
+            String key = keySet.get(i);
+            stringBuilder.append(jsonObject.get(key).getAsString());
+            if (i != size - 1) {
+                stringBuilder.append(";");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public void setInventory(String inventory) {
@@ -184,6 +201,14 @@ public class ShoppingCartGoodsBean implements Serializable {
         this.inventorypic = inventorypic;
     }
 
+    public Integer getOnshelfstatus() {
+        return onshelfstatus;
+    }
+
+    public void setOnshelfstatus(Integer onshelfstatus) {
+        this.onshelfstatus = onshelfstatus;
+    }
+
     public Integer getPurchasenum() {
         return purchasenum;
     }
@@ -205,6 +230,30 @@ public class ShoppingCartGoodsBean implements Serializable {
     }
 
     public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public ShoppingCartGoodsBean(Integer abandon, Integer belongid, Integer belongtype, String commodityicon, Integer commodityid, Integer commodityisdel, String commodityname, Double commodityoldprice, Double commodityprice, Integer commoditytype, Integer companytype, String createtime, Integer entrance, String inventory, Integer inventoryid, Integer inventorynum, String inventorypic, Integer onshelfstatus, Integer purchasenum, String shoppingcartid, String userid) {
+        this.abandon = abandon;
+        this.belongid = belongid;
+        this.belongtype = belongtype;
+        this.commodityicon = commodityicon;
+        this.commodityid = commodityid;
+        this.commodityisdel = commodityisdel;
+        this.commodityname = commodityname;
+        this.commodityoldprice = commodityoldprice;
+        this.commodityprice = commodityprice;
+        this.commoditytype = commoditytype;
+        this.companytype = companytype;
+        this.createtime = createtime;
+        this.entrance = entrance;
+        this.inventory = inventory;
+        this.inventoryid = inventoryid;
+        this.inventorynum = inventorynum;
+        this.inventorypic = inventorypic;
+        this.onshelfstatus = onshelfstatus;
+        this.purchasenum = purchasenum;
+        this.shoppingcartid = shoppingcartid;
         this.userid = userid;
     }
 }

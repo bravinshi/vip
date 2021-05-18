@@ -28,6 +28,7 @@ import com.goldensky.vip.event.PaymentReturnEvent;
 import com.goldensky.vip.event.PurchaseNumChangeEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
+import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.ConfirmOrderViewModel;
 import com.google.gson.reflect.TypeToken;
@@ -81,7 +82,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
             mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
-            mBinding.tvPrice1.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+            mBinding.tvPrice1.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
         retrieveAddress();
@@ -97,7 +98,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             paymentOrderReqBean.setOrderNumberList(o);
             paymentOrderReqBean.setPayType(0);
             paymentOrderReqBean.setRechargeMoney(getTotalMoney());
-
+            ShoppingCartHelper.getInstance().onShopingCartListChange();
             mViewModel.getPaymentOrder(paymentOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
         });
 
@@ -248,6 +249,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
+            showDefaultAddress=false;
         }
     }
 

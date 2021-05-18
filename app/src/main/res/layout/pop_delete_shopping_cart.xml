@@ -39,7 +39,7 @@
                 android:textColor="@color/EA483F"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 />
             <View
@@ -49,12 +49,13 @@
                 />
             <TextView
                 android:gravity="center"
-                android:textColor="@color/EA483F"
+                android:textColor="@color/white"
                 android:id="@+id/btn_confirm_delete"
                 android:layout_width="0dp"
                 android:text="@string/text_confirm_delete"
+                android:background="@drawable/shape_btn_pop_red"
                 android:textSize="15sp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 />
         </LinearLayout>

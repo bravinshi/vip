@@ -19,10 +19,11 @@ public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, 
     private ChangeNickModel changeNickModel=new ChangeNickModel();
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
+        changeNickModel.setNick(AccountHelper.getUserNick());
         mBinding.topBarNick.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNotNull(changeNickModel.getNick())){
+                if(!isNotNull(changeNickModel.getNick())){
                     toast(getResources().getString(R.string.hint_input_nick_nonull));
                 }else {
                     if(changeNickModel.getNick().length()<4||changeNickModel.getNick().length()>20){

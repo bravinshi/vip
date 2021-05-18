@@ -31,6 +31,11 @@ public class ShoppingCartHelper {
         shoppingcartIds.clear();
         noRefreshChange();
     }
+    public void clear() {
+        shoppingcartIds.clear();
+        goodsBeanList.clear();
+    }
+
     public boolean isGoodsChecked(String shoppingcartId) {
         return shoppingcartIds.contains(shoppingcartId);
     }
@@ -65,6 +70,16 @@ public class ShoppingCartHelper {
             return confirmOrderItemBeans;
         }
         return null;
+    }
+    public boolean hasNotOnshelf(){
+        for (ShoppingCartGoodsBean shoppingCartGoodsBean : goodsBeanList) {
+            if(shoppingCartGoodsBean.getCommodityisdel()==1||shoppingCartGoodsBean.getOnshelfstatus()==0||shoppingCartGoodsBean.getAbandon()==1){
+                if(shoppingcartIds.contains(shoppingCartGoodsBean.getShoppingcartid())){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     public void changeSelectAllGoods(boolean isSelectAll) {
         shoppingcartIds.clear();

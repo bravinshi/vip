@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CommentImageAdapter;
@@ -62,12 +63,13 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
     private int currentStartIndex = -1;
     private String imgUrl = ""; //图片url
     private String secondorderid = "";//secondorderid
+    private String content;
 
 
     public List<LocalMedia> selectList = new ArrayList<>();
     public List<String> selectUrlsList = new ArrayList<>();
+    private int count = 0;
     private PopupWindow mPopupWindow;
-    private LocalMedia lastMedia;
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -123,7 +125,6 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                         PictureSelector.create(OrderCommentActivity.this).externalPicturePreview(position, selectList, 0);
                     } else if (view.getId() == R.id.iv_delete) {
                         if (selectList.size() > position) {
-                            selectUrlsList.remove(position);
                             selectList.remove(position);
                             mCommentImageAdapter.notifyItemChanged(position);
                             mCommentImageAdapter.notifyItemRangeChanged(position, selectList.size());
@@ -152,11 +153,7 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
 
         mViewModel.uploadPicLiveData.observe(this, url -> {
             selectUrlsList.add(url);
-            if (lastMedia != null) {
-                selectList.add(lastMedia);
-                mCommentImageAdapter.notifyDataSetChanged();
-                lastMedia = null;
-            }
+            updateCount();
         });
 
         mViewModel.commitResult.observe(this, map -> {
@@ -223,10 +220,10 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                 PictureSelector.create(OrderCommentActivity.this)
                         .openGallery(PictureMimeType.ofImage())
                         .imageEngine(GlideEngine.createGlideEngine())
-                        .maxSelectNum(1)
+                        .maxSelectNum(6 - selectList.size())
                         .imageSpanCount(4)
                         .isCompress(true)
-                        .selectionMode(PictureConfig.SINGLE)
+                        .selectionMode(PictureConfig.MULTIPLE)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 closePopupWindow();
                 break;
@@ -234,6 +231,7 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
                 //拍照
                 PictureSelector.create(OrderCommentActivity.this)
                         .openCamera(PictureMimeType.ofImage())
+                        .isCompress(true)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 closePopupWindow();
                 break;
@@ -251,24 +249,35 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
             return;
         }
 
-        String content = mBinding.etComment.getText().toString();
+         content = mBinding.etComment.getText().toString();
         if(TextUtils.isEmpty(content)) {
             Toast.makeText(this, "请输入评价内容", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < selectUrlsList.size(); i++) {
-            if (i == 0) {
-                stringBuilder.append(selectUrlsList.get(i));
-            } else {
-                stringBuilder.append(",").append(selectUrlsList.get(i));
+        selectUrlsList.clear();
+        count = 0;
+        if (selectList.size() > 0) {
+            List<String> paths = new ArrayList<>();
+            for (int i = 0; i < selectList.size(); i++) {
+                LocalMedia media = selectList.get(i);
+                String path;
+                if (media.isCompressed()) {
+                    //压缩
+                    path = media.getCompressPath();
+                } else if (!StringUtils.isEmpty(media.getRealPath())){
+                    //原图
+                    path = media.getRealPath();
+                } else {
+                    path = media.getPath();
+                }
+                paths.add(path);
             }
+            uploadImage(paths);
+        } else {
+            mViewModel.orderComment(currentStartIndex + 1 + "", content, "", AccountHelper.getUserId(), secondorderid);
         }
 
-        String urls = stringBuilder.toString();
-
-        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, AccountHelper.getUserId(), secondorderid);
 //        mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, "365fc2e065164700a5b1b985e326a766", secondorderid);
     }
 
@@ -280,30 +289,40 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
             if (requestCode == PictureConfig.CHOOSE_REQUEST) {
                 images = PictureSelector.obtainMultipleResult(data);
                 if (images.size() > 0) {
-                    LocalMedia media = images.get(0);
-                    lastMedia = media;
-                    String path;
-                    if (media.isCompressed()) {
-                        //压缩
-                        path = media.getCompressPath();
-                    } else {
-                        //原图
-                        path = media.getPath();
-                    }
-                    uploadImage(path);
+                    selectList.addAll(images);
+                    mCommentImageAdapter.notifyDataSetChanged();
                 }
             }
         }
     }
 
-    private void uploadImage(String path) {
-        mViewModel.uploadPic(path, new FailCallback() {
-            @Override
-            public void onFail(NetResponse netResponse) {
-                lastMedia = null;
-                Toast.makeText(OrderCommentActivity.this, "图片上传失败", Toast.LENGTH_SHORT).show();
+    private void uploadImage(List<String> paths) {
+        count = 0;
+        for (int i = 0; i < paths.size(); i++) {
+            mViewModel.uploadPic(paths.get(i), new FailCallback() {
+                @Override
+                public void onFail(NetResponse netResponse) {
+//                    Toast.makeText(OrderCommentActivity.this, "图片上传失败", Toast.LENGTH_SHORT).show();
+                    updateCount();
+                }
+            });
+        }
+    }
+
+    private synchronized void updateCount() {
+        count ++;
+        if (count == selectList.size()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < selectUrlsList.size(); i++) {
+                if (i == 0) {
+                    stringBuilder.append(selectUrlsList.get(i));
+                } else {
+                    stringBuilder.append(",").append(selectUrlsList.get(i));
+                }
             }
-        });
+            String urls = stringBuilder.toString();
+            mViewModel.orderComment(currentStartIndex + 1 + "", content, urls, AccountHelper.getUserId(), secondorderid);
+        }
     }
 
 
@@ -321,8 +340,8 @@ public class OrderCommentActivity extends BaseActivity<ActivityOrderCommentBindi
     private void hideKeyBoard() {
         InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         if (manager != null && manager.isActive(mBinding.etComment)) {
+            manager.hideSoftInputFromWindow(mBinding.etComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             mBinding.etComment.clearFocus();
-            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 

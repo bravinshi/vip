@@ -10,24 +10,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
         android:orientation="vertical"
-        android:paddingRight="10dp">
+        android:background="@drawable/bottom_line_white_bg"
+        android:paddingRight="15dp">
 
         <TextView
+            android:id="@+id/msg_item_logistics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@{bean.context}"
-            android:textColor="@color/logistics_textcolor_selector"
+            android:textColor="@color/color_999999"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/time_item_logistics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="15dp"
             android:text="@{bean.time}"
-            android:textColor="@color/logistics_textcolor_selector"
+            android:textColor="@color/color_999999"
             android:textSize="14sp" />
     </LinearLayout>
 </layout>

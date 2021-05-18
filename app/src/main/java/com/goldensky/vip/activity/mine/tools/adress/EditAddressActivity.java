@@ -2,10 +2,12 @@ package com.goldensky.vip.activity.mine.tools.adress;
 
 import androidx.lifecycle.Observer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
@@ -79,7 +81,7 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
         mViewModel.editAddressLive.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object editAddressBean) {
-                    UserAddressHelper.getInstance().refreshAddressList();
+                    UserAddressHelper.getInstance().onChangeAddressList();
                     finish();
             }
         });
@@ -140,6 +142,10 @@ public class EditAddressActivity extends BaseActivity<ActivityEditAddressBinding
                 || paddingTestText.trim().length() != 11;
     }
     private void showCityPicker() {
+        InputMethodManager manager =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (manager != null){
+            manager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
         if(UserAddressHelper.getInstance().isAreaLoad()){
             UserAddressHelper instance = UserAddressHelper.getInstance();
             OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {

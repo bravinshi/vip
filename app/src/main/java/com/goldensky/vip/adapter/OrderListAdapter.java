@@ -1,14 +1,19 @@
 package com.goldensky.vip.adapter;
 
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.databinding.ItemOrderListBinding;
 import com.goldensky.vip.utils.NoScrollStaggeredGridLayoutManager;
@@ -42,7 +47,6 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
                 dataBinding.btnRedItemOrderlist.setVisibility(View.VISIBLE);
                 dataBinding.btnRedItemOrderlist.setText(getContext().getResources().getText(R.string.text_go_pay));
                 break;
-            case 1:
             case 2:
                 dataBinding.btnGrayItemOrderlist.setVisibility(View.VISIBLE);
                 dataBinding.btnRedItemOrderlist.setVisibility(View.VISIBLE);
@@ -56,6 +60,15 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
         }
         dataBinding.rvItemOrderlist.setLayoutManager(new NoScrollStaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         OrderDetailAdapter adapter = new OrderDetailAdapter(orderListBean.getOrderDetailList());
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("orderNumber", orderListBean.getOrdernumber());
+                bundle.putInt("orderType", orderListBean.getOrderstatus());
+                Starter.startOrderDetailActivity(getContext(), bundle);
+            }
+        });
         dataBinding.rvItemOrderlist.setAdapter(adapter);
     }
 }

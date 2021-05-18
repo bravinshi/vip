@@ -22,4 +22,16 @@
     <declare-styleable name="MeasureFixedLayout">
         <attr name="measureFixed_half_height" format="boolean"/>
     </declare-styleable>
+
+    <style name="dialog_update" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置未浮动窗口 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无边框 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置完全透明 -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

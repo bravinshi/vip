@@ -1,9 +1,11 @@
 package com.goldensky.vip.activity.mine.tools.adress;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 
 import androidx.lifecycle.Observer;
@@ -60,7 +62,7 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
             @Override
             public void onChanged(NewAddressResponseBean editAddressBean) {
                     UserAddressBean bean = new UserAddressBean(selectAreaName, selectAreaId, selectCityName, selectCityId, 0, selectProvinceName, selectProvinceId, newAddressModel.getLocation(), isDefaultCode, editAddressBean.getUseraddressid(), newAddressModel.getConsigneeName(), newAddressModel.getConsigneePhone(), editAddressBean.getUseraddresstime(), AccountHelper.getUserId());
-                    UserAddressHelper.getInstance().refreshAddressList();
+                    UserAddressHelper.getInstance().onChangeAddressList();
                     toast("添加成功");
                     finish();
             }
@@ -122,6 +124,10 @@ public class NewAddressActivity extends BaseActivity<ActivityNewAddressBinding, 
                 || paddingTestText.trim().length() != 11;
     }
     private void showCityPicker() {
+        InputMethodManager manager =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (manager != null){
+            manager.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
         if(UserAddressHelper.getInstance().isAreaLoad()){
             UserAddressHelper instance = UserAddressHelper.getInstance();
             OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
