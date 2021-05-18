@@ -72,11 +72,21 @@ public class OrderListBean implements Serializable {
         private String inventorypic;
         @SerializedName("purchasenum")
         private Integer purchasenum;
+        @SerializedName("onshelfstatus")
+        private Integer onshelfstatus;
         @SerializedName("commodityisdel")
         private Integer commodityisdel;
 
         public Integer getCommodityisdel() {
             return commodityisdel;
+        }
+
+        public Integer getOnshelfstatus() {
+            return onshelfstatus;
+        }
+
+        public void setOnshelfstatus(Integer onshelfstatus) {
+            this.onshelfstatus = onshelfstatus;
         }
 
         public void setCommodityisdel(Integer commodityisdel) {

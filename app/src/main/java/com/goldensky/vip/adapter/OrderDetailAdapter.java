@@ -36,11 +36,16 @@ public class OrderDetailAdapter extends BaseQuickAdapter<OrderListBean.OrderDeta
     @Override
     protected void convert(@NotNull BaseDataBindingHolder baseDataBindingHolder, OrderListBean.OrderDetailList orderDetailList) {
         ItemDetailOrderListBinding dataBinding = (ItemDetailOrderListBinding) baseDataBindingHolder.getDataBinding();
-        if(orderDetailList.getCommodityisdel()==1&&orderStatus==5){
-            dataBinding.isdelItemDetailOrderlist.setVisibility(View.VISIBLE);
+        if (orderStatus==5){
+            if(orderDetailList.getCommodityisdel()==1||orderDetailList.getOnshelfstatus()==0){
+                dataBinding.isdelItemDetailOrderlist.setVisibility(View.VISIBLE);
+            }else {
+                dataBinding.isdelItemDetailOrderlist.setVisibility(View.GONE);
+            }
         }else {
             dataBinding.isdelItemDetailOrderlist.setVisibility(View.GONE);
         }
+
         dataBinding.countItemDetailOrderlist.setText("共"+orderDetailList.getPurchasenum()+"件");
         dataBinding.moneyItemDetailOrderlist.setText("￥"+orderDetailList.getCommodityoldprice());
         dataBinding.sizeItemDetailOrderlist.setText(getInventory(orderDetailList.getInventory()));

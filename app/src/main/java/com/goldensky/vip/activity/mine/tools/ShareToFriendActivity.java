@@ -60,11 +60,11 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
             }
         });
         mBinding.setListener(this);
-        mViewModel.getWxAppletCode(AccountHelper.getUserId(),AccountHelper.getInvitationCode());
-        if(AccountHelper.getUserPic()!=null&&!AccountHelper.getUserPic().equals("")){
-            Glide.with(this).load(AccountHelper.getUserPic()).into(mBinding.ivHeadShareToFriend);
-        }else {
-            Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).into(mBinding.ivHeadShareToFriend);
+        mViewModel.getWxAppletCode(AccountHelper.getUserId(), AccountHelper.getInvitationCode());
+        if (AccountHelper.getUserPic() != null && !AccountHelper.getUserPic().equals("")) {
+            Glide.with(this).load(AccountHelper.getUserPic()).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadShareToFriend);
+        } else {
+            Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadShareToFriend);
         }
         mViewModel.getSuperSt(AccountHelper.getUserSuperiorId());
     }
@@ -82,9 +82,9 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
         mViewModel.mSuperStBean.observe(this, new Observer<SuperStBean>() {
             @Override
             public void onChanged(SuperStBean superStBean) {
-               if(superStBean!=null){
-                   mBinding.nameShareToFirend.setText(superStBean.getEnterprisename());
-               }
+                if (superStBean != null) {
+                    mBinding.nameShareToFirend.setText(superStBean.getEnterprisename());
+                }
             }
         });
     }
@@ -97,31 +97,37 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MODE_PRIVATE ) {
+        if (requestCode == MODE_PRIVATE) {
             if (Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-               if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                   saveImage();
-               } else {
-                   ToastUtils.showShort("请在权限设置里允许访问存储");
-               }
-            }
-            if (Manifest.permission.CAMERA.equals(permissions[1])) {
-                if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    saveImage();
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (Manifest.permission.READ_EXTERNAL_STORAGE.equals(permissions[1])) {
+                        if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                            if (Manifest.permission.CAMERA.equals(permissions[1])) {
+                                if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                                    saveImage();
+                                } else {
+                                    ToastUtils.showShort("请在权限设置里允许访问相机");
+                                }
+                            }
+                        } else {
+                            ToastUtils.showShort("请在权限设置里允许访问存储");
+                        }
+                    }
                 } else {
-                    ToastUtils.showShort("请在权限设置里允许访问相机");
+                    ToastUtils.showShort("请在权限设置里允许访问存储");
                 }
             }
+
         }
-        saveImage();
     }
 
 
+
+
+
     private void saveImage() {
-        if (ContextCompat.checkSelfPermission(ShareToFriendActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(ShareToFriendActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Bitmap bitmap = PictrueSaveUtils.testViewSnapshot(mBinding.clShareToFriend);
-            PictrueSaveUtils.saveBitmap(this, bitmap);
-        }
+        Bitmap bitmap = PictrueSaveUtils.testViewSnapshot(mBinding.clShareToFriend);
+        PictrueSaveUtils.saveBitmap(this, bitmap);
     }
 
     @Override
@@ -130,7 +136,7 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
             saveImage();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA},MODE_PRIVATE);
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, MODE_PRIVATE);
             }
         }
     }

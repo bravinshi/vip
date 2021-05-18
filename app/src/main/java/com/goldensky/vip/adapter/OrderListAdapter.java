@@ -75,7 +75,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
         dataBinding.viewIsdelOrderlist.setVisibility(View.GONE);
         if(orderListBean.getOrderstatus()==5){
             for (OrderListBean.OrderDetailList orderDetailList : orderListBean.getOrderDetailList()) {
-                if(orderDetailList.getCommodityisdel()==1){
+                if(orderDetailList.getCommodityisdel()==1||orderDetailList.getOnshelfstatus()==0){
                     dataBinding.viewIsdelOrderlist.setVisibility(View.VISIBLE);
                 }
             }
