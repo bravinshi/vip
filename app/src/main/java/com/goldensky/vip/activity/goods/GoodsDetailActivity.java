@@ -255,7 +255,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void observe() {
         mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
-                mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")"));
+                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount()+goodsCommentResBean.getPraiseCount()+goodsCommentResBean.getDifferenceCount()) + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 
@@ -266,8 +266,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 ToastUtils.showShort(R.string.text_join_shopping_cart_success);
                 EventBus.getDefault().post(new ShoppingCartRefreshEvent());
                 goodsSpecificationDialog.dismissAllowingStateLoss();
-
-
             }
         });
     }

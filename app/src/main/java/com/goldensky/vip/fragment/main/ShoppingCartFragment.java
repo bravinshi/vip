@@ -71,6 +71,28 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 setSumMoney();
             }
         });
+        mBinding.topBarShoppingCart.setRightListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView view = (TextView) v;
+                if (isEdit) {
+                    mBinding.tvSum.setVisibility(View.VISIBLE);
+                    mBinding.tvCloseAccount.setText("去结算");
+                    view.setText("编辑");
+                    view.setTextColor(Color.parseColor("#333333"));
+                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#ffffff"));
+                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_red);
+                } else {
+                    mBinding.tvSum.setVisibility(View.GONE);
+                    mBinding.tvCloseAccount.setText("删除");
+                    view.setText("完成");
+                    view.setTextColor(Color.parseColor("#E65858"));
+                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#888888"));
+                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_gray);
+                }
+                isEdit = !isEdit;
+            }
+        });
         adapter.addChildClickViewIds(new int[]{R.id.select_item_shopping_cart});
         adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
@@ -176,24 +198,6 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_edit_finish:
-                if (isEdit) {
-                    mBinding.tvSum.setVisibility(View.VISIBLE);
-                    mBinding.tvCloseAccount.setText("去结算");
-                    mBinding.tvEditFinish.setText("编辑");
-                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#333333"));
-                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#ffffff"));
-                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_red);
-                } else {
-                    mBinding.tvSum.setVisibility(View.GONE);
-                    mBinding.tvCloseAccount.setText("删除");
-                    mBinding.tvEditFinish.setText("完成");
-                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#E65858"));
-                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#888888"));
-                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_gray);
-                }
-                isEdit = !isEdit;
-                break;
             case R.id.tv_close_account:
                 if(isEdit){
                    if (ShoppingCartHelper.getInstance().hasSelect()){

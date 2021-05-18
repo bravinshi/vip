@@ -48,6 +48,7 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
             binding.iscloseItemShoppingCart.setVisibility(View.VISIBLE);
             binding.priceItemShoppingCart.setVisibility(View.GONE);
             binding.numberItemShoppingCart.setVisibility(View.GONE);
+            binding.viewOverspreadShoppingCart.setVisibility(View.VISIBLE);
         }else {
             binding.iscloseItemShoppingCart.setVisibility(View.GONE);
             binding.priceItemShoppingCart.setVisibility(View.VISIBLE);
@@ -56,6 +57,7 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
             binding.numberItemShoppingCart.setMinCount(1);
             binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
             binding.numberItemShoppingCart.setCountChageListener(listener);
+            binding.viewOverspreadShoppingCart.setVisibility(View.GONE);
         }
 
     }
