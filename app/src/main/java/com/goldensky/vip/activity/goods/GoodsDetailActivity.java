@@ -127,7 +127,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         Bundle bundle = new Bundle();
         if (selectedAddress != null) {
             bundle.putString(ConfirmOrderActivity.KEY_ADDRESS, GsonUtils.toJson(selectedAddress));
-        }else
+        }
         bundle.putString(ConfirmOrderActivity.KEY_GOODS, GsonUtils.toJson(confirmOrderItemBeans));
         // 进入确认订单界面
         Starter.startConfirmOrderActivity(GoodsDetailActivity.this, bundle);
