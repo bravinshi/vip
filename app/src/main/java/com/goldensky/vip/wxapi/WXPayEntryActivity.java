@@ -66,7 +66,6 @@ public class WXPayEntryActivity extends BaseActivity<ActivityWxPaymentBinding, P
         if (baseResp.errCode == 0) {
             ToastUtils.showShort("支付成功");
             mBinding.rlContent.setVisibility(View.VISIBLE);
-            ShoppingCartHelper.getInstance().clearSelect();
         } else {
             // 支付失败
             ToastUtils.showShort("支付失败");
