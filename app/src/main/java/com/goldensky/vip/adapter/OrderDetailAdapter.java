@@ -1,5 +1,7 @@
 package com.goldensky.vip.adapter;
 
+import android.view.View;
+
 import androidx.databinding.ViewDataBinding;
 
 import com.bumptech.glide.Glide;
@@ -22,13 +24,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailAdapter extends BaseQuickAdapter<OrderListBean.OrderDetailList, BaseDataBindingHolder> {
+    private Integer orderStatus;
     public OrderDetailAdapter(@Nullable List<OrderListBean.OrderDetailList> data) {
         super(R.layout.item_detail_order_list, data);
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
     protected void convert(@NotNull BaseDataBindingHolder baseDataBindingHolder, OrderListBean.OrderDetailList orderDetailList) {
         ItemDetailOrderListBinding dataBinding = (ItemDetailOrderListBinding) baseDataBindingHolder.getDataBinding();
+        if(orderDetailList.getCommodityisdel()==1&&orderStatus==5){
+            dataBinding.isdelItemDetailOrderlist.setVisibility(View.VISIBLE);
+        }else {
+            dataBinding.isdelItemDetailOrderlist.setVisibility(View.GONE);
+        }
         dataBinding.countItemDetailOrderlist.setText("共"+orderDetailList.getPurchasenum()+"件");
         dataBinding.moneyItemDetailOrderlist.setText("￥"+orderDetailList.getCommodityoldprice());
         dataBinding.sizeItemDetailOrderlist.setText(getInventory(orderDetailList.getInventory()));

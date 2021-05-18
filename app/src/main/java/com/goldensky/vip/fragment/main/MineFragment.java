@@ -70,8 +70,8 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
             });
             mViewModel.getOrderCount(AccountHelper.getUserId());
             toolAdapter=new MineToolAdapter(toolList);
-            mBinding.rvOrderMine.setAdapter(orderAdapter);
             orderAdapter=new MineToolAdapter(orderList);
+            mBinding.rvOrderMine.setAdapter(orderAdapter);
             mBinding.rvToolMine.setAdapter(toolAdapter);
             mBinding.setListener(this);
             mViewModel.orderCountLive.observe(this, new Observer<OrderCountBean>() {

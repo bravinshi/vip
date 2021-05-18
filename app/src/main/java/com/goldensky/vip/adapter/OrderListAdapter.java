@@ -58,6 +58,7 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
                 dataBinding.btnRedItemOrderlist.setVisibility(View.GONE);
                 break;
         }
+
         dataBinding.rvItemOrderlist.setLayoutManager(new NoScrollStaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         OrderDetailAdapter adapter = new OrderDetailAdapter(orderListBean.getOrderDetailList());
         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -69,6 +70,16 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseDataBi
                 Starter.startOrderDetailActivity(getContext(), bundle);
             }
         });
+        adapter.setOrderStatus(orderListBean.getOrderstatus());
         dataBinding.rvItemOrderlist.setAdapter(adapter);
+        dataBinding.viewIsdelOrderlist.setVisibility(View.GONE);
+        if(orderListBean.getOrderstatus()==5){
+            for (OrderListBean.OrderDetailList orderDetailList : orderListBean.getOrderDetailList()) {
+                if(orderDetailList.getCommodityisdel()==1){
+                    dataBinding.viewIsdelOrderlist.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
     }
 }
