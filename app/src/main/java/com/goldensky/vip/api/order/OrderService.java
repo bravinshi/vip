@@ -5,15 +5,14 @@ import com.goldensky.vip.bean.CommentProductBean;
 import com.goldensky.vip.bean.CommentReqBean;
 import com.goldensky.vip.bean.ExpressBean;
 import com.goldensky.vip.bean.GetOrderListReqBean;
+import com.goldensky.vip.bean.GetPaymentOrderResBean;
 import com.goldensky.vip.bean.LogisticsBean;
 import com.goldensky.vip.bean.LogisticsReqBean;
 import com.goldensky.vip.bean.OrderDetailBean;
 import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.bean.OrderNumberReqBean;
-import com.goldensky.vip.bean.UpdateOrderReqBean;
 import com.goldensky.vip.bean.PaymentOrderReqBean;
-import com.google.gson.JsonObject;
-
+import com.goldensky.vip.bean.UpdateOrderReqBean;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public interface OrderService {
     Observable<NetResponse<List<CommentProductBean>>> getVipOrderDetail(@Query("userId") String userId);
 
     @POST("/goldendays-order/order/weChatPay/getOrder")
-    Observable<NetResponse<JsonObject>> getPaymentOrder(@Body PaymentOrderReqBean reqBean);
+    Observable<NetResponse<GetPaymentOrderResBean>> getPaymentOrder(@Body PaymentOrderReqBean reqBean);
 
     @POST("/goldendays-order/vipOrder/getOrderList")
     Observable<NetResponse<List<OrderListBean>>> getOrderList(@Body GetOrderListReqBean body);

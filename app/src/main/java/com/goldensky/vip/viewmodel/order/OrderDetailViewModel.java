@@ -7,6 +7,7 @@ import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.order.OrderService;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.bean.ExpressBean;
+import com.goldensky.vip.bean.GetPaymentOrderResBean;
 import com.goldensky.vip.bean.LogisticsBean;
 import com.goldensky.vip.bean.LogisticsReqBean;
 import com.goldensky.vip.bean.OrderDetailBean;
@@ -19,7 +20,7 @@ import com.google.gson.JsonObject;
 public class OrderDetailViewModel extends PublicViewModel {
     public MutableLiveData<OrderDetailBean> orderDetailLive=new MutableLiveData<>();
     public MutableLiveData<Object> updateOrderLive=new MutableLiveData<>();
-    public MutableLiveData<JsonObject> paymentOrderLive = new MutableLiveData<>();
+    public MutableLiveData<GetPaymentOrderResBean> paymentOrderLive = new MutableLiveData<>();
     public MutableLiveData<ExpressBean> expressLive = new MutableLiveData<>();
     public MutableLiveData<LogisticsBean> getLogisticsLive=new MutableLiveData<>();
     public void getOrderDetail(String orderNumber){
@@ -51,14 +52,14 @@ public class OrderDetailViewModel extends PublicViewModel {
     public void getPaymentOrder(PaymentOrderReqBean reqBean, FailCallback failCallback) {
         RetrofitAgent.create(OrderService.class)
                 .getPaymentOrder(reqBean)
-                .subscribe(new ToastNetObserver<JsonObject>() {
+                .subscribe(new ToastNetObserver<GetPaymentOrderResBean>() {
                     @Override
-                    public void onSuccess(JsonObject data) {
+                    public void onSuccess(GetPaymentOrderResBean data) {
                         paymentOrderLive.postValue(data);
                     }
 
                     @Override
-                    public boolean onFail(NetResponse<JsonObject> data) {
+                    public boolean onFail(NetResponse<GetPaymentOrderResBean> data) {
                         super.onFail(data);
                         if (failCallback != null) {
                             failCallback.onFail(data);

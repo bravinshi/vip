@@ -109,11 +109,11 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             PayReq payReq = new PayReq();
             payReq.appId = ConfigConstant.WX_APP_ID;
             payReq.partnerId = ConfigConstant.WX_MCH_ID;
-            payReq.prepayId = o.get("prepayid").getAsString();
+            payReq.prepayId = o.getPrepayId();
             payReq.packageValue = "Sign=WXPay";
-            payReq.nonceStr = o.get("noncestr").getAsString();
-            payReq.timeStamp = o.get("timestamp").getAsString();
-            payReq.sign = o.get("paySign").getAsString();
+            payReq.nonceStr = o.getNoncestr();
+            payReq.timeStamp = o.getTimestamp();
+            payReq.sign = o.getPaySign();
             payReq.signType = "MD5";
 
             api.sendReq(payReq);
