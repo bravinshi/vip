@@ -1,16 +1,14 @@
 package com.goldensky.vip.activity.order;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -18,22 +16,20 @@ import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
-import com.goldensky.vip.activity.goods.ConfirmOrderActivity;
 import com.goldensky.vip.adapter.OrderDetailListAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.ui.dialog.LoadingDialog;
 import com.goldensky.vip.bean.ExpressBean;
+import com.goldensky.vip.bean.GetPaymentOrderResBean;
 import com.goldensky.vip.bean.LogisticsBean;
 import com.goldensky.vip.bean.LogisticsReqBean;
 import com.goldensky.vip.bean.OrderDetailBean;
-import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.bean.PaymentOrderReqBean;
 import com.goldensky.vip.constant.ConfigConstant;
 import com.goldensky.vip.databinding.ActivityOrderDetailBinding;
 import com.goldensky.vip.event.ChangeOrderStatusEvent;
 import com.goldensky.vip.utils.NoScrollStaggeredGridLayoutManager;
-import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.goldensky.vip.viewmodel.order.OrderDetailViewModel;
 import com.google.gson.JsonObject;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -198,20 +194,20 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 EventBus.getDefault().post(new ChangeOrderStatusEvent(true));
             }
         });
-        mViewModel.paymentOrderLive.observe(this, new Observer<JsonObject>() {
+        mViewModel.paymentOrderLive.observe(this, new Observer<GetPaymentOrderResBean>() {
             @Override
-            public void onChanged(JsonObject jsonObject) {
+            public void onChanged(GetPaymentOrderResBean jsonObject) {
                 IWXAPI api = WXAPIFactory.createWXAPI(OrderDetailActivity.this, ConfigConstant.WX_APP_ID, false);
                 api.registerApp(ConfigConstant.WX_APP_ID);
 
                 PayReq payReq = new PayReq();
                 payReq.appId = ConfigConstant.WX_APP_ID;
                 payReq.partnerId = ConfigConstant.WX_MCH_ID;
-                payReq.prepayId = jsonObject.get("prepayid").getAsString();
+                payReq.prepayId = jsonObject.getPrepayId();
                 payReq.packageValue = "Sign=WXPay";
-                payReq.nonceStr = jsonObject.get("noncestr").getAsString();
-                payReq.timeStamp = jsonObject.get("timestamp").getAsString();
-                payReq.sign = jsonObject.get("paySign").getAsString();
+                payReq.nonceStr = jsonObject.getNoncestr();
+                payReq.timeStamp = jsonObject.getTimestamp();
+                payReq.sign = jsonObject.getPaySign();
                 payReq.signType = "MD5";
 
                 api.sendReq(payReq);
