@@ -32,6 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintVertical_weight="1"
             >
             <TextView
@@ -143,6 +144,7 @@
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_confirm_change_pwd"
                 app:layout_constraintTop_toBottomOf="@+id/cl_new_pwd_change_pwd"
                 android:layout_width="match_parent"
                 android:background="@color/white"
@@ -189,16 +191,21 @@
                     android:onClick="@{listener}"
                     android:src="@mipmap/bukejian"
                     />
-                <TextView
-                    app:layout_constraintTop_toBottomOf="@+id/can_see_confirm_change_pwd"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hint_new_password"
-                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_hint_password_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="30dp"
+                android:text="@string/hint_new_password"
+                android:textColor="@color/color_999999"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_confirm_change_pwd" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/confirm_commit_change_pwd"

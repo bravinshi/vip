@@ -31,6 +31,11 @@ public class ShoppingCartHelper {
         shoppingcartIds.clear();
         noRefreshChange();
     }
+    public void clear() {
+        shoppingcartIds.clear();
+        goodsBeanList.clear();
+    }
+
     public boolean isGoodsChecked(String shoppingcartId) {
         return shoppingcartIds.contains(shoppingcartId);
     }

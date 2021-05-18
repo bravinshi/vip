@@ -25,6 +25,7 @@ import com.goldensky.vip.databinding.ActivitySettingsBinding;
 import com.goldensky.vip.enumerate.DefaultUrlEnum;
 import com.goldensky.vip.event.VipUserChangeEvent;
 import com.goldensky.vip.helper.AccountHelper;
+import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
@@ -98,6 +99,8 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
                     @Override
                     public void onClick(View v) {
                         AccountHelper.loginOut();
+                        UserAddressHelper.getInstance().clear();
+                        ShoppingCartHelper.getInstance().clear();
                         Starter.startLoginActivity(SettingsActivity.this,null);
                         mPopupWindow.dismiss();
                     }

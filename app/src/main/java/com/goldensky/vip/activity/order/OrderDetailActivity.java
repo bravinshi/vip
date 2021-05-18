@@ -127,7 +127,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 mBinding.orderTimeOrderdetail.setText(orderDetailBean.getCreatetime());
                 switch (orderType){
                     case 0:
-                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_obligation));
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_due));
                         mBinding.cancelOrPaymentOrderdetail.setVisibility(View.VISIBLE);
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
@@ -152,14 +152,21 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_dsh);
                         break;
                     case 3:
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_actual_payment));
+                        mBinding.countDownOrderdetail.setVisibility(View.GONE);
+                        mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
+                        break;
                     case 4:
                         mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_actual_payment));
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
+                        break;
                     case 5:
-                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_obligation));
+                        mBinding.tvPayOrderdetail.setText(getResources().getText(R.string.text_due));
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
@@ -185,8 +192,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         mBinding.tvStatuOrderdetail.setText(orderStatus[orderType]);
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);
-                        mBinding.btnMethedLeft.setVisibility(View.GONE);
-                        mBinding.btnMethedRight.setText(getResources().getText(R.string.text_confirm_receipt));
+                        mBinding.cancelOrPaymentOrderdetail.setVisibility(View.GONE);
                         break;
                 }
                 EventBus.getDefault().post(new ChangeOrderStatusEvent(true));
@@ -236,13 +242,13 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
 //                0在途，1揽收，2疑难，3签收，4退签，5派件，6退回，7转单，10待清关，11清关中，12已清关，13清关异常，14收件人拒签
                 String[] logisticStatus={"在途","揽收","疑难","签收","退签","派件","退回","转单","待揽收","","待清关","清关中","已清关","清关异常","收件人拒签"};
                 int status=0;
-                if(logisticStatus!=null){
+                if(logisticsBean.getState()!=null){
                     status=Integer.parseInt(logisticsBean.getState());
                 }else {
                     status=8;
                 }
                 mBinding.logisticsStatuOrderdetail.setText(logisticStatus[status]);
-                if(logisticsBean.getData().size()!=0){
+                if(logisticsBean.getData()!=null){
                     mBinding.logisticsAddressOrderdetail.setText(logisticsBean.getData().get(0).getContext());
                 }else {
                     mBinding.logisticsAddressOrderdetail.setText("暂无物流信息");

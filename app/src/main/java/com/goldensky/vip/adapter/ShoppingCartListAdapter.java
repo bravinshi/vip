@@ -40,16 +40,11 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
         ItemShoppingCartBinding binding = DataBindingUtil.bind(baseViewHolder.itemView);
         Glide.with(getContext()).load(shoppingCartGoodsBean.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),5))).into(binding.goodsimageItemShoppingCart);
         binding.setBean(shoppingCartGoodsBean);
-        binding.numberItemShoppingCart.setCount(shoppingCartGoodsBean.getPurchasenum());
-        binding.numberItemShoppingCart.setMaxCount(shoppingCartGoodsBean.getInventorynum() == null ? Integer.MAX_VALUE : shoppingCartGoodsBean.getInventorynum());
-        binding.numberItemShoppingCart.setMinCount(1);
         String s = new DecimalFormat("#.00").format(shoppingCartGoodsBean.getCommodityoldprice());
         binding.priceItemShoppingCart.setText(changTvSize("¥"+s));
-        binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
-        binding.numberItemShoppingCart.setCountChageListener(listener);
         binding.selectItemShoppingCart.setChecked(ShoppingCartHelper.getInstance().isGoodsChecked(shoppingCartGoodsBean.getShoppingcartid()));
         binding.iscloseItemShoppingCart.setVisibility(View.GONE);
-        if(shoppingCartGoodsBean.getOnshelfstatus()==1||shoppingCartGoodsBean.getAbandon()==1||shoppingCartGoodsBean.getCommodityisdel()==1){
+        if(shoppingCartGoodsBean.getOnshelfstatus()==0||shoppingCartGoodsBean.getAbandon()==1||shoppingCartGoodsBean.getCommodityisdel()==1){
             binding.iscloseItemShoppingCart.setVisibility(View.VISIBLE);
             binding.priceItemShoppingCart.setVisibility(View.GONE);
             binding.numberItemShoppingCart.setVisibility(View.GONE);
@@ -57,6 +52,10 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
             binding.iscloseItemShoppingCart.setVisibility(View.GONE);
             binding.priceItemShoppingCart.setVisibility(View.VISIBLE);
             binding.numberItemShoppingCart.setVisibility(View.VISIBLE);
+            binding.numberItemShoppingCart.setCount(shoppingCartGoodsBean.getPurchasenum());
+            binding.numberItemShoppingCart.setMinCount(1);
+            binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
+            binding.numberItemShoppingCart.setCountChageListener(listener);
         }
 
     }

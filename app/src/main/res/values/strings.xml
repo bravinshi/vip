@@ -53,6 +53,7 @@
     <string name="text_pic_video">图/视频</string>
     <string name="text_good_comment">好评</string>
     <string name="text_obligation">待付款</string>
+    <string name="text_due">应付款</string>
     <string name="text_wait_for_receiving">待收货</string>
     <string name="text_finished">已完成</string>
     <string name="text_wait_for_evaluated">待评价</string>
