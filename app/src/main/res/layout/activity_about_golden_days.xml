@@ -38,6 +38,7 @@
                 android:src="@mipmap/about"
                 />
             <TextView
+                android:id="@+id/version_about"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_logo_about"

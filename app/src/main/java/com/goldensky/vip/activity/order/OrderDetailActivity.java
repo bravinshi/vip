@@ -97,7 +97,6 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         mViewModel.getOrderDetail(orderNumber);
        switch (orderType){
            case 2:
-           case 3:
                mViewModel.getExpress(orderNumber);
                break;
        }
@@ -189,6 +188,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                         break;
                     case 2:
                         orderType=3;
+                        mBinding.clLogisticsOrderdetail.setVisibility(View.GONE);
                         mBinding.tvStatuOrderdetail.setText(orderStatus[orderType]);
                         mBinding.ivStatuOrderdetail.setImageResource(R.mipmap.img_wddd_ywc);
                         mBinding.countDownOrderdetail.setVisibility(View.GONE);

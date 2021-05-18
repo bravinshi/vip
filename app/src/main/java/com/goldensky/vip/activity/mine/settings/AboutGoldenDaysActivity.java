@@ -2,6 +2,7 @@ package com.goldensky.vip.activity.mine.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,6 +22,14 @@ public class AboutGoldenDaysActivity extends BaseActivity<ActivityAboutGoldenDay
                 finish();
             }
         });
+        String verName = "";
+        try {
+            verName =getPackageManager().
+                    getPackageInfo(getPackageName(), 0).versionName;
+            mBinding.versionAbout.setText("For Andriod "+verName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
