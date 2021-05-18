@@ -2,7 +2,6 @@ package com.goldensky.vip.activity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.WindowManager;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.ui.dialog.UpdateDialog;
