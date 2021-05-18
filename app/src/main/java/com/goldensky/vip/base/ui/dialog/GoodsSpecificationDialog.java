@@ -527,7 +527,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
                 // 次级的recyclerView绑定adapter
                 secondAdapter = new SecondAdapter();
                 itemSpecificationBinding.rvSpecification.setAdapter(secondAdapter);
-                secondAdapter.setNewInstance(first.seconds);
                 secondAdapter.setOnItemClickListener((adapter, view, position) -> {
                     // 次级item被点击
                     Second secondItem = (Second) adapter.getItem(position);
@@ -548,6 +547,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
                     EventBus.getDefault().post(specificationItemClickEvent);
                 });
             }
+            secondAdapter.setNewInstance(first.seconds);
             // 每次convert都重新设置LayoutManager是为了让每个内层的recyclerView都能在外层的adapter notifyDataSetChanged的时候重新绘制
             itemSpecificationBinding.rvSpecification
                     .setLayoutManager(new FlexboxLayoutManager(mBinding.recyclerView.getContext(),

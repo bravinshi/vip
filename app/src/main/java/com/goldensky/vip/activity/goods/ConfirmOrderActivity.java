@@ -40,6 +40,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,11 +109,11 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             PayReq payReq = new PayReq();
             payReq.appId = ConfigConstant.WX_APP_ID;
             payReq.partnerId = ConfigConstant.WX_MCH_ID;
-            payReq.prepayId = o.get("prepayid").getAsString();
+            payReq.prepayId = o.getPrepayId();
             payReq.packageValue = "Sign=WXPay";
-            payReq.nonceStr = o.get("noncestr").getAsString();
-            payReq.timeStamp = o.get("timestamp").getAsString();
-            payReq.sign = o.get("paySign").getAsString();
+            payReq.nonceStr = o.getNoncestr();
+            payReq.timeStamp = o.getTimestamp();
+            payReq.sign = o.getPaySign();
             payReq.signType = "MD5";
 
             api.sendReq(payReq);
@@ -191,11 +192,13 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
     private double getTotalMoney() {
         List<ConfirmOrderItemBean> confirmOrderItemBeanList = confirmOrderAdapter.getData();
-        double total = 0D;
+        BigDecimal total = new BigDecimal("0");
         for (ConfirmOrderItemBean confirmOrderItemBean : confirmOrderItemBeanList) {
-            total = total + confirmOrderItemBean.getPurchaseNum() * confirmOrderItemBean.getPrice();
+            BigDecimal temp = new BigDecimal(String.valueOf(confirmOrderItemBean.getPrice()));
+            temp = temp.multiply(new BigDecimal(String.valueOf(confirmOrderItemBean.getPurchaseNum())));
+            total = total.add(temp);
         }
-        return total;
+        return total.doubleValue();
     }
 
     // 提交订单
