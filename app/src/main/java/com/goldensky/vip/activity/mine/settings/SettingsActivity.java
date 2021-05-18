@@ -3,6 +3,7 @@ package com.goldensky.vip.activity.mine.settings;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, PublicViewModel> implements View.OnClickListener {
     private PopupWindow mPopupWindow;
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -46,31 +48,43 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
         });
         mBinding.setListener(this);
         setMSG();
+
     }
 
     private void setMSG() {
-        if(AccountHelper.getUserNick()!=null){
+        if (AccountHelper.getUserNick() != null) {
             mBinding.tvUserNameSettings.setText(AccountHelper.getUserNick());
-        }else {
+        } else {
             mBinding.tvUserNameSettings.setText(AccountHelper.getUserMobile());
         }
-        if(AccountHelper.getUserPic()!=null&&!AccountHelper.getUserPic().equals("")){
+        if (AccountHelper.getUserPic() != null && !AccountHelper.getUserPic().equals("")) {
             Glide.with(this).load(AccountHelper.getUserPic()).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadSettings);
-        }else {
+        } else {
             Glide.with(this).load(DefaultUrlEnum.DEFAULTHEADPIC.value).apply(new RequestOptions().circleCrop()).into(mBinding.ivHeadSettings);
         }
+        String verName = "";
+        try {
+            verName = getPackageManager().
+                    getPackageInfo(getPackageName(), 0).versionName;
+            mBinding.versionSettings.setText(verName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onVipUserChanged(VipUserChangeEvent event){
-        if(event.getSuccess()){
+    public void onVipUserChanged(VipUserChangeEvent event) {
+        if (event.getSuccess()) {
             setMSG();
         }
     }
+
     @Override
     public void observe() {
 
@@ -83,12 +97,12 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.cl_person_settings:
-                Starter.startPersonDetailActivity(this,null);
+                Starter.startPersonDetailActivity(this, null);
                 break;
             case R.id.cl_change_password_settings:
-                Starter.startChangePWDActivity(this,null);
+                Starter.startChangePWDActivity(this, null);
                 break;
             case R.id.logout_settings:
 
@@ -101,7 +115,7 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
                         AccountHelper.loginOut();
                         UserAddressHelper.getInstance().clear();
                         ShoppingCartHelper.getInstance().clear();
-                        Starter.startLoginActivity(SettingsActivity.this,null);
+                        Starter.startLoginActivity(SettingsActivity.this, null);
                         mPopupWindow.dismiss();
                     }
                 });
@@ -133,7 +147,7 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Publ
                 UserAddressHelper.getInstance().clear();
                 break;
             case R.id.cl_current_version_settings:
-                Starter.startAboutGoldenDaysActivity(this,null);
+                Starter.startAboutGoldenDaysActivity(this, null);
                 break;
 
         }

@@ -82,7 +82,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             List<ConfirmOrderItemBean> confirmOrderItemBeans = GsonUtils.fromJson(goodsJson,
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
-            mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+            mBinding.tvTotalPrice.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
             mBinding.tvPrice1.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
