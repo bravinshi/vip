@@ -60,7 +60,7 @@ public class UserAddressHelper {
     public void setUserAddressList(List<UserAddressBean> list) {
         userAddressList.clear();
         userAddressList.addAll(list);
-        onChangeAddressList();
+        refreshAddressList();
     }
 
 

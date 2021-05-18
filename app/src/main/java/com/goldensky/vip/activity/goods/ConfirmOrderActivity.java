@@ -28,6 +28,7 @@ import com.goldensky.vip.event.PaymentReturnEvent;
 import com.goldensky.vip.event.PurchaseNumChangeEvent;
 import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.helper.AccountHelper;
+import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.ConfirmOrderViewModel;
 import com.google.gson.reflect.TypeToken;
@@ -39,6 +40,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
                     new TypeToken<List<ConfirmOrderItemBean>>(){}.getType());
             confirmOrderAdapter.setNewInstance(confirmOrderItemBeans);
             mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
-            mBinding.tvPrice1.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+            mBinding.tvPrice1.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
         }
 
         retrieveAddress();
@@ -96,7 +98,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             paymentOrderReqBean.setOrderNumberList(o);
             paymentOrderReqBean.setPayType(0);
             paymentOrderReqBean.setRechargeMoney(getTotalMoney());
-
+            ShoppingCartHelper.getInstance().onShopingCartListChange();
             mViewModel.getPaymentOrder(paymentOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
         });
 
@@ -190,11 +192,13 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
 
     private double getTotalMoney() {
         List<ConfirmOrderItemBean> confirmOrderItemBeanList = confirmOrderAdapter.getData();
-        double total = 0D;
+        BigDecimal total = new BigDecimal("0");
         for (ConfirmOrderItemBean confirmOrderItemBean : confirmOrderItemBeanList) {
-            total = total + confirmOrderItemBean.getPurchaseNum() * confirmOrderItemBean.getPrice();
+            BigDecimal temp = new BigDecimal(String.valueOf(confirmOrderItemBean.getPrice()));
+            temp = temp.multiply(new BigDecimal(String.valueOf(confirmOrderItemBean.getPurchaseNum())));
+            total = total.add(temp);
         }
-        return total;
+        return total.doubleValue();
     }
 
     // 提交订单
@@ -245,6 +249,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
+            showDefaultAddress=false;
         }
     }
 

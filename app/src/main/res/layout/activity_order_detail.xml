@@ -88,11 +88,12 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/cl_statu_orderdetail"
                     android:id="@+id/cl_logistics_orderdetail"
                     android:layout_width="match_parent"
                     android:background="@color/white"
-                    android:layout_height="100dp">
+                    android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_logistics_orderdetail"
                         app:layout_constraintTop_toTopOf="parent"
@@ -269,7 +270,6 @@
                         android:id="@+id/order_time_orderdetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{detailBean.createtime}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_marginTop="90dp"
@@ -328,6 +328,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_copy"
+                        android:onClick="@{listener}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginTop="55dp"
@@ -401,6 +402,7 @@
                         android:textColor="@color/EA483F"
                         />
                     <TextView
+                        android:id="@+id/tv_pay_orderdetail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toLeftOf="@+id/actual_payment_orderdetail"
                         android:layout_marginBottom="20dp"
@@ -415,6 +417,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/cancel_or_payment_orderdetail"
             android:layout_width="match_parent"

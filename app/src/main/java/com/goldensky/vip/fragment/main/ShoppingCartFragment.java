@@ -34,6 +34,8 @@ import com.goldensky.vip.event.ShoppingCartRefreshEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.viewmodel.shoppingcart.ShoppingCartViewModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -69,6 +71,28 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 setSumMoney();
             }
         });
+        mBinding.topBarShoppingCart.setRightListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView view = (TextView) v;
+                if (isEdit) {
+                    mBinding.tvSum.setVisibility(View.VISIBLE);
+                    mBinding.tvCloseAccount.setText("去结算");
+                    view.setText("编辑");
+                    view.setTextColor(Color.parseColor("#333333"));
+                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#ffffff"));
+                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_red);
+                } else {
+                    mBinding.tvSum.setVisibility(View.GONE);
+                    mBinding.tvCloseAccount.setText("删除");
+                    view.setText("完成");
+                    view.setTextColor(Color.parseColor("#E65858"));
+                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#888888"));
+                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_gray);
+                }
+                isEdit = !isEdit;
+            }
+        });
         adapter.addChildClickViewIds(new int[]{R.id.select_item_shopping_cart});
         adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
@@ -90,10 +114,17 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
             }
         });
         setSumMoney();
+        mBinding.smartShoppingCart.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mViewModel.getShoppingCartList(AccountHelper.getUserId());
+            }
+        });
         mViewModel.shoppingCartListLive.observe(this, new Observer<List<ShoppingCartGoodsBean>>() {
             @Override
             public void onChanged(List<ShoppingCartGoodsBean> shoppingCartGoodsBeans) {
                 ShoppingCartHelper.getInstance().setShoppingCartGoodsBeanList(shoppingCartGoodsBeans);
+                mBinding.smartShoppingCart.finishRefresh();
             }
         });
         mViewModel.updateCartGoodsNumberLive.observe(this, new Observer<Object>() {
@@ -102,6 +133,13 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                 mViewModel.getShoppingCartList(AccountHelper.getUserId());
             }
         });
+        mViewModel.getShoppingCartList(AccountHelper.getUserId());
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mViewModel.getShoppingCartList(AccountHelper.getUserId());
     }
 
@@ -145,10 +183,10 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     private void setSumMoney() {
         Double sumMoney = ShoppingCartHelper.getInstance().getSumMoney();
        if(sumMoney==0.00){
-           mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥0.00</font>"));
+           mBinding.tvSum.setText(Html.fromHtml("合计：<font color=\"#EA483F\">¥0.00</font>"));
        }else {
            String format = new DecimalFormat("#.00").format(sumMoney);
-           mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥" + format + "</font>"));
+           mBinding.tvSum.setText(Html.fromHtml("合计：<font color=\"#EA483F\">¥" + format + "</font>"));
        }
     }
 
@@ -160,24 +198,6 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_edit_finish:
-                if (isEdit) {
-                    mBinding.tvSum.setVisibility(View.VISIBLE);
-                    mBinding.tvCloseAccount.setText("去结算");
-                    mBinding.tvEditFinish.setText("编辑");
-                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#333333"));
-                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#ffffff"));
-                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_red);
-                } else {
-                    mBinding.tvSum.setVisibility(View.GONE);
-                    mBinding.tvCloseAccount.setText("删除");
-                    mBinding.tvEditFinish.setText("完成");
-                    mBinding.tvEditFinish.setTextColor(Color.parseColor("#E65858"));
-                    mBinding.tvCloseAccount.setTextColor(Color.parseColor("#888888"));
-                    mBinding.tvCloseAccount.setBackgroundResource(R.drawable.shape_btn_gray);
-                }
-                isEdit = !isEdit;
-                break;
             case R.id.tv_close_account:
                 if(isEdit){
                    if (ShoppingCartHelper.getInstance().hasSelect()){
@@ -222,11 +242,16 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
 
                 }else {
                    if(ShoppingCartHelper.getInstance().hasSelect()){
-                       Bundle bundle = new Bundle();
-                       List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
-                       String json = GsonUtils.toJson(confirmOrderList);
-                       bundle.putString("KEY_GOODS",json);
-                       Starter.startConfirmOrderActivity(getContext(),bundle);
+                       if(!ShoppingCartHelper.getInstance().hasNotOnshelf()){
+                           Bundle bundle = new Bundle();
+                           List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
+                           String json = GsonUtils.toJson(confirmOrderList);
+                           bundle.putString("KEY_GOODS",json);
+                           Starter.startConfirmOrderActivity(getContext(),bundle);
+                       }else {
+                           toast(getResources().getString(R.string.hint_goods_colse_shooping_cart));
+                       }
+
                    }else {
                        toast("请选择要结算的商品!");
                    }

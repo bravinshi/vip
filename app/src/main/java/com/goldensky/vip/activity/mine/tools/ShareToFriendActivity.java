@@ -91,6 +91,8 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)==
                 PackageManager.PERMISSION_DENIED&&ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)==
+                PackageManager.PERMISSION_DENIED&&ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)==
                 PackageManager.PERMISSION_DENIED){
             //判断为没有权限，换起权限申请询问
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},1);

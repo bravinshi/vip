@@ -29,6 +29,7 @@ import com.goldensky.vip.event.ShoppingCartRefreshEvent;
 import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
+import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -93,6 +94,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
+            showDefaultAddress=false;
         }
     }
 
@@ -211,6 +213,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
      * @param userAddresses 地址列表
      */
     private void handleAddress(List<UserAddressBean> userAddresses) {
+        UserAddressHelper.getInstance().setUserAddressList(userAddresses);
         if (selectAddressDialog == null) {
             selectAddressDialog = new SelectAddressDialog();
         }
@@ -252,7 +255,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void observe() {
         mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
-                mBinding.tvCommentNum.setText("(" + goodsCommentResBean.getTotalCount() + ")"));
+                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount()+goodsCommentResBean.getPraiseCount()+goodsCommentResBean.getDifferenceCount()) + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 
@@ -263,8 +266,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 ToastUtils.showShort(R.string.text_join_shopping_cart_success);
                 EventBus.getDefault().post(new ShoppingCartRefreshEvent());
                 goodsSpecificationDialog.dismissAllowingStateLoss();
-
-
             }
         });
     }

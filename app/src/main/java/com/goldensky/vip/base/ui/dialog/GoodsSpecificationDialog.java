@@ -91,8 +91,8 @@ public class GoodsSpecificationDialog extends BottomDialog {
             // 图片
             ImageLoaderHelper.loadImage(mBinding.ivPic, selectedInventory.getInventoryPic());
             // 价格
-            mBinding.tvPrice.setText(selectedInventory.getCommodityOldPrice() + "");
-            mBinding.tvBuyFromNum.setText("最小购买数量:" + selectedInventory.getBuyFromNum());
+            mBinding.tvPrice.setText("¥"+selectedInventory.getCommodityOldPrice() + "");
+
         }
     }
 
@@ -153,11 +153,11 @@ public class GoodsSpecificationDialog extends BottomDialog {
 //        }
 
 
-        if (belongType != null && belongType == 0
-                && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
-            ToastUtils.showShort("库存不足");
-            return false;
-        }
+            if (belongType != null && belongType == 1
+                    && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
+                ToastUtils.showShort("库存不足");
+                return false;
+            }
 
         return true;
     }

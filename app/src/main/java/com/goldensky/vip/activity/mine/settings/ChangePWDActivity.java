@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.activity.account.SetPasswordActivity;
@@ -24,7 +25,7 @@ import com.goldensky.vip.viewmodel.PublicViewModel;
 import com.goldensky.vip.viewmodel.account.AccountViewModel;
 
 public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, AccountViewModel> implements View.OnClickListener {
-    private ChangePWDModel changePWDModel=new ChangePWDModel();
+    private ChangePWDModel changePWDModel = new ChangePWDModel();
 
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
@@ -61,41 +62,47 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
             public void onChanged(Integer integer) {
                 toast(getResources().getString(R.string.hint_change_psd_success));
                 AccountHelper.loginOut();
-                Starter.startLoginActivity(ChangePWDActivity.this,null);
+                Starter.startLoginActivity(ChangePWDActivity.this, null);
             }
         });
     }
 
     private void confirm() {
-            if (StringUtils.isTrimEmpty(changePWDModel.getNewPassword())) {
-                toast(R.string.hint_input_new_password);
-                return;
-            }
+        if (StringUtils.isTrimEmpty(changePWDModel.getNewPassword())) {
+            toast(R.string.hint_input_new_password);
+            return;
+        }
 
-            if (changePWDModel.getNewPassword().trim().length() < 6
-                    || changePWDModel.getNewPassword().trim().length() > 16) {
-                toast(R.string.hint_new_password_length_is_wrong);
-                return;
-            }
+        if (changePWDModel.getNewPassword().trim().length() < 6
+                || changePWDModel.getNewPassword().trim().length() > 16) {
+            toast(R.string.hint_new_password_length_is_wrong);
+            return;
+        }
 
-            if (StringUtils.isTrimEmpty(changePWDModel.getNewPasswordConfirm())) {
-                toast(R.string.hint_input_new_password_confirm);
-                return;
-            }
+        if (StringUtils.isTrimEmpty(changePWDModel.getNewPasswordConfirm())) {
+            toast(R.string.hint_input_new_password_confirm);
+            return;
+        }
+        try {
+            Integer temp = Integer.valueOf(changePWDModel.getNewPassword());
+            ToastUtils.showShort("密码不能为纯数字");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!changePWDModel.getNewPassword().trim().equals(changePWDModel.getNewPasswordConfirm().trim())) {
+            toast(R.string.hint_password_not_equal);
+            return;
+        }
 
-            if (!changePWDModel.getNewPassword().trim().equals(changePWDModel.getNewPasswordConfirm().trim())) {
-                toast(R.string.hint_password_not_equal);
-                return;
-            }
+        // 修改密码
+        UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
 
-            // 修改密码
-            UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
-
-            userInfo.setPhoneCode(changePWDModel.getVerificationCode().trim());
-            userInfo.setUserPassword(changePWDModel.getNewPasswordConfirm().trim());
-            userInfo.setNewPwd(changePWDModel.getNewPassword().trim());
-            userInfo.setUserId(AccountHelper.getUserId());
-            mViewModel.updateVipUser(userInfo);
+        userInfo.setPhoneCode(changePWDModel.getVerificationCode().trim());
+        userInfo.setNewPwd(changePWDModel.getNewPassword().trim());
+        userInfo.setUsermobile(AccountHelper.getUserMobile());
+        userInfo.setUserId(AccountHelper.getUserId());
+        mViewModel.updateVipUser(userInfo);
 
     }
 
@@ -106,20 +113,20 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_get_code_change_pwd:
                 mViewModel.getVerificationCode(AccountHelper.getUserMobile());
                 break;
             case R.id.confirm_commit_change_pwd:
-                if(changePWDModel.getConfirm()){
+                if (changePWDModel.getConfirm()) {
                     confirm();
-                }else {
+                } else {
                     mViewModel.checkCode(AccountHelper.getUserMobile(), changePWDModel.getVerificationCode(), new FailCallback() {
                         @Override
                         public void onFail(NetResponse netResponse) {
-                            if(netResponse.getCode()==5){
+                            if (netResponse.getCode() == 5) {
                                 toast(getResources().getString(R.string.hint_input_code_nonull));
-                            }else {
+                            } else {
                                 toast(netResponse.getMessage());
                             }
                         }
@@ -127,20 +134,20 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
                 }
                 break;
             case R.id.can_see_new_change_pwd:
-                if (changePWDModel.getNewPasswordCanSee()){
+                if (changePWDModel.getNewPasswordCanSee()) {
                     mBinding.etPwdChangePwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     mBinding.canSeeNewChangePwd.setImageResource(R.mipmap.bukejian);
-                }else {
+                } else {
                     mBinding.etPwdChangePwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     mBinding.canSeeNewChangePwd.setImageResource(R.mipmap.kejian);
                 }
                 changePWDModel.setNewPasswordCanSee(!changePWDModel.getNewPasswordCanSee());
                 break;
             case R.id.can_see_confirm_change_pwd:
-                if (changePWDModel.getConfirmPasswordCanSee()){
+                if (changePWDModel.getConfirmPasswordCanSee()) {
                     mBinding.etConfirmPwdChangePwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     mBinding.canSeeConfirmChangePwd.setImageResource(R.mipmap.bukejian);
-                }else {
+                } else {
                     mBinding.etConfirmPwdChangePwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     mBinding.canSeeConfirmChangePwd.setImageResource(R.mipmap.kejian);
                 }

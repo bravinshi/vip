@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.goldensky.framework.bean.NetResponse;
+import com.goldensky.framework.util.StringUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.activity.order.OrderCommentActivity;
@@ -43,6 +44,7 @@ import java.util.List;
 public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetailsBinding, AccountViewModel> implements View.OnClickListener {
     private PopupWindow mPopupWindow;
     private LocalMedia lastMedia;
+    private String modifyPic="";
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -85,16 +87,16 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
             @Override
             public void onChanged(String s) {
                 UpdateVipUserReqBean bean = new UpdateVipUserReqBean();
+                modifyPic=s;
                 bean.setUserId(AccountHelper.getUserId());
                 bean.setUserpic(s);
                 mViewModel.updateVipUser(bean);
             }
         });
-        mViewModel.uploadPicLiveData.observe(this, new Observer<String>() {
+        mViewModel.userLive.observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(String s) {
-                AccountHelper.setUserPic(s);
-                toast("");
+            public void onChanged(Integer s) {
+                AccountHelper.setUserPic(modifyPic);
             }
         });
     }
@@ -129,6 +131,7 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
                 //拍照
                 PictureSelector.create(this)
                         .openCamera(PictureMimeType.ofImage())
+                        .isCompress(true)
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 closePopupWindow();
                 break;
@@ -187,8 +190,10 @@ public class PersonalDetailsActivity extends BaseActivity<ActivityPersonalDetail
                     if (media.isCompressed()) {
                         //压缩
                         path = media.getCompressPath();
-                    } else {
+                    } else if (!StringUtils.isEmpty(media.getRealPath())){
                         //原图
+                        path = media.getRealPath();
+                    } else {
                         path = media.getPath();
                     }
                     if(path!=null&&!path.equals("")){
