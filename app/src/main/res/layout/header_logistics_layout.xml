@@ -51,26 +51,26 @@
                         android:textSize="15dp" />
                 </LinearLayout>
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/pt5"-->
-<!--                    android:orientation="horizontal">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="承运来源："-->
-<!--                        android:textColor="#FF999999"-->
-<!--                        android:textSize="@dimen/pt15" />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="承运来源："
+                        android:textColor="#FF999999"
+                        android:textSize="15dp" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv_expressname"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="#FF000000"-->
-<!--                        android:textSize="@dimen/pt15" />-->
-<!--                </LinearLayout>-->
+                    <TextView
+                        android:id="@+id/tv_expressname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

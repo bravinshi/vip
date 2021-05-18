@@ -159,6 +159,7 @@ public class OrderListFragment extends LazyLoadFragment<FragmentOrderListBinding
             public void onChanged(LogisticsBean logisticsBean) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("logistics", logisticsBean);
+                bundle.putSerializable("express",express);
                 bundle.putString("pic", orderDetailLists.get(0).getOrderDetailList().get(0).getInventorypic());
                 Starter.startLogisticsActivity(getContext(), bundle);
             }

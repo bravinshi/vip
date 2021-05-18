@@ -95,10 +95,10 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
         mViewModel.submitOrderLive.observe(this, o -> {
             // 生成预支付订单
             PaymentOrderReqBean paymentOrderReqBean = new PaymentOrderReqBean();
-
             paymentOrderReqBean.setOrderNumberList(o);
             paymentOrderReqBean.setPayType(0);
             paymentOrderReqBean.setRechargeMoney(getTotalMoney());
+            ShoppingCartHelper.getInstance().clearSelect();
             ShoppingCartHelper.getInstance().onShopingCartListChange();
             mViewModel.getPaymentOrder(paymentOrderReqBean, netResponse -> loadingDialog.dismissAllowingStateLoss());
         });

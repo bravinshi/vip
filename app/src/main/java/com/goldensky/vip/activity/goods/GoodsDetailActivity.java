@@ -255,7 +255,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void observe() {
         mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
-                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount()+goodsCommentResBean.getPraiseCount()+goodsCommentResBean.getDifferenceCount()) + ")"));
+                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount()+goodsCommentResBean.getPraiseCount()+goodsCommentResBean.getTotalCount()) + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 

@@ -8,11 +8,13 @@ import com.goldensky.vip.bean.GetOrderListReqBean;
 import com.goldensky.vip.bean.GetPaymentOrderResBean;
 import com.goldensky.vip.bean.LogisticsBean;
 import com.goldensky.vip.bean.LogisticsReqBean;
+import com.goldensky.vip.bean.OrderCountBean;
 import com.goldensky.vip.bean.OrderDetailBean;
 import com.goldensky.vip.bean.OrderListBean;
 import com.goldensky.vip.bean.OrderNumberReqBean;
 import com.goldensky.vip.bean.PaymentOrderReqBean;
 import com.goldensky.vip.bean.UpdateOrderReqBean;
+import com.goldensky.vip.bean.UserIdReqBean;
 
 import java.util.List;
 
@@ -47,4 +49,6 @@ public interface OrderService {
     @POST("/goldendays-currency/currency/queryTrackMap")
     Observable<NetResponse<LogisticsBean>> querTrackMap(@Body LogisticsReqBean body);
 
+    @GET("/goldendays-order/vipOrderClient/queryOrderByStatus")
+    Observable<NetResponse<OrderCountBean>> getOrderCount(@Query("userid") String userId);
 }
