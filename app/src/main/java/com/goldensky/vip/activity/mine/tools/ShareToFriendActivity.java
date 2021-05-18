@@ -100,17 +100,11 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
         if (requestCode == MODE_PRIVATE) {
             if (Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (Manifest.permission.READ_EXTERNAL_STORAGE.equals(permissions[1])) {
+                    if (Manifest.permission.CAMERA.equals(permissions[1])) {
                         if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                            if (Manifest.permission.CAMERA.equals(permissions[1])) {
-                                if (grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                                    saveImage();
-                                } else {
-                                    ToastUtils.showShort("请在权限设置里允许访问相机");
-                                }
-                            }
+                            saveImage();
                         } else {
-                            ToastUtils.showShort("请在权限设置里允许访问存储");
+                            ToastUtils.showShort("请在权限设置里允许访问相机");
                         }
                     }
                 } else {
@@ -120,9 +114,6 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
 
         }
     }
-
-
-
 
 
     private void saveImage() {
@@ -136,7 +127,7 @@ public class ShareToFriendActivity extends BaseActivity<ActivityShareToFriendBin
             saveImage();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, MODE_PRIVATE);
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, MODE_PRIVATE);
             }
         }
     }
