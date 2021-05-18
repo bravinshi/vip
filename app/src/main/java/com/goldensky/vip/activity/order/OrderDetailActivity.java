@@ -203,7 +203,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
                 PayReq payReq = new PayReq();
                 payReq.appId = ConfigConstant.WX_APP_ID;
                 payReq.partnerId = ConfigConstant.WX_MCH_ID;
-                payReq.prepayId = jsonObject.getPrepayId();
+                payReq.prepayId = jsonObject.getPrepayid();
                 payReq.packageValue = "Sign=WXPay";
                 payReq.nonceStr = jsonObject.getNoncestr();
                 payReq.timeStamp = jsonObject.getTimestamp();

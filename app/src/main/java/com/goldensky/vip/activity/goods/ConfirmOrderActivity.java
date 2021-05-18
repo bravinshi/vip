@@ -72,6 +72,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             String addressJson = bundle.getString(KEY_ADDRESS);
             if (!StringUtils.isTrimEmpty(addressJson)) {
                 selectedAddress = GsonUtils.fromJson(addressJson, UserAddressBean.class);
+                showDefaultAddress = true;
             }
 
             drawAddress();
@@ -109,7 +110,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
             PayReq payReq = new PayReq();
             payReq.appId = ConfigConstant.WX_APP_ID;
             payReq.partnerId = ConfigConstant.WX_MCH_ID;
-            payReq.prepayId = o.getPrepayId();
+            payReq.prepayId = o.getPrepayid();
             payReq.packageValue = "Sign=WXPay";
             payReq.nonceStr = o.getNoncestr();
             payReq.timeStamp = o.getTimestamp();

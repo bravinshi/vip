@@ -8,17 +8,17 @@ package com.goldensky.vip.bean;
  * 类说明：
  */
 public class GetPaymentOrderResBean {
-    private String prepayId;
+    private String prepayid;
     private String noncestr;
     private String timestamp;
     private String paySign;
 
-    public String getPrepayId() {
-        return prepayId;
+    public String getPrepayid() {
+        return prepayid;
     }
 
-    public void setPrepayId(String prepayId) {
-        this.prepayId = prepayId;
+    public void setPrepayid(String prepayid) {
+        this.prepayid = prepayid;
     }
 
     public String getNoncestr() {
