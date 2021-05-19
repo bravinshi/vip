@@ -62,6 +62,7 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
     private PopupWindow mPopupWindow;
     private boolean keyboardListenersAttached = false;
     private ViewGroup rootLayout;
+    private int keyboardHeight;
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_shopping_cart;
@@ -74,7 +75,7 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
             if(heightDiff <= contentViewTop){
                 onHideKeyboard();
             } else {
-                int keyboardHeight = heightDiff - contentViewTop;
+                keyboardHeight = heightDiff - contentViewTop;
                 onShowKeyboard(keyboardHeight);
             }
         }
@@ -310,6 +311,14 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                         if (!ShoppingCartHelper.getInstance().hasNotOnshelf()) {
                             Bundle bundle = new Bundle();
                             List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
+                            for (int i = 0; i < shoppingCartGoodsList.size(); i++) {
+                                for (int j = 0; j < confirmOrderList.size(); j++) {
+                                    if(confirmOrderList.get(j).getCommodityId().equals(shoppingCartGoodsList.get(i).getCommodityid())){
+                                        NumberButton numberButton = (NumberButton) adapter.getViewByPosition(i,R.id.number_item_shopping_cart);
+                                        confirmOrderList.get(j).setPurchaseNum(numberButton.getEditCount());
+                                    }
+                                }
+                            }
                             String json = GsonUtils.toJson(confirmOrderList);
                             bundle.putString("KEY_GOODS", json);
                             Starter.startConfirmOrderActivity(getContext(), bundle);

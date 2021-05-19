@@ -117,6 +117,9 @@ public class NumberButton extends LinearLayout {
                         return;
                     }
                     if(countString.startsWith("0")){
+                        ToastUtils.showShort("购买数量不能小于:" + minCount);
+                        countNumberButton.setText("1");
+                        countNumberButton.setSelection(countString.length());//光标移至尾部
                         return;
                     }
                     count = Integer.parseInt(countString);
@@ -124,6 +127,7 @@ public class NumberButton extends LinearLayout {
                         ToastUtils.showShort("购买量不能大于:" + maxCount);
                         count = maxCount;
                         changeCount(count);
+                        listener.onChange(NumberButton.this);
                     }
 
                 }
@@ -186,6 +190,10 @@ public class NumberButton extends LinearLayout {
 
     public void setCountChageListener(OnCountChangeListener listener) {
         this.listener = listener;
+    }
+
+    public Integer getEditCount() {
+        return Integer.parseInt(countNumberButton.getEditableText().toString().trim());
     }
 
     public interface OnCountChangeListener {
