@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +16,7 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.MineToolAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
 import com.goldensky.vip.bean.MineToolBean;
+import com.goldensky.vip.bean.OrderCountBean;
 import com.goldensky.vip.databinding.FragmentMineBinding;
 import com.goldensky.vip.enumerate.DefaultUrlEnum;
 import com.goldensky.vip.event.VipUserChangeEvent;
@@ -34,6 +36,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
     private List<MineToolBean> toolList=new ArrayList<>();
     private MineToolAdapter orderAdapter;
     private MineToolAdapter toolAdapter;
+    private List<Integer> orderCounts=new ArrayList<>();
     private boolean flag=true;
     @Override
     protected int getLayoutRes() {
@@ -65,11 +68,23 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                     return false;
                 }
             });
-            orderAdapter=new MineToolAdapter(orderList);
+            mViewModel.getOrderCount(AccountHelper.getUserId());
             toolAdapter=new MineToolAdapter(toolList);
+            orderAdapter=new MineToolAdapter(orderList);
             mBinding.rvOrderMine.setAdapter(orderAdapter);
             mBinding.rvToolMine.setAdapter(toolAdapter);
             mBinding.setListener(this);
+            mViewModel.orderCountLive.observe(this, new Observer<OrderCountBean>() {
+                @Override
+                public void onChanged(OrderCountBean orderCountBean) {
+                    orderCounts.add(orderCountBean.getToBePay());
+                    orderCounts.add(orderCountBean.getReceived());
+                    orderCounts.add(orderCountBean.getComplete());
+                    orderCounts.add(orderCountBean.getTotal());
+                    orderAdapter.setCountList(orderCounts);
+                    orderAdapter.notifyDataSetChanged();
+                }
+            });
             orderAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

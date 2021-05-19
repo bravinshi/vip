@@ -18,13 +18,19 @@
             app:centerText="@string/text_logistics"
             android:layout_height="wrap_content"
          />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_logistics"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toBottomOf="@+id/top_bar_logistics"
             android:layout_height="0dp"
             app:layout_constraintVertical_weight="1"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar_logistics"
+            android:layout_width="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_logistics"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <include layout="@layout/include_empty_logistics" android:id="@+id/include_logistics" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -167,7 +167,7 @@
             app:layout_constraintTop_toBottomOf="@+id/top_bar_mine"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="match_parent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:layout_height="95dp"
             android:layout_marginTop="135dp"
             android:layout_marginLeft="15dp"

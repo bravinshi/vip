@@ -34,15 +34,6 @@ public class PictrueSaveUtils {
 
     //保存BitMap图片到本地文件
     public static void saveBitmap(Context context, Bitmap bitmap) {
-        // 检查是否有访问本地图库的权限
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA)) {
-            ToastUtils.showShort("请在权限设置里允许访问相册");
-            return;
-        }
-        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            ToastUtils.showShort("请在权限设置里允许存储");
-            return;
-        }
         //获取需要存储到本地的路径
 //        File file = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File file = Environment.getExternalStorageDirectory();

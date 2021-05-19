@@ -28,7 +28,7 @@ public interface AccountService {
     @POST("/goldendays-user/merchantUser/getUserAndMerchant")
     Observable<NetResponse<SuperStBean>> getUserAndMerchant(@Body UserIdReqBean reqBean);
 
-    @POST("https://openapi.jtmsh.com//goldendays-currency/wxApplet/getWxAppletCode")
+    @POST("https://openapi.jtmsh.com/goldendays-currency/wxApplet/getWxAppletCode")
 //    @POST("/goldendays-currency/wxApplet/getWxAppletCode")
     Observable<ResponseBody> getWxAppletCode(@Query("userid") String userid,
                                                           @Query("scene") String scene);

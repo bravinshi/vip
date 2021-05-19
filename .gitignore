@@ -13,5 +13,6 @@ local.properties
 /app/release
 /library/debug
 /library/release
+/library/build
 /goldenFramework/build
 /.idea/

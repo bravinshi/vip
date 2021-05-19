@@ -126,6 +126,7 @@
     <string name="hint_logout">确认退出登录?</string>
     <string name="hint_empty_shopping_cart">还没有商品，赶紧去添加吧～</string>
     <string name="hint_empty_address">暂无收货地址</string>
+    <string name="hint_empty_logistics">查无结果</string>
     <string name="hint_empty_order">暂无订单</string>
     <string name="hint_delete_success">删除成功</string>
     <string name="text_join_shopping_cart_success">添加成功，在购物车等您哦~</string>

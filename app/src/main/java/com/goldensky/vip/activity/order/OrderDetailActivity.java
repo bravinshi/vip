@@ -289,6 +289,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
             case R.id.check_logistics_orderdetail://查看物流信息
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("logistics",logistics);
+                bundle.putSerializable("express",express);
                 bundle.putString("pic",orderDetail.getOrderDetailList().get(0).getInventorypic());
                 Starter.startLogisticsActivity(this,bundle);
                 break;

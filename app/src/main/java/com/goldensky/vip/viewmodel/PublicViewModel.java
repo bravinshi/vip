@@ -8,6 +8,7 @@ import com.goldensky.vip.api.PublicService;
 import com.goldensky.vip.api.account.AccountService;
 import com.goldensky.vip.api.account.AddressService;
 import com.goldensky.vip.api.goods.GoodsService;
+import com.goldensky.vip.api.order.OrderService;
 import com.goldensky.vip.api.shoppingcart.ShoppingCartService;
 import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.viewmodel.NetWorkViewModel;
@@ -18,6 +19,7 @@ import com.goldensky.vip.bean.CheckVersionResBean;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
+import com.goldensky.vip.bean.OrderCountBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -57,6 +59,7 @@ public class PublicViewModel extends NetWorkViewModel {
 
     public MutableLiveData<CheckVersionResBean> checkVersionLive = new MutableLiveData<>();
 
+    public MutableLiveData<OrderCountBean> orderCountLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -310,6 +313,17 @@ public class PublicViewModel extends NetWorkViewModel {
                             failCallback.onFail(data);
                         }
                         return true;
+                    }
+                });
+    }
+
+    public void getOrderCount(String userId){
+        RetrofitAgent.create(OrderService.class)
+                .getOrderCount(userId)
+                .subscribe(new ToastNetObserver<OrderCountBean>() {
+                    @Override
+                    public void onSuccess(OrderCountBean data) {
+                        orderCountLive.postValue(data);
                     }
                 });
     }
