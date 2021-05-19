@@ -138,6 +138,7 @@ public class NumberButton extends LinearLayout {
                 String s = editText.getEditableText().toString().trim();
                 if (!hasFocus) {
                     if (editText.getEditableText().length() == 0) {
+                        ToastUtils.showShort("购买数量不能小于:" + minCount);
                         countNumberButton.setText("1");
                         countNumberButton.setSelection(1);//光标移至尾部
                     }else {
