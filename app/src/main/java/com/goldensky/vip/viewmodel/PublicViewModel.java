@@ -17,8 +17,10 @@ import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.bean.AreaListBean;
 import com.goldensky.vip.bean.CheckVersionResBean;
 import com.goldensky.vip.bean.CommodityBean;
+import com.goldensky.vip.bean.GetUserByIdReqBean;
 import com.goldensky.vip.bean.GoodsCommentResBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
+import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.bean.OrderCountBean;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.SuperStBean;
@@ -60,6 +62,7 @@ public class PublicViewModel extends NetWorkViewModel {
     public MutableLiveData<CheckVersionResBean> checkVersionLive = new MutableLiveData<>();
 
     public MutableLiveData<OrderCountBean> orderCountLive = new MutableLiveData<>();
+    public MutableLiveData<LoginResponseBean.VipUser> vipUserLive = new MutableLiveData<>();
 
     public void uploadPic(String filePath, final FailCallback callback) {
         File file = new File(filePath);
@@ -316,7 +319,7 @@ public class PublicViewModel extends NetWorkViewModel {
                     }
                 });
     }
-
+    //获取评论数量
     public void getOrderCount(String userId){
         RetrofitAgent.create(OrderService.class)
                 .getOrderCount(userId)
@@ -324,6 +327,19 @@ public class PublicViewModel extends NetWorkViewModel {
                     @Override
                     public void onSuccess(OrderCountBean data) {
                         orderCountLive.postValue(data);
+                    }
+                });
+    }
+
+    public void getVipUser(String userId){
+        GetUserByIdReqBean bean = new GetUserByIdReqBean();
+        bean.setUserid(userId);
+        RetrofitAgent.create(AccountService.class)
+                .getVipUserByUserId(bean)
+                .subscribe(new ToastNetObserver<LoginResponseBean.VipUser>() {
+                    @Override
+                    public void onSuccess(LoginResponseBean.VipUser data) {
+                        vipUserLive.postValue(data);
                     }
                 });
     }

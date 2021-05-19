@@ -97,7 +97,6 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             showDefaultAddress=false;
         }
     }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleAddAddress(ShowSpecificationEvent showSpecificationEvent) {
         mBinding.tvSpecification.setText(showSpecificationEvent.getSpecification());

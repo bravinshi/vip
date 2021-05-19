@@ -4,6 +4,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -27,12 +28,17 @@ import java.util.List;
 
 public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsBean, BaseViewHolder> {
     private NumberButton.OnCountChangeListener listener;
+    private TextView.OnEditorActionListener foucsListener;
     public ShoppingCartListAdapter(@Nullable List<ShoppingCartGoodsBean> data) {
         super(R.layout.item_shopping_cart, data);
     }
 
     public void setOnCountChangeListener(NumberButton.OnCountChangeListener listener) {
         this.listener = listener;
+    }
+
+    public void setFoucsListener(TextView.OnEditorActionListener foucsListener) {
+        this.foucsListener = foucsListener;
     }
 
     @Override
@@ -55,8 +61,10 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
             binding.numberItemShoppingCart.setVisibility(View.VISIBLE);
             binding.numberItemShoppingCart.setCount(shoppingCartGoodsBean.getPurchasenum());
             binding.numberItemShoppingCart.setMinCount(1);
+            binding.numberItemShoppingCart.setMaxCount(999);
             binding.numberItemShoppingCart.setTag(shoppingCartGoodsBean);
             binding.numberItemShoppingCart.setCountChageListener(listener);
+            binding.numberItemShoppingCart.setFocusListener(foucsListener);
             binding.viewOverspreadShoppingCart.setVisibility(View.GONE);
         }
 

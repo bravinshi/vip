@@ -88,7 +88,7 @@
         <activity android:name=".activity.account.ForgetPasswordActivity" />
         <activity android:name=".activity.goods.PackageCustomizationActivity" />
         <activity android:name=".activity.goods.SearchActivity" />
-        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".MainActivity" android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name=".activity.goods.GoodsDetailActivity" />
         <activity android:name=".activity.goods.SpecialPriceAreaActivity" />
         <activity android:name=".activity.goods.HotTodayActivity" />

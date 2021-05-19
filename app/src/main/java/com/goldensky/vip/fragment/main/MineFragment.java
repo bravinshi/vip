@@ -15,6 +15,7 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.MineToolAdapter;
 import com.goldensky.vip.base.fragment.LazyLoadFragment;
+import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.bean.MineToolBean;
 import com.goldensky.vip.bean.OrderCountBean;
 import com.goldensky.vip.databinding.FragmentMineBinding;
@@ -46,6 +47,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
     @Override
     public void onResume() {
         super.onResume();
+        mViewModel.getVipUser(AccountHelper.getUserId());
         mViewModel.getOrderCount(AccountHelper.getUserId());
         if(flag){
             orderList.add(new MineToolBean(R.mipmap.my_icon_daifukuan,"待付款"));
@@ -69,23 +71,12 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                     return false;
                 }
             });
-
             toolAdapter=new MineToolAdapter(toolList);
             orderAdapter=new MineToolAdapter(orderList);
             mBinding.rvOrderMine.setAdapter(orderAdapter);
             mBinding.rvToolMine.setAdapter(toolAdapter);
             mBinding.setListener(this);
-            mViewModel.orderCountLive.observe(this, new Observer<OrderCountBean>() {
-                @Override
-                public void onChanged(OrderCountBean orderCountBean) {
-                    orderCounts.add(orderCountBean.getToBePay());
-                    orderCounts.add(orderCountBean.getReceived());
-                    orderCounts.add(orderCountBean.getComplete());
-                    orderCounts.add(orderCountBean.getTotal());
-                    orderAdapter.setCountList(orderCounts);
-                    orderAdapter.notifyDataSetChanged();
-                }
-            });
+
             orderAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -169,8 +160,42 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        setMSG();
+        mViewModel.orderCountLive.observe(this, new Observer<OrderCountBean>() {
+            @Override
+            public void onChanged(OrderCountBean orderCountBean) {
+                orderCounts.clear();
+                orderCounts.add(orderCountBean.getToBePay());
+                orderCounts.add(orderCountBean.getReceived());
+                orderCounts.add(orderCountBean.getComplete());
+                orderCounts.add(orderCountBean.getTotal());
+                orderAdapter.setCountList(orderCounts);
+                orderAdapter.notifyDataSetChanged();
+            }
+        });
+        mViewModel.vipUserLive.observe(this, new Observer<LoginResponseBean.VipUser>() {
+            @Override
+            public void onChanged(LoginResponseBean.VipUser vipUser) {
+                if(vipUser!= null){
+                    if(AccountHelper.getUserNick()!=null){
+                        if(!AccountHelper.getUserNick().equals(vipUser.getUserNick())){
+                            AccountHelper.setNick(vipUser.getUserNick());
+                        }
+                    }else {
+                        AccountHelper.setNick(vipUser.getUserNick());
+                    }
+                    if(AccountHelper.getUserPic()!=null){
+                        if(!AccountHelper.getUserPic().equals(vipUser.getUserpic())){
+                            AccountHelper.setUserPic(vipUser.getUserpic());
+                        }
 
+                    }else {
+                        AccountHelper.setUserPic(vipUser.getUserpic());
+                    }
+                    setMSG();
+                }
+            }
+        });
+        setMSG();
     }
 
     private void setMSG() {

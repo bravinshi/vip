@@ -21,12 +21,18 @@ public class NumberButton extends LinearLayout {
     private EditText countNumberButton;
     private TextView plusNumberButton;
     private OnCountChangeListener listener;
-    public int count=1;
-    private int minCount=1;
-    private int maxCount=Integer.MAX_VALUE;
-    private boolean isUser=false;
+    public int count = 1;
+    private int minCount = 1;
+    private int maxCount = Integer.MAX_VALUE;
+    private boolean isUser = false;
+    private int inputCount=1;
+    private TextView.OnEditorActionListener focusListener;
     public NumberButton(Context context) {
         super(context);
+    }
+
+    public void setFocusListener(TextView.OnEditorActionListener focusListener) {
+        this.focusListener = focusListener;
     }
 
     public NumberButton(Context context, @Nullable AttributeSet attrs) {
@@ -46,31 +52,45 @@ public class NumberButton extends LinearLayout {
         minusNumberButton = (TextView) findViewById(R.id.minus_number_button);
         countNumberButton = (EditText) findViewById(R.id.count_number_button);
         plusNumberButton = (TextView) findViewById(R.id.plus_number_button);
+        if(focusListener!=null){
+            countNumberButton.setOnEditorActionListener(focusListener);
+        }
         minusNumberButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count-1<minCount){
-                    ToastUtils.showShort("购买数量不能小于:"+minCount);
-                    count=minCount;
-                }else {
+                countNumberButton.clearFocus();
+                if (count - 1 < minCount) {
+                    ToastUtils.showShort("购买数量不能小于:" + minCount);
+                    count = minCount;
+                } else {
                     count--;
                 }
-                isUser=true;
+                isUser = true;
                 changeCount(count);
+                if (listener != null) {
+                    listener.onChange(NumberButton.this);
+                }
             }
 
         });
         plusNumberButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count+1>maxCount){
-                    ToastUtils.showShort("购买量不能大于:"+maxCount);
-                    count=maxCount;
-                }else {
-                    count++;
+                countNumberButton.clearFocus();
+                if (count + 1 > maxCount) {
+                    ToastUtils.showShort("购买量不能大于:" + maxCount);
+                    count = maxCount;
+                } else {
+                    if(inputCount!=0){
+                        count++;
+                    }
+
                 }
-                isUser=true;
+                isUser = true;
                 changeCount(count);
+                if (listener != null) {
+                    listener.onChange(NumberButton.this);
+                }
             }
         });
         countNumberButton.addTextChangedListener(new TextWatcher() {
@@ -86,59 +106,71 @@ public class NumberButton extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()==0){
-                    countNumberButton.setText("1");
-                    countNumberButton.setSelection(1) ;//光标移至尾部
-                    if (listener!=null){
-                        listener.onChange(NumberButton.this);
-                    }
-                    return;
-                }
-                if(s.length()>0){
-                    String countString =s.toString().trim();
 
-                    if (countString.startsWith("0")&&countString.length() >= 2) {
+                if (s.length() > 0) {
+                    inputCount=Integer.parseInt(s.toString().trim());
+                    String countString = s.toString().trim();
+                    if (countString.startsWith("0") && countString.length() >= 2) {
                         countString = countString.substring(1);
                         countNumberButton.setText(countString);
-                        countNumberButton.setSelection(countString.length()) ;//光标移至尾部
-                        if (listener!=null){
-                            listener.onChange(NumberButton.this);
-                        }
+                        countNumberButton.setSelection(countString.length());//光标移至尾部
+                        return;
+                    }
+                    if(countString.startsWith("0")){
                         return;
                     }
                     count = Integer.parseInt(countString);
-                   if(count>maxCount){
-                       ToastUtils.showShort("购买量不能大于:"+maxCount);
-                       count=maxCount;
-                       changeCount(count);
+                    if (count > maxCount) {
+                        ToastUtils.showShort("购买量不能大于:" + maxCount);
+                        count = maxCount;
+                        changeCount(count);
+                    }
 
-                   }
-                   if(count<minCount){
-                       ToastUtils.showShort("购买数量不能小于:"+minCount);
-                       count=minCount;
-                       changeCount(count);
-                   }
                 }
-                if(isUser){
-                    if (listener!=null){
-                        listener.onChange(NumberButton.this);
+
+
+            }
+        });
+        countNumberButton.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditText editText = (EditText) v;
+                String s = editText.getEditableText().toString().trim();
+                if (!hasFocus) {
+                    if (editText.getEditableText().length() == 0) {
+                        countNumberButton.setText("1");
+                        countNumberButton.setSelection(1);//光标移至尾部
+                    }else {
+                        if(s.startsWith("0")){
+                            ToastUtils.showShort("购买数量不能小于:" + minCount);
+                            count = minCount;
+                            countNumberButton.setText(count+"");
+                            countNumberButton.setSelection(1);//光标移至尾部
+                        }
+                    }
+
+                    if(isUser){
+                        if (listener != null) {
+                            listener.onChange(NumberButton.this);
+                        }
                     }
                 }
-
             }
         });
     }
 
     public void changeCount(Integer number) {
-           countNumberButton.setText(number+"");
-           countNumberButton.setSelection(countNumberButton.getEditableText().length()) ;//光标移至尾部
+        countNumberButton.setText(number + "");
+        countNumberButton.setSelection(countNumberButton.getEditableText().length());//光标移至尾部
     }
 
     public void setCount(int count) {
-        isUser=false;
+        isUser = false;
         this.count = count;
         changeCount(this.count);
+        isUser=true;
     }
+
     public int getCount() {
         return count;
     }
@@ -155,7 +187,7 @@ public class NumberButton extends LinearLayout {
         this.listener = listener;
     }
 
-    public interface OnCountChangeListener{
+    public interface OnCountChangeListener {
         void onChange(NumberButton button);
     }
 }
