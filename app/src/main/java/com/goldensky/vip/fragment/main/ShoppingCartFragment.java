@@ -313,9 +313,11 @@ public class ShoppingCartFragment extends LazyLoadFragment<FragmentShoppingCartB
                             List<ConfirmOrderItemBean> confirmOrderList = ShoppingCartHelper.getInstance().getConfirmOrderList();
                             for (int i = 0; i < shoppingCartGoodsList.size(); i++) {
                                 for (int j = 0; j < confirmOrderList.size(); j++) {
-                                    if(confirmOrderList.get(j).getCommodityId().equals(shoppingCartGoodsList.get(i).getCommodityid())){
-                                        NumberButton numberButton = (NumberButton) adapter.getViewByPosition(i,R.id.number_item_shopping_cart);
-                                        confirmOrderList.get(j).setPurchaseNum(numberButton.getEditCount());
+                                    if(confirmOrderList.get(j).getInventoryId()==shoppingCartGoodsList.get(i).getInventoryid()){
+                                        NumberButton numberButton = (NumberButton) adapter.getViewByPosition(i, R.id.number_item_shopping_cart);
+                                        if(numberButton!=null){
+                                            confirmOrderList.get(j).setPurchaseNum(numberButton.getEditCount());
+                                        }
                                     }
                                 }
                             }

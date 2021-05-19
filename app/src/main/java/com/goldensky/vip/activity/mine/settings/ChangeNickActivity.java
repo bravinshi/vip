@@ -56,25 +56,8 @@ public class ChangeNickActivity extends BaseActivity<ActivityChangeNickBinding, 
             }
         });
         mBinding.setModel(changeNickModel);
-        mBinding.etNickChangeNick.addTextChangedListener(new DoNothingTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                super.afterTextChanged(s);
-                String string = s.toString();
-                if (isEmote(string)) {
-                    String substring = string.substring(0, (string.length() - 2));
-                    mBinding.etNickChangeNick.setText(substring);
-                    mBinding.etNickChangeNick.setSelection(substring.length());
-                }
-            }
-        });
     }
 
-    private boolean isEmote(String str) {
-        Pattern pattern = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]");
-        Matcher matcher = pattern.matcher(str);
-        return matcher.find();
-    }
 
     private boolean isNotNull(String str) {
         return str != null && !str.equals("");
