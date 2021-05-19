@@ -57,7 +57,7 @@ public class MyApplication extends Application {
 //        apiConfiguration.setBaseUrl("http://172.25.0.145:9999/");
 
         // 设置gson
-        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss");
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
         Gson gson = gsonBuilder.create();
         apiConfiguration.setGson(gson);
         GsonUtils.init(gson);

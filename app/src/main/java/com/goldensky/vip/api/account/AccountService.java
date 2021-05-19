@@ -4,6 +4,7 @@ package com.goldensky.vip.api.account;
 import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.vip.base.net.NetParams;
 import com.goldensky.vip.bean.ForgetPasswordReqBean;
+import com.goldensky.vip.bean.GetUserByIdReqBean;
 import com.goldensky.vip.bean.LoginResponseBean;
 import com.goldensky.vip.bean.SuperStBean;
 import com.goldensky.vip.bean.UpdateVipUserReqBean;
@@ -34,4 +35,7 @@ public interface AccountService {
 
     @POST("/goldendays-user/applet/user/forgetPwd")
     Observable<NetResponse<Object>> forgetPwd(@Body ForgetPasswordReqBean forgetPasswordReqBean);
+
+    @POST("/goldendays-user/vip/userFeign/getVipUserByUserId")
+    Observable<NetResponse<LoginResponseBean.VipUser>> getVipUserByUserId(GetUserByIdReqBean reqBean);
 }
