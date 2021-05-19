@@ -178,6 +178,7 @@ public class ConfirmOrderActivity extends BaseActivity<ActivityConfirmOrderBindi
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPurchaseNumChanged(PurchaseNumChangeEvent purchaseNumChangeEvent) {
         mBinding.tvTotalPrice.setText(MathUtils.bigDecimalString(getTotalMoney(), 2));
+        mBinding.tvPrice1.setText("¥"+MathUtils.bigDecimalString(getTotalMoney(), 2));
         if (purchaseNumChangeEvent.getNotify()) {
             confirmOrderAdapter.notifyDataSetChanged();
         }

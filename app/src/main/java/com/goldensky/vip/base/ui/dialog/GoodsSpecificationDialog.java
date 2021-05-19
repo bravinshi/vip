@@ -25,7 +25,6 @@ import com.goldensky.vip.databinding.ItemSpecificationValueBinding;
 import com.goldensky.vip.event.JoinOrBuyEvent;
 import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.ImageLoaderHelper;
-import com.goldensky.vip.model.PurchaseQuantityModel;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -59,7 +58,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
     private int buyVis = View.VISIBLE;
 
     private InventoryBean selectedInventory;// 选择的规格
-    private final PurchaseQuantityModel purchaseQuantityModel = new PurchaseQuantityModel("1");
     private Integer belongType;
 
     public GoodsSpecificationDialog(Integer belongType){
@@ -102,7 +100,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
             JoinOrBuyEvent joinOrBuyEvent = new JoinOrBuyEvent();
 
             joinOrBuyEvent.setJoin(true);
-            joinOrBuyEvent.setPurchaseNum(purchaseQuantityModel.getPurchaseQuantityInt());
+            joinOrBuyEvent.setPurchaseNum(mBinding.pnv.getPurchaseNum());
             joinOrBuyEvent.setInventory(selectedInventory);
 
             EventBus.getDefault().post(joinOrBuyEvent);
@@ -115,7 +113,7 @@ public class GoodsSpecificationDialog extends BottomDialog {
             JoinOrBuyEvent joinOrBuyEvent = new JoinOrBuyEvent();
 
             joinOrBuyEvent.setJoin(false);
-            joinOrBuyEvent.setPurchaseNum(purchaseQuantityModel.getPurchaseQuantityInt());
+            joinOrBuyEvent.setPurchaseNum(mBinding.pnv.getPurchaseNum());
             joinOrBuyEvent.setInventory(selectedInventory);
 
             EventBus.getDefault().post(joinOrBuyEvent);
@@ -142,22 +140,17 @@ public class GoodsSpecificationDialog extends BottomDialog {
         }
 
         // 检查购买数量
-        if (purchaseQuantityModel.getPurchaseQuantityInt() == 0) {
+        if (mBinding.pnv.getPurchaseNum() == 0) {
             //
             ToastUtils.showShort("购买数量不能为0");
             return false;
         }
-//        if (purchaseQuantityModel.getPurchaseQuantityInt() < selectedInventory.getBuyFromNum()) {
-//            ToastUtils.showShort("购买数量不能低于最小购买数量");
-//            return false;
-//        }
 
-
-            if (belongType != null && belongType == 2
-                    && selectedInventory.getInventoryNum() < purchaseQuantityModel.getPurchaseQuantityInt()) {
-                ToastUtils.showShort("库存不足");
-                return false;
-            }
+        if (belongType != null && belongType == 2
+                && selectedInventory.getInventoryNum() < mBinding.pnv.getPurchaseNum()) {
+            ToastUtils.showShort("库存不足");
+            return false;
+        }
 
         return true;
     }
@@ -463,10 +456,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
         mBinding.tvBuyRightNow.setOnClickListener(v -> {
             buy();
         });
-
-        mBinding.btnDecrease.setOnClickListener(v -> purchaseQuantityModel.decrease());
-
-        mBinding.btnIncrease.setOnClickListener(v -> purchaseQuantityModel.increase());
     }
 
     @Nullable
@@ -474,7 +463,6 @@ public class GoodsSpecificationDialog extends BottomDialog {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_good_specification, container, false);
         mBinding.recyclerView.setAdapter(firstAdapter);
-        mBinding.setModel(purchaseQuantityModel);
         initListener();
         return mBinding.getRoot();
     }

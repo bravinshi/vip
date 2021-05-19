@@ -36,6 +36,7 @@ public interface AccountService {
     @POST("/goldendays-user/applet/user/forgetPwd")
     Observable<NetResponse<Object>> forgetPwd(@Body ForgetPasswordReqBean forgetPasswordReqBean);
 
+
     @POST("/goldendays-user/applet/user/getVipUserByUserId")
     Observable<NetResponse<LoginResponseBean.VipUser>> getVipUserByUserId(@Body GetUserByIdReqBean reqBean);
 }
