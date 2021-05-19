@@ -46,10 +46,11 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
     @Override
     public void onResume() {
         super.onResume();
+        mViewModel.getOrderCount(AccountHelper.getUserId());
         if(flag){
             orderList.add(new MineToolBean(R.mipmap.my_icon_daifukuan,"待付款"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_daishouhuo,"待收货"));
-            orderList.add(new MineToolBean(R.mipmap.my_icon_daipingjia,"待评价"));
+            orderList.add(new MineToolBean(R.mipmap.my_icon_daipingjia,"已完成"));
 //            orderList.add(new MineToolBean(R.mipmap.my_icon_shouhou,"退款/售后"));
             orderList.add(new MineToolBean(R.mipmap.my_icon_dingdan,"我的订单"));
 //            toolList.add(new MineToolBean(R.mipmap.my_icon_youhuijuan,"优惠券"));
@@ -68,7 +69,7 @@ public class MineFragment extends LazyLoadFragment<FragmentMineBinding, PublicVi
                     return false;
                 }
             });
-            mViewModel.getOrderCount(AccountHelper.getUserId());
+
             toolAdapter=new MineToolAdapter(toolList);
             orderAdapter=new MineToolAdapter(orderList);
             mBinding.rvOrderMine.setAdapter(orderAdapter);
