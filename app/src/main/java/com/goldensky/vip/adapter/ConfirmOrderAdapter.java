@@ -7,7 +7,9 @@ import androidx.databinding.DataBindingUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.framework.util.StringUtils;
+import com.goldensky.framework.util.ToastUtils;
 import com.goldensky.vip.R;
+import com.goldensky.vip.base.ui.view.PurchaseNumView;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.databinding.ItemConfirmOrderBinding;
 import com.goldensky.vip.event.PurchaseNumChangeEvent;
@@ -37,88 +39,19 @@ public class ConfirmOrderAdapter extends BaseQuickAdapter<ConfirmOrderItemBean, 
         mBinding.tvDesc.setText(confirmOrderItemBean.getCommodityName());
         mBinding.tvPrice.setText("¥"+String.valueOf(confirmOrderItemBean.getPrice()));
         mBinding.tvSpecification.setText(confirmOrderItemBean.getSpecification());
-        mBinding.etCount.setTag(confirmOrderItemBean);
-        mBinding.etCount.setText(String.valueOf(confirmOrderItemBean.getPurchaseNum()));
-        mBinding.btnIncrease.setOnClickListener(v -> {
-            String count = mBinding.etCount.getText().toString().trim();
-            if (StringUtils.isTrimEmpty(count)) {
-                return;
-            }
+        mBinding.pnv.setTag(confirmOrderItemBean);
+        if (confirmOrderItemBean.getPurchaseNum() != 0) {
+            mBinding.pnv.setPurchaseNum(confirmOrderItemBean.getPurchaseNum());
+        }
+        mBinding.pnv.setOnNumChangedListener((fromBtn, oldNum, newNum) -> {
+            ConfirmOrderItemBean item = (ConfirmOrderItemBean) mBinding.pnv.getTag();
+            PurchaseNumChangeEvent purchaseNumChangeEvent = new PurchaseNumChangeEvent();
+            purchaseNumChangeEvent.setNewNum(newNum);
+            item.setPurchaseNum(newNum);
+            purchaseNumChangeEvent.setNotify(fromBtn);
+            purchaseNumChangeEvent.setConfirmOrderItemBean(item);
+            EventBus.getDefault().post(purchaseNumChangeEvent);
 
-            try {
-                int temp = Integer.parseInt(count);
-                temp++;
-                mBinding.etCount.setText(String.valueOf(temp));
-                ConfirmOrderItemBean item = (ConfirmOrderItemBean) mBinding.etCount.getTag();
-                PurchaseNumChangeEvent purchaseNumChangeEvent = new PurchaseNumChangeEvent();
-                purchaseNumChangeEvent.setNewNum(temp);
-                item.setPurchaseNum(temp);
-                purchaseNumChangeEvent.setNotify(true);
-                purchaseNumChangeEvent.setConfirmOrderItemBean(item);
-                EventBus.getDefault().post(purchaseNumChangeEvent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        mBinding.btnDecrease.setOnClickListener(v -> {
-            String count = mBinding.etCount.getText().toString().trim();
-            if (StringUtils.isTrimEmpty(count)) {
-                return;
-            }
-
-            try {
-                int temp = Integer.parseInt(count);
-                temp--;
-                if (temp < 0) {
-                    temp = 0;
-                }
-                ConfirmOrderItemBean item = (ConfirmOrderItemBean) mBinding.etCount.getTag();
-                PurchaseNumChangeEvent purchaseNumChangeEvent = new PurchaseNumChangeEvent();
-                purchaseNumChangeEvent.setNewNum(temp);
-                purchaseNumChangeEvent.setNotify(true);
-                purchaseNumChangeEvent.setConfirmOrderItemBean(item);
-                item.setPurchaseNum(temp);
-                EventBus.getDefault().post(purchaseNumChangeEvent);
-                mBinding.etCount.setText(String.valueOf(temp));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        mBinding.etCount.addTextChangedListener(new DoNothingTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                String temp = s.toString().trim();
-                Integer count = 0;
-                int length = temp.length();
-                if (length > 0) {
-                    count = Integer.valueOf(temp);
-                    if (length > 1 && temp.startsWith("0")){
-                        temp = temp.substring(1);
-                        mBinding.etCount.setText(temp);
-                        mBinding.etCount.setSelection(1);
-                        return;
-                    }
-                }
-                try {
-                    if (StringUtils.isTrimEmpty(temp)
-                    || (length > 1 && count == 0)) {
-                        mBinding.etCount.setText("0");
-                        mBinding.etCount.setSelection(1);
-                    }
-
-                    ConfirmOrderItemBean item = (ConfirmOrderItemBean) mBinding.etCount.getTag();
-                    PurchaseNumChangeEvent purchaseNumChangeEvent = new PurchaseNumChangeEvent();
-                    purchaseNumChangeEvent.setNewNum(count);
-                    purchaseNumChangeEvent.setConfirmOrderItemBean(item);
-                    purchaseNumChangeEvent.setNotify(false);
-                    item.setPurchaseNum(count);
-                    EventBus.getDefault().post(purchaseNumChangeEvent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         });
     }
 }
