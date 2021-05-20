@@ -3,6 +3,7 @@ package com.goldensky.vip.activity.goods;
 import android.os.Bundle;
 import android.view.View;
 
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.util.CollectionUtils;
 import com.goldensky.framework.util.GsonUtils;
 import com.goldensky.framework.util.StringUtils;
@@ -11,6 +12,7 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
+import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.CommodityBean;
@@ -77,7 +79,12 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         }
 
         // 获取商品详情
-        mViewModel.getGoodsDetail(goodsId);
+        mViewModel.getGoodsDetail(goodsId, new FailCallback() {
+            @Override
+            public void onFail(NetResponse netResponse) {
+                finish();
+            }
+        });
         // 获取评论信息
         mViewModel.getGoodsComment(1, 1, goodsId.toString(), null, null);
         // 获取地址信息

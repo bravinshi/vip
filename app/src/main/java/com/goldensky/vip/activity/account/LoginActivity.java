@@ -66,6 +66,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AccountVie
         });
         // 忘记密码监听
         mBinding.tvUnableLogin.setOnClickListener(v -> forgetPassword());
+        changeLoginType(LOGIN_TYPE_PASSWORD);
     }
 
     @Override

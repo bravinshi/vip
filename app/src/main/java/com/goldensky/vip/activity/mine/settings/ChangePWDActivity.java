@@ -97,7 +97,7 @@ public class ChangePWDActivity extends BaseActivity<ActivityChangePWDBinding, Ac
 
         // 修改密码
         UpdateVipUserReqBean userInfo = new UpdateVipUserReqBean();
-
+        userInfo.setUserNick(AccountHelper.getUserNick());
         userInfo.setPhoneCode(changePWDModel.getVerificationCode().trim());
         userInfo.setNewPwd(changePWDModel.getNewPassword().trim());
         userInfo.setUsermobile(AccountHelper.getUserMobile());

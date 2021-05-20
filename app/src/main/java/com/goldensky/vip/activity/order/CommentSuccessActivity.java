@@ -47,8 +47,14 @@ public class CommentSuccessActivity extends BaseActivity<ActivityCommentSuccessB
     @Override
     public void observe() {
         mViewModel.commentProducts.observe(this, list -> {
+            List<CommentProductBean> newList=new ArrayList<>();
+            for (CommentProductBean commentProductBean : list) {
+                if(commentProductBean.getIsevaluate()==0){
+                    newList.add(commentProductBean);
+                }
+            }
             mCommentProductBeans.clear();
-            mCommentProductBeans.addAll(list);
+            mCommentProductBeans.addAll(newList);
             mCommentProductAdapter.notifyDataSetChanged();
         });
         mCommentProductAdapter = new CommentProductAdapter(mCommentProductBeans);

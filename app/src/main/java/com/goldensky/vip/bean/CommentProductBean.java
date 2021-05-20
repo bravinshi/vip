@@ -5,13 +5,23 @@ public class CommentProductBean {
     private String inventorypic;
     private String inventory; //规格
     private String commodityname;
+    private Integer isevaluate;
 
-    public CommentProductBean(String secondorderid, String inventorypic, String inventory, String commodityname, String commodityid) {
+    public CommentProductBean(String secondorderid, String inventorypic, String inventory, String commodityname, Integer isevaluate, String commodityid) {
         this.secondorderid = secondorderid;
         this.inventorypic = inventorypic;
         this.inventory = inventory;
         this.commodityname = commodityname;
+        this.isevaluate = isevaluate;
         this.commodityid = commodityid;
+    }
+
+    public Integer getIsevaluate() {
+        return isevaluate;
+    }
+
+    public void setIsevaluate(Integer isevaluate) {
+        this.isevaluate = isevaluate;
     }
 
     public String getSecondorderid() {

@@ -2,8 +2,10 @@ package com.goldensky.vip.viewmodel.goods;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.goldensky.framework.bean.NetResponse;
 import com.goldensky.framework.net.RetrofitAgent;
 import com.goldensky.vip.api.goods.GoodsService;
+import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.viewmodel.PublicViewModel;
 
@@ -18,13 +20,21 @@ public class GoodsDetailViewModel extends PublicViewModel {
 
     public MutableLiveData<CommodityBean> goodsDetailLive = new MutableLiveData<>();
 
-    public void getGoodsDetail(Integer goodsId) {
+    public void getGoodsDetail(Integer goodsId, FailCallback callback) {
         RetrofitAgent.create(GoodsService.class)
                 .getGoodsDetail(goodsId)
-                .subscribe(new ToastNetObserver<CommodityBean>(){
+                .subscribe(new ToastNetObserver<CommodityBean>() {
                     @Override
                     public void onSuccess(CommodityBean data) {
                         goodsDetailLive.postValue(data);
+                    }
+
+                    @Override
+                    public boolean onFail(NetResponse<CommodityBean> data) {
+                        if (callback != null) {
+                            callback.onFail(data);
+                        }
+                        return super.onFail(data);
                     }
                 });
     }
