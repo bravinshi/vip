@@ -41,7 +41,13 @@ public class GoodsAttributeDialog extends BottomDialog {
         DialogGoodsAttributeBinding mBinding = DataBindingUtil
                 .inflate(inflater, R.layout.dialog_goods_attribute, container, false);
         mBinding.rv.setAdapter(goodsAttributeAdapter);
+        mBinding.tvFinish.setOnClickListener(getListener());
+        mBinding.btnClose.setOnClickListener(getListener());
         return mBinding.getRoot();
+    }
+
+    private View.OnClickListener getListener() {
+        return v -> dismissAllowingStateLoss();
     }
 
     private static class GoodsAttributeAdapter extends BaseQuickAdapter<DataModel, BaseViewHolder> {
@@ -63,6 +69,14 @@ public class GoodsAttributeDialog extends BottomDialog {
     public static class DataModel {
         private String attribute;
         private String content;
+
+        public DataModel(String attribute, String content) {
+            this.attribute = attribute;
+            this.content = content;
+        }
+
+        public DataModel() {
+        }
 
         public String getAttribute() {
             return attribute;

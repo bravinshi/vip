@@ -13,8 +13,10 @@ import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.BannerImageAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.base.error.FailCallback;
+import com.goldensky.vip.base.ui.dialog.GoodsAttributeDialog;
 import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
+import com.goldensky.vip.bean.AttributeBean;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
@@ -33,6 +35,7 @@ import com.goldensky.vip.helper.AccountHelper;
 import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
+import com.google.gson.JsonObject;
 import com.youth.banner.indicator.CircleIndicator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,6 +61,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private Integer goodsId;
     private SelectAddressDialog selectAddressDialog;
     private GoodsSpecificationDialog goodsSpecificationDialog;
+    private GoodsAttributeDialog goodsAttributeDialog;
     private final String selectAddressDialogTag = "selectAddressDialog";
     private final String goodsSpecificationDialogTag = "goodsSpecificationDialog";
     private UserAddressBean selectedAddress = null;// 选择的地址
@@ -197,6 +201,39 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 .replace("<img", "<img style=\"max-width:100%;height:auto\"");
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
 
+        if (StringUtils.isTrimEmpty(detail.getAttributecontenct())
+        && StringUtils.isTrimEmpty(detail.getAttributeextendcontenct())) {
+            mBinding.clGoodsAttribute.setVisibility(View.GONE);
+        } else {
+            try {
+                String attribute = detail.getAttributecontenct();
+                String extendAttribute = detail.getAttributeextendcontenct();
+                List<GoodsAttributeDialog.DataModel> dataModels = new ArrayList<>();
+                if (!StringUtils.isTrimEmpty(attribute)) {
+                    AttributeBean attributeBean = GsonUtils.fromJson(attribute, AttributeBean.class);
+                    for (JsonObject object : attributeBean.getTemplateItemFormList()) {
+                        dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
+                    }
+                }
+
+                if (!StringUtils.isTrimEmpty(extendAttribute)) {
+                    AttributeBean attributeBean = GsonUtils.fromJson(extendAttribute, AttributeBean.class);
+                    for (JsonObject object : attributeBean.getTemplateItemFormList()) {
+                        dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
+                    }
+                }
+
+                if (dataModels.size() == 0) {
+                    mBinding.clGoodsAttribute.setVisibility(View.GONE);
+                } else {
+                    goodsAttributeDialog = new GoodsAttributeDialog();
+                    goodsAttributeDialog.setData(dataModels);
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         handleInventory(detail.getBelongType(), detail.getCommodityInventoryList());
     }
 
@@ -311,6 +348,16 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
             Bundle bundle = new Bundle();
             bundle.putString(KEY_GOODS_ID, goodsId + "");
             Starter.startGoodsCommentActivity(GoodsDetailActivity.this, bundle);
+        });
+
+        mBinding.clGoodsAttribute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (goodsAttributeDialog == null) {
+                    return;
+                }
+                goodsAttributeDialog.show(getSupportFragmentManager(), "goodsAttributeDialog");
+            }
         });
     }
 
