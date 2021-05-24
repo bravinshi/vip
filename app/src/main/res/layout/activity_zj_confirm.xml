@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.brandcompany.ZjConfirmActivity">
+        tools:context=".activity.brandcompany.ZjConfirmActivity"
+        android:background="#F2F2F2">
         <ImageView
             android:id="@+id/top_iv"
             android:layout_width="match_parent"

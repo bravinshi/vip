@@ -57,12 +57,15 @@
                     android:layout_weight="1"></View>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
             android:id="@+id/money_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@mipmap/my_pic_yuejiesuan2"/>
+            android:src="@mipmap/my_pic_yuejiesuan2"
+            android:layout_marginTop="5dp"/>
+
         <View
             android:id="@+id/line_v"
             android:layout_width="match_parent"
