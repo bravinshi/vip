@@ -16,13 +16,11 @@ import com.goldensky.vip.base.error.FailCallback;
 import com.goldensky.vip.base.ui.dialog.GoodsAttributeDialog;
 import com.goldensky.vip.base.ui.dialog.GoodsSpecificationDialog;
 import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
-import com.goldensky.vip.bean.AttributeBean;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
-import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.bean.UserAddressBean;
 import com.goldensky.vip.constant.BusinessConstant;
 import com.goldensky.vip.databinding.ActivityGoodsDetailBinding;
@@ -32,10 +30,10 @@ import com.goldensky.vip.event.RetrieveAddressEvent;
 import com.goldensky.vip.event.ShoppingCartRefreshEvent;
 import com.goldensky.vip.event.ShowSpecificationEvent;
 import com.goldensky.vip.helper.AccountHelper;
-import com.goldensky.vip.helper.ShoppingCartHelper;
 import com.goldensky.vip.helper.UserAddressHelper;
 import com.goldensky.vip.viewmodel.goods.GoodsDetailViewModel;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.youth.banner.indicator.CircleIndicator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -210,15 +208,15 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 String extendAttribute = detail.getAttributeextendcontenct();
                 List<GoodsAttributeDialog.DataModel> dataModels = new ArrayList<>();
                 if (!StringUtils.isTrimEmpty(attribute)) {
-                    AttributeBean attributeBean = GsonUtils.fromJson(attribute, AttributeBean.class);
-                    for (JsonObject object : attributeBean.getTemplateItemFormList()) {
+                    List<JsonObject> attributeBean = GsonUtils.fromJson(attribute, new TypeToken<List<JsonObject>>(){}.getType());
+                    for (JsonObject object : attributeBean) {
                         dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
                     }
                 }
 
                 if (!StringUtils.isTrimEmpty(extendAttribute)) {
-                    AttributeBean attributeBean = GsonUtils.fromJson(extendAttribute, AttributeBean.class);
-                    for (JsonObject object : attributeBean.getTemplateItemFormList()) {
+                    List<JsonObject> attributeBean = GsonUtils.fromJson(extendAttribute, new TypeToken<List<JsonObject>>(){}.getType());
+                    for (JsonObject object : attributeBean) {
                         dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
                     }
                 }
