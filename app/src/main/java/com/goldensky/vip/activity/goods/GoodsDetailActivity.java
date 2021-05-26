@@ -19,6 +19,7 @@ import com.goldensky.vip.base.ui.dialog.SelectAddressDialog;
 import com.goldensky.vip.bean.CommodityBean;
 import com.goldensky.vip.bean.CommodityPicBean;
 import com.goldensky.vip.bean.ConfirmOrderItemBean;
+import com.goldensky.vip.bean.GoodsAttributeBean;
 import com.goldensky.vip.bean.InventoryBean;
 import com.goldensky.vip.bean.JoinIntoShoppingCartReqBean;
 import com.goldensky.vip.bean.UserAddressBean;
@@ -65,6 +66,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     private UserAddressBean selectedAddress = null;// 选择的地址
     private boolean showDefaultAddress = false;// 是否展示过默认地址
     private JoinIntoShoppingCartReqBean joinIntoShoppingCartReqBean;
+
     @Override
     public void onFinishInit(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -103,9 +105,10 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         if (addAddressEvent.getSuccess()) {
             // 刷新地址信息
             mViewModel.getUserAddress(AccountHelper.getUserId());
-            showDefaultAddress=false;
+            showDefaultAddress = false;
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleAddAddress(ShowSpecificationEvent showSpecificationEvent) {
         mBinding.tvSpecification.setText(showSpecificationEvent.getSpecification());
@@ -200,7 +203,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
         mBinding.wvDetail.loadData(content, "text/html", "utf-8");
 
         if (StringUtils.isTrimEmpty(detail.getAttributecontenct())
-        && StringUtils.isTrimEmpty(detail.getAttributeextendcontenct())) {
+                && StringUtils.isTrimEmpty(detail.getAttributeextendcontenct())) {
             mBinding.clGoodsAttribute.setVisibility(View.GONE);
         } else {
             try {
@@ -208,16 +211,22 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                 String extendAttribute = detail.getAttributeextendcontenct();
                 List<GoodsAttributeDialog.DataModel> dataModels = new ArrayList<>();
                 if (!StringUtils.isTrimEmpty(attribute)) {
-                    List<JsonObject> attributeBean = GsonUtils.fromJson(attribute, new TypeToken<List<JsonObject>>(){}.getType());
-                    for (JsonObject object : attributeBean) {
-                        dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
+                    List<GoodsAttributeBean> attributeBean = GsonUtils.fromJson(attribute, new TypeToken<List<GoodsAttributeBean>>() {
+                    }.getType());
+                    for (GoodsAttributeBean object : attributeBean) {
+                        if (!StringUtils.isTrimEmpty(object.getFieldname()) && !StringUtils.isTrimEmpty(object.getFieldvalue())) {
+                            dataModels.add(new GoodsAttributeDialog.DataModel(object.getFieldname(), object.getFieldvalue()));
+                        }
                     }
                 }
 
                 if (!StringUtils.isTrimEmpty(extendAttribute)) {
-                    List<JsonObject> attributeBean = GsonUtils.fromJson(extendAttribute, new TypeToken<List<JsonObject>>(){}.getType());
-                    for (JsonObject object : attributeBean) {
-                        dataModels.add(new GoodsAttributeDialog.DataModel(object.get("fieldname").getAsString(), object.get("fieldvalue").getAsString()));
+                    List<GoodsAttributeBean> attributeBean = GsonUtils.fromJson(extendAttribute, new TypeToken<List<GoodsAttributeBean>>() {
+                    }.getType());
+                    for (GoodsAttributeBean object : attributeBean) {
+                        if (!StringUtils.isTrimEmpty(object.getExtendfieldname()) && !StringUtils.isTrimEmpty(object.getFieldvalue())) {
+                            dataModels.add(new GoodsAttributeDialog.DataModel(object.getExtendfieldname(), object.getFieldvalue()));
+                        }
                     }
                 }
 
@@ -227,7 +236,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
                     goodsAttributeDialog = new GoodsAttributeDialog();
                     goodsAttributeDialog.setData(dataModels);
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -296,7 +305,7 @@ public class GoodsDetailActivity extends BaseActivity<ActivityGoodsDetailBinding
     @Override
     public void observe() {
         mViewModel.goodsCommentLive.observe(this, goodsCommentResBean ->
-                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount()+goodsCommentResBean.getPraiseCount()+goodsCommentResBean.getTotalCount()) + ")"));
+                mBinding.tvCommentNum.setText("(" + (goodsCommentResBean.getDifferenceCount() + goodsCommentResBean.getPraiseCount() + goodsCommentResBean.getTotalCount()) + ")"));
 
         mViewModel.goodsDetailLive.observe(this, this::showGoodsDetail);
 
