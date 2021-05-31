@@ -38,7 +38,13 @@ public class RetrofitAgent {
             MAX_CORE_SIZE * 10, 1,
             TimeUnit.SECONDS, new LinkedBlockingDeque<>());
 
+    private static OkHttpClient httpClient = null;
+
     private static Retrofit retrofit;
+
+    public static OkHttpClient getHttpClient() {
+        return httpClient;
+    }
 
     public static <T> T create(Class<T> clazz) {
         if (retrofit == null) {
@@ -60,7 +66,7 @@ public class RetrofitAgent {
 
         // 创建
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), (X509TrustManager)(SSLSocketClient.getTrustManager()[0]))
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), (X509TrustManager) (SSLSocketClient.getTrustManager()[0]))
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .addInterceptor(loggingInterceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
@@ -71,7 +77,7 @@ public class RetrofitAgent {
             builder.addInterceptor(interceptor);
         }
 
-        OkHttpClient httpClient = builder.build();
+        httpClient = builder.build();
 
         GsonConverterFactory gsonConverterFactory
                 = apiConfiguration.getGson() == null
