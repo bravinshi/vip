@@ -46,6 +46,8 @@ public class MyApplication extends Application {
         apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
         // 财哥
 //        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
+//        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
+
 //        apiConfiguration.setBaseUrl("http://172.25.0.249:9999/");
         //王珂
 //        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");

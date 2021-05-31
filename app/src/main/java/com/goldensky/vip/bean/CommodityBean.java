@@ -66,6 +66,24 @@ public class CommodityBean {
     private List<CommodityPicBean> commodityPicList;
     @SerializedName("commoditydesc")
     private String commodityDesc;
+    private String attributecontenct;
+    private String attributeextendcontenct;
+
+    public String getAttributecontenct() {
+        return attributecontenct;
+    }
+
+    public void setAttributecontenct(String attributecontenct) {
+        this.attributecontenct = attributecontenct;
+    }
+
+    public String getAttributeextendcontenct() {
+        return attributeextendcontenct;
+    }
+
+    public void setAttributeextendcontenct(String attributeextendcontenct) {
+        this.attributeextendcontenct = attributeextendcontenct;
+    }
 
     private List<InventoryBean> commodityInventoryList;
 
