@@ -42,9 +42,10 @@ public class MyApplication extends Application {
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new ProcessLifecycleObserver());
 
         ApiConfiguration apiConfiguration = new ApiConfiguration();
+        //正式环境
+        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
         // 财哥
 //        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
-        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
 //        apiConfiguration.setBaseUrl("http://172.25.0.249:9999/");
         //王珂
 //        apiConfiguration.setBaseUrl("http://172.25.0.187:9999/");
@@ -52,10 +53,11 @@ public class MyApplication extends Application {
 //        apiConfiguration.setBaseUrl("http://172.25.0.84:9999/");
         // 马晓伟
 //        apiConfiguration.setBaseUrl("http://172.25.0.178:9999/");
+
         //正式
 //        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
         //国新 172.25.0.145
-//        apiConfiguration.setBaseUrl("http://172.25.0.145:9999/");
+//        apiConfiguration.setBaseUrl("http://172.25.0.183:9999/");
 
         // 设置gson
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss");
