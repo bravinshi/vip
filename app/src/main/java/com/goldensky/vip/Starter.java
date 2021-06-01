@@ -9,7 +9,10 @@ import com.goldensky.vip.activity.account.LoginActivity;
 import com.goldensky.vip.activity.accountManager.AccountManageActivity;
 import com.goldensky.vip.activity.accountManager.CompanyInfoActivity;
 import com.goldensky.vip.activity.accountManager.BusinessAnalysisActivity;
+import com.goldensky.vip.activity.accountManager.FxhzActivity;
+import com.goldensky.vip.activity.accountManager.FxhzDetailActivity;
 import com.goldensky.vip.activity.accountManager.JsAccountActivity;
+import com.goldensky.vip.activity.accountManager.JxtjDetailActivity;
 import com.goldensky.vip.activity.accountManager.JyAccountActivity;
 import com.goldensky.vip.activity.article.ArticleDetailActivity;
 import com.goldensky.vip.activity.brandcompany.SjczActivity;
@@ -488,6 +491,24 @@ public class Starter {
     //升级合作实体
     public static void startAssignedAccountActivity(Context context) {
         Intent intent = new Intent(context, AssignedAccountActivity.class);
+        context.startActivity(intent);
+    }
+
+    //分销汇总
+    public static void startFxhzActivity(Context context) {
+        Intent intent = new Intent(context, FxhzActivity.class);
+        context.startActivity(intent);
+    }
+
+    //分销汇总详情
+    public static void startFxhzDetailActivity(Context context) {
+        Intent intent = new Intent(context, FxhzDetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    //经销汇总详情
+    public static void startJxhzDetailActivity(Context context) {
+        Intent intent = new Intent(context, JxtjDetailActivity.class);
         context.startActivity(intent);
     }
 }

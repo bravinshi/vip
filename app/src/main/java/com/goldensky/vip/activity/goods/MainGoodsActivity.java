@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.vip.R;
+import com.goldensky.vip.Starter;
 import com.goldensky.vip.adapter.CircleFocusAdapter;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.databinding.ActivityMainGoodsBinding;
@@ -27,6 +29,14 @@ public class MainGoodsActivity extends BaseActivity<ActivityMainGoodsBinding, Pu
         list.add(R.mipmap.my_pic_zhuyingshangpin4);
         list.add(R.mipmap.my_pic_zhuyingshangpin5);
         adapter=new CircleFocusAdapter(list);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 0 && view.getId() == R.id.v_clicked) {
+                    Starter.startJxhzDetailActivity(MainGoodsActivity.this);
+                }
+            }
+        });
         mBinding.rvMianGoods.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvMianGoods.setAdapter(adapter);
         mBinding.topBarMainGoods.setBackListener(new View.OnClickListener() {

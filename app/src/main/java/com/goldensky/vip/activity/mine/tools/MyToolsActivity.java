@@ -47,6 +47,7 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
         accountList.add(R.mipmap.my_pic_jiaoyizhanghu);
         accountList.add(R.mipmap.my_pic_jiesuanzhanghu);
         elseList.add(R.mipmap.my_pic_gongsiguanli);
+        elseList.add(R.mipmap.my_pic_fenxiaohuizong);
         serviceAdapter=new MyToolAdapter(serviseList);
         goodsAdapter=new MyToolAdapter(goodsList);
         mallAdapter=new MyToolAdapter(mallList);
@@ -137,6 +138,9 @@ public class MyToolsActivity extends BaseActivity<ActivityMyToolsBinding, Public
                 switch (position){
                     case 0:
                         Starter.startCompanyManageActivity(MyToolsActivity.this);
+                        break;
+                    case 1:
+                        Starter.startFxhzActivity(MyToolsActivity.this);
                         break;
                 }
             }
