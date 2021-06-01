@@ -300,7 +300,7 @@ public class PublicViewModel extends NetWorkViewModel {
     }
 
     //版本更新
-    public void checkVersion(Integer version, FailCallback failCallback) {
+    public void checkVersion(String version, FailCallback failCallback) {
         RetrofitAgent.create(PublicService.class)
                 .checkVision(1, version)
                 .subscribe(new ToastNetObserver<CheckVersionResBean>(){

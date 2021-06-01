@@ -43,9 +43,9 @@ public class MyApplication extends Application {
 
         ApiConfiguration apiConfiguration = new ApiConfiguration();
         //正式环境
-        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
+//        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
         // 财哥
-//        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
+        apiConfiguration.setBaseUrl("http://testopenapi.jtmsh.com/");
 //        apiConfiguration.setBaseUrl("https://openapi.jtmsh.com/");
 
 //        apiConfiguration.setBaseUrl("http://172.25.0.249:9999/");

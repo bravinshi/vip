@@ -50,7 +50,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, PublicVi
         };
 
         //检查版本更新
-        mViewModel.checkVersion(AppUtils.getAppVersionCode(), new FailCallback() {
+        mViewModel.checkVersion(AppUtils.getAppVersionName(), new FailCallback() {
             @Override
             public void onFail(NetResponse netResponse) {
                 countDownTimer.start();

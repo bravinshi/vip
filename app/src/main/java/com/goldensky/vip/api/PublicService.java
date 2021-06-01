@@ -48,5 +48,5 @@ public interface PublicService {
     //App 版本更新
     @GET("/goldendays-currency/AutoUpdate/getVipVersion")
     Observable<NetResponse<CheckVersionResBean>> checkVision(@Query("appType") Integer appType,
-                                                             @Query("version") Integer version);
+                                                             @Query("version") String version);
 }
