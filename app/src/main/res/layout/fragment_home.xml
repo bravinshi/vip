@@ -152,8 +152,28 @@
                     android:scaleType="fitXY"
                     app:layout_constraintTop_toBottomOf="@+id/iv_4"
                     android:layout_marginTop="15dp"
-                    android:src="@mipmap/my_pic_shouye6"
-                    android:paddingBottom="30dp"/>
+                    android:src="@mipmap/my_pic_shouye7"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:layout_gravity="bottom"
+                    android:animateLayoutChanges="true"
+                    android:showDividers="middle"
+                    android:layoutAnimation="@anim/la_bottom_to_top"
+                    android:id="@+id/ll_container"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_6"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:background="@color/white">
+                </LinearLayout>
+                <View
+                    app:layout_constraintTop_toBottomOf="@id/ll_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
