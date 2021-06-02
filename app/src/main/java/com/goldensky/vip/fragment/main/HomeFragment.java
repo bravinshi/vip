@@ -47,7 +47,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         mBinding.gxtjIv.setOnClickListener(this);
-
         mHomeAdapter = new HomeAdapter(mViewModel.homeBeans);
         mHomeAdapter.addChildClickViewIds(new int[]{ R.id.more_iv, R.id.more_tv});
         mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
