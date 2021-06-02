@@ -25,8 +25,11 @@
             android:layout_weight="1">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_shopping_cart"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="50dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/shape_corner_white_bg"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -43,6 +46,7 @@
             android:layout_height="56dp"
             >
             <CheckBox
+                android:checked="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -62,7 +66,7 @@
                 app:layout_constraintRight_toLeftOf="@id/tv_close_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="合计：¥189.00"
+                android:text="合计：¥141.40"
                 android:textSize="14sp"
                 android:layout_marginTop="17dp"
                 android:layout_marginRight="10dp"

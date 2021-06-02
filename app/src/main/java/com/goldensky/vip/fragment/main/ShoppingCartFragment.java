@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBinding, PublicViewModel> {
     private boolean isEdit=false;
-    private CircleFocusAdapter adapter;
+    private GoodsFocusAdapter adapter;
     private List<Integer> list=new ArrayList<>();
     @Override
     protected int getLayoutRes() {
@@ -36,7 +36,7 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥49.60</font>"));
+        mBinding.tvSum.setText(Html.fromHtml("合计:<font color=\"#EA483F\">¥141.76</font>"));
         mBinding.topBarShoppingCart.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,41 +48,44 @@ public class ShoppingCartFragment extends BaseFragment<FragmentShoppingCartBindi
         list.add(R.mipmap.gwc2);
         list.add(R.mipmap.gwc3);
         list.add(R.mipmap.gwc4);
-        adapter=new CircleFocusAdapter(list);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                switch (position){
-                    case 0:
-                        bundle.putInt("KEY_FAKE_DATA",6);
-                        break;
-                    case 1:
-                        bundle.putInt("KEY_FAKE_DATA",2);
-                        break;
-                    case 2:
-                        bundle.putInt("KEY_FAKE_DATA",1);
-                        break;
-                    case 3:
-                        bundle.putInt("KEY_FAKE_DATA",4);
-                        break;
-                }
-                Starter.startGoodsDetailActivity(getContext(),bundle);
-            }
-        });
-        mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
+        list.add(R.mipmap.gwc5);
+        list.add(R.mipmap.gwc6);
+        adapter=new GoodsFocusAdapter(list);
+//        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                Bundle bundle = new Bundle();
+//                switch (position){
+//                    case 0:
+//                        bundle.putInt("KEY_FAKE_DATA",6);
+//                        break;
+//                    case 1:
+//                        bundle.putInt("KEY_FAKE_DATA",2);
+//                        break;
+//                    case 2:
+//                        bundle.putInt("KEY_FAKE_DATA",1);
+//                        break;
+//                    case 3:
+//                        bundle.putInt("KEY_FAKE_DATA",4);
+//                        break;
+//                }
+//                Starter.startGoodsDetailActivity(getContext(),bundle);
+//            }
+//        });
+        mBinding.rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.rvShoppingCart.setAdapter(adapter);
         mBinding.tvCloseAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("KEY_FAKE_DATA",1);
+                bundle.putInt("KEY_FAKE_DATA",25);
                 Starter.startConfirmOrderActivity(getContext(),bundle);
+            }
+        });
+        mBinding.checkboxSelectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBinding.checkboxSelectAll.setChecked(true);
             }
         });
 
