@@ -49,9 +49,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         if (isTYST) {
             mBinding.iv1.setImageResource(R.mipmap.home_tiyan_top);
             mBinding.iv4.setImageResource(R.mipmap.my_pic_wodegongju_ty);
+            mBinding.iv6.setVisibility(View.GONE);
         } else {
             mBinding.iv1.setImageResource(R.mipmap.my_pic_shouye1);
             mBinding.iv4.setImageResource(R.mipmap.my_pic_wodegongju);
+            mBinding.iv6.setVisibility(View.VISIBLE);
         }
     }
 

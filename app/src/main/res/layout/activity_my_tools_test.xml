@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.mine.tools.MyToolsTestActivity">
+        tools:context=".activity.mine.tools.MyToolsTestActivity"
+        android:background="@color/white">
         <com.goldensky.framework.ui.view.TopActionBar
             android:id="@+id/top_bar_my_tools_test"
             app:centerText="我的工具"
@@ -62,7 +63,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            />
+            android:background="@color/white"/>
         <TextView
             app:layout_constraintTop_toBottomOf="@+id/rv_goods_manage_tools_test"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -83,7 +84,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            />
+            android:background="@color/white"/>
         <TextView
             app:layout_constraintTop_toBottomOf="@+id/rv_mall_manage_tools_test"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -104,6 +105,6 @@
             android:layout_marginTop="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            />
+            android:background="@color/white"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
