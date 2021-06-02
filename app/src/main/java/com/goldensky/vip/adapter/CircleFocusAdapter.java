@@ -18,6 +18,8 @@ public class CircleFocusAdapter extends BaseQuickAdapter<Integer, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, Integer item) {
+        helper.addOnClickListener(R.id.btn_mai);
+        helper.addOnClickListener(R.id.btn_more);
         Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.iv_item_circle_focus));
     }
 }

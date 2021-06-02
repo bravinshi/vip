@@ -25,8 +25,23 @@
 
         <ImageView
             android:id="@+id/iv_item_circle_focus"
+            android:adjustViewBounds="true"
             app:layout_constraintTop_toBottomOf="@+id/data_item_circle_focus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <Button
+            android:background="#00ffffff"
+            android:id="@+id/btn_mai"
+            app:layout_constraintBottom_toTopOf="@+id/btn_more"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            />
+        <Button
+            android:id="@+id/btn_more"
+            android:background="#00ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
