@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -17,7 +18,6 @@ import com.goldensky.vip.R;
 import com.goldensky.vip.bean.ShoppingCartGoodsBean;
 import com.goldensky.vip.databinding.ItemShoppingCartBinding;
 import com.goldensky.vip.helper.ShoppingCartHelper;
-import com.goldensky.vip.utils.GlideRoundTransform;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public class ShoppingCartListAdapter extends BaseQuickAdapter<ShoppingCartGoodsB
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, ShoppingCartGoodsBean shoppingCartGoodsBean) {
         ItemShoppingCartBinding binding = DataBindingUtil.bind(baseViewHolder.itemView);
-        Glide.with(getContext()).load(shoppingCartGoodsBean.getInventorypic()).apply(new RequestOptions().transform(new GlideRoundTransform(getContext(),5))).into(binding.goodsimageItemShoppingCart);
+        Glide.with(getContext()).load(shoppingCartGoodsBean.getInventorypic()).into(binding.goodsimageItemShoppingCart);
         binding.setBean(shoppingCartGoodsBean);
         String s = new DecimalFormat("#.00").format(shoppingCartGoodsBean.getCommodityoldprice());
         binding.priceItemShoppingCart.setText(changTvSize("¥"+s));

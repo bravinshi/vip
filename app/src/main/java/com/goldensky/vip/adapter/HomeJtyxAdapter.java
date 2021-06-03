@@ -1,17 +1,17 @@
 package com.goldensky.vip.adapter;
 
 import android.graphics.Paint;
-import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.goldensky.framework.util.MathUtils;
 import com.goldensky.vip.R;
 import com.goldensky.vip.bean.CommodityBean;
-import com.goldensky.vip.databinding.ItemHomeProductJrbkBinding;
 import com.goldensky.vip.databinding.ItemHomeProductJtyxBinding;
 
 import org.jetbrains.annotations.NotNull;

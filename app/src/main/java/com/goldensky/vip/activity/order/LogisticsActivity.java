@@ -1,6 +1,5 @@
 package com.goldensky.vip.activity.order;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -11,19 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.goldensky.vip.R;
 import com.goldensky.vip.adapter.LogisticsAdapter;
-import com.goldensky.vip.api.PublicService;
 import com.goldensky.vip.base.activity.BaseActivity;
 import com.goldensky.vip.bean.ExpressBean;
 import com.goldensky.vip.bean.LogisticsBean;
 import com.goldensky.vip.databinding.ActivityLogisticsBinding;
-import com.goldensky.vip.utils.GlideRoundTransform;
 import com.goldensky.vip.viewmodel.PublicViewModel;
-
-import java.io.Serializable;
 
 public class LogisticsActivity extends BaseActivity<ActivityLogisticsBinding, PublicViewModel> {
     private LogisticsBean logistics;
@@ -59,7 +54,7 @@ public class LogisticsActivity extends BaseActivity<ActivityLogisticsBinding, Pu
             status=8;
         }
         state.setText(logisticStatus[status]);
-        Glide.with(this).load(picUrl).apply(new RequestOptions().transform(new GlideRoundTransform(this,16))).into(pic);
+        Glide.with(this).load(picUrl).apply(new RequestOptions().transform(new RoundedCorners(16))).into(pic);
         adapter.addHeaderView(logisticsHeader);
         if(logistics.getData()==null){
             mBinding.includeLogistics.clEmptyLogistics.setVisibility(View.VISIBLE);

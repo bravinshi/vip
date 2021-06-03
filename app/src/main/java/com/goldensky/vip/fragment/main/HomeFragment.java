@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.goldensky.framework.bean.NetResponse;
@@ -104,7 +105,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     private void updateStInfo() {
         mBinding.nicknameTv.setText(mSuperStBean.getStorename());
-        Glide.with(getContext()).load(mSuperStBean.getUserpic()).into(mBinding.portaritIv);
+        Glide.with(getContext()).load(mSuperStBean.getUserpic()).apply(new RequestOptions().circleCrop()).into(mBinding.portaritIv);
     }
 
     private void getHomeData() {
