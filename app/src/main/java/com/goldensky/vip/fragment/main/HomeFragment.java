@@ -58,7 +58,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mBinding.allIv.setOnClickListener(this);
         mBinding.jyzhV.setOnClickListener(this);
         mBinding.jszhV.setOnClickListener(this);
-
+        mBinding.wdscIv.setOnClickListener(this);
 
         LayoutTransition transition = new LayoutTransition();
 
@@ -158,6 +158,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 break;
             case R.id.ddgl_iv: //订单管理
                 Starter.startOrderListActivity(getContext(),null);
+                break;
+            case R.id.wdsc_iv:
+                Starter.startVipHomeActivity(getContext());
                 break;
             case R.id.all_iv: //全部
                 if (isTYST) {

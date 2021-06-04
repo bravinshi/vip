@@ -61,7 +61,7 @@ public class MallManageTestActivity extends BaseActivity<ActivityMallManageBindi
         });
         mBinding.rvMallManage.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvMallManage.setAdapter(adapter);
-        refreshAdapter(distributionList);
+        refreshAdapter(guanlianList);
         mBinding.clItemName.setVisibility(View.GONE);
         mBinding.tabMallManage.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
