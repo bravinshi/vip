@@ -19,7 +19,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewModel> implements View.OnClickListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewModel>  {
     private FragmentAdapter fragmentAdapter;
     private List<Fragment> fragments;
 
@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
             return true;
         });
         mBinding.viewPagerMain.setOffscreenPageLimit(5);
-        mBinding.setListener(this);
     }
 
     @Override
@@ -68,8 +67,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, PublicViewMo
         return R.layout.activity_main;
     }
 
-    @Override
-    public void onClick(View v) {
-        Starter.startCustomerServiceActivity(this,null);
-    }
+
 }

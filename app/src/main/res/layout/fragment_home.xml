@@ -96,6 +96,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/iv_4"
                     app:layout_constraintBottom_toBottomOf="@id/iv_4"
                     android:layout_marginBottom="20dp"
                     android:orientation="horizontal"
@@ -126,7 +127,47 @@
                         android:layout_weight="1">
                     </View>
                     <View
+                        android:id="@+id/wdsc_iv"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1">
+                    </View>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_4"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:alpha="0.2"
+                    android:gravity="center">
+                    <View
                         android:id="@+id/all_iv"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1">
+                    </View>
+                    <View
+
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1">
+                    </View>
+                    <View
+
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1">
+                    </View>
+                    <View
+
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1">
+                    </View>
+                    <View
+
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="1">
