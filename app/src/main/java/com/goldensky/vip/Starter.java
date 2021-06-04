@@ -48,6 +48,7 @@ import com.goldensky.vip.activity.mine.tools.MyToolsTestActivity;
 import com.goldensky.vip.activity.mine.tools.ShareToFriendActivity;
 import com.goldensky.vip.activity.mine.vip.VipHomeActivity;
 import com.goldensky.vip.activity.mine.vip.VipManageActivity;
+import com.goldensky.vip.activity.order.ConfirmOrderActivity;
 import com.goldensky.vip.activity.order.FxOrderActivity;
 import com.goldensky.vip.activity.order.JhManageActivity;
 import com.goldensky.vip.activity.order.OrderListActivity;
@@ -509,6 +510,14 @@ public class Starter {
     //经销汇总详情
     public static void startJxhzDetailActivity(Context context) {
         Intent intent = new Intent(context, JxtjDetailActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startConfirmOrderActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, ConfirmOrderActivity.class);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         context.startActivity(intent);
     }
 }
